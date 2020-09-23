@@ -595,6 +595,8 @@ export default function FormComponent() {
                                rows='10'
                                onBlur={validateTextarea}
                                onChange={changeHandler('textarea')}
+                               placeholder={'Textarea'}
+                               label={'Textarea just for you'}
                     />
                 </div>
             </form>
