@@ -10,8 +10,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 
 export default function FormComponent() {
-
-    const [ inputState, setInputState] = useState({
+    const [isValidCheck, setIsValid] = useState(false);
+    const [inputState, setInputState] = useState({
         error: {
             nameError: false,
             emailError: false,
@@ -22,6 +22,15 @@ export default function FormComponent() {
             additionalNumberError: false,
             additionalNumberMaskError: false,
             passwordError: false
+        },
+        isValid: {
+            nameIsInvalid: true,
+            emailIsInvalid: true,
+            liteEmailIsInvalid: true,
+            idIsInvalid: true,
+            phoneIsInvalid: true,
+            additionalNumberIsInvalid: true,
+            passwordIsInvalid: true
         },
         errorMessage: {
             nameErrMess: '',
@@ -55,9 +64,28 @@ export default function FormComponent() {
     const lengthMask = (val, length) => {
         return val.substr(0, length);
     }
+    const checkValidity = () => {
+        console.log('compare');
+        if(inputState.isValid.nameIsInvalid === true
+            && inputState.isValid.emailIsInvalid === true
+            && inputState.isValid.liteEmailIsInvalid === true
+            && inputState.isValid.idIsInvalid === true
+            && inputState.isValid.phoneIsInvalid === true
+            && inputState.isValid.additionalNumberIsInvalid === true
+            && inputState.isValid.passwordIsInvalid === true
+        ) {
+            setIsValid(true);
+        } else {
+            setIsValid(false);
+        };
+
+        console.log(inputState.isValid);
+    }
 
     const validateName = (ev) => {
+        console.log('blur');
         if(ev.target.value.match(/[^A-Za-z\s]/g)) {
+            console.log('find error');
             setInputState({
                 ...inputState,
                 error: {
@@ -67,8 +95,13 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     nameErrMess: "Name should contain only latin letters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    nameIsInvalid: true
                 }
             });
+            console.log('setInputState')
         } else if(!ev.target.value.match(/.{2,}/g)) {
             setInputState({
                 ...inputState,
@@ -79,6 +112,10 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     nameErrMess: "Name should be at least 2 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    nameIsInvalid: true
                 }
             });
         } else if(ev.target.value.match(/.{128}/g)) {
@@ -91,6 +128,10 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     nameErrMess: "Name should be less than 128 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    nameIsInvalid: true
                 }
             });
         } else if(ev.target.value.match(/^\s+$/)) {
@@ -103,11 +144,27 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     nameErrMess: "Name can't consist only from spaces!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    nameIsInvalid: true
                 }
             });
         } else {
+            console.log('else block start');
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    nameIsInvalid: false
+                }
+            });
+            console.log('else block end', inputState.isValid.nameIsInvalid);
             changeHandler('name');
         }
+        console.log('Check the validity', inputState.isValid.nameIsInvalid);
+        checkValidity();
+        console.log('checked the validity');
     }
     const validateEmail = (ev) => {
         if(!ev.target.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g)) {
@@ -120,11 +177,24 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     emailErrMess: "Email is not valid"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    emailIsInvalid: true
                 }
             });
+
         } else {
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    emailIsInvalid: false
+                }
+            });
             changeHandler('name');
         }
+        checkValidity();
     }
     const validateLiteEmail = (ev) => {
         if(!ev.target.value.match(/[\w-]{1,64}@[\w-]+\.[\w-]{2,}/)) {
@@ -137,8 +207,13 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     liteEmailErrMess: "Invalid email!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    liteEmailIsInvalid: true
                 }
             });
+            checkValidity();
         } else if(ev.target.value.match(/.{254}/)) {
             setInputState({
                 ...inputState,
@@ -149,11 +224,24 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     liteEmailErrMess: "Email can't be more than 254 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    liteEmailIsInvalid: true
                 }
             });
+            checkValidity();
         } else {
-            changeHandler('liteEmail');
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    liteEmailIsInvalid: false
+                }
+            });
+            changeHandler('name');
         }
+        checkValidity();
     }
     const validateId = (ev) => {
         if(ev.target.value.match(/[^a-z0-9_]/g)) {
@@ -166,8 +254,13 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     idErrMess: "Number can contain only numbers, lowercase latin letters and _!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    idIsInvalid: true
                 }
             });
+            checkValidity();
         } else if(!ev.target.value.match(/.{2,}/g)) {
             setInputState({
                 ...inputState,
@@ -178,8 +271,13 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     idErrMess: "Number should be at least 2 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    idIsInvalid: true
                 }
             });
+            checkValidity();
         } else if(ev.target.value.match(/.{128}/g)) {
             setInputState({
                 ...inputState,
@@ -190,11 +288,24 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     idErrMess: "Number should be less than 128 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    idIsInvalid: true
                 }
             });
+            checkValidity();
         } else {
-            changeHandler('id');
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    idIsInvalid: false
+                }
+            });
+            changeHandler('name');
         }
+        checkValidity();
     }
     const validateNumber = (ev) => {
         if(!ev.target.value.match(/\+38\(0\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)) {
@@ -207,11 +318,25 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     phoneErrMess: "Phone number is not valid!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    phoneIsInvalid: true
                 }
             });
+            checkValidity();
+            console.log()
         } else {
-            changeHandler('phone');
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    phoneIsInvalid: false
+                }
+            });
+            changeHandler('name');
         }
+        checkValidity();
     }
     const validateAdditionalNumber =(ev) => {
         if(!ev.target.value.match(/\+|\,|\(|\)|\;|[0-9]/)) {
@@ -224,8 +349,13 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     additionalNumberErrMess: "You can use only ',', ';', '(', ')', '+' and numbers 0-9"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberIsInvalid: true
                 }
             });
+            checkValidity();
         } else if(!ev.target.value.match(/.{7,}/g)) {
             setInputState({
                 ...inputState,
@@ -236,9 +366,14 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     additionalNumberErrMess: "Additional numbers should be al least 7 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberIsInvalid: true
                 }
             });
-        } else if(!ev.target.value.match(/.{256}/g)) {
+            checkValidity();
+        } else if(ev.target.value.match(/.{256}/g)) {
             setInputState({
                 ...inputState,
                 error: {
@@ -247,12 +382,25 @@ export default function FormComponent() {
                 },
                 errorMessage: {
                     ...inputState.errorMessage,
-                    additionalNumberErrMess: "Additional numbers should be less than 128 characters!"
+                    additionalNumberErrMess: "Additional numbers should be less than 256 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberIsInvalid: true
                 }
             });
+            checkValidity();
         } else {
-            changeHandler('additionalNumber');
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberIsInvalid: false
+                }
+            });
+            changeHandler('name');
         }
+        checkValidity();
     }
     const validatePassword = (ev) => {
         if(!ev.target.value.match(/\d{4}\-\d{4}/)) {
@@ -265,11 +413,24 @@ export default function FormComponent() {
                 errorMessage: {
                     ...inputState.errorMessage,
                     passwordErrMess: "Password should be 8 symbols long!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    passwordIsInvalid: true
                 }
             });
+            checkValidity();
         } else {
-            changeHandler('phone');
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    passwordIsInvalid: false
+                }
+            });
+            changeHandler('name');
         }
+        checkValidity();
     }
     const validateTextarea = (ev) => {
         ev.target.value = ev.target.value.replace(/^\s+|\s+$|^\n+|\n+$/g,'');
@@ -293,7 +454,8 @@ export default function FormComponent() {
 
         const err = type+'Error';
         const mes = type+'ErrMess';
-        const val = type+'Value';
+        const value = type+'Value';
+
             setInputState({
                 ...inputState,
                 error: {
@@ -306,7 +468,7 @@ export default function FormComponent() {
                 },
                 value: {
                     ...inputState.value,
-                    [val]: ev.target.value
+                    [value]: ev.target.value
                 }
             });
     }
@@ -436,7 +598,11 @@ export default function FormComponent() {
                     />
                 </div>
             </form>
-            <Button variant="contained" onClick={submitForm} color="primary">Submit</Button>
+            <Button disabled={(inputState.isValid.additionalNumberIsInvalid || inputState.isValid.emailIsInvalid
+            || inputState.isValid.nameIsInvalid
+            || inputState.isValid.emailIsInvalid || inputState.isValid.idIsInvalid || inputState.isValid.liteEmailIsInvalid
+            || inputState.isValid.passwordIsInvalid || inputState.isValid.phoneIsInvalid)
+            } variant="contained" onClick={submitForm} color="primary">Submit</Button>
         </Card>
     )
 }
