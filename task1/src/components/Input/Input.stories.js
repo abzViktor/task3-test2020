@@ -1,7 +1,6 @@
 import React from 'react';
 import InputComponent from './Input';
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
-import { storiesOf } from "@storybook/react";
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import TextField from '@material-ui/core/TextField';
 
 export default {
@@ -10,16 +9,20 @@ export default {
     decorators: [withKnobs],
 };
 
-const Template = args => {
-    return <InputComponent disabled={boolean('Disabled', false)} {...args} />;
+
+export const Name = () => {
+    return (<TextField error={boolean("Error", false)}
+                       disabled={boolean("Disabled", false)}
+                       placeholder={text("Placeholder", "First Name")}
+                       helperText={text("Error Text", "Some error occurs")}
+                       value={text("Value", "")}
+                       label={text("Label", 'Enter your name')}
+                       variant={select("Background", {'Outlined': 'outlined', 'filled':'filled', 'Standard': 'standard'}, 'filled')}
+    />);
 }
 
-export const Name = () => <TextField error={boolean("Error", false)}
-                                     disabled={boolean("Disabled", false)}
-                                     placeholder={text("Placeholder", "First Name")}
-                                     helperText={text("Error Text", "Some error occurs")}
-                                     value={text("Value", "")}
-/>
+
+
 
 
 
