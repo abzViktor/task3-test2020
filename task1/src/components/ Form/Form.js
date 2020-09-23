@@ -64,28 +64,9 @@ export default function FormComponent() {
     const lengthMask = (val, length) => {
         return val.substr(0, length);
     }
-    const checkValidity = () => {
-        console.log('compare');
-        if(inputState.isValid.nameIsInvalid === true
-            && inputState.isValid.emailIsInvalid === true
-            && inputState.isValid.liteEmailIsInvalid === true
-            && inputState.isValid.idIsInvalid === true
-            && inputState.isValid.phoneIsInvalid === true
-            && inputState.isValid.additionalNumberIsInvalid === true
-            && inputState.isValid.passwordIsInvalid === true
-        ) {
-            setIsValid(true);
-        } else {
-            setIsValid(false);
-        };
-
-        console.log(inputState.isValid);
-    }
 
     const validateName = (ev) => {
-        console.log('blur');
         if(ev.target.value.match(/[^A-Za-z\s]/g)) {
-            console.log('find error');
             setInputState({
                 ...inputState,
                 error: {
@@ -101,7 +82,6 @@ export default function FormComponent() {
                     nameIsInvalid: true
                 }
             });
-            console.log('setInputState')
         } else if(!ev.target.value.match(/.{2,}/g)) {
             setInputState({
                 ...inputState,
@@ -159,12 +139,8 @@ export default function FormComponent() {
                     nameIsInvalid: false
                 }
             });
-            console.log('else block end', inputState.isValid.nameIsInvalid);
             changeHandler('name');
         }
-        console.log('Check the validity', inputState.isValid.nameIsInvalid);
-        checkValidity();
-        console.log('checked the validity');
     }
     const validateEmail = (ev) => {
         if(!ev.target.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g)) {
@@ -183,7 +159,6 @@ export default function FormComponent() {
                     emailIsInvalid: true
                 }
             });
-
         } else {
             setInputState({
                 ...inputState,
@@ -194,7 +169,6 @@ export default function FormComponent() {
             });
             changeHandler('name');
         }
-        checkValidity();
     }
     const validateLiteEmail = (ev) => {
         if(!ev.target.value.match(/[\w-]{1,64}@[\w-]+\.[\w-]{2,}/)) {
@@ -213,7 +187,6 @@ export default function FormComponent() {
                     liteEmailIsInvalid: true
                 }
             });
-            checkValidity();
         } else if(ev.target.value.match(/.{254}/)) {
             setInputState({
                 ...inputState,
@@ -230,7 +203,6 @@ export default function FormComponent() {
                     liteEmailIsInvalid: true
                 }
             });
-            checkValidity();
         } else {
             setInputState({
                 ...inputState,
@@ -241,7 +213,6 @@ export default function FormComponent() {
             });
             changeHandler('name');
         }
-        checkValidity();
     }
     const validateId = (ev) => {
         if(ev.target.value.match(/[^a-z0-9_]/g)) {
@@ -260,7 +231,6 @@ export default function FormComponent() {
                     idIsInvalid: true
                 }
             });
-            checkValidity();
         } else if(!ev.target.value.match(/.{2,}/g)) {
             setInputState({
                 ...inputState,
@@ -277,7 +247,6 @@ export default function FormComponent() {
                     idIsInvalid: true
                 }
             });
-            checkValidity();
         } else if(ev.target.value.match(/.{128}/g)) {
             setInputState({
                 ...inputState,
@@ -294,7 +263,6 @@ export default function FormComponent() {
                     idIsInvalid: true
                 }
             });
-            checkValidity();
         } else {
             setInputState({
                 ...inputState,
@@ -305,7 +273,6 @@ export default function FormComponent() {
             });
             changeHandler('name');
         }
-        checkValidity();
     }
     const validateNumber = (ev) => {
         if(!ev.target.value.match(/\+38\(0\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)) {
@@ -324,7 +291,6 @@ export default function FormComponent() {
                     phoneIsInvalid: true
                 }
             });
-            checkValidity();
             console.log()
         } else {
             setInputState({
@@ -336,7 +302,6 @@ export default function FormComponent() {
             });
             changeHandler('name');
         }
-        checkValidity();
     }
     const validateAdditionalNumber =(ev) => {
         if(!ev.target.value.match(/\+|\,|\(|\)|\;|[0-9]/)) {
@@ -355,7 +320,6 @@ export default function FormComponent() {
                     additionalNumberIsInvalid: true
                 }
             });
-            checkValidity();
         } else if(!ev.target.value.match(/.{7,}/g)) {
             setInputState({
                 ...inputState,
@@ -372,7 +336,6 @@ export default function FormComponent() {
                     additionalNumberIsInvalid: true
                 }
             });
-            checkValidity();
         } else if(ev.target.value.match(/.{256}/g)) {
             setInputState({
                 ...inputState,
@@ -389,7 +352,6 @@ export default function FormComponent() {
                     additionalNumberIsInvalid: true
                 }
             });
-            checkValidity();
         } else {
             setInputState({
                 ...inputState,
@@ -400,7 +362,6 @@ export default function FormComponent() {
             });
             changeHandler('name');
         }
-        checkValidity();
     }
     const validatePassword = (ev) => {
         if(!ev.target.value.match(/\d{4}\-\d{4}/)) {
@@ -419,7 +380,6 @@ export default function FormComponent() {
                     passwordIsInvalid: true
                 }
             });
-            checkValidity();
         } else {
             setInputState({
                 ...inputState,
@@ -430,8 +390,8 @@ export default function FormComponent() {
             });
             changeHandler('name');
         }
-        checkValidity();
     }
+
     const validateTextarea = (ev) => {
         ev.target.value = ev.target.value.replace(/^\s+|\s+$|^\n+|\n+$/g,'');
         ev.target.value = ev.target.value.replace(/\n{2,}\s*\n+|\n+\s*\n{2,}/g, '\n\n\n');
@@ -480,10 +440,14 @@ export default function FormComponent() {
             ...inputState,
             value: {
                 nameValue: '',
-                emailValue: '',
                 liteEmailValue: '',
+                emailValue: '',
                 idValue: '',
-                phoneValue: ''
+                idMaskValue: '',
+                phoneValue: '+38(0  )         ',
+                additionalNumberValue: '',
+                additionalNumberMaskValue: '',
+                passwordValue: '    -    '
             }
         })
     }
