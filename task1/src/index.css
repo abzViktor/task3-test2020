@@ -20,7 +20,7 @@ button {
 
 .MuiCard-root {
   padding: 20px !important;
-  margin-top: 20px;
+  margin: 20px 0;
 }
 
 .MuiInputBase-input,
