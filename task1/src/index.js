@@ -7,7 +7,11 @@ import FormComponent from './components/ Form/Form.js';
 
 ReactDOM.render(
   <React.StrictMode>
-    <FormComponent />
+      <div className='container'>
+          <div className='form-holder'>
+            <FormComponent />
+          </div>
+      </div>
   </React.StrictMode>,
   document.getElementById('root')
 );

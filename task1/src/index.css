@@ -1,7 +1,21 @@
 
 
 button {
-  margin: 30px 0 30px 30px  !important;
+  margin: 30px 0 15px !important;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.form-holder {
+  max-width: 600px;
+  width: 100%;
+}
+
+.button-holder {
+  text-align: center;
 }
 
 .MuiCard-root {
@@ -15,7 +29,7 @@ button {
 }
 
 .mb-1 {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 
 .MuiFormControl-root {

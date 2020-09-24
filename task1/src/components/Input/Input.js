@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 export default function InputComponent(props) {
     const { placeholder, type, onBlur, onChange, error,
-        helperText, label, value } = props;
+        helperText, label, value, required } = props;
 
     return (
         <TextField
@@ -16,6 +16,7 @@ export default function InputComponent(props) {
             helperText={helperText}
             label={label}
             value={value}
+            required={required}
         />
     );
 }

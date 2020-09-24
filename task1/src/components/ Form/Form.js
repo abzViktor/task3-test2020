@@ -3,14 +3,14 @@ import InputComponent from "../Input/Input.js"
 import {Card} from "@material-ui/core";
 import {Button} from '@material-ui/core';
 import {FormControl} from "@material-ui/core";
-import TextMaskCustom, {PasswordMaskCustom} from '../Input/NumberMask';
 import Input from '@material-ui/core/Input';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
+import InputMask from 'react-input-mask';
+
 
 export default function FormComponent() {
-    const [isValidCheck, setIsValid] = useState(false);
     const [inputState, setInputState] = useState({
         error: {
             nameError: false,
@@ -30,6 +30,8 @@ export default function FormComponent() {
             idIsInvalid: true,
             phoneIsInvalid: true,
             additionalNumberIsInvalid: true,
+            additionalNumberMaskIsInvalid: true,
+            idMaskIsInvalid: true,
             passwordIsInvalid: true
         },
         errorMessage: {
@@ -52,9 +54,12 @@ export default function FormComponent() {
             phoneValue: '',
             additionalNumberValue: '',
             additionalNumberMaskValue: '',
-            passwordValue: ''
+            passwordValue: '',
+            textareaValue: ''
         }
     });
+
+
 
     const customTrim = (val) => {
         val = val.replace(/^\s+/g,'');
@@ -167,7 +172,7 @@ export default function FormComponent() {
                     emailIsInvalid: false
                 }
             });
-            changeHandler('name');
+            changeHandler('email');
         }
     }
     const validateLiteEmail = (ev) => {
@@ -211,7 +216,7 @@ export default function FormComponent() {
                     liteEmailIsInvalid: false
                 }
             });
-            changeHandler('name');
+            changeHandler('liteEmail');
         }
     }
     const validateId = (ev) => {
@@ -271,11 +276,57 @@ export default function FormComponent() {
                     idIsInvalid: false
                 }
             });
-            changeHandler('name');
+            changeHandler('id');
         }
     }
+
+    const validateIdMask = (ev) => {
+        if(ev.target.value.match(/[^a-z0-9_]/g)) {
+            setInputState({
+                ...inputState,
+                error: {
+                    ...inputState.error,
+                    idMaskError: true
+                },
+                errorMessage: {
+                    ...inputState.errorMessage,
+                    idMaskErrMess: "Number can contain only numbers, lowercase latin letters and _!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    idMaskIsInvalid: true
+                }
+            });
+        } else if(!ev.target.value.match(/.{2,}/g)) {
+            setInputState({
+                ...inputState,
+                error: {
+                    ...inputState.error,
+                    idMaskError: true
+                },
+                errorMessage: {
+                    ...inputState.errorMessage,
+                    idMaskErrMess: "Number should be at least 2 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    idMaskIsInvalid: true
+                }
+            });
+        } else {
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    idMaskIsInvalid: false
+                }
+            });
+            changeHandler('idMask');
+        }
+    }
+
     const validateNumber = (ev) => {
-        if(!ev.target.value.match(/\+38\(0\d{2}\)\s\d{3}\-\d{2}\-\d{2}/)) {
+        if(!ev.target.value.match(/\+38\(0\d{2}\)\d{3}\-\d{2}\-\d{2}/)) {
             setInputState({
                 ...inputState,
                 error: {
@@ -300,10 +351,11 @@ export default function FormComponent() {
                     phoneIsInvalid: false
                 }
             });
-            changeHandler('name');
+            changeHandler('phone');
         }
+        console.log(inputState.isValid.phoneIsInvalid);
     }
-    const validateAdditionalNumber =(ev) => {
+    const validateAdditionalNumber = (ev) => {
         if(!ev.target.value.match(/\+|\,|\(|\)|\;|[0-9]/)) {
             setInputState({
                 ...inputState,
@@ -360,9 +412,55 @@ export default function FormComponent() {
                     additionalNumberIsInvalid: false
                 }
             });
-            changeHandler('name');
+            changeHandler('additionalNumber');
         }
     }
+
+    const validateAdditionalNumberMask = (ev) => {
+        if(!ev.target.value.match(/\+|\,|\(|\)|\;|[0-9]/g)) {
+            setInputState({
+                ...inputState,
+                error: {
+                    ...inputState.error,
+                    additionalNumberMaskError: true
+                },
+                errorMessage: {
+                    ...inputState.errorMessage,
+                    additionalNumberMaskErrMess: "You can use only ',', ';', '(', ')', '+' and numbers 0-9"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberMaskIsInvalid: true
+                }
+            });
+        } else if(!ev.target.value.match(/.{7,}/g)) {
+            setInputState({
+                ...inputState,
+                error: {
+                    ...inputState.error,
+                    additionalNumberMaskError: true
+                },
+                errorMessage: {
+                    ...inputState.errorMessage,
+                    additionalNumberMaskErrMess: "Additional numbers should be al least 7 characters!"
+                },
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberMaskIsInvalid: true
+                }
+            });
+        } else {
+            setInputState({
+                ...inputState,
+                isValid: {
+                    ...inputState.isValid,
+                    additionalNumberMaskIsInvalid: false
+                }
+            });
+            changeHandler('additionalNumberMask');
+        }
+    }
+
     const validatePassword = (ev) => {
         if(!ev.target.value.match(/\d{4}\-\d{4}/)) {
             setInputState({
@@ -388,7 +486,7 @@ export default function FormComponent() {
                     passwordIsInvalid: false
                 }
             });
-            changeHandler('name');
+            changeHandler('password');
         }
     }
 
@@ -412,10 +510,13 @@ export default function FormComponent() {
             ev.target.value = lengthMask(ev.target.value, 256);
         }
 
-        const err = type+'Error';
-        const mes = type+'ErrMess';
-        const value = type+'Value';
 
+
+
+        const value = type+'Value';
+        if(type !== 'textarea') {
+            const err = type+'Error';
+            const mes = type+'ErrMess';
             setInputState({
                 ...inputState,
                 error: {
@@ -431,7 +532,19 @@ export default function FormComponent() {
                     [value]: ev.target.value
                 }
             });
+        } else {
+            setInputState({
+                ...inputState,
+                value: {
+                    ...inputState.value,
+                    [value]: ev.target.value
+                }
+            })
+        }
+
     }
+
+
 
     const submitForm = (ev) => {
         console.log(inputState.value);
@@ -444,10 +557,11 @@ export default function FormComponent() {
                 emailValue: '',
                 idValue: '',
                 idMaskValue: '',
-                phoneValue: '+38(0  )         ',
+                phoneValue: '',
                 additionalNumberValue: '',
                 additionalNumberMaskValue: '',
-                passwordValue: '    -    '
+                passwordValue: '',
+                textareaValue: ''
             }
         })
     }
@@ -457,98 +571,102 @@ export default function FormComponent() {
             <form noValidate>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter your name" type="text" placeholder="First Name"
+                        <InputComponent label="Name" type="text"
                                         onBlur={validateName} onChange={changeHandler('name')}
                                         error={inputState.error.nameError}
                                         helperText={inputState.errorMessage.nameErrMess}
                                         value={inputState.value.nameValue}
+                                        required
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter your email" type="text" placeholder="Email"
+                        <InputComponent label="Email" type="text"
                                         onBlur={validateEmail} onChange={changeHandler('email')}
                                         error={inputState.error.emailError}
                                         helperText={inputState.errorMessage.emailErrMess}
-                                        value={inputState.value.emailValue}
+                                        value={inputState.value.emailValue} required
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter your lite email" type="text" placeholder="Lite Email"
+                        <InputComponent label="Lite email" type="text"
                                         onBlur={validateLiteEmail} onChange={changeHandler('liteEmail')}
                                         error={inputState.error.liteEmailError}
                                         helperText={inputState.errorMessage.liteEmailErrMess}
                                         value={inputState.value.liteEmailValue}
-
+                                        required
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter worker ID" type="text" placeholder="Id"
+                        <InputComponent label="Worker ID" type="text"
                                         onBlur={validateId} onChange={changeHandler('id')}
                                         error={inputState.error.idError}
                                         helperText={inputState.errorMessage.idErrMess}
-                                        value={inputState.value.idValue}
+                                        value={inputState.value.idValue} required
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter worker ID(Mask)" type="text" placeholder="Id"
-                                        onBlur={validateId} onChange={changeHandler('idMask')}
+                        <InputComponent label="Worker ID Mask" type="text"
+                                        onBlur={validateIdMask} onChange={changeHandler('idMask')}
                                         error={inputState.error.idMaskError}
-                                        helperText={inputState.errorMessage.idErrMess}
-                                        value={inputState.value.idMaskValue}
+                                        helperText={inputState.errorMessage.idMaskErrMess}
+                                        value={inputState.value.idMaskValue} required
                         />
                     </FormControl>
                 </div>
                 <div className='mb-1'>
                     <FormControl>
-                        <InputLabel htmlFor="number">Enter your phone number</InputLabel>
-                        <Input
-                            id='number'
-                            inputComponent={TextMaskCustom}
-                            onBlur={validateNumber} onChange={changeHandler('phone')}
-                            error={inputState.error.phoneError}
-                            value={inputState.value.phoneValue}
-                        />
+                        <InputLabel required htmlFor="number">Phone number</InputLabel>
+                        <InputMask mask="+38(099)999-99-99" onBlur={validateNumber}
+                                   onChange={changeHandler('phone')} value={inputState.value.phoneValue}
+                                   id='number' required='true'>
+
+                            {() => <Input error={inputState.error.phoneError} />}
+                        </InputMask>
                         <FormHelperText error={inputState.error.phoneError}>
-                            {inputState.errorMessage.phoneErrMess}
-                        </FormHelperText>
+                                       {inputState.errorMessage.phoneErrMess}
+                                    </FormHelperText>
                     </FormControl>
                 </div>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter additional numbers" type="text" placeholder="Additional numbers"
+                        <InputComponent label="Additional numbers" type="text"
                                         onBlur={validateAdditionalNumber} onChange={changeHandler('additionalNumber')}
                                         error={inputState.error.additionalNumberError}
                                         helperText={inputState.errorMessage.additionalNumberErrMess}
                                         value={inputState.value.additionalNumberValue}
+                                        required
                         />
                     </FormControl>
                 </div>
                 <div>
                     <FormControl>
-                        <InputComponent label="Enter additional numbers(Mask)" type="text" placeholder="Additional numbers"
-                                        onBlur={validateAdditionalNumber} onChange={changeHandler('additionalNumberMask')}
+                        <InputComponent label="Additional number mask" type="text" placeholder="Additional numbers"
+                                        onBlur={validateAdditionalNumberMask}
+                                        onChange={changeHandler('additionalNumberMask')}
+                                        error={inputState.error.additionalNumberMaskError}
+                                        helperText={inputState.errorMessage.additionalNumberMaskErrMess}
                                         value={inputState.value.additionalNumberMaskValue}
+                                        required
                         />
                     </FormControl>
                 </div>
                 <div className='mb-1'>
                     <FormControl>
-                        <InputLabel htmlFor="password">Enter your password</InputLabel>
-                        <Input
-                            id="password"
-                            inputComponent={PasswordMaskCustom}
-                            onBlur={validatePassword} onChange={changeHandler('password')}
-                            error={inputState.error.passwordError}
-                            value={inputState.value.passwordValue}
-                        />
+                        <InputLabel required htmlFor="password">Password</InputLabel>
+                        <InputMask mask="9999-9999" onBlur={validatePassword}
+                                   onChange={changeHandler('password')} value={inputState.value.passwordValue}
+                                   id='password' required='true'>
+
+                            {() => <Input error={inputState.error.passwordError} />}
+                        </InputMask>
                         <FormHelperText error={inputState.error.passwordError}>
                             {inputState.errorMessage.passwordErrMess}
                         </FormHelperText>
@@ -561,14 +679,15 @@ export default function FormComponent() {
                                onChange={changeHandler('textarea')}
                                placeholder={'Textarea'}
                                label={'Textarea just for you'}
+                               value={inputState.value.textareaValue}
                     />
                 </div>
             </form>
-            <Button disabled={(inputState.isValid.additionalNumberIsInvalid || inputState.isValid.emailIsInvalid
+            <div className='button-holder'><Button disabled={(inputState.isValid.additionalNumberIsInvalid || inputState.isValid.emailIsInvalid
             || inputState.isValid.nameIsInvalid
             || inputState.isValid.emailIsInvalid || inputState.isValid.idIsInvalid || inputState.isValid.liteEmailIsInvalid
             || inputState.isValid.passwordIsInvalid || inputState.isValid.phoneIsInvalid)
-            } variant="contained" onClick={submitForm} color="primary">Submit</Button>
+            } variant="contained" onClick={submitForm} color="primary">Submit</Button></div>
         </Card>
     )
 }
