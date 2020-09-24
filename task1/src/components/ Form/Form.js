@@ -66,6 +66,11 @@ export default function FormComponent() {
         val = val.replace(/\s{2,}/, ' ');
         return val;
     }
+
+    const trimSpaces = (val) => {
+        return val.replace(/\s*/g, '');
+    }
+
     const lengthMask = (val, length) => {
         return val.substr(0, length);
     }
@@ -148,7 +153,8 @@ export default function FormComponent() {
         }
     }
     const validateEmail = (ev) => {
-        if(!ev.target.value.match(/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g)) {
+        if(!ev.target.value.match(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
+
             setInputState({
                 ...inputState,
                 error: {
@@ -157,7 +163,7 @@ export default function FormComponent() {
                 },
                 errorMessage: {
                     ...inputState.errorMessage,
-                    emailErrMess: "Email is not valid"
+                    emailErrMess: "Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '."
                 },
                 isValid: {
                     ...inputState.isValid,
@@ -176,7 +182,7 @@ export default function FormComponent() {
         }
     }
     const validateLiteEmail = (ev) => {
-        if(!ev.target.value.match(/[\w-]{1,64}@[\w-]+\.[\w-]{2,}/)) {
+        if(!ev.target.value.match(/^[\w-]{1,64}?@[\w-]+\.[\w-]{2,}/)) {
             setInputState({
                 ...inputState,
                 error: {
@@ -185,7 +191,7 @@ export default function FormComponent() {
                 },
                 errorMessage: {
                     ...inputState.errorMessage,
-                    liteEmailErrMess: "Invalid email!"
+                    liteEmailErrMess: "Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '."
                 },
                 isValid: {
                     ...inputState.isValid,
@@ -356,7 +362,7 @@ export default function FormComponent() {
         console.log(inputState.isValid.phoneIsInvalid);
     }
     const validateAdditionalNumber = (ev) => {
-        if(!ev.target.value.match(/\+|\,|\(|\)|\;|[0-9]/)) {
+        if(!ev.target.value.match(/\+|\,|\(|\)|\;|[0-9]/g)) {
             setInputState({
                 ...inputState,
                 error: {
@@ -498,9 +504,15 @@ export default function FormComponent() {
 
 
     const changeHandler = (type) => (ev) => {
-        if(type === 'name') {
+        if(type === 'name' || type === 'textarea'
+            || type ==='additionalNumber'  || type === 'additionalNumberMask') {
             ev.target.value = customTrim(ev.target.value);
+        } else {
+            ev.target.value = trimSpaces(ev.target.value);
         }
+
+
+
 
         if(type === 'idMask') {
             ev.target.value = lengthMask(ev.target.value, 128);
@@ -568,7 +580,7 @@ export default function FormComponent() {
 
         return (
         <Card>
-            <form noValidate>
+            <form noValidate title='Task 1 2020test Form'>
                 <div>
                     <FormControl>
                         <InputComponent label="Name" type="text"
