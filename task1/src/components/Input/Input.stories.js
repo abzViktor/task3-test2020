@@ -14,7 +14,7 @@ export const Name = () => {
     return (<TextField error={boolean("Error", false)}
                        disabled={boolean("Disabled", false)}
                        placeholder={text("Placeholder", "First Name")}
-                       helperText={text("Error Text", "Some error occurs")}
+                       helperText={text("Helper Text", "Some error occurs")}
                        value={text("Value", "")}
                        label={text("Label", 'Enter your name')}
                        variant={select("Background", {'Outlined': 'outlined', 'filled':'filled', 'Standard': 'standard'}, 'filled')}
