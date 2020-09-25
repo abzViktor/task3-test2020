@@ -20,8 +20,8 @@ export default function FormComponent() {
             idMaskError: false,
             phoneError: false,
             phoneMaskError: false,
-            additionalNumberError: true,
-            additionalNumberMaskError: true,
+            additionalNumberError: false,
+            additionalNumberMaskError: false,
             passwordError: false,
             passwordMaskError: false
         },
