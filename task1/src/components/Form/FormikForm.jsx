@@ -181,6 +181,7 @@ export default function FormComponent() {
                   </Card>
                 </Dialog>
                 <Field
+                  required
                   label="Name"
                   name="firstName"
                   type="input"
@@ -193,6 +194,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Email"
                   name="email"
                   type="input"
@@ -205,6 +207,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Lite email"
                   name="liteEmail"
                   type="input"
@@ -217,6 +220,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Worker ID"
                   name="id"
                   type="input"
@@ -226,6 +230,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Worker ID mask"
                   name="idMask"
                   type="input"
@@ -238,6 +243,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Phone number"
                   name="number"
                   type="input"
@@ -263,6 +269,7 @@ export default function FormComponent() {
                     >
                       {() => (
                         <TextField
+                          required
                           label="Phone number mask"
                           helperText={touched.numberMask ? errors.numberMask : ''}
                           error={touched.numberMask && (!!errors.numberMask)}
@@ -273,6 +280,7 @@ export default function FormComponent() {
                 </Field>
 
                 <Field
+                  required
                   label="Additional number"
                   name="additionalNumber"
                   type="input"
@@ -282,6 +290,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Additional number mask"
                   name="additionalNumberMask"
                   type="input"
@@ -294,6 +303,7 @@ export default function FormComponent() {
                 />
 
                 <Field
+                  required
                   label="Password"
                   name="password"
                   type="input"
@@ -319,6 +329,7 @@ export default function FormComponent() {
                     >
                       {() => (
                         <TextField
+                          required
                           label="Password mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
                           error={touched.passwordMask && (!!errors.passwordMask)}
