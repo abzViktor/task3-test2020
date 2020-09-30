@@ -6,9 +6,14 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputMask from 'react-input-mask';
 import Card from '@material-ui/core/Card';
+import Dialog from '@material-ui/core/Dialog';
 import * as Yup from 'yup';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 
 export default function FormComponent() {
+  const [open, setOpen] = React.useState(false);
   const validationSchema = Yup.object({
     firstName: Yup.string()
       .required('This field is required!')
@@ -46,10 +51,7 @@ export default function FormComponent() {
       .min(7, 'Additional number should be at least 7 characters!'),
     password: Yup.string()
       .required('This field is required!')
-      .matches(/^\d{4}-\d{4}$/, 'Password should be XXXX-XXXX format!'),
-    // passwordMask: Yup.string()
-    //   .required('This field is required!')
-    //   .matches(/^\d{4}-\d{4}$/, 'Password should be XXXX-XXXX format!'),
+      .matches(/^\d{4}-\d{4}$/, 'Password should be in XXXX-XXXX format and contain only numbers!'),
   });
 
   const initialValues = {
@@ -63,31 +65,42 @@ export default function FormComponent() {
     additionalNumber: '',
     additionalNumberMask: '',
     password: '',
-    // passwordMask: '',
+    passwordMask: '',
     textarea: '',
   };
 
   const validateNumberMask = (value) => {
     let error;
-    if (value === '+38(0__)___-__-__') {
+    if (value === '+38(0__)___-__-__' || !value) {
       error = 'This field is required!';
     } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/)) {
       error = 'Phone number should be in +38(0XX)XXX-XX-XX format!';
     }
     return error;
   };
-  //
-  // const trimDoubleSpaces = (value) => {
-  //   const newValue = value.replace(/\s{2,}/g, ' ');
-  //   return newValue;
-  // };
-  //
-  // const trimSpaces = (value) => value.replace(/\s+/g, '');
-  // const formatTextarea = (value) => value.replace(/\n{2,}\s*\n+|\n+\s*\n{2,}/g, '\n\n\n')
-  //   .substr(0, 500);
-  //
-  // const trimShort = (value) => value.substr(0, 128);
-  // const trimLong = (value) => value.substr(0, 256);
+
+  const validatePasswordMask = (value) => {
+    let error;
+    if (value === '____-____' || !value) {
+      error = 'This field is required!';
+    } else if (!value.match(/\d{4}-\d{4}/)) {
+      error = 'Password should be in XXXX-XXXX format and contain only numbers!';
+    }
+    return error;
+  };
+
+  const trimDoubleSpaces = (value) => {
+    const newValue = value.replace(/\s{2,}/g, ' ');
+    return newValue;
+  };
+
+  const trimSpaces = (value) => value.replace(/\s+/g, '');
+  const formatTextarea = (value) => value.replace(/\n{2,}\s*\n+|\n+\s*\n{2,}/g, '\n\n\n')
+    .replace(/^\s+|\s+$|^\n+|\n+$/g, '')
+    .substr(0, 500);
+
+  const cutShort = (value) => value.substr(0, 128);
+  const cutLong = (value) => value.substr(0, 256);
 
   return (
     <div>
@@ -97,22 +110,78 @@ export default function FormComponent() {
           initialValues={initialValues}
           onSubmit={(values, options) => {
             options.setSubmitting(true);
-            console.log(values);
-            options.resetForm();
+            setOpen(true);
+            options.setSubmitting(false);
           }}
           validationSchema={validationSchema}
         >
           {
             ({
               values,
-              handleChange,
               errors,
               touched,
               isValid,
-              handleBlur,
               dirty,
+              setFieldValue,
+              setFieldTouched,
+              resetForm,
             }) => (
               <Form>
+                <Dialog open={open}>
+                  <DialogTitle id="simple-dialog-title">Submission confirmed!</DialogTitle>
+                  <Card>
+                    <div>
+                      Firstname:&nbsp;
+                      {values.firstName}
+                      Email:&nbsp;
+                      {values.email}
+                      <br />
+                      Lite Email:&nbsp;
+                      {values.liteEmail}
+                      <br />
+                      Id:&nbsp;
+                      {values.id}
+                      <br />
+                      Id mask:&nbsp;
+                      {values.idMask}
+                      <br />
+                      Phone:&nbsp;
+                      {values.number}
+                      <br />
+                      Phone mask:&nbsp;
+                      {values.numberMask}
+                      <br />
+                      Additional numbers:&nbsp;
+                      {values.additionalNumber}
+                      <br />
+                      Additional numbers mask:&nbsp;
+                      {values.additionalNumberMask}
+                      <br />
+                      Password:&nbsp;
+                      {values.password}
+                      <br />
+                      Password mask:&nbsp;
+                      {values.passwordMask}
+                      <br />
+                      Textarea:
+                      {' '}
+                      <br />
+                      {values.textarea}
+                    </div>
+                    <div className="button-holder">
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={() => {
+                          setOpen(false);
+                          resetForm();
+                        }}
+                      >
+                        Close
+                      </Button>
+                    </div>
+                  </Card>
+                </Dialog>
                 <Field
                   label="Name"
                   name="firstName"
@@ -120,27 +189,33 @@ export default function FormComponent() {
                   as={TextField}
                   helperText={touched.firstName ? errors.firstName : ''}
                   error={touched.firstName && (!!errors.firstName)}
-                  // value={trimDoubleSpaces(values.firstName)}
+                  onChange={({ target }) => {
+                    setFieldValue(target.name, trimDoubleSpaces(target.value));
+                  }}
                 />
 
                 <Field
-                  // value={trimSpaces(values.email)}
                   label="Email"
                   name="email"
                   type="input"
                   as={TextField}
                   helperText={touched.email ? errors.email : ''}
                   error={touched.email && (!!errors.email)}
+                  onChange={({ target }) => {
+                    setFieldValue(target.name, trimSpaces(target.value));
+                  }}
                 />
 
                 <Field
-                  // value={trimSpaces(values.liteEmail)}
                   label="Lite email"
                   name="liteEmail"
                   type="input"
                   as={TextField}
                   helperText={touched.liteEmail ? errors.liteEmail : ''}
                   error={touched.liteEmail && (!!errors.liteEmail)}
+                  onChange={({ target }) => {
+                    setFieldValue(target.name, trimSpaces(target.value));
+                  }}
                 />
 
                 <Field
@@ -154,12 +229,14 @@ export default function FormComponent() {
 
                 <Field
                   label="Worker ID mask"
-                  // value={trimShort(values.idMask)}
                   name="idMask"
                   type="input"
                   as={TextField}
                   helperText={touched.idMask ? errors.idMask : ''}
                   error={touched.idMask && (!!errors.idMask)}
+                  onChange={({ target }) => {
+                    setFieldValue(target.name, cutShort(target.value));
+                  }}
                 />
 
                 <Field
@@ -171,19 +248,31 @@ export default function FormComponent() {
                   error={touched.number && (!!errors.number)}
                 />
 
-                <InputMask mask="+38(099)999-99-99" values={values} onChange={handleChange} onBlur={handleBlur} touched={touched} errors={errors}>
+                <Field
+                  name="numberMask"
+                  validate={validateNumberMask}
+                >
                   {() => (
-                    <Field
-                      validate={validateNumberMask}
-                      label="Phone number mask"
-                      name="numberMask"
-                      type="input"
-                      as={TextField}
-                      helperText={touched.numberMask ? errors.numberMask : ''}
-                      error={touched.numberMask && (!!errors.numberMask)}
-                    />
+                    <InputMask
+                      value={values.numberMask}
+                      mask="+38(099)999-99-99"
+                      onChange={({ target }) => {
+                        setFieldValue('numberMask', target.value);
+                      }}
+                      onBlur={() => {
+                        setFieldTouched('numberMask', true);
+                      }}
+                    >
+                      {() => (
+                        <TextField
+                          label="Phone number mask"
+                          helperText={touched.numberMask ? errors.numberMask : ''}
+                          error={touched.numberMask && (!!errors.numberMask)}
+                        />
+                      )}
+                    </InputMask>
                   )}
-                </InputMask>
+                </Field>
 
                 <Field
                   label="Additional number"
@@ -195,13 +284,15 @@ export default function FormComponent() {
                 />
 
                 <Field
-                  // value={trimLong(values.additionalNumberMask)}
                   label="Additional number mask"
                   name="additionalNumberMask"
                   type="input"
                   as={TextField}
                   helperText={touched.additionalNumberMask ? errors.additionalNumberMask : ''}
                   error={touched.additionalNumberMask && (!!errors.additionalNumberMask)}
+                  onChange={({ target }) => {
+                    setFieldValue(target.name, cutLong(target.value));
+                  }}
                 />
 
                 <Field
@@ -213,18 +304,31 @@ export default function FormComponent() {
                   error={touched.password && (!!errors.password)}
                 />
 
-                {/* <InputMask mask="9999-9999" values={values} onChange={handleChange} onBlur={handleBlur} touched={touched} errors={errors}> */}
-                {/*  {() => ( */}
-                {/*    <Field */}
-                {/*      label="Password mask" */}
-                {/*      name="passwordMask" */}
-                {/*      type="input" */}
-                {/*      as={TextField} */}
-                {/*      helperText={touched.passwordMask ? errors.passwordMask : ''} */}
-                {/*      error={touched.passwordMask && (!!errors.passwordMask)} */}
-                {/*    /> */}
-                {/*  )} */}
-                {/* </InputMask> */}
+                <Field
+                  name="passwordMask"
+                  validate={validatePasswordMask}
+                >
+                  {() => (
+                    <InputMask
+                      value={values.passwordMask}
+                      mask="9999-9999"
+                      onChange={({ target }) => {
+                        setFieldValue('passwordMask', target.value);
+                      }}
+                      onBlur={() => {
+                        setFieldTouched('passwordMask', true);
+                      }}
+                    >
+                      {() => (
+                        <TextField
+                          label="Password mask"
+                          helperText={touched.passwordMask ? errors.passwordMask : ''}
+                          error={touched.passwordMask && (!!errors.passwordMask)}
+                        />
+                      )}
+                    </InputMask>
+                  )}
+                </Field>
 
                 <Field
                   multiline
@@ -233,14 +337,25 @@ export default function FormComponent() {
                   name="textarea"
                   type="input"
                   as={TextField}
+                  onBlur={({ target }) => {
+                    setFieldValue(target.name, formatTextarea(target.value));
+                  }}
                 />
                 <div className="button-holder">
-                  <Button color="primary" variant="contained" type="submit">Submit</Button>
+                  <Button disabled={!(isValid && dirty)} color="primary" variant="contained" type="submit">Submit</Button>
                 </div>
+                {/* <pre> */}
+                {/*  {JSON.stringify(values, null, 2)} */}
+                {/*  {JSON.stringify(errors, null, 2)} */}
+                {/*  <br /> */}
+                {/*  {JSON.stringify(dirty, null, 2)} */}
+                {/* </pre> */}
               </Form>
             )
-}
+          }
+
         </Formik>
+
       </Card>
     </div>
   );
