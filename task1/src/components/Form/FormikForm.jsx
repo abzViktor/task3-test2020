@@ -9,8 +9,6 @@ import Card from '@material-ui/core/Card';
 import Dialog from '@material-ui/core/Dialog';
 import * as Yup from 'yup';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 
 export default function FormComponent() {
   const [open, setOpen] = React.useState(false);
