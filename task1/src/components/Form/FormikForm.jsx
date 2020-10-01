@@ -335,6 +335,7 @@ export default function FormComponent() {
                     >
                       {() => (
                         <TextField
+                          type="password"
                           required
                           label="Password mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
