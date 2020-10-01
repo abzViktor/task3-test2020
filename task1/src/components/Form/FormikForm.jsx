@@ -158,10 +158,10 @@ export default function FormComponent() {
                       Additional numbers mask:&nbsp;
                       {values.additionalNumberMask}
                       <br />
-                      Password:&nbsp;
+                      PIN:&nbsp;
                       {values.password}
                       <br />
-                      Password mask:&nbsp;
+                      PIN mask:&nbsp;
                       {values.passwordMask}
                       <br />
                       Textarea:
@@ -309,9 +309,9 @@ export default function FormComponent() {
 
                 <Field
                   required
-                  label="Password"
+                  label="PIN"
                   name="password"
-                  type="password"
+                  inputMode="tel"
                   as={TextField}
                   helperText={touched.password ? errors.password : ''}
                   error={touched.password && (!!errors.password)}
@@ -335,9 +335,9 @@ export default function FormComponent() {
                     >
                       {() => (
                         <TextField
-                          type="password"
+                          inputMode="tel"
                           required
-                          label="Password mask"
+                          label="PIN mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
                           error={touched.passwordMask && (!!errors.passwordMask)}
                         />
