@@ -1,17 +1,12 @@
 import React from 'react';
 import {
-  withKnobs, text, boolean, number, select,
+  text, boolean, select,
 } from '@storybook/addon-knobs';
 import Button from '@material-ui/core/Button';
-import ButtonComponent from './Button';
 
-export default {
-  component: ButtonComponent,
-  title: 'Button',
-  decorators: [withKnobs],
-};
-
+// eslint-disable-next-line import/prefer-default-export
 export const Primary = () => (
+  // eslint-disable-next-line react/jsx-filename-extension
   <Button
     disabled={boolean('Disabled', false)}
     color={select('Color', { Primary: 'primary', Secondary: 'secondary' }, 'primary')}

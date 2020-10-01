@@ -12,6 +12,7 @@ export default {
 };
 
 export const Name = () => (
+  // eslint-disable-next-line react/jsx-filename-extension
   <TextField
     error={boolean('Error', false)}
     disabled={boolean('Disabled', false)}
