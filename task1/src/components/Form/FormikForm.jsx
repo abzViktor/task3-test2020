@@ -14,7 +14,7 @@ export default function FormComponent() {
   const [open, setOpen] = React.useState(false);
   const validationSchema = Yup.object({
     firstName: Yup.string()
-      .required('')
+      .required('This field is required!')
       .trim('')
       .min(2, 'Name should be at least 2 characters!')
       .max(128, 'Name should be less than 128 characters!')
@@ -24,34 +24,34 @@ export default function FormComponent() {
       .matches(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/, 'Email is invalid!')
       .min(6, 'Email should be more than 6 characters')
       .max(254, 'Email should be less than 254 characters!')
-      .required(''),
+      .required('This field is required!'),
     liteEmail: Yup.string()
-      .required('')
+      .required('This field is required!')
       .max(254, 'Email should be less than 254 characters!')
       .matches(/^[\w-]{1,64}?@[\w-]+\.[\w-]{2,}/, 'Invalid Email!'),
     id: Yup.string()
-      .required('')
+      .required('This field is required!')
       .min(2, 'Id should be at least 2 characters!')
       .max(128, 'Id should be less than 128 characters!')
       .matches(/^[a-z0-9_]+$/g, 'Id can contain only numbers, lowercase latin letters and _!'),
     idMask: Yup.string()
-      .required('')
+      .required('This field is required!')
       .min(2, 'Id should be at least 2 characters!')
       .matches(/^[a-z0-9_]+$/g, 'Id can contain only numbers, lowercase latin letters and _!'),
     number: Yup.string()
       .required('This field is required!')
       .matches(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/, 'Phone number should be in +38(0XX)XXX-XX-XX format!'),
     additionalNumber: Yup.string()
-      .required('')
+      .required('This field is required!')
       .matches(/^[-,;()+0-9\s]+$/g, 'Additional number should contain only \',\', \';\', \'(\', \')\', \'+\' and numbers 0-9')
       .min(7, 'Additional number should be at least 7 characters!')
       .max(256, 'Additional number should be less than 256 characters!'),
     additionalNumberMask: Yup.string()
-      .required('')
+      .required('This field is required!')
       .matches(/^[-,;()+0-9\s]+$/g, 'Additional number should contain only \',\', \';\', \'(\', \')\', \'+\' and numbers 0-9')
       .min(7, 'Additional number should be at least 7 characters!'),
     password: Yup.string()
-      .required('')
+      .required('This field is required!')
       .matches(/^\d{4}-\d{4}$/, 'Password should be in XXXX-XXXX format and contain only numbers!'),
   });
 
