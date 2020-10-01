@@ -258,7 +258,7 @@ export default function FormComponent() {
                 <Field
                   name="numberMask"
                   validate={validateNumberMask}
-                  type="tel"
+
                 >
                   {() => (
                     <InputMask
@@ -273,6 +273,7 @@ export default function FormComponent() {
                     >
                       {() => (
                         <TextField
+                          type="tel"
                           required
                           label="Phone number mask"
                           helperText={touched.numberMask ? errors.numberMask : ''}
