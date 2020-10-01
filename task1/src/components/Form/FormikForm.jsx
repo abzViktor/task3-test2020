@@ -20,7 +20,10 @@ export default function FormComponent() {
       .max(128, 'Name should be less than 128 characters!')
       .matches(/^[A-Za-z\s]+$/g, 'Name should contain only latin letters!'),
     email: Yup.string()
-      .email('Invalid Email!')
+    // eslint-disable-next-line no-control-regex
+      .matches(/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/, 'Email is invalid!')
+      .min(6, 'Email should be more than 6 characters')
+      .max(254, 'Email should be less than 254 characters!')
       .required('This field is required!'),
     liteEmail: Yup.string()
       .required('This field is required!')
@@ -128,9 +131,10 @@ export default function FormComponent() {
                 <Dialog open={open}>
                   <DialogTitle id="simple-dialog-title">Submission confirmed!</DialogTitle>
                   <Card>
-                    <div>
+                    <div className="wrapWords">
                       Firstname:&nbsp;
                       {values.firstName}
+                      <br />
                       Email:&nbsp;
                       {values.email}
                       <br />
@@ -184,7 +188,7 @@ export default function FormComponent() {
                   required
                   label="Name"
                   name="firstName"
-                  type="input"
+                  type="text"
                   as={TextField}
                   helperText={touched.firstName ? errors.firstName : ''}
                   error={touched.firstName && (!!errors.firstName)}
@@ -197,7 +201,7 @@ export default function FormComponent() {
                   required
                   label="Email"
                   name="email"
-                  type="input"
+                  type="email"
                   as={TextField}
                   helperText={touched.email ? errors.email : ''}
                   error={touched.email && (!!errors.email)}
@@ -210,7 +214,7 @@ export default function FormComponent() {
                   required
                   label="Lite email"
                   name="liteEmail"
-                  type="input"
+                  type="email"
                   as={TextField}
                   helperText={touched.liteEmail ? errors.liteEmail : ''}
                   error={touched.liteEmail && (!!errors.liteEmail)}
@@ -223,7 +227,7 @@ export default function FormComponent() {
                   required
                   label="Worker ID"
                   name="id"
-                  type="input"
+                  type="text"
                   as={TextField}
                   helperText={touched.id ? errors.id : ''}
                   error={touched.id && (!!errors.id)}
@@ -233,7 +237,7 @@ export default function FormComponent() {
                   required
                   label="Worker ID mask"
                   name="idMask"
-                  type="input"
+                  type="text"
                   as={TextField}
                   helperText={touched.idMask ? errors.idMask : ''}
                   error={touched.idMask && (!!errors.idMask)}
@@ -246,7 +250,7 @@ export default function FormComponent() {
                   required
                   label="Phone number"
                   name="number"
-                  type="input"
+                  type="tel"
                   as={TextField}
                   helperText={touched.number ? errors.number : ''}
                   error={touched.number && (!!errors.number)}
@@ -255,6 +259,7 @@ export default function FormComponent() {
                 <Field
                   name="numberMask"
                   validate={validateNumberMask}
+                  type="tel"
                 >
                   {() => (
                     <InputMask
@@ -283,7 +288,7 @@ export default function FormComponent() {
                   required
                   label="Additional number"
                   name="additionalNumber"
-                  type="input"
+                  type="tel"
                   as={TextField}
                   helperText={touched.additionalNumber ? errors.additionalNumber : ''}
                   error={touched.additionalNumber && (!!errors.additionalNumber)}
@@ -293,7 +298,7 @@ export default function FormComponent() {
                   required
                   label="Additional number mask"
                   name="additionalNumberMask"
-                  type="input"
+                  type="tel"
                   as={TextField}
                   helperText={touched.additionalNumberMask ? errors.additionalNumberMask : ''}
                   error={touched.additionalNumberMask && (!!errors.additionalNumberMask)}
@@ -306,7 +311,7 @@ export default function FormComponent() {
                   required
                   label="Password"
                   name="password"
-                  type="input"
+                  type="password"
                   as={TextField}
                   helperText={touched.password ? errors.password : ''}
                   error={touched.password && (!!errors.password)}
@@ -315,6 +320,7 @@ export default function FormComponent() {
                 <Field
                   name="passwordMask"
                   validate={validatePasswordMask}
+
                 >
                   {() => (
                     <InputMask

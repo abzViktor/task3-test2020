@@ -18,6 +18,10 @@ button {
   text-align: center;
 }
 
+.wrapWords {
+  word-break: break-all;
+}
+
 .MuiCard-root {
   padding: 20px !important;
   margin: 20px 0;
