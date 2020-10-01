@@ -168,7 +168,7 @@ export default function FormComponent() {
                       Textarea:
                       {' '}
                       <br />
-                      {values.textarea}
+                      <div style={{ whiteSpace: 'pre-wrap' }}>{values.textarea}</div>
                     </div>
                     <div className="button-holder">
                       <Button
