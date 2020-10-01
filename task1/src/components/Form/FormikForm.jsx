@@ -26,7 +26,7 @@ export default function FormComponent() {
       .max(254, 'Email should be less than 254 characters!')
       .required(''),
     liteEmail: Yup.string()
-      .required('This field is required!')
+      .required('')
       .max(254, 'Email should be less than 254 characters!')
       .matches(/^[\w-]{1,64}?@[\w-]+\.[\w-]{2,}/, 'Invalid Email!'),
     id: Yup.string()
