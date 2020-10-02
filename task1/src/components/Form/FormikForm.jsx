@@ -312,7 +312,7 @@ export default function FormComponent() {
                   label="PIN"
                   name="password"
                   type="text"
-                  inputMode="numeric"
+                  inputProps={{ inputMode: 'numeric' }}
                   as={TextField}
                   helperText={touched.password ? errors.password : ''}
                   error={touched.password && (!!errors.password)}
@@ -337,7 +337,7 @@ export default function FormComponent() {
                       {() => (
                         <TextField
                           type="text"
-                          inputMode="numeric"
+                          inputProps={{ inputMode: 'numeric' }}
                           required
                           label="PIN mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
