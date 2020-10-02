@@ -54,7 +54,7 @@ export default function FormComponent() {
       .matches(/^\d{4}-?\d{4}$/, 'Password should be in XXXX-XXXX or XXXXXXXX format and contain only numbers!'),
   });
 
-  const codeUkraine = '38';
+  const codeUkraine = '38(0';
 
   const initialValues = {
     firstName: '',
@@ -73,7 +73,7 @@ export default function FormComponent() {
 
   const validateNumberMask = (value) => {
     let error;
-    if (value === `+${codeUkraine}(0__)___-__-__` || !value) {
+    if (value === `+${codeUkraine}__)___-__-__` || !value) {
       error = 'This field is required!';
     } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/)) {
       error = 'Phone number should be in +38(0XX)XXX-XX-XX format!';
