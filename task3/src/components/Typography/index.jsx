@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './button.css';
 
-export const Typography = ({ tag, size, text, ...props }) => {
+export const Typography = ({ tag, text }) => {
     return (
-        <button
-
-        >
-
-        </button>
+         React.createElement(tag, {color: 'red'}, text)
     );
 };
 
@@ -36,5 +31,6 @@ export const Typography = ({ tag, size, text, ...props }) => {
 // };
 
 Typography.defaultProps = {
-
+    tag: 'h2',
+    text: 'The quick brown fox jumps over the lazy dog.'
 };
