@@ -311,7 +311,8 @@ export default function FormComponent() {
                   required
                   label="PIN"
                   name="password"
-                  type="tel"
+                  type="text"
+                  inputMode="number"
                   as={TextField}
                   helperText={touched.password ? errors.password : ''}
                   error={touched.password && (!!errors.password)}
@@ -335,7 +336,8 @@ export default function FormComponent() {
                     >
                       {() => (
                         <TextField
-                          type="tel"
+                          type="text"
+                          inputMode="number"
                           required
                           label="PIN mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
