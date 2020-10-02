@@ -7,6 +7,3 @@ export const Typography = ({ tag, text, className }) => {
     );
 };
 
-Typography.defaultProps = {
-    text: 'The quick brown fox jumps over the lazy dog.'
-};

@@ -1,14 +1,15 @@
 import React from 'react';
-import './Links.css';
+import './Button.css';
 
-export default function Links(props) {
-    const { className } = props;
+export default function Button(props) {
+    const {className } = props;
 
     return (
-        <a
+        <button
             /* eslint-disable-next-line react/jsx-props-no-spreading */
             className={className}
         />
     );
 };
+
 
