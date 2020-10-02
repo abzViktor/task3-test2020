@@ -51,7 +51,7 @@ export default function FormComponent() {
       .min(7, 'Additional number should be at least 7 characters!'),
     password: Yup.string()
       .required('')
-      .matches(/^\d{4}-\d{4}$/, 'Password should be in XXXX-XXXX format and contain only numbers!'),
+      .matches(/^\d{4}-?\d{4}$/, 'Password should be in XXXX-XXXX or XXXXXXXX format and contain only numbers!'),
   });
 
   const initialValues = {
@@ -312,7 +312,7 @@ export default function FormComponent() {
                   label="PIN"
                   name="password"
                   type="text"
-                  inputProps={{ inputMode: 'numeric' }}
+                  inputProps={{ inputMode: 'decimal' }}
                   as={TextField}
                   helperText={touched.password ? errors.password : ''}
                   error={touched.password && (!!errors.password)}
@@ -337,7 +337,7 @@ export default function FormComponent() {
                       {() => (
                         <TextField
                           type="text"
-                          inputProps={{ inputMode: 'numeric' }}
+                          inputProps={{ inputMode: 'decimal' }}
                           required
                           label="PIN mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
