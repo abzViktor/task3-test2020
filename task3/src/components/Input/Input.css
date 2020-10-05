@@ -33,6 +33,10 @@
     padding: 0 !important;
 }
 
+.MuiSelect-select:focus {
+    background-color: transparent !important;
+}
+
 .select-component .MuiOutlinedInput-input {
     padding-top: 14.5px !important;
     padding-bottom: 14.5px !important;
