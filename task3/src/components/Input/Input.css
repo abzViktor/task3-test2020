@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
+.MuiOutlinedInput-root {
+    padding-right: 18px;
+}
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: 2px solid #b7b7b7 !important;
@@ -33,6 +36,17 @@
 .select-component .MuiOutlinedInput-input {
     padding-top: 14.5px !important;
     padding-bottom: 14.5px !important;
+}
+
+.MuiOutlinedInput-input,
+.MuiInputBase-input{
+    font-family: "Source Sans Pro" !important;
+    font-size: 16px !important;
+}
+
+.PrivateNotchedOutline-legendLabelled-3 > span {
+    font-family: "Source Sans Pro", sans-serif;
+
 }
 
 

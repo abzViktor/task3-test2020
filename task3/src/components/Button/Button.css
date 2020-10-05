@@ -14,7 +14,8 @@ button.secondary:hover{
     cursor: pointer;
 }
 
-button.secondary:active {
+button.secondary:active,
+button.secondary:hover{
     background-color: #FEE6D2;
     border: 2px solid #ef6c00;
 }
@@ -34,7 +35,8 @@ button.secondary {
     border: 2px solid #ef6c00;
 }
 
-button.primary:active {
+button.primary:active,
+button.primary:hover{
     background-color: #fc831f;
     border: 2px solid #fc831f;
 }
@@ -44,3 +46,12 @@ button[disabled] {
     border: 2px solid #D7D7D7;
     color: #929191;
 }
+
+
+@media screen and (max-width: 600px) {
+    button.secondary,
+    button.primary {
+        margin: 4px 0;
+    }
+}
+

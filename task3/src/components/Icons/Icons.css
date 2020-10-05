@@ -5,7 +5,14 @@
     flex-wrap: wrap;
 }
 
-.primary-links-holder a {
+.secondary-links-holder {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.primary-links-holder a,
+.secondary-links-holder a{
     min-width: 40px;
     min-height: 40px;
     display: flex;
