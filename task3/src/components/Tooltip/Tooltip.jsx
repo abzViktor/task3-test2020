@@ -1,5 +1,5 @@
 import React from 'react';
-import './Button.css';
+import './Tooltip.css';
 
 export default function Button(props) {
   // eslint-disable-next-line react/prop-types
@@ -7,8 +7,7 @@ export default function Button(props) {
 
   return (
   // eslint-disable-next-line jsx-a11y/control-has-associated-label
-    <button
-      type="button" /* eslint-disable-next-line react/jsx-props-no-spreading */
+    <div/* eslint-disable-next-line react/jsx-props-no-spreading */
       className={className}
     />
   );
