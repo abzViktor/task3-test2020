@@ -1,4 +1,6 @@
 import React from 'react';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
 import Logo from '../Logo/Logo';
 import './Header.css';
 import '../Links/Links.css';
@@ -6,6 +8,10 @@ import '../Links/Links.css';
 const defaultLink = 'localhost:3000';
 
 export default function Header() {
+  const [open, setOpen] = React.useState(false);
+  const toggleMenu = (value) => () => {
+    setOpen(value);
+  };
   return (
     <header className="container">
       <div className="desktop-header">
@@ -29,7 +35,7 @@ export default function Header() {
             </div>
             <img className="header-avatar" src="user-superstar-2x.jpg" alt="avatar icon" />
             <div>
-              <a href="#" className="exitButton">
+              <a href={defaultLink} className="exitButton">
                 <svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
                   <title>Sign-out</title>
                   <desc>Created with Sketch.</desc>
@@ -47,10 +53,29 @@ export default function Header() {
         </div>
       </div>
       <div className="mobile-header flex">
+        <Drawer open={open} onClose={toggleMenu(false)}>
+          <div className="side-menu-container-contacts">
+            <div><img className="header-avatar-mob" src="user-superstar-2x.jpg" alt="avatar icon" /></div>
+            <div><span className="name">Superstar</span></div>
+            <div><a href="mailto:Superstar@gmail.com">Superstar@gmail.com</a></div>
+          </div>
+          <Divider />
+          <div className="side-menu-container-nav">
+            <nav>
+              <ul>
+                <li><a className="primary" href={defaultLink}>About me</a></li>
+                <li><a className="primary" href={defaultLink}>Relationships</a></li>
+                <li><a className="primary" href={defaultLink}>Users</a></li>
+                <li><a className="primary" href={defaultLink}>Sign up</a></li>
+                <li><a className="primary" href={defaultLink}>Terms and Conditions</a></li>
+              </ul>
+            </nav>
+          </div>
+        </Drawer>
         <div className="logo-container">
           <Logo />
         </div>
-        <button type="button" className="menuOpen">
+        <button type="button" onClick={toggleMenu(true)} className="menuOpen">
           <svg width="23px" height="22px" viewBox="0 0 23 22" version="1.1" xmlns="http://www.w3.org/2000/svg">
             <title>line-menu</title>
             <desc>Created with Sketch.</desc>
