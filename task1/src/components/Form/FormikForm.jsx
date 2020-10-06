@@ -51,8 +51,10 @@ export default function FormComponent() {
       .min(7, 'Additional number should be at least 7 characters!'),
     password: Yup.string()
       .required('')
-      .matches(/^\d{4}-\d{4}$/, 'Password should be in XXXX-XXXX format and contain only numbers!'),
+      .matches(/^\d{4}-?\d{4}$/, 'Password should be in XXXX-XXXX or XXXXXXXX format and contain only numbers!'),
   });
+
+  const codeUkraine = '38(0';
 
   const initialValues = {
     firstName: '',
@@ -71,7 +73,7 @@ export default function FormComponent() {
 
   const validateNumberMask = (value) => {
     let error;
-    if (value === '+38(0__)___-__-__' || !value) {
+    if (value === `+${codeUkraine}__)___-__-__` || !value) {
       error = 'This field is required!';
     } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/)) {
       error = 'Phone number should be in +38(0XX)XXX-XX-XX format!';
@@ -312,7 +314,7 @@ export default function FormComponent() {
                   label="PIN"
                   name="password"
                   type="text"
-                  inputMode="number"
+                  inputProps={{ inputMode: 'decimal' }}
                   as={TextField}
                   helperText={touched.password ? errors.password : ''}
                   error={touched.password && (!!errors.password)}
@@ -337,7 +339,7 @@ export default function FormComponent() {
                       {() => (
                         <TextField
                           type="text"
-                          inputMode="number"
+                          inputProps={{ inputMode: 'decimal' }}
                           required
                           label="PIN mask"
                           helperText={touched.passwordMask ? errors.passwordMask : ''}
