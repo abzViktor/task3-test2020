@@ -75,13 +75,13 @@ nav ul li a {
 
 
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 830px){
     header .desktop-header {
         display: none;
     }
 }
 
-@media screen and (min-width: 769px){
+@media screen and (min-width: 831px){
     header .mobile-header {
         display: none;
     }
