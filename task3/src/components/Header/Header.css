@@ -1,0 +1,90 @@
+.logo-container svg {
+    width: 134px;
+}
+
+header .desktop-header,
+header .mobile-header{
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    padding-right: 43px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    padding: 12px 5px;
+    margin: 10px;
+}
+
+.header-personal-info {
+    display: flex;
+    align-items: center;
+}
+
+.header-contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.header-contacts a {
+    font-size: 12px;
+    font-family: "Source Sans Pro", sans-serif;
+    text-decoration: none;
+    color: #8d8c8c;
+    line-height: 10px;
+}
+
+.header-avatar {
+    border-radius: 50%;
+    margin: 0 14px 0 12px;
+    width: 40px;
+    height: 40px;
+}
+
+.exitButton {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+}
+
+.exitButton:hover svg g{
+    fill: #ef6c00;
+}
+.menuOpen {
+    outline: 0;
+    border: 0;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    padding: 0;
+    margin-right: -12px;
+}
+
+.menuOpen:hover svg g {
+    fill: #2638bb;
+}
+
+
+
+@media screen and (max-width: 768px){
+    header .desktop-header {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 769px){
+    header .mobile-header {
+        display: none;
+    }
+}
+
+

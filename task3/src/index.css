@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.cls-1{isolation:isolate;}
+.cls-2{fill:#161616;}
+
+.container {
+  max-width: 929px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 2560px) {
+  .container {
+    max-width: 1140px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+}
+
+.flex {
+  display: flex;
+}

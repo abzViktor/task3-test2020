@@ -1,7 +1,7 @@
 import React from 'react';
 import './Menu.css';
 
-export default function Links(props) {
+export default function Menu(props) {
   const {} = props;
 
   return (
