@@ -1,3 +1,5 @@
+@import "../../../src/variables.scss";
+
 .logo-container svg {
     width: 134px;
 }
@@ -112,7 +114,7 @@ header .mobile-header{
 }
 
 .exitButton:hover svg g{
-    fill: #ef6c00;
+    fill: $primary-color;
 }
 .menuOpen {
     outline: 0;

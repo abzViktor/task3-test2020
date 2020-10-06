@@ -1,3 +1,5 @@
+@import "../../../src/variables.scss";
+
 button.primary {
     padding: 6px 100px;
     font-family: "Source Sans Pro";
@@ -37,8 +39,8 @@ button.secondary {
 
 button.primary:active,
 button.primary:hover{
-    background-color: #fc831f;
-    border: 2px solid #fc831f;
+    background-color: $primary-button-hover;
+    border: 2px solid $primary-button-hover;
 }
 
 button[disabled] {

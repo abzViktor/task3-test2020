@@ -2,7 +2,7 @@ import React from 'react';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Logo from '../Logo/Logo';
-import './Header.css';
+import './Header.scss';
 import '../Links/Links.css';
 
 const defaultLink = 'localhost:3000';
