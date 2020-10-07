@@ -1,0 +1,64 @@
+@import "src/variables";
+
+.lets-container {
+  background-color: $background-color;
+  width: 100%;
+  padding-bottom: 139px;
+  h2 {
+    text-align: center;
+    margin-top: 159px;
+    margin-bottom: 29px;
+  }
+  h4 {
+    margin-bottom: -7px;
+  }
+  p {
+    color: #4c4b4b;
+  }
+  .lets-block {
+    display: flex;
+    justify-content: center;
+    >div {
+     padding: 0 32px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 992px){
+  .lets-container {
+    .lets-block {
+      >div {
+        padding: 0 15px;
+      }
+      svg {
+        width: 219px;
+        height: 216px;
+      }
+    }
+
+  }
+}
+
+
+@media screen and (max-width: 700px){
+  .lets-container {
+    padding-bottom: 70px;
+    h2 {
+      margin-top: 70px;
+    }
+    .lets-block {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      >div {
+        padding: 0;
+      }
+      svg {
+        width: 219px;
+        height: 216px;
+      }
+    }
+
+  }
+}

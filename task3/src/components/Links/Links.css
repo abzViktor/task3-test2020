@@ -28,3 +28,15 @@ a.secondary {
     color: #fff;
 }
 
+a.text-link {
+    font-family: "Source Sans Pro";
+    font-size: 22px;
+    font-weight: 700;
+    color: #ef6c00;
+}
+
+a.text-link:hover {
+    color:#fc831f;
+    cursor: pointer;
+}
+

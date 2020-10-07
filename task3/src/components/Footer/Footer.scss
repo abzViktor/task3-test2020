@@ -3,11 +3,6 @@
 
 footer {
     background-color: $secondary-color;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-
 
     .top-footer .logo-container .cls-2 {
         fill: #fff !important;
@@ -160,18 +155,17 @@ footer {
             width: 40%;
             text-align: right;
             height: 26px;
-            .social-link {
-                margin: 0 11px;
-                min-width: 40px;
-                min-height: 40px;
-                padding: 5px;
+            .social-link svg{
+                padding: 7px;
+                margin: 3px;
             }
 
             .social-link:hover svg g {
                 fill: $primary-color;
             }
-            .social-link:nth-last-child(1) {
+            .social-link:nth-last-child(1) svg{
                 margin-right: 0;
+                padding-right: 0;
             }
         }
     }
@@ -247,6 +241,10 @@ footer {
             }
             .social-networks {
                 order: 1;
+                .social-link svg{
+                    padding: 9px;
+                    margin: 1px;
+                }
             }
             .lang {
                 order: 3;

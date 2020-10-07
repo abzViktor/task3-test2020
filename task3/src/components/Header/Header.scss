@@ -4,8 +4,19 @@
     width: 134px;
 }
 
+.header-holder {
+    z-index: 1;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    background-color: $background-color;
+
+}
+
 header .desktop-header,
-header .mobile-header{
+header .mobile-header {
+    background-color: $background-color;
     height: 64px;
     display: flex;
     justify-content: space-between;
