@@ -1,0 +1,123 @@
+.tools-container {
+  background-color: #f6f6f6;
+  padding: 140px 0;
+  .tools-content {
+    display: flex;
+    >div {
+      flex: 1 0 12.5%;
+    }
+    .css-block {
+      margin: 0 88px 0 38px;
+      max-width: 306px;
+    }
+  }
+  .heading-holder {
+    display: flex;
+    justify-content: center;
+  }
+  h2 {
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 51px;
+    margin-top: 0;
+  }
+  p {
+    color: #4c4b4b;
+  }
+}
+
+@media screen and (max-width: 2559px) {
+ .tools-container {
+   padding: 96px 0;
+   .tools-content {
+     .css-block {
+       margin: 0 20px 0 38px;
+       p {
+           max-width: 220px;
+       }
+     }
+     .js-block {
+       p {
+         max-width: 264px;
+       }
+     }
+   }
+ }
+}
+
+@media screen and (max-width: 974px) {
+  .tools-container {
+    padding: 96px 0;
+    .tools-content {
+      flex-direction: column;
+      align-items: center;
+      >div {
+        display: flex;
+        max-width: 587px;
+        padding-bottom: 50px;
+        >div {
+          padding-left: 36px;
+        }
+      }
+      .css-block {
+        margin: 0;
+        max-width: 587px;
+        p {
+          max-width: unset;
+        }
+      }
+      .js-block {
+        p {
+          max-width: unset;
+        }
+      }
+    }
+    h3 {
+      margin-bottom: 10px;
+      margin-top: 0;
+    }
+    p {
+      margin-top: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .tools-container {
+    padding: 60px 0;
+    .tools-content {
+      img {
+        margin-bottom: 15px;
+      }
+      >div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 30px;
+        >div {
+          text-align: center;
+          padding: 0;
+          max-width: 280px;
+        }
+      }
+      .css-block {
+        margin: 0;
+        max-width: 587px;
+        p {
+          max-width: unset;
+        }
+      }
+      .js-block {
+        p {
+          max-width: unset;
+        }
+      }
+    }
+    h2 {
+      line-height: 26px;
+      letter-spacing: -0.1px;
+    }
+  }
+}
+
