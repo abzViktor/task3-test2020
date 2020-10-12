@@ -39,7 +39,7 @@ export function UserInfo(props) {
             textOverflow="ellipsis"
             overflow="hidden"
             className="paragraph-3"
-            href="mailto: vitia2282@gmail.com"
+            href={`mailto:${email}`}
             ref={refText}
           >
             {email}

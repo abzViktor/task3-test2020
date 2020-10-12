@@ -4,9 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Drawer from '@material-ui/core/Drawer';
-import Logo from '../Logo/Logo';
 import './Header.scss';
 import '../Links/Links.css';
+import Tooltip from '@material-ui/core/Tooltip';
+import Box from '@material-ui/core/Box';
+import Logo from '../Logo/Logo';
 
 const defaultLink = '/';
 const initialActive = {
@@ -14,6 +16,7 @@ const initialActive = {
   relation: 'primary inactive',
   users: 'primary inactive',
 };
+
 // eslint-disable-next-line react/prop-types
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState(initialActive);
@@ -104,8 +107,8 @@ export default function Header() {
               {isUserLoaded && (
               <>
                 <div className="header-contacts">
-                  <div><span className="paragraph-3">{user.name}</span></div>
-                  <div><a href="mailto:Superstar@gmail.com">{user.email}</a></div>
+                  <div className="header-user"><span className="paragraph-3">{user.name}</span></div>
+                  <div className="header-user"><a href={`mailto:${user.email}`}>{user.email}</a></div>
                 </div>
                 <img className="header-avatar" src={user.photo} alt="avatar icon" />
               </>
