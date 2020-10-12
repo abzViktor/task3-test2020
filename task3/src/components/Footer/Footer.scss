@@ -104,7 +104,7 @@ footer {
 
     hr {
         border-color: #5f5fc4;
-        margin-bottom: 18px;
+        margin-bottom: 29px;
         margin-top: 0;
     }
 
@@ -159,6 +159,10 @@ footer {
             width: 40%;
             text-align: right;
             height: 26px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 3px;
             .social-link svg{
                 padding: 7px;
                 margin: 3px;
@@ -168,8 +172,7 @@ footer {
                 fill: $primary-color;
             }
             .social-link:nth-last-child(1) svg{
-                margin-right: 0;
-                padding-right: 0;
+                margin-right: -7px;
             }
         }
     }
@@ -239,6 +242,12 @@ footer {
                 text-align: center;
                 margin: 10px 0;
                 width: 100%;
+            }
+            .social-networks {
+                justify-content: center;
+                .social-link:nth-last-child(1) svg {
+                    margin-right: 3px;
+                }
             }
             .copyright {
                 order: 2;
