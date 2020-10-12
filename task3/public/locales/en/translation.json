@@ -1,0 +1,75 @@
+{
+  "About": {
+    "1": "About"
+  },
+  "Relationships": {
+    "1": "Relationships"
+  },
+  "Users": {
+    "1": "Users"
+  },
+  "SignUp": {
+    "1": "Sign Up"
+  },
+  "TestAssignment": {
+    "1": "Test assignment for Frontend Developer position"
+  },
+  "KindlyRemind": {
+    "1": "We kindly remind you that your test assignment should be submitted as a link to github/bitbucket repository. ",
+    "2": "Please be patient, we consider and respond to every application that meets minimum requirements. We look forward to your submission. Good luck!"
+  },
+  "LetsGet": {
+    "1": "Let's get acquainted"
+  },
+  "Cool": {
+    "1": "I am cool frontend developer"
+  },
+  "Looking": {
+    "1": "When real users have a slow experience on mobile, they're much less likely to find what they are looking for or purchase from you in the future. For many sites this equates to a huge missed opportunity, especially when more than half of visits are abandoned if a mobile page takes over 3 seconds to load.",
+    "2": "Last week, Google Search and Ads teams announced two new speed initiatives to help improve user-experience on the web."
+  },
+  "AboutRelationships": {
+    "1": "About my relationships with web-development"
+  },
+  "html": {
+    "1": "I'm in love with HTML",
+    "2": "Hypertext Markup Language (HTML) is the standard markup language for creating web pages and web applications."
+  },
+  "css": {
+    "1": "CSS is my best friend",
+    "2": "Cascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language like HTML."
+  },
+  "js": {
+    "1": "JavaScript is my passion",
+    "2": "JavaScript is a high-level, interpreted programming language. It is a language which is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm."
+  },
+  "Cheerful": {
+    "1": "Our cheerful users",
+    "2": "Attention! Sorting users by registration date"
+  },
+  "ShowMore": {
+    "1": "Show More"
+  },
+  "links": {
+    "News": "News",
+    "Blog": "Blog",
+    "Partners": "Partners",
+    "Shop": "Shop",
+    "Overview": "Overview",
+    "Design":"Design",
+    "Code": "Code",
+    "Collaborate":"Collaborate",
+    "Tutorials": "Tutorials",
+    "Resources":"Resources",
+    "Guides": "Guides",
+    "Examples":"Examples",
+    "FAQ":"FAQ",
+    "Terms":"Terms",
+    "T&C": "Terms and conditions",
+    "Conditions":"Conditions",
+    "Help":"Help"
+  },
+  "testTask": {
+    "1": "specially for the test task"
+  }
+}

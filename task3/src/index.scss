@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   width: 100%;
+
 }
 
 #root {
@@ -16,6 +17,10 @@ body {
 body,
 html {
   height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .wrapper {
@@ -55,6 +60,25 @@ code {
   }
 }
 
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+
 .flex {
   display: flex;
+}
+
+.anchor-holder {
+  position: relative;
+  span {
+    position: absolute;
+    top: -64px;
+  }
+}
+
+.tempHeading {
+  text-align: center;
 }

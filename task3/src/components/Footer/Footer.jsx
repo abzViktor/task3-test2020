@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import Logo from '../Logo/Logo';
 import './Footer.scss';
-import { boolean } from '@storybook/addon-knobs';
 
 export default function Footer() {
-  const defaultLink = 'localhost:3000';
-
+  if (localStorage.getItem('i18nextLng') === null) {
+    localStorage.setItem('i18nextLng', 'en');
+  }
+  const currentLang = localStorage.getItem('i18nextLng');
+  const defaultLink = '#';
+  const { t, i18n } = useTranslation();
+  const [activeLang, setActiveLang] = useState({ en: 'inactive', de: 'inactive', [currentLang]: 'active' });
+  function handleClick(lang) {
+    i18n.changeLanguage(lang);
+    setActiveLang({
+      en: 'inactive',
+      de: 'inactive',
+      [lang]: 'active',
+    });
+    localStorage.setItem('i18nextLng', lang);
+  }
   return (
     <footer>
       <div className="container">
@@ -16,10 +32,10 @@ export default function Footer() {
           </div>
           <nav>
             <ul>
-              <li><a className="secondary" href={defaultLink}>About me</a></li>
-              <li><a className="secondary" href={defaultLink}>Relationships</a></li>
-              <li><a className="secondary" href={defaultLink}>Users</a></li>
-              <li><a className="secondary" href={defaultLink}>Sign up</a></li>
+              <li><HashLink to="/#about" className="secondary">{t('About.1')}</HashLink></li>
+              <li><HashLink to="/#relation" className="secondary">{t('Relationships.1')}</HashLink></li>
+              <li><HashLink to="/#users" className="secondary">{t('Users.1')}</HashLink></li>
+              <li><Link to="/registration" className="secondary" href={defaultLink}>{t('SignUp.1')}</Link></li>
             </ul>
           </nav>
         </div>
@@ -81,28 +97,97 @@ export default function Footer() {
             </div>
             <div className="other-links">
               <ul>
-                <li><a className="secondary" href={defaultLink}>News</a></li>
-                <li><a className="secondary" href={defaultLink}>Blog</a></li>
-                <li><a className="secondary" href={defaultLink}>Partners</a></li>
-                <li><a className="secondary" href={defaultLink}>Shop</a></li>
+                <li><a className="secondary" href={defaultLink}>{t('links.News')}</a></li>
+                <li><a className="secondary" href={defaultLink}>{t('links.Blog')}</a></li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Partners')}
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Shop')}
+
+                  </a>
+                </li>
               </ul>
               <ul>
-                <li><a className="secondary" href={defaultLink}>Overview</a></li>
-                <li><a className="secondary" href={defaultLink}>Design</a></li>
-                <li><a className="secondary" href={defaultLink}>Code</a></li>
-                <li><a className="secondary" href={defaultLink}>Collaborate</a></li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Overview')}
+
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Design')}
+
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Code')}
+
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Collaborate')}
+
+                  </a>
+                </li>
               </ul>
               <ul>
-                <li><a className="secondary" href={defaultLink}>Tutorials</a></li>
-                <li><a className="secondary" href={defaultLink}>Resources</a></li>
-                <li><a className="secondary" href={defaultLink}>Guides</a></li>
-                <li><a className="secondary" href={defaultLink}>Examples</a></li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Tutorials')}
+
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Resources')}
+
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Guides')}
+
+                  </a>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Examples')}
+
+                  </a>
+                </li>
               </ul>
               <ul>
-                <li><a className="secondary" href={defaultLink}>FAQ</a></li>
-                <li><a className="secondary" href={defaultLink}>Terms</a></li>
-                <li><a className="secondary" href={defaultLink}>Conditions</a></li>
-                <li><a className="secondary" href={defaultLink}>Help</a></li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.FAQ')}
+
+                  </a>
+                </li>
+                <li>
+                  <Link to="/terms" className="secondary" href={defaultLink}>
+                    {t('links.Terms')}
+
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/terms" className="secondary" href={defaultLink}>
+                    {t('links.Conditions')}
+
+                  </Link>
+                </li>
+                <li>
+                  <a className="secondary" href={defaultLink}>
+                    {t('links.Help')}
+
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -110,12 +195,14 @@ export default function Footer() {
         <div className="bottom-footer">
           <div className="copyright">
             <span>
-              © abz.agency specially for the test task
+              © abz.agency
+              {' '}
+              {t('testTask.1')}
             </span>
           </div>
           <div className="lang">
-            <button type="button" className="inactive">DE</button>
-            <button type="button" className="active">EN</button>
+            <button type="button" onClick={() => handleClick('de')} className={activeLang.de}>DE</button>
+            <button type="button" onClick={() => handleClick('en')} className={activeLang.en}>EN</button>
           </div>
           <div className="social-networks">
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

@@ -1,46 +1,43 @@
 import React from 'react';
 import './Tools.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function Tools() {
+  const { t } = useTranslation();
+
   return (
     <div className="tools-container">
       <div className="container">
         <div className="heading-holder">
           <h2 className="heading-2-desktop">
-            About my relationships with
-            web&#8209;development
+            {t('AboutRelationships.1')}
           </h2>
         </div>
         <div className="tools-content">
           <div>
             <img src="images/html.svg" alt="Html icon" />
             <div>
-              <h3 className="heading-3-desktop">I&apos;m in love with HTML</h3>
+              <h3 className="heading-3-desktop">{t('html.1')}</h3>
               <p className="paragraph-2">
-                Hypertext Markup Language (HTML) is the standard markup
-                language for creating web pages and web applications.
+                {t('html.2')}
               </p>
             </div>
           </div>
           <div className="css-block">
             <img src="images/css.svg" alt="Html icon" />
             <div>
-              <h3 className="heading-3-desktop">CSS is my best friend</h3>
+              <h3 className="heading-3-desktop">{t('css.1')}</h3>
               <p className="paragraph-2">
-                Cascading Style Sheets (CSS)
-                is a style sheet language used for describing the
-                presentation of a document written in a markup language like HTML.
+                {t('css.2')}
               </p>
             </div>
           </div>
           <div className="js-block">
             <img src="images/javascript.svg" alt="Html icon" />
             <div>
-              <h3 className="heading-3-desktop">JavaScript is my passion</h3>
+              <h3 className="heading-3-desktop">{t('js.1')}</h3>
               <p className="paragraph-2">
-                JavaScript is a high-level, interpreted programming language.
-                It is a language which is also characterized as dynamic,
-                weakly typed, prototype-based and multi-paradigm.
+                {t('js.2')}
               </p>
             </div>
           </div>

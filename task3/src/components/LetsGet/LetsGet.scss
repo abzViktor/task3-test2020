@@ -3,10 +3,10 @@
 .lets-container {
   background-color: $background-color;
   width: 100%;
-  padding-bottom: 139px;
+  padding: 139px 0;
   h2 {
     text-align: center;
-    margin-top: 159px;
+    margin-top: 0;
     margin-bottom: 29px;
   }
   h4 {
@@ -43,10 +43,7 @@
 
 @media screen and (max-width: 700px){
   .lets-container {
-    padding-bottom: 70px;
-    h2 {
-      margin-top: 70px;
-    }
+    padding: 70px 0;
     .lets-block {
       flex-direction: column;
       align-items: center;

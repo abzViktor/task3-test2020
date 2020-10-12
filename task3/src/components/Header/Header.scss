@@ -4,6 +4,7 @@
     width: 134px;
 }
 
+
 .header-holder {
     z-index: 1;
     position: fixed;
@@ -70,6 +71,11 @@ header .mobile-header {
     color: #000000;
     padding: 12px 5px;
     margin: 10px;
+}
+
+.desktop-header nav ul li a.active,
+.side-menu-container-nav nav a.active{
+    color: $secondary-color;
 }
 
 .header-personal-info {

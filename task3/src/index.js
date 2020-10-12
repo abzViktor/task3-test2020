@@ -1,27 +1,16 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import Banner from './components/Banner/Banner';
-import LetsGet from './components/LetsGet/LetsGet';
-import Tools from './components/Tools/Tools';
+import Wrapper from './components/Wrapper/Wrapper';
 import * as serviceWorker from './serviceWorker';
+import './i18next';
 
 ReactDOM.render(
+
   <React.StrictMode>
-    <div className="wrapper">
-      <div className="content">
-        <Header />
-        <div className="header-spacer" />
-        <Banner />
-        <LetsGet />
-        <Tools />
-      </div>
-      <div className="footer">
-        <Footer />
-      </div>
-    </div>
+    <Suspense fallback={(<div>Loading...</div>)}>
+      <Wrapper />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root'),
 );

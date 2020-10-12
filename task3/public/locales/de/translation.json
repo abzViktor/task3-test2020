@@ -1,0 +1,76 @@
+{
+  "About": {
+    "1": "Über"
+  },
+  "Relationships": {
+    "1": "Beziehungen"
+  },
+  "Users": {
+    "1": "Benutzer"
+  },
+  "SignUp": {
+    "1": "Anmelden"
+  },
+  "TestAssignment": {
+    "1": "Testzuweisung für Frontend-Entwicklerposition"
+  },
+  "KindlyRemind": {
+    "1": "Wir erinnern Sie freundlich daran, dass Ihre Testaufgabe als Link zum Github / Bitbucket-Repository eingereicht werden sollte. ",
+    "2": "Bitte haben Sie etwas Geduld, wir prüfen und beantworten jede Bewerbung, die die Mindestanforderungen erfüllt. Wir freuen uns auf Ihre Einreichung. Viel Glück!"
+  },
+  "LetsGet": {
+    "1": "Lass uns kennenlernen"
+  },
+  "Cool": {
+    "1": "Ich bin ein cooler Frontend-Entwickler"
+  },
+  "Looking": {
+    "1": "Wenn echte Benutzer eine langsame Erfahrung auf Mobilgeräten haben, ist es viel weniger wahrscheinlich, dass sie in Zukunft das finden, was sie suchen oder bei Ihnen kaufen. Für viele Websites bedeutet dies eine große verpasste Gelegenheit, insbesondere wenn mehr mehr als die Hälfte der Besuche wird abgebrochen, wenn das Laden einer mobilen Seite länger als 3 Sekunden dauert.",
+    "2": "Letzte Woche haben die Google Search- und Ads-Teams zwei neue Geschwindigkeitsinitiativen angekündigt, um die Nutzererfahrung im Web zu verbessern."
+  },
+  "AboutRelationships": {
+    "1": "Über meine Beziehungen zur Webentwicklung"
+  },
+  "html": {
+    "1": "Ich bin verliebt in HTML",
+    "2": "Hypertext Markup Language (HTML) ist die Standard-Markup-Sprache zum Erstellen von Webseiten und Webanwendungen"
+  },
+  "css": {
+    "1": "CSS ist mein bester Freund",
+    "2": "Cascading Style Sheets (CSS) ist eine Stylesheet-Sprache, mit der die Präsentation eines Dokuments beschrieben wird, das in einer Auszeichnungssprache wie HTML geschrieben ist."
+  },
+  "js": {
+    "1": "JavaScript ist meine Leidenschaft",
+    "2": "JavaScript ist eine interpretierte Programmiersprache auf hoher Ebene. Es ist eine Sprache, die auch als dynamisch, schwach typisiert, prototypbasiert und Multi-Paradigma charakterisiert ist."
+  },
+  "Cheerful": {
+    "1": "Unsere fröhlichen Benutzer",
+    "2": "Achtung! Benutzer nach Registrierungsdatum sortieren"
+  },
+  "ShowMore": {
+    "1": "Mehr anzeigen"
+  },
+  "links": {
+    "News": "Nachrichten",
+    "Blog": "Blog",
+    "Partners": "Partner",
+    "Shop": "Shop",
+    "Overview": "Übersicht",
+    "Design":"Design",
+    "Code": "Code",
+    "Collaborate":"Zusammenarbeiten",
+    "Tutorials": "Tutorials",
+    "Resources":"Ressourcen",
+    "Guides": "Guides",
+    "Examples":"Beispiele",
+    "FAQ":"FAQ",
+    "Terms":"Bedingungen",
+    "T&C": "Allgemeine Geschäftsbedingungen",
+    "Conditions":"Bedingungen",
+    "Help":"Hilfe"
+  },
+  "testTask": {
+    "1": "speziell für die Testaufgabe"
+  }
+}
+

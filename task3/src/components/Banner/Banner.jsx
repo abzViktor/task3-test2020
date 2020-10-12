@@ -2,8 +2,11 @@ import React from 'react';
 import './Banner.scss';
 import '../Button/Button.scss';
 import '../Typography/Typography.css';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function Banner() {
+  const { t } = useTranslation();
   return (
     <div className="image-container">
       <picture>
@@ -21,23 +24,15 @@ export default function Banner() {
         <div className="banner-text container">
           <div className="text-block">
             <h1 className="heading-1-desktop">
-              Test assignment for
-              <br />
-              {' '}
-              Frontend Developer
-              <br />
-              {' '}
-              position
+              {t('TestAssignment.1')}
             </h1>
             <p className="paragraph-1">
-              We kindly remind you that your test assignment should
-              be submitted as a link to github/bitbucket repository.
+              {t('KindlyRemind.1')}
               <span className="desktop-visible">
-                Please be patient, we consider and respond to every application
-                that meets minimum requirements. We look forward to your submission. Good luck!
+                {t('KindlyRemind.2')}
               </span>
             </p>
-            <button type="button" className="primary">Sign up</button>
+            <Link to="/registration"><button type="button" className="primary">{t('SignUp.1')}</button></Link>
           </div>
         </div>
       </div>

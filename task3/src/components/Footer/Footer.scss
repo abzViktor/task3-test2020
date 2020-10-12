@@ -142,10 +142,14 @@ footer {
             background: $secondary-color;
             color: white;
         }
-        button.active:hover,
+
         button.inactive:hover {
             cursor: pointer;
             background-color: $primary-color;
+        }
+
+        button.active:hover {
+            pointer-events: none;
         }
         .lang {
             width: 20%;

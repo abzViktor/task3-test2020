@@ -1,40 +1,124 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Divider from '@material-ui/core/Divider';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import Drawer from '@material-ui/core/Drawer';
 import Logo from '../Logo/Logo';
 import './Header.scss';
 import '../Links/Links.css';
 
-const defaultLink = 'localhost:3000';
-
+const defaultLink = '/';
+const initialActive = {
+  about: 'primary inactive',
+  relation: 'primary inactive',
+  users: 'primary inactive',
+};
+// eslint-disable-next-line react/prop-types
 export default function Header() {
-  const [open, setOpen] = React.useState(false);
+  const [activeMenu, setActiveMenu] = useState(initialActive);
+  const [open, setOpen] = useState(false);
+  const [user, setUser] = useState([]);
+  const [isUserLoaded, setUserLoaded] = useState(false);
   const toggleMenu = (value) => () => {
     setOpen(value);
   };
+  const { t } = useTranslation();
+
+  React.useEffect(() => {
+    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setTimeout(() => {
+            setUser(data.user);
+            setUserLoaded(true);
+          }, 2000);
+        } else {
+        // proccess server errors
+        }
+      });
+  }, []);
+
+  window.onscroll = function () {
+    if (document.getElementById('about') !== null
+          && document.getElementById('relation') !== null
+          && document.getElementById('users') !== null
+    ) {
+      if (window.pageYOffset < document.getElementById('about').offsetParent.offsetTop - 264) {
+        setActiveMenu(initialActive);
+      }
+      if (window.pageYOffset >= document.getElementById('about').offsetParent.offsetTop - 264
+            && window.pageYOffset < document.getElementById('relation').offsetParent.offsetTop - 264
+            && activeMenu.about === initialActive.about) {
+        setActiveMenu({
+          ...initialActive,
+          about: 'primary active',
+        });
+      }
+      if (window.pageYOffset >= document.getElementById('relation').offsetParent.offsetTop - 264
+            && window.pageYOffset < document.getElementById('users').offsetParent.offsetTop - 264
+            && activeMenu.relation === initialActive.relation) {
+        setActiveMenu({
+          ...initialActive,
+          relation: 'primary active',
+        });
+      }
+      if (window.pageYOffset >= document.getElementById('users').offsetParent.offsetTop - 264
+            && activeMenu.users === initialActive.users) {
+        setActiveMenu({
+          ...initialActive,
+          users: 'primary active',
+        });
+      }
+    } else {
+      setActiveMenu(initialActive);
+    }
+  };
+
   return (
     <div className="header-holder">
       <header className="container">
         <div className="desktop-header">
           <div className="logo-container">
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <a href={defaultLink}><Logo /></a>
+            <Link to="/"><Logo /></Link>
           </div>
           <div className="flex">
             <nav>
               <ul>
-                <li><a className="primary" href={defaultLink}>About me</a></li>
-                <li><a className="primary" href={defaultLink}>Relationships</a></li>
-                <li><a className="primary" href={defaultLink}>Users</a></li>
-                <li><a className="primary" href={defaultLink}>Sign up</a></li>
+                <li>
+                  <HashLink
+                    to="/#about"
+                    className={activeMenu.about}
+                  >
+                    {t('About.1')}
+                  </HashLink>
+                </li>
+                <li><HashLink to="/#relation" className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
+                <li><HashLink to="/#users" className={activeMenu.users}>{t('Users.1')}</HashLink></li>
+                <li><Link to="/registration" className="primary">{t('SignUp.1')}</Link></li>
               </ul>
             </nav>
             <div className="header-personal-info">
-              <div className="header-contacts">
-                <div><span className="paragraph-3">Superstar</span></div>
-                <div><a href="mailto:Superstar@gmail.com">Superstar@gmail.com</a></div>
-              </div>
-              <img className="header-avatar" src="user-superstar-2x.jpg" alt="avatar icon" />
+              {isUserLoaded && (
+              <>
+                <div className="header-contacts">
+                  <div><span className="paragraph-3">{user.name}</span></div>
+                  <div><a href="mailto:Superstar@gmail.com">{user.email}</a></div>
+                </div>
+                <img className="header-avatar" src={user.photo} alt="avatar icon" />
+              </>
+              )}
+              {!isUserLoaded && (
+              <>
+                <div className="header-contacts">
+                  <div><span className="paragraph-3"><img src="placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
+                  <div><a href="mailto:Superstar@gmail.com"><img src="placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+                </div>
+                <img className="header-avatar" src="placeholders/Ellipse_1.svg" alt="avatar icon" />
+              </>
+              )}
               <div>
                 <a href={defaultLink} className="exitButton">
                   <svg width="24px" height="20px" viewBox="0 0 24 20" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -43,9 +127,9 @@ export default function Header() {
                     <defs />
                     <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
                       <g id="sign-out" transform="translate(-1.000000, 0.000000)" fill="#283593" fillRule="nonzero">
-                          <path d="M10.8,18.12 C10.777904,18.0551642 10.777904,17.9848358 10.8,17.92 C10.8,17.86 10.8,17.81 10.69,17.78 C10.58,17.75 10.57,17.71 10.57,17.69 C10.57,17.67 10.51,17.69 10.39,17.69 L10.21,17.69 L5.41,17.69 C4.75845014,17.7002355 4.13190144,17.4394753 3.68,16.97 C3.20950293,16.496921 2.9622806,15.8461445 3,15.18 L3,4.41 C2.98976453,3.75845014 3.25052469,3.13190144 3.72,2.68 C4.1689932,2.23532929 4.77815242,1.99022381 5.41,2 L10.31,2 C10.4221952,2.00654693 10.5327795,1.97087459 10.62,1.9 C10.7044485,1.82129123 10.7577021,1.71478409 10.77,1.6 C10.7951089,1.48132462 10.811817,1.3610262 10.82,1.24 C10.82,1.13 10.82,1 10.82,0.84 C10.82,0.68 10.82,0.57 10.82,0.53 C10.8288509,0.383160805 10.7653717,0.241265929 10.65,0.15 C10.5628056,0.0544088005 10.4393852,-4.1366484e-05 10.31,1.41542594e-16 L5.41,1.41542594e-16 C4.23694711,-0.0168652328 3.10862792,0.449651354 2.29,1.29 C1.44965135,2.10862792 0.983134767,3.23694711 1,4.41 L1,15.18 C0.980749809,16.3535074 1.44764176,17.4827345 2.29,18.3 C3.10862792,19.1403486 4.23694711,19.6068652 5.41,19.59 L10.31,19.59 C10.4221952,19.5965469 10.5327795,19.5608746 10.62,19.49 C10.7085477,19.4144273 10.7626705,19.3061818 10.77,19.19 C10.7951089,19.0713246 10.811817,18.9510262 10.82,18.83 C10.82,18.73 10.82,18.59 10.82,18.43 C10.82,18.27 10.8,18.16 10.8,18.12 Z" id="Shape" />
-                          <path d="M24.71,9.11 L16.38,0.78 C15.9937017,0.411745823 15.3862983,0.411745823 15,0.78 C14.8062225,0.956726196 14.6970803,1.20775326 14.7,1.47 L14.7,5.88 L7.86,5.88 C7.30771525,5.88 6.86,6.32771525 6.86,6.88 L6.86,12.75 C6.86,13.3022847 7.30771525,13.75 7.86,13.75 L14.71,13.75 L14.71,18.16 C14.7070803,18.4222467 14.8162225,18.6732738 15.01,18.85 C15.39495,19.2119426 15.99505,19.2119426 16.38,18.85 L24.71,10.52 C25.0719426,10.13505 25.0719426,9.53495001 24.71,9.15 L24.71,9.11 Z" id="Shape" />
-                        </g>
+                        <path d="M10.8,18.12 C10.777904,18.0551642 10.777904,17.9848358 10.8,17.92 C10.8,17.86 10.8,17.81 10.69,17.78 C10.58,17.75 10.57,17.71 10.57,17.69 C10.57,17.67 10.51,17.69 10.39,17.69 L10.21,17.69 L5.41,17.69 C4.75845014,17.7002355 4.13190144,17.4394753 3.68,16.97 C3.20950293,16.496921 2.9622806,15.8461445 3,15.18 L3,4.41 C2.98976453,3.75845014 3.25052469,3.13190144 3.72,2.68 C4.1689932,2.23532929 4.77815242,1.99022381 5.41,2 L10.31,2 C10.4221952,2.00654693 10.5327795,1.97087459 10.62,1.9 C10.7044485,1.82129123 10.7577021,1.71478409 10.77,1.6 C10.7951089,1.48132462 10.811817,1.3610262 10.82,1.24 C10.82,1.13 10.82,1 10.82,0.84 C10.82,0.68 10.82,0.57 10.82,0.53 C10.8288509,0.383160805 10.7653717,0.241265929 10.65,0.15 C10.5628056,0.0544088005 10.4393852,-4.1366484e-05 10.31,1.41542594e-16 L5.41,1.41542594e-16 C4.23694711,-0.0168652328 3.10862792,0.449651354 2.29,1.29 C1.44965135,2.10862792 0.983134767,3.23694711 1,4.41 L1,15.18 C0.980749809,16.3535074 1.44764176,17.4827345 2.29,18.3 C3.10862792,19.1403486 4.23694711,19.6068652 5.41,19.59 L10.31,19.59 C10.4221952,19.5965469 10.5327795,19.5608746 10.62,19.49 C10.7085477,19.4144273 10.7626705,19.3061818 10.77,19.19 C10.7951089,19.0713246 10.811817,18.9510262 10.82,18.83 C10.82,18.73 10.82,18.59 10.82,18.43 C10.82,18.27 10.8,18.16 10.8,18.12 Z" id="Shape" />
+                        <path d="M24.71,9.11 L16.38,0.78 C15.9937017,0.411745823 15.3862983,0.411745823 15,0.78 C14.8062225,0.956726196 14.6970803,1.20775326 14.7,1.47 L14.7,5.88 L7.86,5.88 C7.30771525,5.88 6.86,6.32771525 6.86,6.88 L6.86,12.75 C6.86,13.3022847 7.30771525,13.75 7.86,13.75 L14.71,13.75 L14.71,18.16 C14.7070803,18.4222467 14.8162225,18.6732738 15.01,18.85 C15.39495,19.2119426 15.99505,19.2119426 16.38,18.85 L24.71,10.52 C25.0719426,10.13505 25.0719426,9.53495001 24.71,9.15 L24.71,9.11 Z" id="Shape" />
+                      </g>
                     </g>
                   </svg>
                 </a>
@@ -55,26 +139,41 @@ export default function Header() {
         </div>
         <div className="mobile-header flex">
           <Drawer open={open} onClose={toggleMenu(false)}>
-            <div className="side-menu-container-contacts">
-              <div><img className="header-avatar-mob" src="user-superstar-2x.jpg" alt="avatar icon" /></div>
-              <div><span className="name">Superstar</span></div>
-              <div><a href="mailto:Superstar@gmail.com">Superstar@gmail.com</a></div>
-            </div>
+            {isUserLoaded && (
+            <>
+              <div className="side-menu-container-contacts">
+                <div><img className="header-avatar-mob" src={user.photo} alt="avatar icon" /></div>
+                <div><span className="name">{user.name}</span></div>
+                <div><a href="mailto:Superstar@gmail.com">{user.email}</a></div>
+              </div>
+            </>
+            )}
+            {!isUserLoaded && (
+            <>
+              <div className="side-menu-container-contacts">
+                <div><img className="header-avatar-mob" src="placeholders/Ellipse_1.svg" alt="avatar icon" /></div>
+                <div><span className="name"><img src="placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
+                <div><a href="mailto:Superstar@gmail.com"><img src="placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+              </div>
+            </>
+            )}
             <Divider />
             <div className="side-menu-container-nav">
               <nav>
                 <ul>
-                  <li><a className="primary" href={defaultLink}>About me</a></li>
-                  <li><a className="primary" href={defaultLink}>Relationships</a></li>
-                  <li><a className="primary" href={defaultLink}>Users</a></li>
-                  <li><a className="primary" href={defaultLink}>Sign up</a></li>
-                  <li><a className="primary" href={defaultLink}>Terms and Conditions</a></li>
+                  <li><HashLink to="/#about" onClick={toggleMenu(false)} className={activeMenu.about}>{t('About.1')}</HashLink></li>
+                  <li><HashLink to="/#relation" onClick={toggleMenu(false)} className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
+                  <li><HashLink to="/#users" onClick={toggleMenu(false)} className={activeMenu.users}>{t('Users.1')}</HashLink></li>
+                  <li><Link to="/registration" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</Link></li>
+                  <li><Link to="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</Link></li>
                 </ul>
               </nav>
             </div>
           </Drawer>
           <div className="logo-container">
-            <Logo />
+            <Link to="/">
+              <Logo />
+            </Link>
           </div>
           <button type="button" onClick={toggleMenu(true)} className="menuOpen">
             <svg width="23px" height="22px" viewBox="0 0 23 22" version="1.1" xmlns="http://www.w3.org/2000/svg">

@@ -1,0 +1,129 @@
+@import "../../../src/variables.scss";
+
+.users-container {
+  background-color: $background-color;
+  padding: 140px 0;
+  .h2-wrapper,
+  .p-wrapper,
+  .button-wrapper {
+    text-align: center;
+    h2 {
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+    p {
+      margin-bottom: 58px;
+    }
+  }
+  p {
+    margin: 0;
+  }
+  .users-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .users-block:after {
+    content: "";
+    width: 352px;
+  }
+  .user-block {
+    display:flex;
+    width: 352px;
+    margin-bottom: 52px;
+    .photo-holder img {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background-color: #ccc;
+    }
+    .user-info {
+      padding-top: 24px;
+      margin-left: 9px;
+      overflow: hidden;
+      p, a {
+        color: #4c4b4b;
+      }
+      p {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      a {
+        white-space: nowrap;
+      }
+      .user-name {
+        font-family: Overpass;
+        color: #000;
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 22px;
+        padding-bottom: 19px;
+        word-wrap: break-word;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 2559px) {
+  .users-container {
+    .user-block {
+      width: 284px;
+      margin-bottom: 56px;
+      }
+    .users-block:after {
+      content: "";
+      width: 284px;
+    }
+    }
+  }
+
+@media screen and (max-width: 900px) {
+  .users-container {
+    padding: 100px 0;
+    .user-block {
+      flex-direction: column;
+      width: 217px;
+      margin-bottom: 40px;
+      align-items: center;
+      .user-info {
+        width: 217px;
+        text-align: center;
+        padding-top: 8px;
+        margin: 0;
+        .user-name {
+          padding-bottom: 8px;
+        }
+      }
+    }
+    .users-block:after {
+      content: "";
+      width: 217px;
+    }
+  }
+}
+
+@media screen and (max-width: 700px){
+  .users-container {
+    button {
+      width: 290px;
+      padding: 6px 60px;
+    }
+    padding: 60px 0;
+    .users-block {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      .user-block {
+        width: 100%;
+        .user-info {
+          width: 100%;
+          .user-name {
+            width: 217px;
+            margin: 0 auto;
+          }
+        }
+      }
+    }
+  }
+}
+
