@@ -3,11 +3,11 @@ import Divider from '@material-ui/core/Divider';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { Tooltip } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
+import Box from '@material-ui/core/Box';
 import './Header.scss';
 import '../Links/Links.css';
-import Tooltip from '@material-ui/core/Tooltip';
-import Box from '@material-ui/core/Box';
 import Logo from '../Logo/Logo';
 
 const defaultLink = '/';
@@ -19,6 +19,8 @@ const initialActive = {
 
 // eslint-disable-next-line react/prop-types
 export default function Header() {
+  const [tipName, setTipName] = React.useState('');
+  const [tipEmail, setTipEmail] = React.useState('');
   const [activeMenu, setActiveMenu] = useState(initialActive);
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState([]);
@@ -26,10 +28,30 @@ export default function Header() {
   const toggleMenu = (value) => () => {
     setOpen(value);
   };
+  const refContainer = React.useRef(null);
+  const refName = React.useRef(null);
+  const refEmail = React.useRef(null);
+
+  React.useEffect(() => {
+    if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
+      setTipName(user.name);
+    } else {
+      setTipName('');
+    }
+  });
+
+  React.useEffect(() => {
+    if (refEmail.current.offsetWidth > refContainer.current.offsetWidth && user) {
+      setTipEmail(user.email);
+    } else {
+      setTipEmail('');
+    }
+  });
+
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
+    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/8')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -106,18 +128,18 @@ export default function Header() {
             <div className="header-personal-info">
               {isUserLoaded && (
               <>
-                <div className="header-contacts">
-                  <div className="header-user"><span className="paragraph-3">{user.name}</span></div>
-                  <div className="header-user"><a href={`mailto:${user.email}`}>{user.email}</a></div>
+                <div className="header-contacts" ref={refContainer}>
+                  <div className="header-user"><Tooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></Tooltip></div>
+                  <div className="header-user"><Tooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></Tooltip></div>
                 </div>
                 <img className="header-avatar" src={user.photo} alt="avatar icon" />
               </>
               )}
               {!isUserLoaded && (
               <>
-                <div className="header-contacts">
-                  <div><span className="paragraph-3"><img src="placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
-                  <div><a href="mailto:Superstar@gmail.com"><img src="placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+                <div className="header-contacts" ref={refContainer}>
+                  <div><span ref={refName} className="paragraph-3"><img src="placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
+                  <div><a ref={refEmail} href="mailto:Superstar@gmail.com"><img src="placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
                 </div>
                 <img className="header-avatar" src="placeholders/Ellipse_1.svg" alt="avatar icon" />
               </>

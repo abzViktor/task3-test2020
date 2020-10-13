@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Home from '../Home/Home';
-import Registration from '../Registration/Registration';
-import Terms from '../Terms/Terms';
+
+const Registration = React.lazy(() => import('../Registration/Registration'));
+const Terms = React.lazy(() => import('../Terms/Terms'));
 
 export default function Wrapper() {
   return (

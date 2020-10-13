@@ -8,7 +8,7 @@ import './i18next';
 ReactDOM.render(
 
   <React.StrictMode>
-    <Suspense fallback={(<div>Loading...</div>)}>
+    <Suspense fallback={(<div />)}>
       <Wrapper />
     </Suspense>
   </React.StrictMode>,
