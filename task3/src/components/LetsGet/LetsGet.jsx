@@ -15,7 +15,7 @@ export default function LetsGetComponent() {
           <div className="lets-image-holder">
             <picture>
               <source srcSet="images/man-cool.svg" />
-              <img src="images/man-cool.svg" alt="Cool man from lets get as block" />
+              <img src="images/man-cool.svg" alt="Cool man from lets get acquainted block" />
             </picture>
           </div>
           <div className="lets-text-block">
@@ -26,7 +26,7 @@ export default function LetsGetComponent() {
             <p className="paragraph-2">
               {t('Looking.2')}
             </p>
-            <Link to="/registration" className="text-link" rel="stylesheet">{t('SignUp.1')}</Link>
+            <Link to="/registration#form" className="text-link" rel="stylesheet">{t('SignUp.1')}</Link>
           </div>
         </div>
       </div>

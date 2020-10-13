@@ -6,6 +6,7 @@ import { HashLink } from 'react-router-hash-link';
 import { Tooltip } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
+import lockScroll from '../../shared/lockScroll';
 import './Header.scss';
 import '../Links/Links.css';
 import Logo from '../Logo/Logo';
@@ -27,11 +28,15 @@ export default function Header() {
   const [isUserLoaded, setUserLoaded] = useState(false);
   const toggleMenu = (value) => () => {
     setOpen(value);
+    if (value) {
+      lockScroll.enable();
+    } else {
+      lockScroll.disable();
+    }
   };
   const refContainer = React.useRef(null);
   const refName = React.useRef(null);
   const refEmail = React.useRef(null);
-
   React.useEffect(() => {
     if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
       setTipName(user.name);
@@ -48,10 +53,13 @@ export default function Header() {
     }
   });
 
+  const scollToTop = () => {
+    window.scrollTo(0, 0);
+  };
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/8')
+    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/8888')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -107,7 +115,7 @@ export default function Header() {
         <div className="desktop-header">
           <div className="logo-container">
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <Link to="/"><Logo /></Link>
+            <Link onClick={scollToTop} to="/"><Logo /></Link>
           </div>
           <div className="flex">
             <nav>
@@ -122,7 +130,7 @@ export default function Header() {
                 </li>
                 <li><HashLink to="/#relation" className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
                 <li><HashLink to="/#users" className={activeMenu.users}>{t('Users.1')}</HashLink></li>
-                <li><Link to="/registration" className="primary">{t('SignUp.1')}</Link></li>
+                <li><Link to="/registration#form" className="primary">{t('SignUp.1')}</Link></li>
               </ul>
             </nav>
             <div className="header-personal-info">
@@ -163,7 +171,7 @@ export default function Header() {
           </div>
         </div>
         <div className="mobile-header flex">
-          <Drawer open={open} onClose={toggleMenu(false)}>
+          <Drawer open={open} onClose={toggleMenu(false)} className={open ? 'opened' : 'closed'}>
             {isUserLoaded && (
             <>
               <div className="side-menu-container-contacts">
@@ -189,7 +197,7 @@ export default function Header() {
                   <li><HashLink to="/#about" onClick={toggleMenu(false)} className={activeMenu.about}>{t('About.1')}</HashLink></li>
                   <li><HashLink to="/#relation" onClick={toggleMenu(false)} className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
                   <li><HashLink to="/#users" onClick={toggleMenu(false)} className={activeMenu.users}>{t('Users.1')}</HashLink></li>
-                  <li><Link to="/registration" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</Link></li>
+                  <li><Link to="/registration#form" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</Link></li>
                   <li><Link to="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</Link></li>
                 </ul>
               </nav>

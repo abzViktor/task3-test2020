@@ -58,6 +58,7 @@ export function GetUsers() {
   const [users, setUsers] = React.useState([]);
   const [showButton, setShowButton] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
+  const [noUsers, setNoUsers] = React.useState(false);
   const [isMoreLoaded, setIsMoreLoaded] = React.useState(true);
   const link = `https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${count}&count=${count}`;
 
@@ -82,13 +83,18 @@ export function GetUsers() {
             setIsLoaded(true);
             setUsers(data.users);
             setOffset(offset + count);
+            console.log(data.users.length);
+            if (data.users.length === 0) {
+              setNoUsers(true);
+              setShowButton(false);
+            }
             if (data.total_users <= offset) {
               setShowButton(false);
             }
           }, 2000);
           // process success response
         } else {
-          console.log(data);
+          setShowButton(false);
         }
       });
   }, []);
@@ -148,6 +154,8 @@ export function GetUsers() {
         </div>
       </div>
     );
+  } if (noUsers) {
+    return <div className="noUsers">Oh... It looks like there are no users here yet. You have a nice chance to be the first!</div>;
   }
   return (
     <div>

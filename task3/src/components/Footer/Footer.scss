@@ -19,6 +19,7 @@ footer {
         display: flex;
         padding: 0;
         list-style: none;
+        margin: 7px 0;
     }
 
     .top-footer nav a {
@@ -56,7 +57,7 @@ footer {
 
     .other-links ul li a,
     .other-links ul li {
-        padding: 8px 0;
+        padding: 5px 0;
         margin: 1px 0;
     }
 
@@ -69,7 +70,7 @@ footer {
     }
 
     .other-links ul li {
-        padding: 8px 0;
+        padding: 5px 0;
         margin: 1px 0;
     }
 
@@ -77,6 +78,7 @@ footer {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin: -8px 0;
     }
 
     .footer-contacts > div{
@@ -94,6 +96,14 @@ footer {
         font-size: 20px;
         font-family: "Source Sans Pro", sans-serif;
         color: white;
+        padding: 8px 0;
+
+    }
+
+    .contact-link:hover,
+    .contact-link:hover svg g{
+        color: $primary-color;
+        fill: $primary-color;
     }
 
     .contact-link svg {
@@ -154,6 +164,18 @@ footer {
         .lang {
             width: 20%;
             text-align: center;
+            button {
+                position: relative;
+            }
+            button:before {
+                position: absolute;
+                content: "";
+                width: 40px;
+                height: 40px;
+                top: 0;
+                left: 0;
+                transform: translate(-8px, -7px);
+            }
         }
         .social-networks {
             width: 40%;
@@ -183,9 +205,25 @@ footer {
         .contact-link svg {
             display: none;
         }
+        .contact-link {
+            margin: 7px;
+            font-size:18px;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-contacts {
+            height: 109px;
+            padding-top: 0;
+        }
     }
     footer .other-links {
         flex-grow: 1;
+        ul li {
+            padding: 4px 0;
+            a {
+                padding: 4px 0;
+            }
+        }
     }
 }
 
@@ -201,20 +239,27 @@ footer {
 
 @media screen and (max-width: 720px) {
     footer {
+        .middle-footer {
+            margin-bottom: 12px;
+        }
         .other-links {
             display: none;
+        }
+        hr {
+            margin-bottom: 18px;
         }
         .top-footer {
             padding-top: 31px;
             flex-direction: column;
             align-items: center;
             height: auto;
+            padding-bottom: 20px;
         }
         .top-footer ul {
             flex-direction: column;
             li {
                 text-align: center;
-                padding: 5px 0;
+                padding: 3px 0;
                 a {
                     padding: 5px 0;
                     margin: 0;
@@ -227,10 +272,14 @@ footer {
         .footer-contacts {
             justify-content: center;
             align-items: center;
+            margin: -2px 0 0 0;
         }
         .contact-link {
-            margin: 9px;
+            margin: 7px;
+            font-size:18px;
+            padding: 0;
         }
+
         .bottom-footer {
             flex-direction: column;
             align-items: center;
@@ -255,12 +304,24 @@ footer {
             .social-networks {
                 order: 1;
                 .social-link svg{
-                    padding: 9px;
+                    padding: 11px;
                     margin: 1px;
                 }
             }
             .lang {
                 order: 3;
+                button {
+                    margin: 8px 12px;
+                }
+                button:before {
+                    position: absolute;
+                    content: "";
+                    width: 48px;
+                    height: 48px;
+                    top: 0;
+                    left: 0;
+                    transform: translate(-11px, -11px);
+                }
             }
         }
     }

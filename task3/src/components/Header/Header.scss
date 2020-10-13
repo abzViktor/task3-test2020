@@ -143,6 +143,10 @@ header .mobile-header {
     margin-right: -12px;
 }
 
+.MuiDrawer-modal.opened {
+    overflow: hidden;
+}
+
 .header-user {
     width: 121px;
     text-align: right;
@@ -153,6 +157,12 @@ header .mobile-header {
     >span{
         color: #000;
     }
+}
+
+.side-menu-container-contacts {
+    width: 280px;
+    word-break: break-word;
+    word-wrap: break-word;
 }
 
 .menuOpen:hover svg g {

@@ -24,7 +24,7 @@ export default function Tools() {
             </div>
           </div>
           <div className="css-block">
-            <img src="images/css.svg" alt="Html icon" />
+            <img src="images/css.svg" alt="Css icon" />
             <div>
               <h3 className="heading-3-desktop">{t('css.1')}</h3>
               <p className="paragraph-2">
@@ -33,7 +33,7 @@ export default function Tools() {
             </div>
           </div>
           <div className="js-block">
-            <img src="images/javascript.svg" alt="Html icon" />
+            <img src="images/javascript.svg" alt="Java Script icon" />
             <div>
               <h3 className="heading-3-desktop">{t('js.1')}</h3>
               <p className="paragraph-2">

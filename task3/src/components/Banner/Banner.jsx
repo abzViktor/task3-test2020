@@ -18,7 +18,7 @@ export default function Banner() {
         <source srcSet="banner/bg-992.jpg" media="(min-width: 992px)" />
         <source srcSet="banner/bg-768.jpg" media="(min-width: 768px)" />
         <source srcSet="banner/bg-320.jpg" media="(min-width: 320px)" />
-        <img src="banner/bg-320.jpg" alt="" />
+        <img src="banner/bg-320.jpg" alt="Main banner of home page" />
       </picture>
       <div className="banner-container">
         <div className="banner-text container">
@@ -32,7 +32,7 @@ export default function Banner() {
                 {t('KindlyRemind.2')}
               </span>
             </p>
-            <Link to="/registration"><button type="button" className="primary">{t('SignUp.1')}</button></Link>
+            <Link to="/registration#form"><button type="button" className="primary">{t('SignUp.1')}</button></Link>
           </div>
         </div>
       </div>

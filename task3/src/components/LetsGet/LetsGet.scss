@@ -7,10 +7,13 @@
   h2 {
     text-align: center;
     margin-top: 0;
-    margin-bottom: 29px;
+    margin-bottom: 22px;
   }
   h4 {
-    margin-bottom: -7px;
+    margin-bottom: 1px;
+    margin-top: 17px;
+    padding: 0 14px;
+    letter-spacing: 0.7px;
   }
   p {
     color: #4c4b4b;
@@ -27,11 +30,18 @@
 
 @media screen and (max-width: 992px){
   .lets-container {
+    .lets-image-holder {
+      padding-top: 22px;
+    }
+    h4 {
+      padding: 0;
+    }
+    padding: 88px 0;
     .lets-block {
       >div {
-        padding: 0 15px;
+        padding: 0 10px;
       }
-      svg {
+      img {
         width: 219px;
         height: 216px;
       }
@@ -43,7 +53,7 @@
 
 @media screen and (max-width: 700px){
   .lets-container {
-    padding: 70px 0;
+    padding: 47px 0;
     .lets-block {
       flex-direction: column;
       align-items: center;
@@ -51,11 +61,13 @@
       >div {
         padding: 0;
       }
-      svg {
+      img {
         width: 219px;
         height: 216px;
       }
     }
-
+    .lets-image-holder img {
+      width: 219px;
+    }
   }
 }
