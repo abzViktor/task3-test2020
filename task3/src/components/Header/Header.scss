@@ -169,6 +169,13 @@ header .mobile-header {
     fill: #2638bb;
 }
 
+.api-error {
+    background-color: $primary-color;
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
 
 
 @media screen and (max-width: 830px){

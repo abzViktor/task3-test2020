@@ -10,15 +10,30 @@ export default function Banner() {
   return (
     <div className="image-container">
       <picture>
-        <source srcSet="banner/bg-3840.jpg" media="(min-width: 3840px)" />
-        <source srcSet="banner/bg-2560.jpg" media="(min-width: 2560px)" />
-        <source srcSet="banner/bg-1920.jpg" media="(min-width: 1920px)" />
-        <source srcSet="banner/bg-1440.jpg" media="(min-width: 1440px)" />
-        <source srcSet="banner/bg-1024.jpg" media="(min-width: 1024px)" />
-        <source srcSet="banner/bg-992.jpg" media="(min-width: 992px)" />
-        <source srcSet="banner/bg-768.jpg" media="(min-width: 768px)" />
-        <source srcSet="banner/bg-320.jpg" media="(min-width: 320px)" />
-        <img src="banner/bg-320.jpg" alt="Main banner of home page" />
+        <source srcSet="banner/bg-3840-2x.webp 2x ,banner/bg-3840.webp 1x" media="(min-width: 3840px)" type="image/webp" />
+        <source srcSet="banner/bg-3840-2x.jpg 2x ,banner/bg-3840.jpg 1x" media="(min-width: 3840px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-2560-2x.webp 2x ,banner/bg-2560.webp 1x" media="(min-width: 2560px)" type="image/webp" />
+        <source srcSet="banner/bg-2560-2x.jpg 2x ,banner/bg-2560.jpg 1x" media="(min-width: 2560px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-1920-2x.webp 2x ,banner/bg-1920.webp 1x" media="(min-width: 1920px)" type="image/webp" />
+        <source srcSet="banner/bg-1920-2x.jpg 2x ,banner/bg-1920.jpg 1x" media="(min-width: 1920px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-1440-2x.webp 2x ,banner/bg-1440.webp 1x" media="(min-width: 1440px)" type="image/webp" />
+        <source srcSet="banner/bg-1440-2x.jpg 2x ,banner/bg-1440.jpg 1x" media="(min-width: 1440px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-1024-2x.webp 2x ,banner/bg-1024.webp 1x" media="(min-width: 1024px)" type="image/webp" />
+        <source srcSet="banner/bg-1024-2x.jpg 2x ,banner/bg-1024.jpg 1x" media="(min-width: 1024px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-992-2x.webp 2x ,banner/bg-992.webp 1x" media="(min-width: 992px)" type="image/webp" />
+        <source srcSet="banner/bg-992-2x.jpg 2x ,banner/bg-992.jpg 1x" media="(min-width: 992px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-768-2x.webp 2x ,banner/bg-768.webp 1x" media="(min-width: 768px)" type="image/webp" />
+        <source srcSet="banner/bg-768-2x.jpg 2x ,banner/bg-768.jpg 1x" media="(min-width: 768px)" type="image/jpeg" />
+
+        <source srcSet="banner/bg-320-2x.webp 2x ,banner/bg-320.webp 1x" media="(min-width: 320px)" type="image/webp" />
+        <source srcSet="banner/bg-320-2x.jpg 2x ,banner/bg-320.jpg 1x" media="(min-width: 320px)" type="image/jpeg" />
+        <img src="banner/bg-1024.jpg" alt="Main banner of home page" />
       </picture>
       <div className="banner-container">
         <div className="banner-text container">

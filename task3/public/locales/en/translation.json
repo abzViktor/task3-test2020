@@ -71,5 +71,11 @@
   },
   "testTask": {
     "1": "specially for the test task"
+  },
+  "no-users": {
+    "1": "Oh... It looks like there are no users here yet. You have a nice chance to be the first!"
+  },
+  "api-error": {
+    "1": "Wooops... There is some problems with API connection!"
   }
 }

@@ -51,10 +51,10 @@ export function UserInfo(props) {
   );
 }
 
-export function GetUsers() {
+export function GetUsers(props) {
   // eslint-disable-next-line react/prop-types
   const [isLoaded, setIsLoaded] = React.useState(false);
-  const [count, setCount] = React.useState(window.innerWidth > 700 ? 6 : 3);
+  const [count, setCount] = React.useState(window.innerWidth > 700 ? 101 : 3);
   const [users, setUsers] = React.useState([]);
   const [showButton, setShowButton] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
@@ -75,58 +75,61 @@ export function GetUsers() {
   window.addEventListener('resize', handleResize);
 
   React.useEffect(() => {
+    localStorage.setItem('apiResponseStatus', '200');
     window.fetch(link)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setTimeout(() => {
-            setIsLoaded(true);
-            setUsers(data.users);
-            setOffset(offset + count);
-            console.log(data.users.length);
-            if (data.users.length === 0) {
-              setNoUsers(true);
-              setShowButton(false);
-            }
-            if (data.total_users <= offset) {
-              setShowButton(false);
-            }
-          }, 2000);
+      .then((response) => {
+        // eslint-disable-next-line react/prop-types
+        props.errorHandler(response.status);
+        response.json().then((data) => {
+          if (data.success) {
+            setTimeout(() => {
+              setIsLoaded(true);
+              setUsers(data.users);
+              setOffset(offset + count);
+              console.log(data.users.length);
+              if (data.users.length === 0) {
+                setNoUsers(true);
+                setShowButton(false);
+              }
+              if (data.total_users <= offset) {
+                setShowButton(false);
+              }
+            }, 2000);
           // process success response
-        } else {
-          setShowButton(false);
-        }
+          } else {
+            setShowButton(false);
+          }
+        });
       });
   }, []);
 
   const ShowMore = () => {
     setIsMoreLoaded(false);
     setShowButton(false);
-    console.log('isMore 1:', isMoreLoaded);
     window.fetch(link)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setTimeout(() => {
-            setIsMoreLoaded(true);
-            console.log('isMore 2:', isMoreLoaded);
-            setUsers([
-              ...users,
-              ...data.users,
-            ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
-            setOffset(offset + count);
-            if (data.total_users <= offset) {
-              setShowButton(false);
-            } else {
-              setShowButton(true);
-            }
-          }, 2000);
-          // process success response
-        } else {
-          // proccess server errors
-        }
+      .then((response) => {
+        console.log(response.status);
+        response.json().then((data) => {
+          if (data.success) {
+            setTimeout(() => {
+              setIsMoreLoaded(true);
+              setUsers([
+                ...users,
+                ...data.users,
+              ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
+              setOffset(offset + count);
+              if (data.total_users <= offset) {
+                setShowButton(false);
+              } else {
+                setShowButton(true);
+              }
+            }, 2000);
+            // process success response
+          } else {
+            // proccess server errors
+          }
+        });
       });
-    console.log('isMore 3:', isMoreLoaded);
   };
 
   if (isLoaded) {
@@ -155,7 +158,7 @@ export function GetUsers() {
       </div>
     );
   } if (noUsers) {
-    return <div className="noUsers">Oh... It looks like there are no users here yet. You have a nice chance to be the first!</div>;
+    return <div className="noUsers">{t('no-users.1')}</div>;
   }
   return (
     <div>
@@ -187,17 +190,27 @@ export function GetUsers() {
 
 export default function Users() {
   const { t } = useTranslation();
+  const [apiOk, setApiOk] = React.useState(200);
+  const errorHandler = (data) => {
+    setApiOk(data);
+    localStorage.setItem('apiResponseStatus', data);
+  };
+
   return (
-    <div className="users-container">
-      <div className="container">
-        <div className="h2-wrapper">
-          <h2 className="heading-2-desktop">{t('Cheerful.1')}</h2>
+    <>
+      {apiOk === 200 && (
+      <div className="users-container">
+        <div className="container">
+          <div className="h2-wrapper">
+            <h2 className="heading-2-desktop">{t('Cheerful.1')}</h2>
+          </div>
+          <div className="p-wrapper">
+            <p className="paragraph-1">{t('Cheerful.2')}</p>
+          </div>
+          <GetUsers errorHandler={errorHandler} />
         </div>
-        <div className="p-wrapper">
-          <p className="paragraph-1">{t('Cheerful.2')}</p>
-        </div>
-        <GetUsers />
       </div>
-    </div>
+      )}
+    </>
   );
 }

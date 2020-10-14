@@ -26,6 +26,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState([]);
   const [isUserLoaded, setUserLoaded] = useState(false);
+  const [isResponseOk, setResponseOk] = useState(true);
   const toggleMenu = (value) => () => {
     setOpen(value);
     if (value) {
@@ -53,13 +54,24 @@ export default function Header() {
     }
   });
 
+  React.useEffect(() => {
+    if (+localStorage.getItem('apiResponseStatus') !== 200) {
+      setResponseOk(false);
+    } else {
+      setResponseOk(true);
+    }
+    return () => {
+
+    };
+  });
+
   const scollToTop = () => {
     window.scrollTo(0, 0);
   };
   const { t } = useTranslation();
 
   React.useEffect(() => {
-    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/8888')
+    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -111,6 +123,11 @@ export default function Header() {
 
   return (
     <div className="header-holder">
+      {!isResponseOk && (
+      <div className="api-error">
+        <div className="container">{t('api-error.1')}</div>
+      </div>
+      )}
       <header className="container">
         <div className="desktop-header">
           <div className="logo-container">
