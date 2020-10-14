@@ -54,7 +54,7 @@ export function UserInfo(props) {
 export function GetUsers(props) {
   // eslint-disable-next-line react/prop-types
   const [isLoaded, setIsLoaded] = React.useState(false);
-  const [count, setCount] = React.useState(window.innerWidth > 700 ? 101 : 3);
+  const [count, setCount] = React.useState(window.innerWidth > 700 ? 6 : 3);
   const [users, setUsers] = React.useState([]);
   const [showButton, setShowButton] = React.useState(true);
   const [offset, setOffset] = React.useState(0);
