@@ -1,9 +1,13 @@
 import React from 'react';
+import RegistrationBanner from './components/Banner/RegistrationBanner';
+import RegistrationForm from './components/Form/RegistrationForm';
+import './Registration.scss';
 
 export default function Registration() {
   return (
     <>
-      <h1 className="tempHeading">Here will be registration component</h1>
+      <RegistrationBanner />
+      <RegistrationForm />
     </>
   );
 }

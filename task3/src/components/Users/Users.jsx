@@ -75,7 +75,6 @@ export function GetUsers(props) {
   window.addEventListener('resize', handleResize);
 
   React.useEffect(() => {
-    localStorage.setItem('apiResponseStatus', '200');
     window.fetch(link)
       .then((response) => {
         // eslint-disable-next-line react/prop-types

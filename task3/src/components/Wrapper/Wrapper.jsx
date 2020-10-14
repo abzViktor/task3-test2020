@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
@@ -8,6 +8,9 @@ const Registration = React.lazy(() => import('../Registration/Registration'));
 const Terms = React.lazy(() => import('../Terms/Terms'));
 
 export default function Wrapper() {
+  useEffect(() => {
+    localStorage.setItem('apiResponseStatus', '200');
+  });
   return (
     <>
       <Router>

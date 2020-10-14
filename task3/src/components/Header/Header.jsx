@@ -55,7 +55,7 @@ export default function Header() {
   });
 
   React.useEffect(() => {
-    if (+localStorage.getItem('apiResponseStatus') !== 200) {
+    if (+localStorage.getItem('apiResponseStatus') && +localStorage.getItem('apiResponseStatus') !== 200) {
       setResponseOk(false);
     } else {
       setResponseOk(true);
