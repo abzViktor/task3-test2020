@@ -1,0 +1,111 @@
+.registration-text-block {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
+.form {
+  padding-top: 139px;
+  h1,
+  >p {
+    text-align: center;
+  }
+}
+
+.registration-banner-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .paragraphs-banner {
+    max-width: 450px;
+    text-align: left;
+  }
+  .image-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .image-container img {
+    width: 429px;
+  }
+}
+
+.fileFieldHolder {
+  position: relative;
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    height: 56px;
+    width: 130px;
+    min-width: 130px;
+    border-radius: 0 4px 4px 0;
+  }
+  >div {
+    width: 100%;
+  }
+  div:hover,
+  input:hover {
+    cursor: pointer;
+  }
+}
+
+.submit-holder {
+  text-align: center;
+  margin-bottom: 140px;
+}
+
+.firstFormRow,
+.secondFormRow {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px -15px;
+  width: 100%;
+  >div {
+    padding: 0 15px;
+    width: 100%;
+    >div {
+      width: 100%;
+    }
+  }
+}
+
+//input[type="file" i] {
+//  z-index: -1;
+//}
+
+@media screen and (max-width: 1023px) {
+  .registration-banner-content {
+    .image-container img {
+      width: 343px;
+    }
+  }
+
+}
+
+@media screen and (max-width: 700px) {
+  .registration-banner-content {
+    flex-direction: column-reverse;
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .registration-text-block {
+    h1 {
+      line-height: 32px;
+    }
+  }
+  .registration-banner-content {
+    flex-direction: column-reverse;
+    .image-container img {
+      width: 283px;
+    }
+    .paragraphs-banner {
+      max-width: 450px;
+      text-align: center;
+    }
+  }
+
+}
+

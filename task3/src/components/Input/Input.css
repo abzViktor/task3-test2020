@@ -37,10 +37,10 @@
     background-color: transparent !important;
 }
 
-.select-component .MuiOutlinedInput-input {
-    padding-top: 14.5px !important;
-    padding-bottom: 14.5px !important;
-}
+/*.select-component .MuiOutlinedInput-input {*/
+/*    padding-top: 14.5px !important;*/
+/*    padding-bottom: 14.5px !important;*/
+/*}*/
 
 .MuiOutlinedInput-input,
 .MuiInputBase-input{
@@ -85,6 +85,10 @@
     font-family: "Source Sans Pro" !important;
 }
 
+.MuiListItem-root {
+    height: 47px;
+}
+
 .select-component  .MuiFormHelperText-root {
     padding-left: 15px;
 }
@@ -107,7 +111,7 @@
     background-color: #FCE2CC !important;
 }
 
-.MuiPopover-paper {
-    top: 15px !important;
-}
+/*.MuiPopover-paper {*/
+/*    top: 15px !important;*/
+/*}*/
 
