@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap');
 
-.MuiOutlinedInput-root {
+.select-component .MuiOutlinedInput-root {
     padding-right: 18px;
 }
+
+
 
 .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: 2px solid #b7b7b7 !important;

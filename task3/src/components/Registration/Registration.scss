@@ -9,6 +9,11 @@
   >p {
     text-align: center;
   }
+  .fileFieldHolder {
+    .MuiOutlinedInput-root.Mui-error fieldset.MuiOutlinedInput-notchedOutline {
+      border: 1px solid #f44336 !important;
+    }
+  }
 }
 
 .registration-banner-content {
