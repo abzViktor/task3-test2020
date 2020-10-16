@@ -20,10 +20,10 @@ export default function LetsGetComponent() {
           </div>
           <div className="lets-text-block">
             <h4 className="heading-3-desktop">{t('Cool.1')}</h4>
-            <p className="paragraph-2">
+            <p className="paragraph-2 middle-text">
               {t('Looking.1')}
             </p>
-            <p className="paragraph-2">
+            <p className="paragraph-2 bottom-text">
               {t('Looking.2')}
             </p>
             <Link to="/registration#form" className="text-link" rel="stylesheet">{t('SignUp.1')}</Link>

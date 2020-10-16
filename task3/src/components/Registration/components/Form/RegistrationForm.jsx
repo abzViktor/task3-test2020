@@ -76,7 +76,7 @@ export default function RegistrationForm() {
   // };
 
   return (
-    <div className="form">
+    <div id="form" className="form">
       <div className="container">
         <h1 className="heading-2-desktop">Register to get a work</h1>
         <p className="paragraph-1">Attention! After successful registration and alert, update the list of users in the block from the top</p>

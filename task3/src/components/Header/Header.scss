@@ -64,6 +64,9 @@ header .mobile-header {
     display: flex;
     list-style: none;
     padding-right: 43px;
+    li {
+        margin-bottom: 7px;
+    }
 }
 
 .desktop-header nav ul li a {
@@ -84,10 +87,15 @@ header .mobile-header {
 }
 
 .header-contacts {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: center;
+    margin-bottom: 7px;
+
+    > div:nth-child(1) {
+        margin-bottom: -3px;
+    }
+
+    > div:nth-child(2) {
+        margin-bottom: 3px;
+    }
 }
 
 .header-contacts a {
@@ -148,7 +156,7 @@ header .mobile-header {
 }
 
 .header-user {
-    width: 121px;
+    width: 112px;
     text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;

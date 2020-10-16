@@ -7,35 +7,45 @@
 
 .users-container {
   background-color: $background-color;
-  padding: 140px 0;
+  padding: 130px 0 140px;
   .h2-wrapper,
   .p-wrapper,
   .button-wrapper {
     text-align: center;
     h2 {
       margin-top: 0;
-      margin-bottom: 30px;
+      margin-bottom: 13px;
     }
     p {
-      margin-bottom: 58px;
+      margin-bottom: 54px;
+      text-align: center;
+      margin-left: 1px;
+      letter-spacing: 0.3px;
     }
+  }
+  .button-wrapper {
+    margin-top: -32px;
   }
   p {
     margin: 0;
   }
   .users-block {
+    box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
+    margin: 0 -15px;
     justify-content: space-between;
   }
   .users-block:after {
     content: "";
-    width: 352px;
+    width: 33.3px;
   }
   .user-block {
-    display:flex;
-    width: 352px;
-    margin-bottom: 52px;
+    box-sizing: border-box;
+    display: flex;
+    width: 33.3%;
+    padding: 0 15px;
+    margin-bottom: 85px;
     .photo-holder img {
       width: 70px;
       height: 70px;
@@ -48,6 +58,7 @@
       overflow: hidden;
       p, a {
         color: #4c4b4b;
+        line-height: 17px;
       }
       p {
         text-overflow: ellipsis;
@@ -62,29 +73,41 @@
         font-size: 22px;
         font-weight: 700;
         line-height: 22px;
-        padding-bottom: 19px;
+        padding-bottom: 14px;
         word-wrap: break-word;
       }
     }
   }
 }
 
-@media screen and (max-width: 2559px) {
+@media screen and (max-width: 1440px) {
   .users-container {
+    padding-top: 125px;
+    .button-wrapper {
+      margin-top: -50px;
+    }
     .user-block {
-      width: 284px;
-      margin-bottom: 56px;
+      margin-bottom: 104px;
+      .user-info {
+        padding-top: 27px;
       }
-    .users-block:after {
-      content: "";
-      width: 284px;
     }
     }
   }
 
 @media screen and (max-width: 900px) {
   .users-container {
-    padding: 80px 0;
+    padding: 90px 0 100px;
+    .p-wrapper p {
+      margin-bottom: 41px;
+      letter-spacing: -0.1px;
+    }
+    .button-wrapper {
+      margin-top: 19px;
+    }
+    .users-block {
+      margin: 0;
+    }
     .user-block {
       flex-direction: column;
       width: 217px;
@@ -109,13 +132,13 @@
 
 @media screen and (max-width: 700px){
   .users-container {
-    padding: 45px 0;
+    padding: 45px 0 60px;
     .h2-wrapper h2 {
       margin-bottom: 6px;
     }
     .p-wrapper p {
       padding: 0 61px;
-      margin-bottom: 30px;
+      margin-bottom: 32px;
     }
     button {
       width: 290px;

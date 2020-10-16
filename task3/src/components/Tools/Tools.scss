@@ -1,19 +1,21 @@
 .tools-container {
   background-color: #f6f6f6;
-  padding: 140px 0;
+  padding: 144px 0 124px 0;
   .tools-content {
     display: flex;
+    margin: 0 -15px;
+    justify-content: space-between;
     >div {
-      flex: 1 0 12.5%;
-    }
-    .css-block {
-      margin: 0 88px 0 38px;
-      max-width: 306px;
+      width: 33.3%;
+      padding: 0 15px;
     }
   }
   .heading-holder {
     display: flex;
     justify-content: center;
+  }
+  img {
+    width: 98px;
   }
   h2 {
     text-align: center;
@@ -21,17 +23,31 @@
     margin-bottom: 51px;
     margin-top: 0;
   }
+  h3 {
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
   p {
     color: #4c4b4b;
+    margin-top: 10px;
+  }
+
+  .css-block {
+    p {
+      padding-right: 50px;
+    }
   }
 }
 
-@media screen and (max-width: 2559px) {
+@media screen and (max-width: 1440px) {
  .tools-container {
-   padding: 96px 0;
+   padding-top: 136px;
+   p {
+     margin-top: 12px;
+
+   }
    .tools-content {
      .css-block {
-       margin: 0 20px 0 38px;
        p {
            max-width: 220px;
        }
@@ -47,87 +63,104 @@
 
 @media screen and (max-width: 974px) {
   .tools-container {
-    padding: 105px 0 86px 0;
+    padding: 98px 0 81px 0;
  h2 {
-   margin-bottom: 39px;
+   margin-bottom: 47px;
  }
     .tools-content {
+      display: flex;
       flex-direction: column;
       align-items: center;
+      margin: 0;
       img {
         width: 88px;
         margin-bottom: 5px;
       }
       >div {
         display: flex;
-        max-width: 587px;
-        padding-bottom: 38px;
+        max-width: 100%;
+        width: 83.3%;
+        padding-bottom: 37px;
         >div {
           padding-left: 36px;
         }
       }
       .js-block {
         padding-bottom: 0;
+        img {
+          margin-top:-7px;
+        }
       }
       .css-block {
-        margin: 0;
-        max-width: 587px;
+        h3 {
+          margin-top: 0;
+        }
         p {
           max-width: unset;
         }
       }
       .js-block {
+        h3 {
+          padding-left: 4px;
+        }
         p {
           max-width: unset;
+          padding-left: 4px;
+          padding-right: 17px;
         }
       }
     }
     h3 {
-      margin-bottom: 10px;
-      margin-top: 0;
+      margin-bottom: 7px;
+      margin-top: -6px;
     }
     p {
       margin-top: 0;
+      letter-spacing: 0.07px;
     }
   }
 }
 
 @media screen and (max-width: 600px) {
   .tools-container {
-    padding: 60px 0 24px;
+    padding: 60px 0 51px;
+    h2 {
+      margin-bottom: 38px;
+    }
     .tools-content {
       img {
         width: 88px;
-        margin-bottom: 5px;
+        margin-bottom: 14px;
       }
       >div {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding-bottom: 30px;
+        padding: 0 0 21px;
+        width: 290px;
         >div {
           text-align: center;
           padding: 0;
-          max-width: 280px;
         }
       }
       .css-block {
-        margin: 0;
-        max-width: 587px;
+        padding-bottom: 38px;
         p {
           max-width: unset;
+          padding: 0;
         }
       }
       .js-block {
         p {
           max-width: unset;
+          padding: 0 4px;
         }
       }
     }
     h2 {
       line-height: 26px;
-      letter-spacing: -0.1px;
+      letter-spacing: 0.1px;
     }
     h3 {
       margin-bottom: 3px;
