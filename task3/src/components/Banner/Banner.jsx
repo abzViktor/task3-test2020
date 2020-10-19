@@ -43,7 +43,7 @@ export default function Banner() {
                 {t('TestAssignment.1')}
               </h1>
             </div>
-            <div>
+            <div className="main-text">
               {' '}
               <p className="paragraph-1">
                 <p className="all-visible">{t('KindlyRemind.1')}</p>

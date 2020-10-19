@@ -46,7 +46,20 @@ export function UserInfo(props) {
           </Box>
         </Tooltip>
       </p>
-      <p><a className="paragraph-3" href="tel: +38(050)6780324">{phone}</a></p>
+      <p>
+        <a className="paragraph-3" href="tel: +38(050)6780324">
+          {phone.slice(0, 3)}
+          &nbsp;(0
+          {phone.slice(4, 6)}
+          )&nbsp;
+          {phone.slice(6, 9)}
+          &nbsp;
+          {phone.slice(9, 11)}
+          &nbsp;
+          {phone.slice(11, 13)}
+
+        </a>
+      </p>
     </div>
   );
 }
@@ -150,7 +163,7 @@ export function GetUsers(props) {
 
         <div className="button-wrapper">
           {isMoreLoaded === false && <CircularProgress />}
-          <button hidden={!showButton} type="button" onClick={ShowMore} className="secondary">
+          <button hidden={!showButton} type="button" onClick={ShowMore} className="secondary show-more-btn">
             {t('ShowMore.1')}
           </button>
         </div>
@@ -167,7 +180,10 @@ export function GetUsers(props) {
             <UserPhoto photo="placeholders/image-ph.svg" />
             <div className="user-info">
               <p className="user-name"><img src="placeholders/Rounded_Rectangle_4.svg" alt="" /></p>
+
               <p className="paragraph-3"><img src="placeholders/Rounded_Rectangle_4 (1).svg" alt="" /></p>
+              <div className="placeholder-spacer" />
+
               <p>
                 <img src="placeholders/Rounded_Rectangle_4 (2).svg" alt="" />
               </p>
@@ -177,9 +193,10 @@ export function GetUsers(props) {
             </div>
           </div>
         ))}
+
       </div>
       <div className="button-wrapper">
-        <button hidden={!showButton} type="button" onClick={ShowMore} className="secondary">
+        <button hidden={!showButton} type="button" onClick={ShowMore} className="secondary show-more-btn">
           {t('ShowMore.1')}
         </button>
       </div>

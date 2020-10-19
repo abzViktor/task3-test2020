@@ -5,6 +5,14 @@
   font-size: 20px;
 }
 
+.show-more-btn {
+  margin: 1px 0;
+}
+
+.placeholder-spacer {
+  height: 2px;
+}
+
 .users-container {
   background-color: $background-color;
   padding: 130px 0 140px;
@@ -136,6 +144,9 @@
     .h2-wrapper h2 {
       margin-bottom: 6px;
     }
+    .button-wrapper {
+      margin-top: 0;
+    }
     .p-wrapper p {
       padding: 0 61px;
       margin-bottom: 32px;
@@ -162,4 +173,6 @@
     }
   }
 }
+
+
 

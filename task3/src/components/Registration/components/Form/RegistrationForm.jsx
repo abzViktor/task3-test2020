@@ -63,7 +63,7 @@ export default function RegistrationForm() {
       .matches(/^[A-Za-z\s]+$/g, 'Name should contain only latin letters!'),
     email: yup.string()
       .max(254, 'Email should be less than 254 characters!')
-      .matches(/^[\w-]{1,64}?@[\w-]+\.[\w-]{2,}/, 'Invalid Email!'),
+      .matches(/^[\w-.]{1,64}?@[\w-]+\.[\w-]{2,}/, 'Invalid Email!'),
   });
   const hiddenFileInput = React.useRef(null);
   const handleUpload = (ev) => {
