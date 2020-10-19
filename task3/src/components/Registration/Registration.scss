@@ -16,18 +16,37 @@
   }
 }
 
+
+.registration-banner-text {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  //padding-top: 130px;
+  h1 {
+    margin: 23px 0 29px;
+  }
+}
+
 .registration-banner-content {
   width: 100%;
   display: flex;
   justify-content: space-between;
   .paragraphs-banner {
-    max-width: 450px;
+    max-width: 50%;
+    width: 50%;
     text-align: left;
+    p {
+      margin-bottom: 21px;
+    }
   }
   .image-container {
+    width: 50%;
     height: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    padding-top: 19px;
+    padding-left: 33px;
   }
   .image-container img {
     width: 429px;
@@ -75,11 +94,40 @@
   }
 }
 
-//input[type="file" i] {
-//  z-index: -1;
-//}
+@media screen and (max-width: 1440px) {
+
+  .registration-banner-text h1{
+    margin: -10px 0 27px;
+  }
+  .registration-banner-content {
+    .image-container {
+      padding-left: 31px;
+      img {
+        padding: 11px 0 0 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .registration-banner-text {
+  }
+  .registration-banner-text h1{
+    margin: 9px 0 27px;
+    padding: 0 125px;
+  }
+  .registration-banner-content {
+    .image-container {
+      padding-left: 26px;
+      img {
+        padding: 0 0 0 20px;
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 1023px) {
+
   .registration-banner-content {
     .image-container img {
       width: 343px;
