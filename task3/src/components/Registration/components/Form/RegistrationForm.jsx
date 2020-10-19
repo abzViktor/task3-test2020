@@ -109,8 +109,8 @@ export default function RegistrationForm() {
                   .then((response) => response.json())
                   .then((postResponse) => {
                     console.log(postResponse);
-                    setOpen(true);
-                    if (data.success) {
+                    if (postResponse.success) {
+                      setOpen(true);
                     } else {
                       // proccess server errors
                     }
@@ -154,6 +154,8 @@ export default function RegistrationForm() {
                     onClick={() => {
                       setOpen(false);
                       resetForm();
+                      setFieldValue('file', '');
+                      setFileValue('');
                     }}
                   >
                     OK

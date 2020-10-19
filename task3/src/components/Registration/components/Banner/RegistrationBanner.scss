@@ -98,10 +98,15 @@
       background-image: url("https://task3-test2020viktor-p.abzdev2.com/reg-banner/bg-768.webp"), url("https://task3-test2020viktor-p.abzdev2.com/reg-banner/bg-768.jpg");
       padding: 100px 0 99px;
     }
-    .heading-2-desktop {
-      padding: 0 127px;
+    .reg-banner .heading-2-desktop {
       margin: 9px 0 25px;
     }
+}
+
+@media screen and (max-width: 768px) and (min-width: 700px) {
+  .reg-banner .heading-2-desktop {
+    padding: 0 127px;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px){
