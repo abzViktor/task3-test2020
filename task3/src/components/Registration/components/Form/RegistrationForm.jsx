@@ -3,6 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+
 import {
   Formik, Field, Form, FieldArray,
 } from 'formik';
@@ -17,12 +20,13 @@ export default function RegistrationForm() {
   // const handleChange = (event) => {
   //   setValue(event.target.value);
   // };
+  const [open, setOpen] = React.useState(false);
   const [isValidFile, setValidFile] = React.useState(false);
   const initialValues = {
     name: '',
     email: '',
     phone: '',
-    position: 1,
+    position: '-1',
     file: '',
   };
 
@@ -67,7 +71,7 @@ export default function RegistrationForm() {
     hiddenFileInput.current.click();
   };
 
-  const [fileValue, setFileValue] = React.useState('Upload your photo');
+  const [fileValue, setFileValue] = React.useState('');
 
   //
   // const handleSubmit = (ev) => {
@@ -79,7 +83,7 @@ export default function RegistrationForm() {
     <div id="form" className="form">
       <div className="container">
         <h1 className="heading-2-desktop">Register to get a work</h1>
-        <p className="paragraph-1">Attention! After successful registration and alert, update the list of users in the block from the top</p>
+        <div><p className="paragraph-1">Attention! After successful registration and alert, update the list of users in the block from the top</p></div>
         <Formik
           initialValues={initialValues}
           onSubmit={(data, { setSubmitting }) => {
@@ -105,8 +109,8 @@ export default function RegistrationForm() {
                   .then((response) => response.json())
                   .then((postResponse) => {
                     console.log(postResponse);
+                    setOpen(true);
                     if (data.success) {
-                      // process success response
                     } else {
                       // proccess server errors
                     }
@@ -118,6 +122,7 @@ export default function RegistrationForm() {
               .catch((e) => {
                 console.log(e);
               });
+            console.log(open);
             setSubmitting(false);
           }}
           validationSchema={validationSchema}
@@ -126,12 +131,35 @@ export default function RegistrationForm() {
             values,
             setFieldValue,
             setFieldTouched,
-            dirty,
+            // dirty,
             isValid,
             errors,
             touched,
+            resetForm,
           }) => (
             <Form>
+              <Dialog open={open}>
+                <div className="modal">
+                  <h4 className="heading-4-desktop">Congratulations</h4>
+                  <p className="paragraph-2">
+                    {' '}
+                    You have successfully passed
+                    <br />
+                    {' '}
+                    the registration
+                  </p>
+                  <button
+                    type="button"
+                    className="text-link"
+                    onClick={() => {
+                      setOpen(false);
+                      resetForm();
+                    }}
+                  >
+                    OK
+                  </button>
+                </div>
+              </Dialog>
               <div className="firstFormRow">
                 <div>
                   <Field
@@ -209,6 +237,9 @@ export default function RegistrationForm() {
                             type="select"
                             as={Select}
                           >
+                            <MenuItem value="-1" disabled>
+                              Select yout position
+                            </MenuItem>
                             {positions.map((pos) => (
                               <MenuItem key={pos.id} value={pos.id}>{pos.name}</MenuItem>
                             ))}
@@ -226,13 +257,27 @@ export default function RegistrationForm() {
                       className="border-1"
                       inputProps={{ readOnly: 'readonly' }}
                       helperText="File format jpg  up to 5 MB, the minimum size of 70x70px"
+                      placeholder="Upload your photo"
                       onClick={handleUpload}
                       ref={hiddenFileInput}
                       value={fileValue}
                       variant="outlined"
                       error={!isValidFile && touched.file}
                     />
-                    <button type="button" onClick={handleUpload} className="secondary">Upload</button>
+                    <button type="button" onClick={handleUpload} className="secondary desktop-upload-btn">Upload</button>
+                    <button type="button" onClick={handleUpload} className="secondary mob-upload-btn">
+                      <svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                        <title>upload</title>
+                        <desc>Created with Sketch.</desc>
+                        <defs />
+                        <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
+                          <g id="upload" fill="#EF6C00" fillRule="nonzero">
+                            <path d="M18.12,14.2 C18.0551642,14.222096 17.9848358,14.222096 17.92,14.2 C17.86,14.2 17.81,14.2 17.78,14.31 C17.75,14.42 17.71,14.43 17.69,14.43 C17.67,14.43 17.69,14.49 17.69,14.61 L17.69,14.79 L17.69,19.56 C17.6847889,20.2177137 17.4164079,20.8459493 16.9447897,21.3044148 C16.4731715,21.7628804 15.837598,22.0133892 15.18,22 L4.41,22 C3.75845014,22.0102355 3.13190144,21.7494753 2.68,21.28 C2.23532929,20.8310068 1.99022381,20.2218476 2,19.59 L2,14.69 C2.00654693,14.5778048 1.97087459,14.4672205 1.9,14.38 C1.82129123,14.2955515 1.71478409,14.2422979 1.6,14.23 C1.48132462,14.2048911 1.3610262,14.188183 1.24,14.18 L0.49,14.18 C0.360349482,14.1786835 0.236431451,14.2333533 0.15,14.33 C0.0544088005,14.4171944 -4.1366484e-05,14.5406148 2.03938429e-16,14.67 L2.03938429e-16,19.57 C-0.0168652328,20.7430529 0.449651354,21.8713721 1.29,22.69 C2.1052145,23.5377036 3.23397252,24.0116372 4.41,24 L15.18,24 C16.3504191,24.0026631 17.4736678,23.5388946 18.3012812,22.7112812 C19.1288946,21.8836678 19.5926631,20.7604191 19.59,19.59 L19.59,14.69 C19.5965469,14.5778048 19.5608746,14.4672205 19.49,14.38 C19.4144273,14.2914523 19.3061818,14.2373295 19.19,14.23 C19.0713246,14.2048911 18.9510262,14.188183 18.83,14.18 L18.12,14.18 L18.12,14.2 Z" id="Shape" />
+                            <path d="M9.11,0.29 L0.78,8.62 C0.411745823,9.00629829 0.411745823,9.61370171 0.78,10 C0.956726196,10.1937775 1.20775326,10.3029197 1.47,10.3 L5.88,10.3 L5.88,17.15 C5.88,17.7022847 6.32771525,18.15 6.88,18.15 L12.75,18.15 C13.3022847,18.15 13.75,17.7022847 13.75,17.15 L13.75,10.29 L18.16,10.29 C18.4222467,10.2929197 18.6732738,10.1837775 18.85,9.99 C19.2119426,9.60504999 19.2119426,9.00495001 18.85,8.62 L10.48,0.29 C10.09505,-0.0719425778 9.49495001,-0.0719425778 9.11,0.29 Z" id="Shape" />
+                          </g>
+                        </g>
+                      </svg>
+                    </button>
                   </div>
                   <>
                     <input
@@ -275,12 +320,12 @@ export default function RegistrationForm() {
                 </div>
               </div>
               <div className="submit-holder">
-                <button disabled={!(isValid && values.name !== '' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)} className="primary" type="submit">Submit</button>
+                <button disabled={!(isValid && values.name !== '' && values.position !== '-1' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)} className="primary" type="submit">Sign Up</button>
               </div>
-              <pre>{JSON.stringify(values, null, 2)}</pre>
-              <pre>{JSON.stringify(errors, null, 2)}</pre>
-              <pre>{JSON.stringify(dirty, null, 2)}</pre>
-              <pre>{JSON.stringify(touched, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(dirty, null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(touched, null, 2)}</pre> */}
             </Form>
           )}
         </Formik>

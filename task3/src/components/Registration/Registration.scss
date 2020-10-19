@@ -3,10 +3,49 @@
   width: 100%;
   text-align: center;
 }
+form {
+  margin: 0 -14px;
+}
+
+.MuiDialog-paper {
+  border-radius: 4px !important;
+}
+
+.modal {
+  padding: 24px 13px 24px 24px;
+  border-radius: 4px;
+  width: 251px;
+  height: 129px;
+  h4, p {
+    margin: 0;
+  }
+  h4 {
+    margin-bottom: 9px;
+    margin-top: -4px;
+  }
+  p {
+    margin-bottom: 24px;
+  }
+  button {
+    float: right;
+  }
+}
+
 .form {
-  padding-top: 139px;
-  h1,
-  >p {
+  padding-top: 101px;
+  h1 {
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  >div>div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  >div>div p {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 41px;
     text-align: center;
   }
   .fileFieldHolder {
@@ -16,6 +55,9 @@
   }
 }
 
+.mob-upload-btn {
+  display: none;
+}
 
 .registration-banner-text {
   display: flex;
@@ -83,7 +125,7 @@
 .secondFormRow {
   display: flex;
   justify-content: space-between;
-  margin: 30px -15px;
+  margin-bottom: 40px;
   width: 100%;
   >div {
     padding: 0 15px;
@@ -110,7 +152,19 @@
 }
 
 @media screen and (max-width: 992px) {
-  .registration-banner-text {
+  .submit-holder {
+    margin-bottom: 100px;
+  }
+  .form {
+    padding-top: 80px;
+    h1 {
+      margin-bottom: 27px;
+    }
+    > div > div p {
+      max-width: 364px;
+      line-height: 22px;
+      padding-bottom: 49px;
+    }
   }
   .registration-banner-text h1{
     margin: 9px 0 27px;
@@ -136,14 +190,77 @@
 
 }
 
+
+
 @media screen and (max-width: 700px) {
+  .submit-holder {
+    padding: 0 15px;
+    margin-bottom: 58px;
+    margin-top: -10px;
+    button {
+      width: 100%;
+    }
+  }
+  .form {
+    padding-top: 34px;
+  }
+  .form h1{
+    margin: 9px 0 5px;
+    padding: 0;
+  }
+  .form {
+    >div>div p {
+      padding-bottom: 32px;
+    }
+  }
   .registration-banner-content {
     flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    .image-container {
+      padding: 0;
+    }
+    .image-container img{
+      padding: 0;
+    }
+      .paragraphs-banner {
+      width: 100%;
+    }
+    p {
+      text-align: center;
+    }
   }
-
+  .firstFormRow,
+  .secondFormRow {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    width: 100%;
+    >div {
+      padding: 0 15px;
+      width: 100%;
+      margin-bottom: 35px;
+      >div {
+        width: 100%;
+      }
+    }
+  }
 }
 
+
+
 @media screen and (max-width: 500px) {
+  button.mob-upload-btn {
+    width: 56px;
+    min-width: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .desktop-upload-btn {
+    display: none;
+  }
   .registration-text-block {
     h1 {
       line-height: 32px;
@@ -151,11 +268,17 @@
   }
   .registration-banner-content {
     flex-direction: column-reverse;
+    .image-container {
+      padding: 0;
+      margin-bottom: 10px;
+    }
     .image-container img {
-      width: 283px;
+      width: 257px;
+      padding: 0;
     }
     .paragraphs-banner {
       max-width: 450px;
+      width: 100%;
       text-align: center;
     }
   }

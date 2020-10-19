@@ -52,6 +52,23 @@ button[disabled] {
     pointer-events: none;
 }
 
+button.text-link {
+    border: 0;
+    outline: 0;
+    min-width: 48px;
+    min-height: 48px;
+    font-family: "Source Sans Pro";
+    font-size: 22px;
+    font-weight: 700;
+    color: #ef6c00;
+    background: transparent;
+}
+
+button.text-link:hover {
+    color:#fc831f;
+    cursor: pointer;
+}
+
 
 @media screen and (max-width: 600px) {
     button.secondary:after,

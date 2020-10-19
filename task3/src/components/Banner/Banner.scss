@@ -68,7 +68,9 @@
 
 @media screen and (max-width: 992px) and (min-width: 701px) {
   .banner-container {
-
+.banner-text {
+  padding-top: 106px;
+}
     .text-block {
       width: 56%;
       height: 397px;
@@ -98,7 +100,12 @@
   }
   .banner-container {
     .banner-text {
-      padding-top: 68px;
+      padding-top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      margin-top: -2px;
     }
       .text-block {
         width: 100%;
