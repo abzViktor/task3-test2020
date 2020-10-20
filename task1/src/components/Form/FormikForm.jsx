@@ -222,6 +222,7 @@ export default function FormComponent() {
                   onChange={({ target }) => {
                     setFieldValue(target.name, trimSpaces(target.value));
                   }}
+
                 />
 
                 <Field

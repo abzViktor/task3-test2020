@@ -79,6 +79,7 @@ header .mobile-header {
 .desktop-header nav ul li a.active,
 .side-menu-container-nav nav a.active{
     color: $secondary-color;
+    pointer-events: none;
 }
 
 .header-personal-info {

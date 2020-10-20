@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
+import { Link, useLocation } from 'react-router-dom';
+import { HashLink, NavHashLink } from 'react-router-hash-link';
+
 import { Tooltip } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
@@ -16,10 +17,12 @@ const initialActive = {
   about: 'primary inactive',
   relation: 'primary inactive',
   users: 'primary inactive',
+  registration: 'primary inactive',
 };
 
 // eslint-disable-next-line react/prop-types
 export default function Header() {
+  const location = useLocation();
   const [tipName, setTipName] = React.useState('');
   const [tipEmail, setTipEmail] = React.useState('');
   const [activeMenu, setActiveMenu] = useState(initialActive);
@@ -65,7 +68,7 @@ export default function Header() {
     };
   });
 
-  const scollToTop = () => {
+  const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
   const { t } = useTranslation();
@@ -84,11 +87,20 @@ export default function Header() {
         }
       });
   }, []);
+  React.useEffect(() => {
+    if (window.location.href.match('registration')) {
+      setActiveMenu({
+        ...initialActive,
+        registration: 'primary active',
+      });
+    }
+    console.log('Location changed');
+  }, [location]);
 
   window.onscroll = function () {
     if (document.getElementById('about') !== null
           && document.getElementById('relation') !== null
-          && document.getElementById('users') !== null
+        && document.getElementById('users') !== null
     ) {
       if (window.pageYOffset < document.getElementById('about').offsetParent.offsetTop - 264) {
         setActiveMenu(initialActive);
@@ -116,6 +128,11 @@ export default function Header() {
           users: 'primary active',
         });
       }
+      console.log(window.location.href);
+    } else if (document.getElementById('form')) {
+      window.onscroll = () => {
+        console.log(window.location.href);
+      };
     } else {
       setActiveMenu(initialActive);
     }
@@ -132,7 +149,7 @@ export default function Header() {
         <div className="desktop-header">
           <div className="logo-container">
             {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-            <Link onClick={scollToTop} to="/"><Logo /></Link>
+            <Link onClick={scrollToTop} to="/"><Logo /></Link>
           </div>
           <div className="flex">
             <nav>
@@ -147,7 +164,7 @@ export default function Header() {
                 </li>
                 <li><HashLink to="/#relation" className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
                 <li><HashLink to="/#users" className={activeMenu.users}>{t('Users.1')}</HashLink></li>
-                <li><Link to="/registration#form" className="primary">{t('SignUp.1')}</Link></li>
+                <li><HashLink to="/registration#form" className={activeMenu.registration}>{t('SignUp.1')}</HashLink></li>
               </ul>
             </nav>
             <div className="header-personal-info">
@@ -214,7 +231,7 @@ export default function Header() {
                   <li><HashLink to="/#about" onClick={toggleMenu(false)} className={activeMenu.about}>{t('About.1')}</HashLink></li>
                   <li><HashLink to="/#relation" onClick={toggleMenu(false)} className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
                   <li><HashLink to="/#users" onClick={toggleMenu(false)} className={activeMenu.users}>{t('Users.1')}</HashLink></li>
-                  <li><Link to="/registration#form" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</Link></li>
+                  <li><HashLink to="/registration#form" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</HashLink></li>
                   <li><Link to="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</Link></li>
                 </ul>
               </nav>

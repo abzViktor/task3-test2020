@@ -23,6 +23,7 @@ button.secondary:hover{
 }
 
 button.secondary:active,
+button.secondary:focus,
 button.secondary:hover{
     background-color: #FEE6D2;
     border: 2px solid #ef6c00;

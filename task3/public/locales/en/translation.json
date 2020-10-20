@@ -77,5 +77,33 @@
   },
   "api-error": {
     "1": "Wooops... There is some problems with API connection!"
+  },
+  "reg-banner": {
+    "1": "General requirements for the test task",
+    "2":  "Users want to find answers to their questions quickly and data shows that people really care about how quickly their pages load. The Search team announced speed would be a ranking signal for desktop searches in 2010 and as of this month (July 2018), page speed will be a ranking factor for mobile searches too.",
+    "3":  "If you're a developer working on a site, now is a good time to evaluate your performance using our speed tools. Think about how performance affects the user experience of your pages and consider measuring a variety of real-world user-centric performance metrics.",
+    "4":  "Are you shipping too much JavaScript? Too many images? Images and JavaScript are the most significant contributors to the page weight that affect page load time based on data from HTTP Archive and the Chrome User Experience Report - our public dataset for key UX metrics as experienced by Chrome users under real-world conditions."
+  },
+  "form": {
+    "heading": "Register to get a work",
+    "attention": "Attention! After successful registration and alert, update the list of users in the block from the top",
+    "name": {
+      "1": "Name",
+      "2": "Your name"
+    },
+    "email": {
+      "1": "Email",
+      "2": "Your email"
+    },
+    "phone": {
+      "1": "Phone"
+    },
+    "select": "Select your position",
+    "upload": {
+      "1": "Upload your photo",
+      "2": "Upload",
+      "3": "File format jpg  up to 5 MB, the minimum size of 70x70px"
+    },
+    "submit": "Sign Up"
   }
 }

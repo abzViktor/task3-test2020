@@ -3,15 +3,15 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import { useTranslation } from 'react-i18next';
 import Dialog from '@material-ui/core/Dialog';
-
 import {
   Formik, Field, Form, FieldArray,
 } from 'formik';
 import * as yup from 'yup';
 // import InputLabel from '@material-ui/core/InputLabel';
 // import { FormControl } from '@material-ui/core';
+import { CircularProgress } from '@material-ui/core';
 import { ArrowIcon } from '../../../Input/Input';
 import '../../../Input/Input.css';
 
@@ -20,8 +20,13 @@ export default function RegistrationForm() {
   // const handleChange = (event) => {
   //   setValue(event.target.value);
   // };
+  const { t } = useTranslation();
+
   const [open, setOpen] = React.useState(false);
   const [isValidFile, setValidFile] = React.useState(false);
+  const [fetchError, setFetchError] = React.useState(true);
+  const [isSending, setSending] = React.useState(false);
+
   const initialValues = {
     name: '',
     email: '',
@@ -39,8 +44,8 @@ export default function RegistrationForm() {
         response.json().then((data) => {
           if (data.success) {
             setPositions(data.positions);
+            setFetchError(false);
           } else {
-            console.log('error');
           }
         });
       });
@@ -79,15 +84,26 @@ export default function RegistrationForm() {
   //   console.log(ev.target.value);
   // };
 
+  const trimDoubleSpaces = (value) => {
+    const newValue = value.replace(/\s{2,}/g, ' ');
+    return newValue;
+  };
+
+  const trimSpaces = (value) => value.replace(/\s+/g, '');
+
+  const trimSideSpaces = (value) => value.replace(/^\s+|\s+$|^\n+|\n+$/g, '');
+
   return (
+    !fetchError && (
     <div id="form" className="form">
       <div className="container">
-        <h1 className="heading-2-desktop">Register to get a work</h1>
-        <div><p className="paragraph-1">Attention! After successful registration and alert, update the list of users in the block from the top</p></div>
+        <h1 className="heading-2-desktop">{t('form.heading')}</h1>
+        <div><p className="paragraph-1">{t('form.attention')}</p></div>
         <Formik
           initialValues={initialValues}
-          onSubmit={(data, { setSubmitting }) => {
-            setSubmitting(true);
+          onSubmit={(data) => {
+            setSending(true);
+
             window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
               .then((response) => response.json())
               .then((res) => {
@@ -110,7 +126,10 @@ export default function RegistrationForm() {
                   .then((postResponse) => {
                     console.log(postResponse);
                     if (postResponse.success) {
-                      setOpen(true);
+                      setTimeout(() => {
+                        setSending(false);
+                        setOpen(true);
+                      }, 2000);
                     } else {
                       // proccess server errors
                     }
@@ -122,8 +141,6 @@ export default function RegistrationForm() {
               .catch((e) => {
                 console.log(e);
               });
-            console.log(open);
-            setSubmitting(false);
           }}
           validationSchema={validationSchema}
         >
@@ -169,9 +186,18 @@ export default function RegistrationForm() {
                     name="name"
                     type="input"
                     as={TextField}
-                    label="Name"
-                    placeholder="Your name"
+                    label={t('form.name.1')}
+                    placeholder={t('form.name.2')}
                     variant="outlined"
+                    onChange={({ target }) => {
+                      setFieldValue(target.name, trimDoubleSpaces(target.value));
+                    }}
+                    onBlur={({ target }) => {
+                      setFieldValue(target.name, trimSideSpaces(target.value));
+                      if (target.value !== '') {
+                        setFieldTouched(target.name, true);
+                      }
+                    }}
                     helperText={touched.name ? errors.name : ''}
                     error={touched.name && (!!errors.name)}
                   />
@@ -180,12 +206,15 @@ export default function RegistrationForm() {
                   <Field
                     required
                     name="email"
-                    label="Email"
-                    placeholder="Your email"
+                    label={t('form.email.1')}
+                    placeholder={t('form.email.2')}
                     variant="outlined"
                     as={TextField}
                     helperText={touched.email ? errors.email : ''}
                     error={touched.email && (!!errors.email)}
+                    onChange={({ target }) => {
+                      setFieldValue(target.name, trimSpaces(target.value));
+                    }}
                   />
                 </div>
                 <div>
@@ -203,15 +232,19 @@ export default function RegistrationForm() {
                         onBlur={() => {
                           setFieldTouched('phone', true);
                         }}
+                        onPaste={(e) => {
+                          console.log(e.clipboardData.getData('Text'));
+                        }}
                       >
                         {() => (
                           <TextField
                             variant="outlined"
                             type="tel"
                             required
-                            label="Phone"
+                            label={t('form.phone.1')}
                             helperText={touched.phone ? errors.phone : ''}
                             error={touched.phone && (!!errors.phone)}
+                            onP
                           />
                         )}
                       </InputMask>
@@ -240,7 +273,7 @@ export default function RegistrationForm() {
                             as={Select}
                           >
                             <MenuItem value="-1" disabled>
-                              Select yout position
+                              {t('form.select')}
                             </MenuItem>
                             {positions.map((pos) => (
                               <MenuItem key={pos.id} value={pos.id}>{pos.name}</MenuItem>
@@ -256,17 +289,19 @@ export default function RegistrationForm() {
                 <div>
                   <div className="fileFieldHolder">
                     <TextField
+                      required
                       className="border-1"
-                      inputProps={{ readOnly: 'readonly' }}
-                      helperText="File format jpg  up to 5 MB, the minimum size of 70x70px"
-                      placeholder="Upload your photo"
+                      inputProps={{ readOnly: 'readonly', tabIndex: '-1' }}
+                      helperText={t('form.upload.3')}
+                      placeholder={t('form.upload.1')}
                       onClick={handleUpload}
                       ref={hiddenFileInput}
                       value={fileValue}
                       variant="outlined"
                       error={!isValidFile && touched.file}
+                      tabIndex="-1"
                     />
-                    <button type="button" onClick={handleUpload} className="secondary desktop-upload-btn">Upload</button>
+                    <button type="button" onClick={handleUpload} className="secondary desktop-upload-btn">{t('form.upload.2')}</button>
                     <button type="button" onClick={handleUpload} className="secondary mob-upload-btn">
                       <svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <title>upload</title>
@@ -314,6 +349,7 @@ export default function RegistrationForm() {
                       }}
                       type="file"
                       name="file"
+                      required
                       value={values.file}
                       ref={hiddenFileInput}
                       style={{ display: 'none' }}
@@ -322,16 +358,29 @@ export default function RegistrationForm() {
                 </div>
               </div>
               <div className="submit-holder">
-                <button disabled={!(isValid && values.name !== '' && values.position !== '-1' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)} className="primary" type="submit">Sign Up</button>
+                {isSending
+                  && (<CircularProgress />)}
+                {!isSending && (
+                  <button
+                    disabled={!(isValid && values.name !== '' && values.position !== '-1' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)}
+                    className="primary submit-btn"
+                    type="submit"
+                  >
+                      {t('form.submit')}
+                  </button>
+                )}
+
               </div>
-              {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
-              {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
+              <pre>{JSON.stringify(values, null, 2)}</pre>
+              <pre>{JSON.stringify(errors, null, 2)}</pre>
+              <pre>{JSON.stringify(values.name.touched, null, 2)}</pre>
               {/* <pre>{JSON.stringify(dirty, null, 2)}</pre> */}
-              {/* <pre>{JSON.stringify(touched, null, 2)}</pre> */}
+              <pre>{JSON.stringify(touched, null, 2)}</pre>
             </Form>
           )}
         </Formik>
       </div>
     </div>
+    )
   );
 }

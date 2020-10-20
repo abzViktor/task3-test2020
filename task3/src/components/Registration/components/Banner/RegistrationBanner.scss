@@ -6,6 +6,9 @@
   //background-attachment: fixed;
   background-position: center center;
   padding: 100px 0;
+  p {
+    hyphens: none;
+  }
 }
 
 @media screen and (max-width: 3840px) {

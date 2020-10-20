@@ -77,6 +77,34 @@
   },
   "api-error": {
     "1": "Wooops ... Es gibt einige Probleme mit der API-Verbindung!"
+  },
+  "reg-banner": {
+    "1": "Allgemeine Anforderungen an die Testaufgabe",
+    "2": "Benutzer möchten schnell Antworten auf ihre Fragen finden und Daten zeigen, dass es den Menschen wirklich wichtig ist, wie schnell ihre Seiten geladen werden. Das Suchteam kündigte an, dass Geschwindigkeit 2010 und ab diesem Monat (Juli) ein Ranking-Signal für Desktop-Suchen sein wird 2018) wird die Seitengeschwindigkeit auch für die mobile Suche ein Ranking-Faktor sein. ",
+    "3": "Wenn Sie ein Entwickler sind, der an einer Website arbeitet, ist jetzt ein guter Zeitpunkt, um Ihre Leistung mithilfe unserer Geschwindigkeitstools zu bewerten. Überlegen Sie, wie sich die Leistung auf die Benutzererfahrung Ihrer Seiten auswirkt, und messen Sie eine Vielzahl realer Werte benutzerzentrierte Leistungsmetriken. ",
+    "4": "Versenden Sie zu viel JavaScript? Zu viele Bilder? Bilder und JavaScript tragen am meisten zum Seitengewicht bei, das sich auf die Ladezeit der Seite auswirkt, basierend auf Daten aus dem HTTP-Archiv und dem Chrome User Experience Report - unserem öffentlichen Datensatz für wichtige UX-Metriken, wie sie Chrome-Nutzer unter realen Bedingungen erfahren. "
+  },
+  "form": {
+    "heading": "Registrieren, um eine Arbeit zu bekommen",
+    "attention": "Achtung! Aktualisieren Sie nach erfolgreicher Registrierung und Benachrichtigung die Liste der Benutzer im Block von oben",
+    "name": {
+      "1": "Name",
+      "2": "Ihre Name"
+    },
+    "email": {
+      "1": "Email",
+      "2": "Ihre E-Mail"
+    },
+    "phone": {
+      "1": "Telefon"
+    },
+    "select": "Wählen Sie Ihre Position",
+    "upload": {
+      "1": "Laden Sie Ihr Foto hoch",
+      "2": "Upload",
+      "3": "Dateiformat jpg bis zu 5 MB, Mindestgröße 70x70px"
+    },
+    "submit": "Anmelden"
   }
 }
 
