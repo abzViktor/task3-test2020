@@ -3,7 +3,7 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  //background-attachment: fixed;
   background-position: center center;
   padding: 100px 0;
 }
@@ -71,7 +71,7 @@
 @media screen and (max-width: 1024px) {
     .reg-banner {
       background-image: url("https://task3-test2020viktor-p.abzdev2.com/reg-banner/bg-1024.webp"), url("https://task3-test2020viktor-p.abzdev2.com/reg-banner/bg-1024.jpg");
-      padding: 100px 0 134px;
+      padding: 100px 0 138px;
     }
 }
 

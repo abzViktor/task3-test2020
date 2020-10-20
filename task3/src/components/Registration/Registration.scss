@@ -46,7 +46,7 @@ form {
   >div>div p {
     margin: 0;
     padding-top: 0;
-    padding-bottom: 41px;
+    padding-bottom: 61px;
     text-align: center;
   }
   .fileFieldHolder {
@@ -138,7 +138,17 @@ form {
 }
 
 @media screen and (max-width: 1440px) {
-
+.form {
+  padding-top: 107px;
+  >div>div p {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 57px;
+  }
+}
+  .submit-holder {
+    margin-bottom: 138px;
+  }
   .registration-banner-text h1{
     margin: -10px 0 27px;
   }
@@ -157,7 +167,7 @@ form {
     margin-bottom: 100px;
   }
   .form {
-    padding-top: 80px;
+    padding-top: 59px;
     h1 {
       margin-bottom: 27px;
     }
@@ -203,7 +213,7 @@ form {
     }
   }
   .form {
-    padding-top: 34px;
+    padding-top: 37px;
   }
   .form h1{
     margin: 9px 0 5px;
