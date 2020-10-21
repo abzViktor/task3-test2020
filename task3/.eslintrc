@@ -10,6 +10,7 @@
   "parser": "babel-eslint",
   "rules": {
     "func-names": ["error", "never"],
-    "quotes": [1, "single", "avoid-escape"]
+    "quotes": [1, "single", "avoid-escape"],
+    "no-shadow": 0
   }
 }

@@ -4,12 +4,15 @@ import './index.scss';
 import Wrapper from './components/Wrapper/Wrapper';
 import * as serviceWorker from './serviceWorker';
 import './i18next';
+import { RootProvider } from './shared/root.context';
 
 ReactDOM.render(
 
   <React.StrictMode>
     <Suspense fallback={(<div />)}>
-      <Wrapper />
+      <RootProvider>
+        <Wrapper />
+      </RootProvider>
     </Suspense>
   </React.StrictMode>,
   document.getElementById('root'),

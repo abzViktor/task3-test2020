@@ -76,7 +76,8 @@
     "1": "Oh... It looks like there are no users here yet. You have a nice chance to be the first!"
   },
   "api-error": {
-    "1": "Wooops... There is some problems with API connection!"
+    "1": "Wooops... There is some problems with API connection!",
+    "2": "Sorry, an error occurred. New user can not be registered at this moment, please try again later."
   },
   "reg-banner": {
     "1": "General requirements for the test task",

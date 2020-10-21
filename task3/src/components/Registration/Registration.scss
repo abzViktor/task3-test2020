@@ -11,6 +11,25 @@ form {
   margin: 1px 0;
 }
 
+.form-placeholder {
+  display: block !important;
+  margin: 0 -15px;
+  height: 257px;
+  margin-bottom: 140px;
+
+  .button-placeholder {
+    width: 290px;
+    height: 46px;
+    margin: 0 auto;
+  }
+  > div > div {
+    background-color: #ccc;
+    width: 100%;
+    height: 56px;
+    margin: 0 15px;
+  }
+}
+
 .MuiDialog-paper {
   border-radius: 4px !important;
   margin: 0;
@@ -142,6 +161,10 @@ form {
 }
 
 @media screen and (max-width: 1440px) {
+  .form-placeholder {
+    margin-bottom: 127px;
+
+  }
 .form {
   padding-top: 107px;
   >div>div p {
@@ -167,6 +190,10 @@ form {
 }
 
 @media screen and (max-width: 992px) {
+  .form-placeholder {
+    margin-bottom: 100px;
+
+  }
   .submit-holder {
     margin-bottom: 100px;
   }
@@ -208,6 +235,9 @@ form {
 
 
 @media screen and (max-width: 700px) {
+
+
+
   .submit-holder {
     padding: 0 15px;
     margin-bottom: 58px;
@@ -245,6 +275,25 @@ form {
       text-align: center;
     }
   }
+
+  .form-placeholder {
+    display: block !important;
+    margin: 0 -15px;
+    height: 542px;
+    margin-bottom: 45px;
+
+    .button-placeholder {
+      width: 290px;
+      height: 46px;
+      margin: 36px auto 0;
+    }
+    > div > div {
+
+      margin: 0 15px 35px;
+
+    }
+  }
+
   .firstFormRow,
   .secondFormRow {
     display: flex;

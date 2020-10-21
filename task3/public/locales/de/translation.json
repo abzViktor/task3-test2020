@@ -76,7 +76,8 @@
     "1": "Oh ... Es sieht so aus, als ob hier noch keine Benutzer sind. Sie haben eine schöne Chance, der Erste zu sein!"
   },
   "api-error": {
-    "1": "Wooops ... Es gibt einige Probleme mit der API-Verbindung!"
+    "1": "Wooops ... Es gibt einige Probleme mit der API-Verbindung!",
+    "2": "Leider ist ein Fehler aufgetreten. Neuer Benutzer kann derzeit nicht registriert werden. Bitte versuchen Sie es später erneut."
   },
   "reg-banner": {
     "1": "Allgemeine Anforderungen an die Testaufgabe",

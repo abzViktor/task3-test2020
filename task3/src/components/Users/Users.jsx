@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CircularProgress } from '@material-ui/core';
 import './Users.scss';
 import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
 import { useTranslation } from 'react-i18next';
+import { RootStore } from '../../shared/root.context';
 
 export function UserPhoto(props) {
   // eslint-disable-next-line react/prop-types
@@ -73,6 +74,7 @@ export function GetUsers(props) {
   const [offset, setOffset] = React.useState(0);
   const [noUsers, setNoUsers] = React.useState(false);
   const [isMoreLoaded, setIsMoreLoaded] = React.useState(true);
+  const { dispatch } = useContext(RootStore);
   const link = `https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${count}&count=${count}`;
 
   function handleResize() {
@@ -111,6 +113,24 @@ export function GetUsers(props) {
           } else {
             setShowButton(false);
           }
+        }).catch(() => {
+          console.log('apiError');
+          dispatch({
+            type: 'API_ERROR',
+            payload: {
+              state: true,
+              messageId: 1,
+            },
+          });
+        });
+      }).catch(() => {
+        console.log('apiError');
+        dispatch({
+          type: 'API_ERROR',
+          payload: {
+            state: true,
+            messageId: 1,
+          },
         });
       });
   }, []);

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { HashLink, NavHashLink } from 'react-router-hash-link';
+import { HashLink } from 'react-router-hash-link';
 
 import { Tooltip } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
@@ -11,6 +11,7 @@ import lockScroll from '../../shared/lockScroll';
 import './Header.scss';
 import '../Links/Links.css';
 import Logo from '../Logo/Logo';
+import { RootStore } from '../../shared/root.context';
 
 const defaultLink = '/';
 const initialActive = {
@@ -29,7 +30,7 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState([]);
   const [isUserLoaded, setUserLoaded] = useState(false);
-  const [isResponseOk, setResponseOk] = useState(true);
+  const { state, dispatch } = useContext(RootStore);
   const toggleMenu = (value) => () => {
     setOpen(value);
     if (value) {
@@ -57,17 +58,6 @@ export default function Header() {
     }
   });
 
-  React.useEffect(() => {
-    if (+localStorage.getItem('apiResponseStatus') && +localStorage.getItem('apiResponseStatus') !== 200) {
-      setResponseOk(false);
-    } else {
-      setResponseOk(true);
-    }
-    return () => {
-
-    };
-  });
-
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
@@ -89,60 +79,24 @@ export default function Header() {
   }, []);
   React.useEffect(() => {
     if (window.location.href.match('registration')) {
-      setActiveMenu({
-        ...initialActive,
-        registration: 'primary active',
+      dispatch({
+        type: 'ACTIVE_MENU_ITEM',
+        payload: 'registration',
+      });
+    } else {
+      dispatch({
+        type: 'ACTIVE_MENU_ITEM',
+        payload: '',
       });
     }
-    console.log('Location changed');
   }, [location]);
-
-  window.onscroll = function () {
-    if (document.getElementById('about') !== null
-          && document.getElementById('relation') !== null
-        && document.getElementById('users') !== null
-    ) {
-      if (window.pageYOffset < document.getElementById('about').offsetParent.offsetTop - 264) {
-        setActiveMenu(initialActive);
-      }
-      if (window.pageYOffset >= document.getElementById('about').offsetParent.offsetTop - 264
-            && window.pageYOffset < document.getElementById('relation').offsetParent.offsetTop - 264
-            && activeMenu.about === initialActive.about) {
-        setActiveMenu({
-          ...initialActive,
-          about: 'primary active',
-        });
-      }
-      if (window.pageYOffset >= document.getElementById('relation').offsetParent.offsetTop - 264
-            && window.pageYOffset < document.getElementById('users').offsetParent.offsetTop - 264
-            && activeMenu.relation === initialActive.relation) {
-        setActiveMenu({
-          ...initialActive,
-          relation: 'primary active',
-        });
-      }
-      if (window.pageYOffset >= document.getElementById('users').offsetParent.offsetTop - 264
-            && activeMenu.users === initialActive.users) {
-        setActiveMenu({
-          ...initialActive,
-          users: 'primary active',
-        });
-      }
-      console.log(window.location.href);
-    } else if (document.getElementById('form')) {
-      window.onscroll = () => {
-        console.log(window.location.href);
-      };
-    } else {
-      setActiveMenu(initialActive);
-    }
-  };
 
   return (
     <div className="header-holder">
-      {!isResponseOk && (
+      {state.apiError.state && (
       <div className="api-error">
-        <div className="container">{t('api-error.1')}</div>
+        {state.apiError.messageId === 1 && <div className="container">{t('api-error.1')}</div>}
+        {state.apiError.messageId === 2 && <div className="container">{t('api-error.2')}</div>}
       </div>
       )}
       <header className="container">
@@ -154,17 +108,10 @@ export default function Header() {
           <div className="flex">
             <nav>
               <ul>
-                <li>
-                  <HashLink
-                    to="/#about"
-                    className={activeMenu.about}
-                  >
-                    {t('About.1')}
-                  </HashLink>
-                </li>
-                <li><HashLink to="/#relation" className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
-                <li><HashLink to="/#users" className={activeMenu.users}>{t('Users.1')}</HashLink></li>
-                <li><HashLink to="/registration#form" className={activeMenu.registration}>{t('SignUp.1')}</HashLink></li>
+                <li><HashLink to="/#about" className={`primary ${state.activeMenu === 'about' ? 'active' : ''}`}>{t('About.1')}</HashLink></li>
+                <li><HashLink to="/#relation" className={`primary ${state.activeMenu === 'relation' ? 'active' : ''}`}>{t('Relationships.1')}</HashLink></li>
+                <li><HashLink to="/#users" className={`primary ${state.activeMenu === 'users' ? 'active' : ''}`}>{t('Users.1')}</HashLink></li>
+                <li><HashLink to="/registration#form" className={`primary ${state.activeMenu === 'registration' ? 'active' : ''}`}>{t('SignUp.1')}</HashLink></li>
               </ul>
             </nav>
             <div className="header-personal-info">

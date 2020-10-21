@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
 import Dialog from '@material-ui/core/Dialog';
+import { Redirect } from 'react-router-dom';
+
 import {
   Formik, Field, Form, FieldArray,
 } from 'formik';
@@ -14,18 +16,21 @@ import * as yup from 'yup';
 import { CircularProgress } from '@material-ui/core';
 import { ArrowIcon } from '../../../Input/Input';
 import '../../../Input/Input.css';
+import { RootStore } from '../../../../shared/root.context';
 
 export default function RegistrationForm() {
-  // const [value, setValue] = React.useState(1);
-  // const handleChange = (event) => {
-  //   setValue(event.target.value);
-  // };
   const { t } = useTranslation();
 
   const [open, setOpen] = React.useState(false);
   const [isValidFile, setValidFile] = React.useState(false);
-  const [fetchError, setFetchError] = React.useState(true);
+  const [fetchError, setFetchError] = React.useState(false);
   const [isSending, setSending] = React.useState(false);
+  const [positionsLoaded, setPositionsLoaded] = React.useState(false);
+  const { dispatch } = useContext(RootStore);
+  const [sendSuccess, setSendSuccess] = React.useState({
+    validationSuccess: true,
+    serverSuccess: true,
+  });
 
   const initialValues = {
     name: '',
@@ -43,10 +48,39 @@ export default function RegistrationForm() {
         // eslint-disable-next-line react/prop-types
         response.json().then((data) => {
           if (data.success) {
-            setPositions(data.positions);
-            setFetchError(false);
+            if (data.positions.length === 0) {
+              setFetchError(true);
+            } else {
+              setPositions(data.positions);
+              setFetchError(false);
+              setTimeout(() => {
+                setPositionsLoaded(true);
+              }, 2000);
+            }
           } else {
+            setFetchError(true);
+            setPositionsLoaded(false);
           }
+        }).catch(() => {
+          setFetchError(true);
+          console.log('apiError');
+          dispatch({
+            type: 'API_ERROR',
+            payload: {
+              state: true,
+              messageId: 2,
+            },
+          });
+        });
+      }).catch(() => {
+        setFetchError(true);
+        console.log('apiError');
+        dispatch({
+          type: 'API_ERROR',
+          payload: {
+            state: true,
+            messageId: 2,
+          },
         });
       });
   }, []);
@@ -55,7 +89,7 @@ export default function RegistrationForm() {
     let error;
     if (value === '+38(0__)___-__-__' || !value) {
       error = '';
-    } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/)) {
+    } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/) && !value.match(/^\+\d{10}/)) {
       error = 'Phone number should be in +38(0XX)XXX-XX-XX format!';
     }
     return error;
@@ -94,11 +128,12 @@ export default function RegistrationForm() {
   const trimSideSpaces = (value) => value.replace(/^\s+|\s+$|^\n+|\n+$/g, '');
 
   return (
-    !fetchError && (
+
     <div id="form" className="form">
       <div className="container">
         <h1 className="heading-2-desktop">{t('form.heading')}</h1>
         <div><p className="paragraph-1">{t('form.attention')}</p></div>
+        {positionsLoaded && (
         <Formik
           initialValues={initialValues}
           onSubmit={(data) => {
@@ -107,6 +142,7 @@ export default function RegistrationForm() {
             window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
               .then((response) => response.json())
               .then((res) => {
+                // eslint-disable-next-line no-undef
                 const formData = new FormData();
                 const fileField = document.querySelector('input[type="file"]');
                 formData.append('position_id', data.position);
@@ -129,13 +165,28 @@ export default function RegistrationForm() {
                       setTimeout(() => {
                         setSending(false);
                         setOpen(true);
+                        setSendSuccess({
+                          serverSuccess: true,
+                          validationSuccess: true,
+                        });
                       }, 2000);
                     } else {
+                      setSending(false);
+                      setOpen(true);
+                      setSendSuccess({
+                        serverSuccess: true,
+                        validationSuccess: false,
+                      });
                       // proccess server errors
                     }
                   })
-                  .catch((error) => {
-                    // proccess network errors
+                  .catch(() => {
+                    setSending(false);
+                    setOpen(true);
+                    setSendSuccess({
+                      validationSuccess: true,
+                      serverSuccess: false,
+                    });
                   });
               })
               .catch((e) => {
@@ -156,28 +207,72 @@ export default function RegistrationForm() {
           }) => (
             <Form>
               <Dialog open={open}>
-                <div className="modal">
-                  <h4 className="heading-4-desktop">Congratulations</h4>
-                  <p className="paragraph-2">
-                    {' '}
-                    You have successfully passed
-                    <br />
-                    {' '}
-                    the registration
-                  </p>
-                  <button
-                    type="button"
-                    className="text-link"
-                    onClick={() => {
-                      setOpen(false);
-                      resetForm();
-                      setFieldValue('file', '');
-                      setFileValue('');
-                    }}
-                  >
-                    OK
-                  </button>
-                </div>
+                {sendSuccess.serverSuccess && sendSuccess.validationSuccess && (
+                  <div className="modal">
+                    <h4 className="heading-4-desktop">Congratulations</h4>
+                    <p className="paragraph-2">
+                      {' '}
+                      You have successfully passed
+                      <br />
+                      {' '}
+                      the registration
+                    </p>
+                    <button
+                      type="button"
+                      className="text-link"
+                      onClick={() => {
+                        setOpen(false);
+                        resetForm();
+                        setFieldValue('file', '');
+                        setFileValue('');
+                      }}
+                    >
+                      OK
+                    </button>
+                  </div>
+                )}
+                {!sendSuccess.validationSuccess && (
+                  <div className="modal">
+                    <h4 className="heading-4-desktop">Something went wrong</h4>
+                    <p className="paragraph-2">
+                      {' '}
+                      Server validation failed,
+                      <br />
+                      {' '}
+                      try again
+                    </p>
+                    <button
+                      type="button"
+                      className="text-link"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      OK
+                    </button>
+                  </div>
+                )}
+                {!sendSuccess.serverSuccess && (
+                  <div className="modal">
+                    <h4 className="heading-4-desktop">Something went wrong</h4>
+                    <p className="paragraph-2">
+                      {' '}
+                      Server response failed,
+                      <br />
+                      {' '}
+                      try again later
+                    </p>
+                    <button
+                      type="button"
+                      className="text-link"
+                      onClick={() => {
+                        setOpen(false);
+                      }}
+                    >
+                      OK
+                    </button>
+                  </div>
+                )}
               </Dialog>
               <div className="firstFormRow">
                 <div>
@@ -233,7 +328,9 @@ export default function RegistrationForm() {
                           setFieldTouched('phone', true);
                         }}
                         onPaste={(e) => {
-                          console.log(e.clipboardData.getData('Text'));
+                          e.preventDefault();
+                          setFieldValue('phone', e.clipboardData.getData('Text'));
+                          // setFieldValue('phone', target.value);
                         }}
                       >
                         {() => (
@@ -244,7 +341,6 @@ export default function RegistrationForm() {
                             label={t('form.phone.1')}
                             helperText={touched.phone ? errors.phone : ''}
                             error={touched.phone && (!!errors.phone)}
-                            onP
                           />
                         )}
                       </InputMask>
@@ -326,12 +422,13 @@ export default function RegistrationForm() {
                           setFieldTouched('file', true);
 
                           const { URL } = window;
+                          // eslint-disable-next-line no-undef
                           const img = new Image();
                           const file = target.files[0];
                           img.src = URL.createObjectURL(file);
                           img.onload = function () {
-                            if (img.width < 75 || img.height < 75) {
-                              console.log('wrong wh', target.files[0]);
+                            if (img.width < 70 || img.height < 70) {
+                              console.log('wrong wh', target.files[0], img.height, img.width);
                               setValidFile(false);
                             }
                           };
@@ -371,16 +468,37 @@ export default function RegistrationForm() {
                 )}
 
               </div>
-              <pre>{JSON.stringify(values, null, 2)}</pre>
-              <pre>{JSON.stringify(errors, null, 2)}</pre>
-              <pre>{JSON.stringify(values.name.touched, null, 2)}</pre>
-              {/* <pre>{JSON.stringify(dirty, null, 2)}</pre> */}
-              <pre>{JSON.stringify(touched, null, 2)}</pre>
+              {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
+              {/* <pre>{JSON.stringify(values.name.touched, null, 2)}</pre> */}
+              {/* /!* <pre>{JSON.stringify(dirty, null, 2)}</pre> *!/ */}
+              {/* <pre>{JSON.stringify(touched, null, 2)}</pre> */}
             </Form>
           )}
         </Formik>
+        )}
+        {!positionsLoaded && (
+        <div className="form-placeholder">
+          <div className="firstFormRow">
+            <div className="field-placeholder" />
+            <div className="field-placeholder" />
+            <div className="field-placeholder" />
+          </div>
+          <div className="secondFormRow">
+
+            <div className="select-component" />
+            <div />
+          </div>
+          <div className="submit-holder">
+            <div className="button-placeholder" />
+          </div>
+        </div>
+        )}
+        {fetchError && (
+        <Redirect to="/#home" />
+        )}
       </div>
     </div>
-    )
+
   );
 }
