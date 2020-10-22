@@ -18,7 +18,7 @@ export default function Tools() {
         </div>
         <div className="tools-content">
           <div>
-            <img src="images/html.svg" alt="Html icon" />
+            <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/html.svg" alt="Html icon" />
             <div>
               <h3 className="heading-3-desktop">{t('html.1')}</h3>
               <p className="paragraph-2">
@@ -27,7 +27,7 @@ export default function Tools() {
             </div>
           </div>
           <div className="css-block">
-            <img src="images/css.svg" alt="Css icon" />
+            <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/css.svg" alt="Css icon" />
             <div>
               <h3 className="heading-3-desktop">{t('css.1')}</h3>
               <p className="paragraph-2">
@@ -36,7 +36,7 @@ export default function Tools() {
             </div>
           </div>
           <div className="js-block">
-            <img src="images/javascript.svg" alt="Java Script icon" />
+            <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/javascript.svg" alt="Java Script icon" />
             <div>
               <h3 className="heading-3-desktop">{t('js.1')}</h3>
               <p className="paragraph-2">

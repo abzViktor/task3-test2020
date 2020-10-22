@@ -18,8 +18,8 @@ export default function LetsGetComponent() {
         <div className="lets-block">
           <div className="lets-image-holder">
             <picture>
-              <source srcSet="images/man-cool.svg" />
-              <img src="images/man-cool.svg" alt="Cool man from lets get acquainted block" />
+              <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/images/man-cool.svg" />
+              <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/man-cool.svg" alt="Cool man from lets get acquainted block" />
             </picture>
           </div>
           <div className="lets-text-block">

@@ -9,7 +9,7 @@ export default function NotFound() {
           <h1 className="heading-2-desktop">Page is not found</h1>
           <p className="paragraph-1">Definitely, something went wrong, we can't find the page you searched</p>
           <div className="image-404">
-            <img src="images/404-image.svg" alt="not-found page man" />
+            <img src="https://source-task3-test2020viktor-p.abzdev2.com/logo.svg" alt="not-found page man" />
           </div>
         </div>
       </div>
