@@ -23,7 +23,7 @@ export default function LetsGetComponent() {
             </picture>
           </div>
           <div className="lets-text-block">
-            <h4 className="heading-3-desktop">{t('Cool.1')}</h4>
+            <h3 className="heading-3-desktop">{t('Cool.1')}</h3>
             <p className="paragraph-2 middle-text">
               {t('Looking.1')}
             </p>
