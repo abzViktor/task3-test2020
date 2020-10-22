@@ -1,0 +1,42 @@
+.not-found-container {
+  background-color: #f6f6f6;
+  padding: 60px 0;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    padding: 0;
+    margin: 0 0 22px;
+    line-height: 32px;
+  }
+  .not-found-content {
+    text-align: center;
+  }
+  p {
+    padding: 0;
+    margin: 0 0 26px;
+  }
+  .image-404 {
+    img {
+      width: 396px;
+      margin: 0 0 0 -46px;
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .not-found-container {
+    padding: 26px 0;
+    h1 {
+      margin: 0 0 12px;
+    }
+    .image-404 {
+      img {
+        width: 290px;
+        margin: 0;
+      }
+    }
+  }
+}

@@ -3,14 +3,18 @@ import { Link } from 'react-router-dom';
 import './LetsGet.scss';
 import '../Typography/Typography.css';
 import { useTranslation } from 'react-i18next';
+import HashLinkObserver from 'react-hash-link';
 
 export default function LetsGetComponent() {
   const { t } = useTranslation();
 
   return (
+
     <div className="lets-container">
+      <div className="anchor-holder"><span id="about" /></div>
+      <HashLinkObserver />
       <div className="container">
-        <h2 id="about" className="heading-2-desktop">{t('LetsGet.1')}</h2>
+        <h2 className="heading-2-desktop">{t('LetsGet.1')}</h2>
         <div className="lets-block">
           <div className="lets-image-holder">
             <picture>

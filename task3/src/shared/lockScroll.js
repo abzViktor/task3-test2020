@@ -1,23 +1,11 @@
-const html = document.querySelector('html');
-let scrollPosition = 0;
+// const html = document.querySelector('html');
+// const body = document.querySelector('body');
 
 const lockScroll = {
-  enable() {
-    scrollPosition = window.pageYOffset;
-    html.style.overflow = 'hidden';
-    html.style.position = 'fixed';
-    html.style.top = `-${scrollPosition}px`;
-
-    html.style.width = '100%';
-  },
   disable() {
-    window.scrollTo(0, scrollPosition);
-
-    html.style.removeProperty('overflow');
-    html.style.removeProperty('position');
-    html.style.removeProperty('top');
-    html.style.removeProperty('width');
-    window.scrollTo(0, scrollPosition);
+    console.log('close');
+    const body = document.querySelector('body');
+    body.style.overflow = 'visible';
   },
 };
 

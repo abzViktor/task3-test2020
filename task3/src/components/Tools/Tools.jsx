@@ -1,12 +1,15 @@
 import React from 'react';
 import './Tools.scss';
 import { useTranslation } from 'react-i18next';
+import HashLinkObserver from 'react-hash-link';
 
 export default function Tools() {
   const { t } = useTranslation();
 
   return (
     <div className="tools-container">
+      <div className="anchor-holder"><span id="relation" /></div>
+      <HashLinkObserver />
       <div className="container">
         <div className="heading-holder">
           <h2 className="heading-2-desktop">

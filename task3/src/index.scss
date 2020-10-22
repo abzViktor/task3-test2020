@@ -28,8 +28,15 @@ html {
   flex-direction: column;
   min-height: 100%;
 }
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 .content {
   flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 .footer {
   flex: 0 0 auto;
@@ -79,7 +86,7 @@ code {
   position: relative;
   span {
     position: absolute;
-    top: -64px;
+    top: -108px;
   }
 }
 

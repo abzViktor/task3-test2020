@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 import { CircularProgress } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import './Users.scss';
 import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
 import { useTranslation } from 'react-i18next';
+import HashLinkObserver from 'react-hash-link';
 import { RootStore } from '../../shared/root.context';
 
 export function UserPhoto(props) {
@@ -18,6 +20,12 @@ export function UserInfo(props) {
     // eslint-disable-next-line react/prop-types
     name, email, position, phone,
   } = props;
+  const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      fontSize: 14,
+      maxWidth: 260,
+    },
+  }))(Tooltip);
   const [tip, setTip] = React.useState('');
   const refText = React.useRef(null);
   const refBlock = React.useRef(null);
@@ -33,7 +41,7 @@ export function UserInfo(props) {
       <p className="user-name">{name}</p>
       <p className="paragraph-3">{position}</p>
       <p>
-        <Tooltip title={tip} placement="bottom-start">
+        <HtmlTooltip title={tip} placement="bottom">
           <Box
             component="a"
             whiteSpace="nowrap"
@@ -45,7 +53,7 @@ export function UserInfo(props) {
           >
             {email}
           </Box>
-        </Tooltip>
+        </HtmlTooltip>
       </p>
       <p>
         <a className="paragraph-3" href="tel: +38(050)6780324">
@@ -150,12 +158,12 @@ export function GetUsers(props) {
                 ...data.users,
               ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
               setOffset(offset + count);
-              if (data.total_users <= offset) {
+              if (data.total_users <= offset + count) {
                 setShowButton(false);
               } else {
                 setShowButton(true);
               }
-            }, 2000);
+            }, 0);
             // process success response
           } else {
             // proccess server errors
@@ -236,6 +244,8 @@ export default function Users() {
     <>
       {apiOk === 200 && (
       <div className="users-container">
+        <div className="anchor-holder"><span id="users" /></div>
+        <HashLinkObserver />
         <div className="container">
           <div className="h2-wrapper">
             <h2 className="heading-2-desktop">{t('Cheerful.1')}</h2>
