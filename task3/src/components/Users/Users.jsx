@@ -104,19 +104,17 @@ export function GetUsers(props) {
         props.errorHandler(response.status);
         response.json().then((data) => {
           if (data.success) {
-            setTimeout(() => {
-              setIsLoaded(true);
-              setUsers(data.users);
-              setOffset(offset + count);
-              console.log(data.users.length);
-              if (data.users.length === 0) {
-                setNoUsers(true);
-                setShowButton(false);
-              }
-              if (data.total_users <= offset) {
-                setShowButton(false);
-              }
-            }, 2000);
+            setIsLoaded(true);
+            setUsers(data.users);
+            setOffset(offset + count);
+            console.log(data.users.length);
+            if (data.users.length === 0) {
+              setNoUsers(true);
+              setShowButton(false);
+            }
+            if (data.total_users <= offset) {
+              setShowButton(false);
+            }
           // process success response
           } else {
             setShowButton(false);
@@ -151,19 +149,17 @@ export function GetUsers(props) {
         console.log(response.status);
         response.json().then((data) => {
           if (data.success) {
-            setTimeout(() => {
-              setIsMoreLoaded(true);
-              setUsers([
-                ...users,
-                ...data.users,
-              ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
-              setOffset(offset + count);
-              if (data.total_users <= offset + count) {
-                setShowButton(false);
-              } else {
-                setShowButton(true);
-              }
-            }, 0);
+            setIsMoreLoaded(true);
+            setUsers([
+              ...users,
+              ...data.users,
+            ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
+            setOffset(offset + count);
+            if (data.total_users <= offset + count) {
+              setShowButton(false);
+            } else {
+              setShowButton(true);
+            }
             // process success response
           } else {
             // proccess server errors

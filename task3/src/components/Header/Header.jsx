@@ -76,10 +76,8 @@ export default function Header() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          setTimeout(() => {
-            setUser(data.user);
-            setUserLoaded(true);
-          }, 2000);
+          setUser(data.user);
+          setUserLoaded(true);
         } else {
         // proccess server errors
         }
