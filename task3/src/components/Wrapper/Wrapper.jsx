@@ -3,12 +3,10 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HashLinkObserver from 'react-hash-link';
 import { RootStore } from '../../shared/root.context';
 import Header from '../Header/Header';
-// import Footer from '../Footer/Footer';
-// import Home from '../Home/Home';
+import Footer from '../Footer/Footer';
+import Home from '../Home/Home';
 
 const Registration = React.lazy(() => import('../Registration/Registration'));
-const Footer = React.lazy(() => import('../Footer/Footer'));
-const Home = React.lazy(() => import('../Home/Home'));
 const NotFound = React.lazy(() => import('../404/404'));
 const Terms = React.lazy(() => import('../Terms/Terms'));
 
