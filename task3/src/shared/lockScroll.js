@@ -1,41 +1,22 @@
-// const html = document.querySelector('html');
-// const body = document.querySelector('body');
-// const body = document.querySelector('body');
-const keys = {
-  37: 1, 38: 1, 39: 1, 40: 1,
-};
+const html = document.querySelector('body');
+let scrollPosition = 0;
 
-function preventDefault(e) {
-  e = e || window.event;
-  if (e.preventDefault) e.preventDefault();
-  e.returnValue = false;
-}
-
-function preventDefaultForScrollKeys(e) {
-  if (keys[e.keyCode]) {
-    preventDefault(e);
-    return false;
-  }
-}
 const lockScroll = {
   enable() {
-    if (window.addEventListener) // older FF
-    {
-      window.addEventListener('DOMMouseScroll', preventDefault, false);
-    }
-    window.onwheel = preventDefault; // modern standard
-    window.onmousewheel = document.onmousewheel = preventDefault; // older browsers, IE
-    window.ontouchmove = preventDefault; // mobile
-    document.onkeydown = preventDefaultForScrollKeys;
+    scrollPosition = window.pageYOffset;
+    html.style.overflow = 'hidden';
+    html.style.position = 'fixed';
+    html.style.top = `${scrollPosition}px`;
+    html.style.width = '100%';
   },
   disable() {
-    if (window.removeEventListener) {
-      window.removeEventListener('DOMMouseScroll', preventDefault, false);
-    }
-    window.onmousewheel = document.onmousewheel = null;
-    window.onwheel = null;
-    window.ontouchmove = null;
-    document.onkeydown = null;
+    window.scrollTo(0, scrollPosition);
+
+    html.style.removeProperty('overflow');
+    html.style.removeProperty('position');
+    html.style.removeProperty('top');
+    html.style.removeProperty('width');
+    window.scrollTo(0, scrollPosition);
   },
 };
 
