@@ -1,11 +1,13 @@
 // const html = document.querySelector('html');
 // const body = document.querySelector('body');
+const body = document.querySelector('body');
 
 const lockScroll = {
+  enable() {
+    body.classList.add('lock');
+  },
   disable() {
-    console.log('close');
-    const body = document.querySelector('body');
-    body.style.overflow = 'visible';
+    body.classList.remove('lock');
   },
 };
 

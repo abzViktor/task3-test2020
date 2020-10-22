@@ -35,7 +35,9 @@ export default function Header() {
   const { state } = useContext(RootStore);
   const toggleMenu = (value) => () => {
     setOpen(value);
-    if (!value) {
+    if (value) {
+      lockScroll.enable();
+    } else {
       lockScroll.disable();
     }
   };
