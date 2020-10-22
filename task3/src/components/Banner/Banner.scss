@@ -137,27 +137,42 @@
 }
 
 
-
-
-.reg-banner {
-  background-size: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  //background-attachment: fixed;
-  background-position: center center;
-  padding: 100px 0;
-  p {
-    hyphens: none;
-  }
-}
-
-@media screen and (max-width: 3840px) {
-  .image-container img {
+@media screen and (min-width: 3840px) {
+  .image-container {
     width: 100%;
     height: auto;
   }
 }
 
+@media screen and (min-width: 1920px) {
+  .image-container  {
+    min-height: 676px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .image-container{
+    min-height: 725px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .image-container {
+    min-height: 622px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .image-container {
+    min-height: 622px;
+  }
+}
+
+@media screen and (min-width: 320px) {
+  .image-container {
+    min-height: 393px;
+  }
+}
 
 
 
