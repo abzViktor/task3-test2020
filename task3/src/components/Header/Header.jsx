@@ -8,6 +8,7 @@ import HashLinkObserver from 'react-hash-link';
 import { Tooltip } from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
+import { withStyles } from '@material-ui/core/styles';
 import lockScroll from '../../shared/lockScroll';
 import './Header.scss';
 import '../Links/Links.css';
@@ -41,6 +42,12 @@ export default function Header() {
   const refContainer = React.useRef(null);
   const refName = React.useRef(null);
   const refEmail = React.useRef(null);
+  const HtmlTooltip = withStyles((theme) => ({
+    tooltip: {
+      fontSize: 14,
+      maxWidth: 260,
+    },
+  }))(Tooltip);
   useEffect(() => {
     if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
       setTipName(user.name);
@@ -173,8 +180,8 @@ export default function Header() {
                 {isUserLoaded && (
                   <>
                     <div className="header-contacts" ref={refContainer}>
-                      <div className="header-user"><Tooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></Tooltip></div>
-                      <div className="header-user"><Tooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></Tooltip></div>
+                      <div className="header-user"><HtmlTooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></HtmlTooltip></div>
+                      <div className="header-user"><HtmlTooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></HtmlTooltip></div>
                     </div>
                     <img className="header-avatar" src={user.photo} alt="avatar icon" />
                   </>
