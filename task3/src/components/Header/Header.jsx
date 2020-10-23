@@ -5,7 +5,6 @@ import { Link, useLocation } from 'react-router-dom';
 import HashLinkObserver from 'react-hash-link';
 
 import { Tooltip } from '@material-ui/core';
-import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
 import lockScroll from '../../shared/lockScroll';
