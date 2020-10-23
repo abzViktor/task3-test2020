@@ -1,10 +1,12 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import Wrapper from './components/Wrapper/Wrapper';
+// import Wrapper from './components/Wrapper/Wrapper';
 import * as serviceWorker from './serviceWorker';
 import './i18next';
 import { RootProvider } from './shared/root.context';
+
+const Wrapper = React.lazy(() => import('./components/Wrapper/Wrapper'));
 
 ReactDOM.render(
 
