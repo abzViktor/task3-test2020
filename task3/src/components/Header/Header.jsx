@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
 import HashLinkObserver from 'react-hash-link';
 
 import { Tooltip } from '@material-ui/core';
@@ -214,7 +213,8 @@ export default function Header() {
             </div>
           </div>
           <div className="mobile-header flex">
-            <Drawer open={open} onClose={toggleMenu(false)} className={open ? 'opened' : 'closed'}>
+            <div onClick={toggleMenu(false)} className={`dark ${open ? 'opened' : 'closed'}`} />
+            <div className={`sideMenu ${open ? 'opened' : 'closed'}`}>
               {isUserLoaded && (
                 <>
                   <div className="side-menu-container-contacts">
@@ -237,15 +237,15 @@ export default function Header() {
               <div className="side-menu-container-nav">
                 <nav>
                   <ul>
-                    <li><HashLink to="/#about" onClick={toggleMenu(false)} className={activeMenu.about}>{t('About.1')}</HashLink></li>
-                    <li><HashLink to="/#relation" onClick={toggleMenu(false)} className={activeMenu.relation}>{t('Relationships.1')}</HashLink></li>
-                    <li><HashLink to="/#users" onClick={toggleMenu(false)} className={activeMenu.users}>{t('Users.1')}</HashLink></li>
-                    <li><HashLink to="/registration#form" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</HashLink></li>
+                    <li><Link to="/#about" onClick={toggleMenu(false)} className={activeMenu.about}>{t('About.1')}</Link></li>
+                    <li><Link to="/#relation" onClick={toggleMenu(false)} className={activeMenu.relation}>{t('Relationships.1')}</Link></li>
+                    <li><Link to="/#users" onClick={toggleMenu(false)} className={activeMenu.users}>{t('Users.1')}</Link></li>
+                    <li><Link to="/registration#form" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</Link></li>
                     <li><Link to="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</Link></li>
                   </ul>
                 </nav>
               </div>
-            </Drawer>
+            </div>
             <div className="logo-container">
               <Link to="/">
                 <Logo />

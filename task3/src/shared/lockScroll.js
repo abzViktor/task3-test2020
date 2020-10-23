@@ -6,7 +6,7 @@ const lockScroll = {
     scrollPosition = window.pageYOffset;
     html.style.overflow = 'hidden';
     html.style.position = 'fixed';
-    html.style.top = `${scrollPosition}px`;
+    html.style.top = `-${scrollPosition}px`;
     html.style.width = '100%';
   },
   disable() {
