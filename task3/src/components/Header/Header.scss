@@ -134,7 +134,8 @@ header .mobile-header {
     line-height: 10px;
 }
 
-.header-avatar {
+.header-avatar,
+.header-contacts + svg{
     border-radius: 50%;
     margin: 0 14px 0 12px;
     width: 40px;

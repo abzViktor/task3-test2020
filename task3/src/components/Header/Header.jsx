@@ -7,6 +7,10 @@ import HashLinkObserver from 'react-hash-link';
 import { Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
+import { ReactComponent as Placeholder1 } from './Ellipse_1.svg';
+import { ReactComponent as Placeholder2 } from './Rounded_Rectangle_2.svg';
+import { ReactComponent as Placeholder3 } from './Rounded_Rectangle_3.svg';
+
 import lockScroll from '../../shared/lockScroll';
 import './Header.scss';
 import '../Links/Links.css';
@@ -187,10 +191,12 @@ export default function Header() {
                 {!isUserLoaded && (
                   <>
                     <div className="header-contacts" ref={refContainer}>
-                      <div><span ref={refName} className="paragraph-3"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
-                      <div><a ref={refEmail} href="mailto:Superstar@gmail.com"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+                      <div><span ref={refName}><Placeholder2 /></span></div>
+                      <div><a ref={refEmail}><Placeholder3 /></a></div>
                     </div>
-                    <img className="header-avatar" src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Ellipse_1.svg" alt="avatar icon" />
+                    <>
+                      <Placeholder1 />
+                    </>
                   </>
                 )}
                 <div>
@@ -226,9 +232,9 @@ export default function Header() {
               {!isUserLoaded && (
                 <>
                   <div className="side-menu-container-contacts">
-                    <div><img className="header-avatar-mob" src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Ellipse_1.svg" alt="avatar icon" /></div>
-                    <div><span className="name"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
-                    <div><a href="mailto:Superstar@gmail.com"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+                    <div><Placeholder1 /></div>
+                    <div><span className="name"><Placeholder2 /></span></div>
+                    <div><a href="mailto:Superstar@gmail.com"><Placeholder3 /></a></div>
                   </div>
                 </>
               )}

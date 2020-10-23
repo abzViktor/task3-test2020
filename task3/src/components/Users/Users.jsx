@@ -8,6 +8,12 @@ import { useTranslation } from 'react-i18next';
 import HashLinkObserver from 'react-hash-link';
 import { RootStore } from '../../shared/root.context';
 
+import { ReactComponent as Placeholder1 } from './Placeholders/Rounded_Rectangle_4.svg';
+import { ReactComponent as Placeholder2 } from './Placeholders/Rounded_Rectangle_4 (1).svg';
+import { ReactComponent as Placeholder3 } from './Placeholders/Rounded_Rectangle_4 (2).svg';
+import { ReactComponent as Placeholder4 } from './Placeholders/Rounded_Rectangle_4 (3).svg';
+import { ReactComponent as Placeholder0 } from './Placeholders/image-ph.svg';
+
 export function UserPhoto(props) {
   // eslint-disable-next-line react/prop-types
   const { photo } = props;
@@ -201,18 +207,18 @@ export function GetUsers(props) {
       <div className="users-block">
         { [...Array(count)].map(() => (
           <div key={Math.random()} className="user-block">
-            <UserPhoto photo="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/image-ph.svg" />
+            <Placeholder0 />
             <div className="user-info">
-              <p className="user-name"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4.svg" alt="" /></p>
+              <p className="user-name"><Placeholder1 /></p>
 
-              <p className="paragraph-3"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4 (1).svg" alt="" /></p>
+              <p className="paragraph-3"><Placeholder2 /></p>
               <div className="placeholder-spacer" />
 
               <p>
-                <img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4 (2).svg" alt="" />
+                <Placeholder3 />
               </p>
               <p>
-                <img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4 (3).svg" alt="" />
+                <Placeholder4 />
               </p>
             </div>
           </div>
