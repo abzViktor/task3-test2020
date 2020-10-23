@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import HashLinkObserver from 'react-hash-link';
 import { RootStore } from '../../shared/root.context';
+
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 // import Footer from '../Footer/Footer';
