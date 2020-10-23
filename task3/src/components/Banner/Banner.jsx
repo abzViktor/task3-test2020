@@ -1,11 +1,13 @@
 import React from 'react';
-import './Banner.scss';
+import { withStyles } from 'react-critical-css';
+// import s from './index.css';
+import s from './Banner.scss';
 import '../Button/Button.scss';
 import '../Typography/Typography.css';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-export default function Banner() {
+function Banner() {
   const { t } = useTranslation();
   return (
     <div className="image-container">
@@ -62,3 +64,5 @@ export default function Banner() {
     </div>
   );
 }
+
+export default withStyles(s)(Banner);
