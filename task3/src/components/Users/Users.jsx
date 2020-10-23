@@ -62,16 +62,16 @@ export function UserInfo(props) {
         </HtmlTooltip>
       </p>
       <p>
-        <a className="paragraph-3" href="tel: +38(050)6780324">
-          {phone.slice(0, 3)}
+        <a className="paragraph-3" href={`tel: ${phone}`}>
+          {phone.toString().slice(0, 3)}
           &nbsp;(0
-          {phone.slice(4, 6)}
+          {phone.toString().slice(4, 6)}
           )&nbsp;
-          {phone.slice(6, 9)}
+          {phone.toString().slice(6, 9)}
           &nbsp;
-          {phone.slice(9, 11)}
+          {phone.toString().slice(9, 11)}
           &nbsp;
-          {phone.slice(11, 13)}
+          {phone.toString().slice(11, 13)}
 
         </a>
       </p>
