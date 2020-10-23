@@ -4,9 +4,8 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
-import Dialog from '@material-ui/core/Dialog';
+// import Dialog from '@material-ui/core/Dialog';
 import { Redirect } from 'react-router-dom';
-
 import {
   Formik, Field, Form, FieldArray,
 } from 'formik';
@@ -17,6 +16,8 @@ import { CircularProgress } from '@material-ui/core';
 import { ArrowIcon } from '../../../Input/Input';
 import '../../../Input/Input.css';
 import { RootStore } from '../../../../shared/root.context';
+
+const Dialog = React.lazy(() => import('@material-ui/core/Dialog'));
 
 export default function RegistrationForm() {
   const { t } = useTranslation();
