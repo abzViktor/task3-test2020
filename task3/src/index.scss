@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -5,6 +7,189 @@ body {
   height: 100%;
   width: 100%;
 
+}
+
+.heading-1-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 60px;
+}
+
+.heading-2-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 51px;
+}
+
+.heading-3-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 31px;
+}
+
+.heading-4-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.paragraph-1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.paragraph-2 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.026px;
+}
+
+.paragraph-3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+@media screen and (max-width: 992px) {
+  .heading-1-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 51px;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .heading-1-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 32px;
+  }
+  .paragraph-1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .heading-2-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 50px;
+  }
+
+  .heading-3-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+  }
+}
+
+
+
+button.primary {
+  color: #fff;
+  background-color: #ef6c00;
+  border-radius: 4px;
+  border: 2px solid #ef6c00;
+}
+
+button.primary,
+button.secondary {
+  position: relative;
+  padding: 6px 60px;
+  font-family: "Source Sans Pro";
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 290px;
+}
+
+button.primary:hover,
+button.secondary:hover{
+  cursor: pointer;
+}
+
+button.secondary:active,
+button.secondary:focus,
+button.secondary:hover{
+  background-color: #FEE6D2;
+  border: 2px solid #ef6c00;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button.secondary {
+  color: #ef6c00;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 2px solid #ef6c00;
+}
+
+button.primary:active,
+button.primary:hover{
+  background-color: $primary-button-hover;
+  border: 2px solid $primary-button-hover;
+}
+
+button[disabled] {
+  background-color: #D7D7D7;
+  border: 2px solid #D7D7D7;
+  color: #929191;
+  pointer-events: none;
+}
+
+button.text-link {
+  border: 0;
+  outline: 0;
+  min-width: 48px;
+  min-height: 48px;
+  font-family: "Source Sans Pro";
+  font-size: 22px;
+  font-weight: 700;
+  color: #ef6c00;
+  background: transparent;
+}
+
+button.text-link:hover {
+  color:#fc831f;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 600px) {
+  button.secondary:after,
+  button.primary:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 4px;
+    bottom: -4px;
+    left: 0;
+  }
+  button.secondary:before,
+  button.primary:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 4px;
+    top: -4px;
+    left: 0;
+  }
 }
 
 .MuiInputLabel-outlined {

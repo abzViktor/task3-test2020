@@ -187,10 +187,10 @@ export default function Header() {
                 {!isUserLoaded && (
                   <>
                     <div className="header-contacts" ref={refContainer}>
-                      <div><span ref={refName} className="paragraph-3"><img src="placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
-                      <div><a ref={refEmail} href="mailto:Superstar@gmail.com"><img src="placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+                      <div><span ref={refName} className="paragraph-3"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
+                      <div><a ref={refEmail} href="mailto:Superstar@gmail.com"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
                     </div>
-                    <img className="header-avatar" src="placeholders/Ellipse_1.svg" alt="avatar icon" />
+                    <img className="header-avatar" src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Ellipse_1.svg" alt="avatar icon" />
                   </>
                 )}
                 <div>
@@ -226,9 +226,9 @@ export default function Header() {
               {!isUserLoaded && (
                 <>
                   <div className="side-menu-container-contacts">
-                    <div><img className="header-avatar-mob" src="placeholders/Ellipse_1.svg" alt="avatar icon" /></div>
-                    <div><span className="name"><img src="placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
-                    <div><a href="mailto:Superstar@gmail.com"><img src="placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
+                    <div><img className="header-avatar-mob" src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Ellipse_1.svg" alt="avatar icon" /></div>
+                    <div><span className="name"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_2.svg" alt="" /></span></div>
+                    <div><a href="mailto:Superstar@gmail.com"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_3.svg" alt="" /></a></div>
                   </div>
                 </>
               )}

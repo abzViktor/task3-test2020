@@ -1,94 +1,94 @@
-@import "../../../src/variables.scss";
-
-button.primary {
-    color: #fff;
-    background-color: #ef6c00;
-    border-radius: 4px;
-    border: 2px solid #ef6c00;
-}
-
-button.primary,
-button.secondary {
-    position: relative;
-    padding: 6px 60px;
-    font-family: "Source Sans Pro";
-    font-size: 20px;
-    font-weight: 700;
-    min-width: 290px;
-}
-
-button.primary:hover,
-button.secondary:hover{
-    cursor: pointer;
-}
-
-button.secondary:active,
-button.secondary:focus,
-button.secondary:hover{
-    background-color: #FEE6D2;
-    border: 2px solid #ef6c00;
-}
-
-button:focus {
-    outline: 0;
-}
-
-button.secondary {
-    color: #ef6c00;
-    background-color: #fff;
-    border-radius: 4px;
-    border: 2px solid #ef6c00;
-}
-
-button.primary:active,
-button.primary:hover{
-    background-color: $primary-button-hover;
-    border: 2px solid $primary-button-hover;
-}
-
-button[disabled] {
-    background-color: #D7D7D7;
-    border: 2px solid #D7D7D7;
-    color: #929191;
-    pointer-events: none;
-}
-
-button.text-link {
-    border: 0;
-    outline: 0;
-    min-width: 48px;
-    min-height: 48px;
-    font-family: "Source Sans Pro";
-    font-size: 22px;
-    font-weight: 700;
-    color: #ef6c00;
-    background: transparent;
-}
-
-button.text-link:hover {
-    color:#fc831f;
-    cursor: pointer;
-}
-
-
-@media screen and (max-width: 600px) {
-    button.secondary:after,
-    button.primary:after {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 4px;
-        bottom: -4px;
-        left: 0;
-    }
-    button.secondary:before,
-    button.primary:before {
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 4px;
-        top: -4px;
-        left: 0;
-    }
-}
-
+//@import "../../../src/variables.scss";
+//
+//button.primary {
+//    color: #fff;
+//    background-color: #ef6c00;
+//    border-radius: 4px;
+//    border: 2px solid #ef6c00;
+//}
+//
+//button.primary,
+//button.secondary {
+//    position: relative;
+//    padding: 6px 60px;
+//    font-family: "Source Sans Pro";
+//    font-size: 20px;
+//    font-weight: 700;
+//    min-width: 290px;
+//}
+//
+//button.primary:hover,
+//button.secondary:hover{
+//    cursor: pointer;
+//}
+//
+//button.secondary:active,
+//button.secondary:focus,
+//button.secondary:hover{
+//    background-color: #FEE6D2;
+//    border: 2px solid #ef6c00;
+//}
+//
+//button:focus {
+//    outline: 0;
+//}
+//
+//button.secondary {
+//    color: #ef6c00;
+//    background-color: #fff;
+//    border-radius: 4px;
+//    border: 2px solid #ef6c00;
+//}
+//
+//button.primary:active,
+//button.primary:hover{
+//    background-color: $primary-button-hover;
+//    border: 2px solid $primary-button-hover;
+//}
+//
+//button[disabled] {
+//    background-color: #D7D7D7;
+//    border: 2px solid #D7D7D7;
+//    color: #929191;
+//    pointer-events: none;
+//}
+//
+//button.text-link {
+//    border: 0;
+//    outline: 0;
+//    min-width: 48px;
+//    min-height: 48px;
+//    font-family: "Source Sans Pro";
+//    font-size: 22px;
+//    font-weight: 700;
+//    color: #ef6c00;
+//    background: transparent;
+//}
+//
+//button.text-link:hover {
+//    color:#fc831f;
+//    cursor: pointer;
+//}
+//
+//
+//@media screen and (max-width: 600px) {
+//    button.secondary:after,
+//    button.primary:after {
+//        position: absolute;
+//        content: "";
+//        width: 100%;
+//        height: 4px;
+//        bottom: -4px;
+//        left: 0;
+//    }
+//    button.secondary:before,
+//    button.primary:before {
+//        position: absolute;
+//        content: "";
+//        width: 100%;
+//        height: 4px;
+//        top: -4px;
+//        left: 0;
+//    }
+//}
+//

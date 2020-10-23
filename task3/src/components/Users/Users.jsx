@@ -201,18 +201,18 @@ export function GetUsers(props) {
       <div className="users-block">
         { [...Array(count)].map(() => (
           <div key={Math.random()} className="user-block">
-            <UserPhoto photo="placeholders/image-ph.svg" />
+            <UserPhoto photo="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/image-ph.svg" />
             <div className="user-info">
-              <p className="user-name"><img src="placeholders/Rounded_Rectangle_4.svg" alt="" /></p>
+              <p className="user-name"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4.svg" alt="" /></p>
 
-              <p className="paragraph-3"><img src="placeholders/Rounded_Rectangle_4 (1).svg" alt="" /></p>
+              <p className="paragraph-3"><img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4 (1).svg" alt="" /></p>
               <div className="placeholder-spacer" />
 
               <p>
-                <img src="placeholders/Rounded_Rectangle_4 (2).svg" alt="" />
+                <img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4 (2).svg" alt="" />
               </p>
               <p>
-                <img src="placeholders/Rounded_Rectangle_4 (3).svg" alt="" />
+                <img src="https://source-task3-test2020viktor-p.abzdev2.com/placeholders/Rounded_Rectangle_4 (3).svg" alt="" />
               </p>
             </div>
           </div>

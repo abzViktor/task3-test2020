@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './LetsGet.scss';
-import '../Typography/Typography.css';
 import { useTranslation } from 'react-i18next';
 import HashLinkObserver from 'react-hash-link';
 

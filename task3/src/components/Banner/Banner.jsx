@@ -1,7 +1,5 @@
 import React from 'react';
 import './Banner.scss';
-import '../Button/Button.scss';
-import '../Typography/Typography.css';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
