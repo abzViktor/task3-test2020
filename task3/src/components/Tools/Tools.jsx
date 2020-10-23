@@ -9,7 +9,7 @@ export default function Tools() {
   return (
     <div className="tools-container">
       <div className="anchor-holder"><span id="relation" /></div>
-      <HashLinkObserver />
+      <HashLinkObserver smoothScroll={false} />
       <div className="container">
         <div className="heading-holder">
           <h2 className="heading-2-desktop">

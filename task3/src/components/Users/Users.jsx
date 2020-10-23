@@ -241,7 +241,7 @@ export default function Users() {
       {apiOk === 200 && (
       <div className="users-container">
         <div className="anchor-holder"><span id="users" /></div>
-        <HashLinkObserver />
+        <HashLinkObserver smoothScroll={false} />
         <div className="container">
           <div className="h2-wrapper">
             <h2 className="heading-2-desktop">{t('Cheerful.1')}</h2>

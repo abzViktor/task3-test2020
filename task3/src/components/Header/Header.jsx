@@ -6,7 +6,6 @@ import { HashLink } from 'react-router-hash-link';
 import HashLinkObserver from 'react-hash-link';
 
 import { Tooltip } from '@material-ui/core';
-import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import { withStyles } from '@material-ui/core/styles';
 import lockScroll from '../../shared/lockScroll';
@@ -84,51 +83,51 @@ export default function Header() {
       });
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      function scrollToElement() {
-        const about = document.getElementById('about');
-        const relation = document.getElementById('relation');
-        const users = document.getElementById('users');
-        if (!users && !relation && !about) {
-          return null;
-        }
-        if (window.pageYOffset < about.offsetParent.offsetTop - 264) {
-          setActiveMenu({
-            ...initialActive,
-          });
-        }
-        if (window.pageYOffset >= about.offsetParent.offsetTop - 264
-                && window.pageYOffset < relation.offsetParent.offsetTop - 264
-                && activeMenu.about !== 'active') {
-          setActiveMenu({
-            ...initialActive,
-            about: 'active',
-          });
-        }
-        if (window.pageYOffset >= relation.offsetParent.offsetTop - 264
-                && window.pageYOffset < users.offsetParent.offsetTop - 264
-                && state.activeMenu !== 'active') {
-          setActiveMenu({
-            ...initialActive,
-            relation: 'active',
-          });
-        }
-        if (window.pageYOffset >= users.offsetParent.offsetTop - 350
-                && state.activeMenu !== 'active') {
-          setActiveMenu({
-            ...initialActive,
-            users: 'active',
-          });
-        }
-        return null;
-      }
-      if (!window.location.href.match('registration') && !window.location.href.match('terms')) {
-        scrollToElement();
-        window.addEventListener('scroll', scrollToElement, false);
-      }
-    }, 300);
-  }, [location]);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     function scrollToElement() {
+  //       const about = document.getElementById('about');
+  //       const relation = document.getElementById('relation');
+  //       const users = document.getElementById('users');
+  //       if (!users && !relation && !about) {
+  //         return null;
+  //       }
+  //       if (window.pageYOffset < about.offsetParent.offsetTop - 264) {
+  //         setActiveMenu({
+  //           ...initialActive,
+  //         });
+  //       }
+  //       if (window.pageYOffset >= about.offsetParent.offsetTop - 264
+  //               && window.pageYOffset < relation.offsetParent.offsetTop - 264
+  //               && activeMenu.about !== 'active') {
+  //         setActiveMenu({
+  //           ...initialActive,
+  //           about: 'active',
+  //         });
+  //       }
+  //       if (window.pageYOffset >= relation.offsetParent.offsetTop - 264
+  //               && window.pageYOffset < users.offsetParent.offsetTop - 264
+  //               && state.activeMenu !== 'active') {
+  //         setActiveMenu({
+  //           ...initialActive,
+  //           relation: 'active',
+  //         });
+  //       }
+  //       if (window.pageYOffset >= users.offsetParent.offsetTop - 350
+  //               && state.activeMenu !== 'active') {
+  //         setActiveMenu({
+  //           ...initialActive,
+  //           users: 'active',
+  //         });
+  //       }
+  //       return null;
+  //     }
+  //     if (!window.location.href.match('registration') && !window.location.href.match('terms')) {
+  //       scrollToElement();
+  //       window.addEventListener('scroll', scrollToElement, false);
+  //     }
+  //   }, 300);
+  // }, [location]);
 
   useEffect(() => {
     if (window.location.href.match('registration')) {
@@ -146,7 +145,7 @@ export default function Header() {
 
   return (
     <>
-      <HashLinkObserver />
+      <HashLinkObserver smoothScroll={false} />
       <div className="header-holder">
         {state.apiError.state && (
           <div className="api-error">
@@ -214,7 +213,8 @@ export default function Header() {
             </div>
           </div>
           <div className="mobile-header flex">
-            <Drawer open={open} onClose={toggleMenu(false)} className={open ? 'opened' : 'closed'}>
+            <div onClick={toggleMenu(false)} className={`dark ${open ? 'opened' : 'closed'}`} />
+            <div className={`sideMenu ${open ? 'opened' : 'closed'}`}>
               {isUserLoaded && (
                 <>
                   <div className="side-menu-container-contacts">
@@ -245,7 +245,7 @@ export default function Header() {
                   </ul>
                 </nav>
               </div>
-            </Drawer>
+            </div>
             <div className="logo-container">
               <Link to="/">
                 <Logo />

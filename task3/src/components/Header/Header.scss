@@ -98,6 +98,34 @@ header .mobile-header {
     }
 }
 
+.sideMenu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 290px;
+    background-color: white;
+    height: 100vh;
+    z-index: 2;
+}
+
+.dark.closed {
+    display: none;
+}
+
+.dark.opened {
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.sideMenu.opened {
+    left: 0;
+}
+
 .header-contacts a {
     font-size: 12px;
     font-family: "Source Sans Pro", sans-serif;
