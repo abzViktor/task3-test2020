@@ -8,54 +8,24 @@ import { Link } from 'react-router-dom';
 export default function Banner() {
   const { t } = useTranslation();
   return (
-    <div className="image-container">
-      <picture>
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840.webp 1x" media="(min-width: 3840px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840.jpg 1x" media="(min-width: 3840px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560.webp 1x" media="(min-width: 2560px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560.jpg 1x" media="(min-width: 2560px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920.webp 1x" media="(min-width: 1920px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920.jpg 1x" media="(min-width: 1920px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440.webp 1x" media="(min-width: 1440px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440.jpg 1x" media="(min-width: 1440px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024.webp 1x" media="(min-width: 1024px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024.jpg 1x" media="(min-width: 1024px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992.webp 1x" media="(min-width: 992px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992.jpg 1x" media="(min-width: 992px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768.webp 1x" media="(min-width: 768px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768.jpg 1x" media="(min-width: 768px)" type="image/jpeg" />
-
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320-x2.webp 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320.webp 1x" media="(min-width: 320px)" type="image/webp" />
-        <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320-x2.jpg 2x ,https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320.jpg 1x" media="(min-width: 320px)" type="image/jpeg" />
-        <img src="https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024.jpg" alt="Main banner of home page" />
-      </picture>
-      <div className="banner-container">
-        <div className="banner-text container">
-          <div className="text-block">
-            <div>
-              <h1 className="heading-1-desktop">
-                {t('TestAssignment.1')}
-              </h1>
-            </div>
-            <div className="main-text">
-              {' '}
-              <p className="paragraph-1">
-                <p className="all-visible">{t('KindlyRemind.1')}</p>
-                <span className="desktop-visible">
-                  {t('KindlyRemind.2')}
-                </span>
-              </p>
-            </div>
-            <div>
-              {' '}
-              <Link to="/registration#form"><button type="button" className="primary">{t('SignUp.1')}</button></Link>
-            </div>
+    <div className="main-banner">
+      <div className="container">
+        <div className="text-block">
+          <div>
+            <h1 className="heading-1-desktop">
+              {t('TestAssignment.1')}
+            </h1>
+          </div>
+          <div className="main-text">
+            <p className="paragraph-1">
+              <p className="all-visible">{t('KindlyRemind.1')}</p>
+              <span className="desktop-visible">
+                {t('KindlyRemind.2')}
+              </span>
+            </p>
+          </div>
+          <div>
+            <Link to="/registration#form"><button type="button" className="primary">{t('SignUp.1')}</button></Link>
           </div>
         </div>
       </div>

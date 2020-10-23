@@ -30,7 +30,7 @@ export function UserInfo(props) {
   const refText = React.useRef(null);
   const refBlock = React.useRef(null);
   React.useEffect(() => {
-    if (refText.current.offsetWidth > refBlock.current.offsetWidth) {
+    if (refText.current.offsetWidth > refBlock.current.offsetWidth + 4) {
       setTip(email);
     } else {
       setTip('');

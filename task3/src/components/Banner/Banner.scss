@@ -1,25 +1,4 @@
-.image-container {
-  position: relative;
-  width: 100%;
-  //height: 676px;
-}
-
-.image-container img {
-  width: 100%;
-}
-
-.banner-container {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  .banner-text {
-    padding-top: 126px;
-  }
-  .text-block {
+.text-block {
     max-width: 533px;
     color: #fff;
     p {
@@ -38,8 +17,6 @@
     max-width: 466px;
     margin: 0 !important;
   }
-}
-
 @media screen and (max-width: 1440px){
 
   .main-text {
@@ -48,10 +25,6 @@
       h1 {
         margin-bottom: 25px;
       }
-  .banner-container {
-    //.paragraph-1 {
-    //  max-width: 427px;
-    //}
     .text-block {
       p {
         margin-bottom: 41px;
@@ -60,16 +33,13 @@
     .all-visible {
       max-width: 466px;
       margin: 0 !important;
-    }
-  }
-    .all-visible {
       display: inline;
     }
   }
-
-
+    .all-visible {
+    }
 @media screen and (max-width: 992px) and (min-width: 701px) {
-  .banner-container {
+
 .banner-text {
   padding-top: 106px;
 }
@@ -92,10 +62,10 @@
       }
     }
     }
-  }
 
-
-
+//
+//
+//
 @media screen and (max-width: 700px) {
   .main-text {
     margin: 0 auto;
@@ -103,7 +73,7 @@
   .desktop-visible {
     display: none;
   }
-  .banner-container {
+
     .banner-text {
       padding-top: 0;
       display: flex;
@@ -119,11 +89,10 @@
         }
 
       }
-  }
-}
 
+}
+//
 @media screen and (max-width: 500px) {
-  .banner-container {
     .text-block {
       h1 {
         margin-bottom: 0;
@@ -133,46 +102,136 @@
         font-size: 16px;
       }
     }
+}
+
+.main-banner {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.text-block {
+  margin: 130px 0 138px;
+}
+
+@media screen and (max-width: 3840px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840.jpg");
   }
 }
 
-
-@media screen and (min-width: 3840px) {
-  .image-container {
-    width: 100%;
-    height: auto;
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 3840px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-3840.jpg");
   }
 }
 
-@media screen and (min-width: 1920px) {
-  .image-container  {
-    min-height: 676px;
+@media screen and (max-width: 2560px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560.jpg");
   }
 }
 
-@media screen and (min-width: 1024px) {
-  .image-container{
-    min-height: 725px;
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 2560px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-2560-x2.jpg");
   }
 }
 
-@media screen and (min-width: 992px) {
-  .image-container {
-    min-height: 622px;
+@media screen and (max-width: 1920px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920.jpg");
   }
 }
 
-@media screen and (min-width: 768px) {
-  .image-container {
-    min-height: 622px;
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1920px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1920-x2.jpg");
   }
 }
 
-@media screen and (min-width: 320px) {
-  .image-container {
-    min-height: 393px;
+@media screen and (max-width: 1440px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440.jpg");
+  }
+  .text-block {
+    margin: 129px 0 156px;
   }
 }
 
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1440px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1440-x2.jpg");
+  }
+}
 
+@media screen and (max-width: 1280px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1280.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1280.jpg");
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1280px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1280-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1280-x2.jpg");
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024.jpg");
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1024px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-1024-x2.jpg");
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992.jpg");
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 992px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-992-x2.jpg");
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768.jpg");
+  }
+  text-block {
+    margin: 108px 0 118px;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 768px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-768-x2.jpg");
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320.jpg");
+  }
+  text-block {
+    margin: 66px 0 70px;
+  }
+  .registration-text-block h1 {
+    padding: 0;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 320px){
+  .main-banner {
+    background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320-x2.webp"), url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-320-x2.jpg");
+  }
+}
 

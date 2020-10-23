@@ -7,6 +7,10 @@ body {
 
 }
 
+.MuiInputLabel-outlined {
+  z-index: 0 !important;
+}
+
 #root {
   height: 100%;
 }
