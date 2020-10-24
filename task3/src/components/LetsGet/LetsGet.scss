@@ -37,7 +37,7 @@
     >div {
      padding: 0 32px;
     }
-    img {
+    svg {
       width: 289px;
       height: 285px;
     }
@@ -99,7 +99,7 @@
       .lets-text-block {
         padding: 13px 0 0 28px;
       }
-      img {
+      svg {
         width: 219px;
         height: 216px;
       }
@@ -133,13 +133,6 @@
       >div {
         padding: 0;
       }
-      img {
-        width: 219px;
-        height: 216px;
-      }
-    }
-    .lets-image-holder img {
-      width: 219px;
     }
   }
 }

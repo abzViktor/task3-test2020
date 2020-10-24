@@ -4,6 +4,8 @@ import './LetsGet.scss';
 import { useTranslation } from 'react-i18next';
 import HashLinkObserver from 'react-hash-link';
 
+import { ReactComponent as ManCool } from './images/man-cool.svg';
+
 export default function LetsGetComponent() {
   const { t } = useTranslation();
 
@@ -16,10 +18,7 @@ export default function LetsGetComponent() {
         <h2 className="heading-2-desktop">{t('LetsGet.1')}</h2>
         <div className="lets-block">
           <div className="lets-image-holder">
-            <picture>
-              <source srcSet="https://source-task3-test2020viktor-p.abzdev2.com/images/man-cool.svg" />
-              <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/man-cool.svg" alt="Cool man from lets get acquainted block" />
-            </picture>
+            <ManCool />
           </div>
           <div className="lets-text-block">
             <h3 className="heading-3-desktop">{t('Cool.1')}</h3>

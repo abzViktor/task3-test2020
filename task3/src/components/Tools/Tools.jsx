@@ -2,6 +2,9 @@ import React from 'react';
 import './Tools.scss';
 import { useTranslation } from 'react-i18next';
 import HashLinkObserver from 'react-hash-link';
+import { ReactComponent as JsLogo } from './images/javascript.svg';
+import { ReactComponent as CssLogo } from './images/css.svg';
+import { ReactComponent as HtmlLogo } from './images/html.svg';
 
 export default function Tools() {
   const { t } = useTranslation();
@@ -18,7 +21,7 @@ export default function Tools() {
         </div>
         <div className="tools-content">
           <div>
-            <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/html.svg" alt="Html icon" />
+            <div className="svg-holder html-svg-holder"><HtmlLogo /></div>
             <div>
               <h3 className="heading-3-desktop">{t('html.1')}</h3>
               <p className="paragraph-2">
@@ -27,7 +30,10 @@ export default function Tools() {
             </div>
           </div>
           <div className="css-block">
-            <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/css.svg" alt="Css icon" />
+            <div className="svg-holder">
+              <CssLogo />
+            </div>
+
             <div>
               <h3 className="heading-3-desktop">{t('css.1')}</h3>
               <p className="paragraph-2">
@@ -36,7 +42,7 @@ export default function Tools() {
             </div>
           </div>
           <div className="js-block">
-            <img src="https://source-task3-test2020viktor-p.abzdev2.com/images/javascript.svg" alt="Java Script icon" />
+            <div className="svg-holder"><JsLogo /></div>
             <div>
               <h3 className="heading-3-desktop">{t('js.1')}</h3>
               <p className="paragraph-2">
