@@ -185,7 +185,7 @@ export default function Header() {
                       <div className="header-user"><HtmlTooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></HtmlTooltip></div>
                       <div className="header-user"><HtmlTooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></HtmlTooltip></div>
                     </div>
-                    <img className="header-avatar" src={user.photo} alt="avatar icon" />
+                    <img width="70" height="70" className="header-avatar" src={user.photo} alt="avatar icon" />
                   </>
                 )}
                 {!isUserLoaded && (
@@ -223,7 +223,7 @@ export default function Header() {
               {isUserLoaded && (
                 <>
                   <div className="side-menu-container-contacts">
-                    <div><img className="header-avatar-mob" src={user.photo} alt="avatar icon" /></div>
+                    <div><img width="70" height="70" className="header-avatar-mob" src={user.photo} alt="avatar icon" /></div>
                     <div><span className="name">{user.name}</span></div>
                     <div><a href="mailto:Superstar@gmail.com">{user.email}</a></div>
                   </div>
