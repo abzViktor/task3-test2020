@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import Logo from '../Logo/Logo';
+import { ReactComponent as Logo } from '../Logo/logo.svg';
 import './Footer.scss';
 
 export default function Footer() {

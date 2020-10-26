@@ -10,11 +10,11 @@ import { withStyles } from '@material-ui/core/styles';
 import { ReactComponent as Placeholder1 } from './Ellipse_1.svg';
 import { ReactComponent as Placeholder2 } from './Rounded_Rectangle_2.svg';
 import { ReactComponent as Placeholder3 } from './Rounded_Rectangle_3.svg';
+import { ReactComponent as Logo } from '../Logo/logo.svg';
 
 import lockScroll from '../../shared/lockScroll';
 import './Header.scss';
 import '../Links/Links.css';
-import Logo from '../Logo/Logo';
 import { RootStore } from '../../shared/root.context';
 
 const defaultLink = '/';
