@@ -11,7 +11,6 @@ export default function Tools() {
 
   return (
     <div className="tools-container">
-      <div className="anchor-holder"><span id="relation" /></div>
       <HashLinkObserver smoothScroll={false} />
       <div className="container">
         <div className="heading-holder">

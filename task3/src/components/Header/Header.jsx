@@ -46,7 +46,7 @@ export default function Header() {
   const refContainer = React.useRef(null);
   const refName = React.useRef(null);
   const refEmail = React.useRef(null);
-  const HtmlTooltip = withStyles((theme) => ({
+  const HtmlTooltip = withStyles(() => ({
     tooltip: {
       fontSize: 14,
       maxWidth: 260,
@@ -72,6 +72,10 @@ export default function Header() {
     window.scrollTo(0, 0);
   };
   const { t } = useTranslation();
+
+  useEffect(() => {
+
+  }, []);
 
   useEffect(() => {
     window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
@@ -133,17 +137,37 @@ export default function Header() {
   // }, [location]);
 
   useEffect(() => {
+    localStorage.removeItem('active');
+    function checkActive() {
+      setTimeout(() => {
+        const item = localStorage.getItem('active');
+
+        if (item) {
+          setActiveMenu({
+            ...initialActive,
+            [item]: 'active',
+          });
+        } else {
+          setActiveMenu({
+            ...initialActive,
+          });
+        }
+      }, 300);
+    }
     if (window.location.href.match('registration')) {
+      console.log('Location changed');
       setActiveMenu({
         ...initialActive,
         registration: 'primary active',
       });
     } else {
-      setActiveMenu({
-        ...initialActive,
-      });
+      console.log('Location changed');
+      checkActive();
+      window.addEventListener('scroll', checkActive);
+      return () => {
+        window.removeEventListener('scroll', checkActive);
+      };
     }
-    console.log('Location changed');
   }, [location]);
 
   return (

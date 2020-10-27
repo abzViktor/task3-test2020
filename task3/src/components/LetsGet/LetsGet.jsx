@@ -12,7 +12,6 @@ export default function LetsGetComponent() {
   return (
 
     <div className="lets-container">
-      <div className="anchor-holder"><span id="about" /></div>
       <HashLinkObserver smoothScroll={false} />
       <div className="container">
         <h2 className="heading-2-desktop">{t('LetsGet.1')}</h2>

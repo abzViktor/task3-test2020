@@ -246,7 +246,6 @@ export default function Users() {
     <>
       {apiOk === 200 && (
       <div className="users-container">
-        <div className="anchor-holder"><span id="users" /></div>
         <HashLinkObserver smoothScroll={false} />
         <div className="container">
           <div className="h2-wrapper">
