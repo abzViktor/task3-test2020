@@ -209,7 +209,7 @@ export default function Header() {
                       <div className="header-user"><HtmlTooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></HtmlTooltip></div>
                       <div className="header-user"><HtmlTooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></HtmlTooltip></div>
                     </div>
-                    <img width="70" height="70" className="header-avatar" src={user.photo} onError={(e) => { e.target.onerror = null; e.target.src = 'cover-icon-user.svg'; }} alt="avatar icon" />
+                    <img width="70" height="70" className="header-avatar" src={user.photo} onError={(e) => { e.target.onerror = null; console.clear(); e.target.src = 'cover-icon-user.svg'; }} alt="avatar icon" />
                   </>
                 )}
                 {!isUserLoaded && (
