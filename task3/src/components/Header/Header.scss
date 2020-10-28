@@ -46,18 +46,14 @@ header .mobile-header {
 .side-menu-container-nav nav ul {
     padding: 0;
     list-style: none;
+    margin-top: 31px;
 }
 
 .side-menu-container-nav nav a,
 .side-menu-container-nav nav li {
-    padding: 14px 0;
-    margin: 1px 0;
+    margin: 23px 0;
 }
 
-.side-menu-container-nav nav a:active,
-.side-menu-container-nav nav a:hover {
-    color: #000;
-}
 
 .desktop-header nav ul {
     display: flex;
@@ -71,8 +67,7 @@ header .mobile-header {
 .desktop-header nav ul li a {
     text-decoration: none;
     color: #000000;
-    padding: 12px 5px;
-    margin: 10px;
+    margin: 0 15px;
 }
 
 .desktop-header nav ul li a.active,
@@ -103,7 +98,7 @@ header .mobile-header {
     position: fixed;
     top: 0;
     left: -100%;
-    width: 290px;
+    width: 250px;
     background-color: white;
     height: 100vh;
     z-index: 2;
@@ -152,7 +147,8 @@ header .mobile-header {
     width: 67px;
     height: 67px;
     border-radius: 50%;
-    margin-bottom: 12px;
+    margin-bottom: 5px;
+    background-color: #ccc;
 }
 
 .side-menu-container .name{
@@ -200,6 +196,10 @@ header .mobile-header {
     >span{
         color: #000;
     }
+}
+.mob-name {
+    font-size: 20px;
+    font-family: "Source Sans Pro";
 }
 
 .side-menu-container-contacts {

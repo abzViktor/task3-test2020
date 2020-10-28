@@ -26,12 +26,6 @@ export function UserInfo(props) {
     // eslint-disable-next-line react/prop-types
     name, email, position, phone,
   } = props;
-  const HtmlTooltip = withStyles((theme) => ({
-    tooltip: {
-      fontSize: 14,
-      maxWidth: 260,
-    },
-  }))(Tooltip);
   const [tip, setTip] = React.useState('');
   const refText = React.useRef(null);
   const refBlock = React.useRef(null);
@@ -47,7 +41,7 @@ export function UserInfo(props) {
       <p className="user-name">{name}</p>
       <p className="paragraph-3">{position}</p>
       <p>
-        <HtmlTooltip title={tip} placement="bottom">
+        <Tooltip title={tip} placement="bottom">
           <Box
             component="a"
             whiteSpace="nowrap"
@@ -59,7 +53,7 @@ export function UserInfo(props) {
           >
             {email}
           </Box>
-        </HtmlTooltip>
+        </Tooltip>
       </p>
       <p>
         <a className="paragraph-3" href={`tel: ${phone}`}>

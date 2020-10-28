@@ -6,7 +6,6 @@ import HashLinkObserver from 'react-hash-link';
 
 import { Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import { withStyles } from '@material-ui/core/styles';
 import { ReactComponent as Placeholder1 } from './Ellipse_1.svg';
 import { ReactComponent as Placeholder2 } from './Rounded_Rectangle_2.svg';
 import { ReactComponent as Placeholder3 } from './Rounded_Rectangle_3.svg';
@@ -46,12 +45,6 @@ export default function Header() {
   const refContainer = React.useRef(null);
   const refName = React.useRef(null);
   const refEmail = React.useRef(null);
-  const HtmlTooltip = withStyles(() => ({
-    tooltip: {
-      fontSize: 14,
-      maxWidth: 260,
-    },
-  }))(Tooltip);
   useEffect(() => {
     if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
       setTipName(user.name);
@@ -206,8 +199,8 @@ export default function Header() {
                 {isUserLoaded && (
                   <>
                     <div className="header-contacts" ref={refContainer}>
-                      <div className="header-user"><HtmlTooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></HtmlTooltip></div>
-                      <div className="header-user"><HtmlTooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></HtmlTooltip></div>
+                      <div className="header-user"><Tooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></Tooltip></div>
+                      <div className="header-user"><Tooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></Tooltip></div>
                     </div>
                     <img width="70" height="70" className="header-avatar" src={user.photo} onError={(e) => { e.target.onerror = null; console.clear(); e.target.src = 'cover-icon-user.svg'; }} alt="avatar icon" />
                   </>
@@ -248,7 +241,7 @@ export default function Header() {
                 <>
                   <div className="side-menu-container-contacts">
                     <div><img width="70" onError={(e) => { e.target.onerror = null; e.target.src = 'cover-icon-user.svg'; }} height="70" className="header-avatar-mob" src={user.photo} alt="avatar icon" /></div>
-                    <div><span className="name">{user.name}</span></div>
+                    <div><span className="mob-name">{user.name}</span></div>
                     <div><a href="mailto:Superstar@gmail.com">{user.email}</a></div>
                   </div>
                 </>
@@ -266,10 +259,10 @@ export default function Header() {
               <div className="side-menu-container-nav">
                 <nav>
                   <ul>
-                    <li><Link to="/#about" onClick={toggleMenu(false)} className={activeMenu.about}>{t('About.1')}</Link></li>
-                    <li><Link to="/#relation" onClick={toggleMenu(false)} className={activeMenu.relation}>{t('Relationships.1')}</Link></li>
-                    <li><Link to="/#users" onClick={toggleMenu(false)} className={activeMenu.users}>{t('Users.1')}</Link></li>
-                    <li><Link to="/registration#form" onClick={toggleMenu(false)} className="primary" href={defaultLink}>{t('SignUp.1')}</Link></li>
+                    <li><Link to="/#about" onClick={toggleMenu(false)} className={`primary ${activeMenu.about}`}>{t('About.1')}</Link></li>
+                    <li><Link to="/#relation" onClick={toggleMenu(false)} className={`primary ${activeMenu.relation}`}>{t('Relationships.1')}</Link></li>
+                    <li><Link to="/#users" onClick={toggleMenu(false)} className={`primary ${activeMenu.users}`}>{t('Users.1')}</Link></li>
+                    <li><Link to="/registration#form" onClick={toggleMenu(false)} className={`primary ${activeMenu.registration}`} href={defaultLink}>{t('SignUp.1')}</Link></li>
                     <li><Link to="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</Link></li>
                   </ul>
                 </nav>

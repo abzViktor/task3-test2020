@@ -6,7 +6,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   height: 100%;
   width: 100%;
+}
 
+.MuiTooltip-tooltip {
+  font-size: 14px !important;
+  max-width: 260px !important;
 }
 
 .heading-1-desktop {
