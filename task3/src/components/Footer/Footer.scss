@@ -292,7 +292,6 @@ footer {
 
 @media screen and (max-width: 720px) {
     footer {
-
         .middle-footer {
             margin-bottom: 12px;
         }
@@ -316,7 +315,7 @@ footer {
                 text-align: center;
                 padding: 3px 0;
                 a {
-                    padding: 5px 0;
+                    padding: 0;
                     margin: 0;
                 }
             }
