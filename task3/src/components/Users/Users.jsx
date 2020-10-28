@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { CircularProgress } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import './Users.scss';
 import Tooltip from '@material-ui/core/Tooltip';
 import Box from '@material-ui/core/Box';
@@ -18,7 +17,7 @@ export function UserPhoto(props) {
   // eslint-disable-next-line react/prop-types
   const { photo } = props;
 
-  return <div className="photo-holder"><img width="70" height="70" src={photo} onError={(e) => { e.target.onerror = null; console.clear(); e.target.src = 'cover-icon-user.svg'; }} alt="User" /></div>;
+  return <div className="photo-holder"><img width="70" height="70" src={photo} onError={(e) => { e.target.onerror = null; e.target.src = 'cover-icon-user.svg'; }} alt="User" /></div>;
 }
 
 export function UserInfo(props) {
