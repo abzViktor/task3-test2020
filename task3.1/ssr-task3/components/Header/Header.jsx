@@ -70,18 +70,6 @@ export default function Header() {
     window.scrollTo(0, 0);
   };
   const { t } = useTranslation();
-  // useEffect(() => {
-  //   window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.success) {
-  //         setUser(data.user);
-  //         setUserLoaded(true);
-  //       } else {
-  //       // proccess server errors
-  //       }
-  //     });
-  // }, []);
 
   useEffect(() => {
     localStorage.removeItem('active');
