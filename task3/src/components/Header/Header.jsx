@@ -182,14 +182,7 @@ export default function Header() {
             <div className="flex">
               <nav>
                 <ul>
-                  <li>
-                    <Link
-                      to="/#about"
-                      className={`primary ${activeMenu.about}`}
-                    >
-                      {t('About.1')}
-                    </Link>
-                  </li>
+                  <li><Link to="/#about" className={`primary ${activeMenu.about}`}>{t('About.1')}</Link></li>
                   <li><Link to="/#relation" className={`primary ${activeMenu.relation}`}>{t('Relationships.1')}</Link></li>
                   <li><Link to="/#users" className={`primary ${activeMenu.users}`}>{t('Users.1')}</Link></li>
                   <li><Link to="/registration#form" className={`primary ${activeMenu.registration}`}>{t('SignUp.1')}</Link></li>
