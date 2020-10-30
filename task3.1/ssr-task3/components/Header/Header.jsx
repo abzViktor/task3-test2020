@@ -1,16 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
-// import HashLinkObserver from 'react-hash-link';
 
 import { Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Logo from '../Logo/Logo';
 
-// import lockScroll from '../lockScroll';
-// import '../../styles/Header.scss';
-// import '../Links/Links.css';
 import { RootStore } from '../root.context';
 
 const defaultLink = '/';
@@ -75,64 +70,18 @@ export default function Header() {
     window.scrollTo(0, 0);
   };
   const { t } = useTranslation();
-  useEffect(() => {
-    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setUser(data.user);
-          setUserLoaded(true);
-        } else {
-        // proccess server errors
-        }
-      });
-  }, []);
-
   // useEffect(() => {
-  //   setTimeout(() => {
-  //     function scrollToElement() {
-  //       const about = document.getElementById('about');
-  //       const relation = document.getElementById('relation');
-  //       const users = document.getElementById('users');
-  //       if (!users && !relation && !about) {
-  //         return null;
+  //   window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.success) {
+  //         setUser(data.user);
+  //         setUserLoaded(true);
+  //       } else {
+  //       // proccess server errors
   //       }
-  //       if (window.pageYOffset < about.offsetParent.offsetTop - 264) {
-  //         setActiveMenu({
-  //           ...initialActive,
-  //         });
-  //       }
-  //       if (window.pageYOffset >= about.offsetParent.offsetTop - 264
-  //               && window.pageYOffset < relation.offsetParent.offsetTop - 264
-  //               && activeMenu.about !== 'active') {
-  //         setActiveMenu({
-  //           ...initialActive,
-  //           about: 'active',
-  //         });
-  //       }
-  //       if (window.pageYOffset >= relation.offsetParent.offsetTop - 264
-  //               && window.pageYOffset < users.offsetParent.offsetTop - 264
-  //               && state.activeMenu !== 'active') {
-  //         setActiveMenu({
-  //           ...initialActive,
-  //           relation: 'active',
-  //         });
-  //       }
-  //       if (window.pageYOffset >= users.offsetParent.offsetTop - 350
-  //               && state.activeMenu !== 'active') {
-  //         setActiveMenu({
-  //           ...initialActive,
-  //           users: 'active',
-  //         });
-  //       }
-  //       return null;
-  //     }
-  //     if (!window.location.href.match('registration') && !window.location.href.match('terms')) {
-  //       scrollToElement();
-  //       window.addEventListener('scroll', scrollToElement, false);
-  //     }
-  //   }, 300);
-  // }, [location]);
+  //     });
+  // }, []);
 
   useEffect(() => {
     localStorage.removeItem('active');
@@ -294,3 +243,4 @@ export default function Header() {
     </>
   );
 }
+

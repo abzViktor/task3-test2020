@@ -1,14 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-// import Link from 'next/link';
-// import { HashLink } from 'react-router-hash-link';
 import Logo from '../Logo/Logo';
 
 export default function Footer() {
-  // if (getCookie('i18nextLng') === null) {
-  //   localStorage.setItem('i18nextLng', 'en');
-  // }
-  // const currentLang = localStorage.getItem('i18nextLng');
   const defaultLink = '#';
   const { t, i18n } = useTranslation();
   const [activeLang, setActiveLang] = useState({ en: 'inactive', de: 'inactive' });

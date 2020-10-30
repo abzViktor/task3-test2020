@@ -4,6 +4,7 @@ import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
 import Users from '../components/Users/Users';
 import Tools from '../components/Tools/Tools';
+import Layout from '../components/layout';
 
 export default function Home() {
   React.useEffect(() => {

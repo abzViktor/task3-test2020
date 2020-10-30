@@ -7,7 +7,6 @@ import styles from './users.module.scss';
 import { RootStore } from '../root.context';
 
 export function UserPhoto(props) {
-  // eslint-disable-next-line react/prop-types
   const { photo } = props;
 
   return <div className={styles.photoHolder}><img width="70" height="70" src={photo} onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} alt="User" /></div>;
@@ -92,50 +91,50 @@ export function GetUsers(props) {
     window.addEventListener('resize', handleResize);
   }, []);
 
-  React.useEffect(() => {
-    const startCount = window.innerWidth > 700 ? 6 : 3;
-    window.fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${startCount}&count=${startCount}`)
-      .then((response) => {
-        // eslint-disable-next-line react/prop-types
-        props.errorHandler(response.status);
-        response.json().then((data) => {
-          if (data.success) {
-            setIsLoaded(true);
-            setUsers(data.users);
-            setOffset(offset + count);
-            console.log(data.users.length);
-            if (data.users.length === 0) {
-              setNoUsers(true);
-              setShowButton(false);
-            }
-            if (data.total_users <= offset) {
-              setShowButton(false);
-            }
-          // process success response
-          } else {
-            setShowButton(false);
-          }
-        }).catch(() => {
-          console.log('apiError');
-          dispatch({
-            type: 'API_ERROR',
-            payload: {
-              state: true,
-              messageId: 1,
-            },
-          });
-        });
-      }).catch(() => {
-        console.log('apiError');
-        dispatch({
-          type: 'API_ERROR',
-          payload: {
-            state: true,
-            messageId: 1,
-          },
-        });
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   const startCount = window.innerWidth > 700 ? 6 : 3;
+  //   window.fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${startCount}&count=${startCount}`)
+  //     .then((response) => {
+  //       // eslint-disable-next-line react/prop-types
+  //       props.errorHandler(response.status);
+  //       response.json().then((data) => {
+  //         if (data.success) {
+  //           setIsLoaded(true);
+  //           setUsers(data.users);
+  //           setOffset(offset + count);
+  //           console.log(data.users.length);
+  //           if (data.users.length === 0) {
+  //             setNoUsers(true);
+  //             setShowButton(false);
+  //           }
+  //           if (data.total_users <= offset) {
+  //             setShowButton(false);
+  //           }
+  //         // process success response
+  //         } else {
+  //           setShowButton(false);
+  //         }
+  //       }).catch(() => {
+  //         console.log('apiError');
+  //         dispatch({
+  //           type: 'API_ERROR',
+  //           payload: {
+  //             state: true,
+  //             messageId: 1,
+  //           },
+  //         });
+  //       });
+  //     }).catch(() => {
+  //       console.log('apiError');
+  //       dispatch({
+  //         type: 'API_ERROR',
+  //         payload: {
+  //           state: true,
+  //           messageId: 1,
+  //         },
+  //       });
+  //     });
+  // }, []);
 
   const ShowMore = () => {
     const startCount = window.innerWidth > 700 ? 6 : 3;

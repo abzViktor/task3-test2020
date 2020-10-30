@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './letsGet.module.scss';
-// import HashLinkObserver from 'react-hash-link';
 
 import ManCool from './images/ManCool';
 
