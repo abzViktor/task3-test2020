@@ -70,40 +70,52 @@ export default function Header() {
     window.scrollTo(0, 0);
   };
   const { t } = useTranslation();
-
   useEffect(() => {
-    localStorage.removeItem('active');
-    function checkActive() {
-      setTimeout(() => {
-        const item = localStorage.getItem('active');
-
-        if (item) {
-          setActiveMenu({
-            ...initialActive,
-            [item]: 'active',
-          });
+    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setUser(data.user);
+          setUserLoaded(true);
         } else {
-          setActiveMenu({
-            ...initialActive,
-          });
+        // proccess server errors
         }
-      }, 300);
-    }
-    if (window.location.href.match('registration')) {
-      console.log('Location changed');
-      setActiveMenu({
-        ...initialActive,
-        registration: 'primary active',
       });
-    } else {
-      console.log('Location changed');
-      checkActive();
-      window.addEventListener('scroll', checkActive);
-      return () => {
-        window.removeEventListener('scroll', checkActive);
-      };
-    }
   }, []);
+
+  // useEffect(() => {
+  //   localStorage.removeItem('active');
+  //   function checkActive() {
+  //     setTimeout(() => {
+  //       const item = localStorage.getItem('active');
+  //
+  //       if (item) {
+  //         setActiveMenu({
+  //           ...initialActive,
+  //           [item]: 'active',
+  //         });
+  //       } else {
+  //         setActiveMenu({
+  //           ...initialActive,
+  //         });
+  //       }
+  //     }, 300);
+  //   }
+  //   if (window.location.href.match('registration')) {
+  //     console.log('Location changed');
+  //     setActiveMenu({
+  //       ...initialActive,
+  //       registration: 'primary active',
+  //     });
+  //   } else {
+  //     console.log('Location changed');
+  //     checkActive();
+  //     window.addEventListener('scroll', checkActive);
+  //     return () => {
+  //       window.removeEventListener('scroll', checkActive);
+  //     };
+  //   }
+  // }, []);
 
   return (
     <>
