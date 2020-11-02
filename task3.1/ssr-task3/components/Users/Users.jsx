@@ -68,7 +68,6 @@ export function UserInfo(props) {
           {phone.toString().slice(9, 11)}
           &nbsp;
           {phone.toString().slice(11, 13)}
-
         </a>
       </p>
     </div>

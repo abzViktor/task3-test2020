@@ -53,11 +53,20 @@ export default function Home({users, initialCount, apiStatus }) {
 }
 
 Home.getInitialProps = async (ctx) => {
-    const ua = useUserAgent(ctx.req.headers['user-agent']);
+    let ua, initialCount;
+    if(ctx.req) {
+        ua = useUserAgent(ctx.req.headers['user-agent']);
+    }
+    else {
+    }
     let apiStatus = 200;
     let users;
     console.log(ua);
-    const initialCount = ua.isMobile === true ? 3 : 6;
+    if(ctx.req) {
+        initialCount = ua.isMobile === true ? 3 : 6;
+    } else {
+        initialCount = 3;
+    }
   const res = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=0&length=${initialCount}&count=${initialCount}`);
   console.log(res.status);
   if(res.status === 200) {

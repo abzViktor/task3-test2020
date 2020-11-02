@@ -163,13 +163,15 @@
         }
       }
       .cssBlock {
-        padding-bottom: 38px;
+        padding-bottom: 20px;
         p {
           max-width: unset;
           padding: 0;
         }
       }
       .jsBlock {
+        margin-top: 0px;
+        margin-bottom: 5px;
         p {
           max-width: unset;
           padding: 0 4px;
