@@ -5,12 +5,22 @@ import Box from '@material-ui/core/Box';
 import { useTranslation } from 'react-i18next';
 import styles from './users.module.scss';
 import { RootStore } from '../root.context';
-import { UserAgent } from "react-useragent";
 
 export function UserPhoto(props) {
   const { photo } = props;
 
-  return <div className={styles.photoHolder}><img width="70" height="70" src={photo} onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} alt="User" /></div>;
+  return <div className={styles.photoHolder}><img width="70" height="70" src={photo}
+                                                  onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} alt="User" /></div>;
+}
+
+const renderImage = (image, fallbackImage) => {
+  const onerror = `this.onerror=null;this.src=this.dataset.fallbackImage;`
+  return (
+      <div className={styles.photoHolder} dangerouslySetInnerHTML={{
+        __html: `<img width="70" height="70" onError="${onerror}" data-fallback-image=${fallbackImage} src="${image}" />`
+      }}>
+      </div>
+  )
 }
 
 export function UserInfo(props) {
@@ -66,13 +76,12 @@ export function UserInfo(props) {
 }
 
 export function GetUsers(props) {
-  // eslint-disable-next-line react/prop-types
-  const [isLoaded, setIsLoaded] = React.useState(false);
-  const [count, setCount] = React.useState(3);
+  const [isLoaded, setIsLoaded] = React.useState(props.users.success);
+  const [count, setCount] = React.useState(0);
 
-  const [users, setUsers] = React.useState([]);
+  const [users, setUsers] = React.useState(props.users.users);
   const [showButton, setShowButton] = React.useState(true);
-  const [offset, setOffset] = React.useState(0);
+  const [offset, setOffset] = React.useState(props.initialCount);
   const [noUsers, setNoUsers] = React.useState(false);
   const [isMoreLoaded, setIsMoreLoaded] = React.useState(true);
   const { dispatch } = useContext(RootStore);
@@ -92,50 +101,50 @@ export function GetUsers(props) {
     window.addEventListener('resize', handleResize);
   }, []);
 
-  React.useEffect(() => {
-    const startCount = window.innerWidth > 700 ? 6 : 3;
-    window.fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${startCount}&count=${startCount}`)
-      .then((response) => {
-        // eslint-disable-next-line react/prop-types
-        props.errorHandler(response.status);
-        response.json().then((data) => {
-          if (data.success) {
-            setIsLoaded(true);
-            setUsers(data.users);
-            setOffset(offset + count);
-            console.log(data.users.length);
-            if (data.users.length === 0) {
-              setNoUsers(true);
-              setShowButton(false);
-            }
-            if (data.total_users <= offset) {
-              setShowButton(false);
-            }
-          // process success response
-          } else {
-            setShowButton(false);
-          }
-        }).catch(() => {
-          console.log('apiError');
-          dispatch({
-            type: 'API_ERROR',
-            payload: {
-              state: true,
-              messageId: 1,
-            },
-          });
-        });
-      }).catch(() => {
-        console.log('apiError');
-        dispatch({
-          type: 'API_ERROR',
-          payload: {
-            state: true,
-            messageId: 1,
-          },
-        });
-      });
-  }, []);
+  // React.useEffect(() => {
+  //   const startCount = window.innerWidth > 700 ? 6 : 3;
+  //   window.fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${startCount}&count=${startCount}`)
+  //     .then((response) => {
+  //       // eslint-disable-next-line react/prop-types
+  //       props.errorHandler(response.status);
+  //       response.json().then((data) => {
+  //         if (data.success) {
+  //           setIsLoaded(true);
+  //           setUsers(data.users);
+  //           setOffset(offset + count);
+  //           console.log(data.users.length);
+  //           if (data.users.length === 0) {
+  //             setNoUsers(true);
+  //             setShowButton(false);
+  //           }
+  //           if (data.total_users <= offset) {
+  //             setShowButton(false);
+  //           }
+  //         // process success response
+  //         } else {
+  //           setShowButton(false);
+  //         }
+  //       }).catch(() => {
+  //         console.log('apiError');
+  //         dispatch({
+  //           type: 'API_ERROR',
+  //           payload: {
+  //             state: true,
+  //             messageId: 1,
+  //           },
+  //         });
+  //       });
+  //     }).catch(() => {
+  //       console.log('apiError');
+  //       dispatch({
+  //         type: 'API_ERROR',
+  //         payload: {
+  //           state: true,
+  //           messageId: 1,
+  //         },
+  //       });
+  //     });
+  // }, []);
 
   const ShowMore = () => {
     const startCount = window.innerWidth > 700 ? 6 : 3;
@@ -152,8 +161,8 @@ export function GetUsers(props) {
               ...users,
               ...data.users,
             ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
-            setOffset(offset + count);
-            if (data.total_users <= offset + count) {
+            setOffset(offset + startCount);
+            if (data.total_users <= offset + startCount) {
               setShowButton(false);
             } else {
               setShowButton(true);
@@ -172,7 +181,7 @@ export function GetUsers(props) {
         <div className={styles.usersBlock}>
           {users.map((user) => (
             <div key={user.id} className={styles.userBlock}>
-              <UserPhoto photo={user.photo} />
+              {renderImage(user.photo, 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg')}
               <UserInfo
                 email={user.email}
                 name={user.name}
@@ -226,14 +235,25 @@ export function GetUsers(props) {
   );
 }
 
-export default function Users() {
-  // const { t } = useTranslation();
-  const [apiOk, setApiOk] = React.useState(200);
-  const errorHandler = (data) => {
-    setApiOk(data);
-    localStorage.setItem('apiResponseStatus', data);
-  };
+export default function Users({users, initialCount, apiStatus}) {
+  console.log(users);
+  console.log(initialCount);
   const { t } = useTranslation();
+  const [apiOk, setApiOk] = React.useState(apiStatus);
+  const { dispatch } = useContext(RootStore);
+
+
+  useEffect(() => {
+    if(apiStatus !== 200) {
+      dispatch({
+        type: 'API_ERROR',
+        payload: {
+          state: true,
+          messageId: 1,
+        },
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -248,10 +268,11 @@ export default function Users() {
           <div className={styles.pWrapper}>
             <p className="paragraph-1">{t('Cheerful.2')}</p>
           </div>
-          <GetUsers errorHandler={errorHandler} />
+          <GetUsers users={users} initialCount={initialCount} />
         </div>
       </div>
       )}
     </>
   );
 }
+
