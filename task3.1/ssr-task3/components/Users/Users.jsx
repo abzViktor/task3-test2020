@@ -82,7 +82,7 @@ export function GetUsers(props) {
   const [users, setUsers] = React.useState(props.users.users);
   const [showButton, setShowButton] = React.useState(true);
   const [offset, setOffset] = React.useState(props.initialCount);
-  const [noUsers, setNoUsers] = React.useState(false);
+  const noUsers = props.users.length === 0;
   const [isMoreLoaded, setIsMoreLoaded] = React.useState(true);
   const { dispatch } = useContext(RootStore);
   // const link = ;
