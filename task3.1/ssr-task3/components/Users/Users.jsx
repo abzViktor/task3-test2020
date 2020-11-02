@@ -5,6 +5,7 @@ import Box from '@material-ui/core/Box';
 import { useTranslation } from 'react-i18next';
 import styles from './users.module.scss';
 import { RootStore } from '../root.context';
+import { UserAgent } from "react-useragent";
 
 export function UserPhoto(props) {
   const { photo } = props;
@@ -238,6 +239,7 @@ export default function Users() {
     <>
       {apiOk === 200 && (
       <div className={styles.usersContainer}>
+
         {/* <HashLinkObserver smoothScroll={false} /> */}
         <div className="container">
           <div className={styles.h2Wrapper}>
