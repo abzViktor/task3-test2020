@@ -16,7 +16,7 @@ export default function RegistrationBanner() {
     }
   }, []);
   return (
-    <div className={${styles.regBanner} ${support ? styles.webp : styles.noWebp}}>
+    <div className={`${styles.regBanner} ${support ? styles.webp : styles.noWebp}`}>
       <div className="container">
         <div className={styles.registrationTextBlock}>
           <h1 className="heading-2-desktop">
