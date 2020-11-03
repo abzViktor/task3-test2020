@@ -8,8 +8,10 @@ import '../styles/form.scss';
 import { appWithTranslation } from '../i18n';
 import { RootProvider } from '../components/root.context';
 import Layout from '../components/layout';
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
+
   return (
     <>
       <RootProvider>
