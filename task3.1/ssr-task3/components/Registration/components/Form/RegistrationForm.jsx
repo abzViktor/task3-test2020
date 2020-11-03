@@ -219,7 +219,7 @@ console.log(props.positions.positions);
             <Form className={styles.registrationForm}>
               <Dialog open={open}>
                 {sendSuccess.serverSuccess && sendSuccess.validationSuccess && (
-                  <div className="modal">
+                  <div className={styles.modal}>
                     <h4 className="heading-4-desktop">Congratulations</h4>
                     <p className="paragraph-2">
                       {' '}
@@ -243,7 +243,7 @@ console.log(props.positions.positions);
                   </div>
                 )}
                 {!sendSuccess.validationSuccess && (
-                  <div className="modal">
+                  <div className={styles.modal}>
                     <h4 className="heading-4-desktop">Something went wrong</h4>
                     <p className="paragraph-2">
                       {' '}
@@ -264,7 +264,7 @@ console.log(props.positions.positions);
                   </div>
                 )}
                 {!sendSuccess.serverSuccess && (
-                  <div className="modal">
+                  <div className={styles.modal}>
                     <h4 className="heading-4-desktop">Something went wrong</h4>
                     <p className="paragraph-2">
                       {' '}
