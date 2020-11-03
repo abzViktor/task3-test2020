@@ -6,18 +6,11 @@ import { useTranslation } from 'react-i18next';
 import styles from './users.module.scss';
 import { RootStore } from '../root.context';
 
-export function UserPhoto(props) {
-  const { photo } = props;
-
-  return <div className={styles.photoHolder}><img width="70" height="70" src={photo}
-                                                  onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} alt="User" /></div>;
-}
-
 const renderImage = (image, fallbackImage) => {
   const onerror = `this.onerror=null;this.src=this.dataset.fallbackImage;`
   return (
       <div className={styles.photoHolder} dangerouslySetInnerHTML={{
-        __html: `<img width="70" height="70" onError="${onerror}" data-fallback-image=${fallbackImage} src="${image}" />`
+        __html: `<img loading="lazy" width="70" height="70" onError="${onerror}" data-fallback-image=${fallbackImage} src="${image}" />`
       }}>
       </div>
   )
