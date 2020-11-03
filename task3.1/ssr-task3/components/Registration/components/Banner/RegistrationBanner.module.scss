@@ -72,6 +72,9 @@
   .noWebp {
     background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-1440.jpg");
   }
+  .regBanner {
+    padding: 100px 0 135px;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 1440px){
@@ -144,13 +147,16 @@
   .noWebp {
     background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-768.jpg");
   }
+  .regBanner {
+    padding: 78px 0 99px;
+  }
     .regBanner .heading-2-desktop {
       margin: 9px 0 25px;
     }
 }
 
 @media screen and (max-width: 768px) and (min-width: 700px) {
-  .regBanner .heading-2-desktop {
+  .regBanner h1 {
     padding: 0 127px;
   }
 }
@@ -174,6 +180,9 @@
   .registrationTextBlock h1 {
     padding: 0;
   }
+  .regBanner {
+    padding: 47px 0 46px;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: 320px){
@@ -183,6 +192,7 @@
   .noWebp {
     background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-320-x2.jpg");
   }
+
 }
 
 .registrationTextBlock {
@@ -251,6 +261,7 @@
       }
     }
   }
+
 }
 
 @media screen and (max-width: 1023px) {
@@ -301,6 +312,7 @@
     .imageContainer img {
       width: 257px;
       padding: 0;
+
     }
     .paragraphsBanner {
       max-width: 450px;

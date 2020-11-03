@@ -13,7 +13,7 @@ export default function Registration({positions, apiStatus}) {
 
 Registration.getInitialProps = async (ctx) => {
     let positions, apiStatus;
-    const res = await fetch(`https://frontend-test-assignment-api.abz.agency/aasdaspi/v1/positions`);
+    const res = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/positions`);
     console.log(res.status);
     if(res.status === 200) {
         apiStatus = res.status;

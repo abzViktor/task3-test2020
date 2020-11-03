@@ -143,11 +143,9 @@ console.log(props.apiStatus === 200);
   return (
     <div id="form" className="form">
       <div className="container">
-        {positionsLoaded && (
-            <>
             <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
         <div><p className={`paragraph-1 ${styles.formSubheading}`}>{t('form.attention')}</p></div>
-        <Formik
+              {positionsLoaded && (<Formik
           initialValues={initialValues}
           onSubmit={(data) => {
             setSending(true);
@@ -487,7 +485,23 @@ console.log(props.apiStatus === 200);
             </Form>
           )}
         </Formik>
-            </>
+        )}
+        {!positionsLoaded && (
+            <div className={styles.formPlaceholder}>
+              <div className={styles.firstFormRow}>
+                <div className={styles.fieldPlaceholder} />
+                <div className={styles.fieldPlaceholder} />
+                <div className={styles.fieldPlaceholder} />
+              </div>
+              <div className={styles.secondFormRow}>
+
+                <div className={styles.selectComponent} />
+                <div />
+              </div>
+              <div className={styles.submitHolder}>
+                <div className={styles.buttonPlaceholder} />
+              </div>
+            </div>
         )}
       </div>
     </div>
