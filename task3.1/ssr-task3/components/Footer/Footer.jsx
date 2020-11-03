@@ -176,13 +176,13 @@ export default function Footer() {
                   </a>
                 </li>
                 <li>
-                  <a to="/terms" className="secondary" href={defaultLink}>
+                  <a to="/terms" className="secondary" href="terms">
                     {t('links.Terms')}
 
                   </a>
                 </li>
                 <li>
-                  <a to="/terms" className="secondary" href={defaultLink}>
+                  <a to="/terms" className="secondary" href="terms">
                     {t('links.Conditions')}
 
                   </a>
