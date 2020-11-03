@@ -3,7 +3,7 @@ import styles from './banner.module.scss';
 import { withTranslation } from '../../i18n';
 
 const Banner = ({ t }) => {
- const [support, setSupport] = React.useState(false);
+ const [support, setSupport] = React.useState(true);
 
   React.useEffect(() => {
     let elem = document.createElement('canvas');
