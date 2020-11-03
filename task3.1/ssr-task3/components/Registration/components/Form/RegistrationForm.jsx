@@ -23,7 +23,7 @@ export default function RegistrationForm(props) {
   const [isValidFile, setValidFile] = React.useState(false);
   const [fetchError, setFetchError] = React.useState(false);
   const [isSending, setSending] = React.useState(false);
-  const positions = React.useState(props.positions.positions);
+  const [positions, setPositions] = React.useState(props.positions.positions);
   const positionsLoaded = props.apiStatus === 200;
   const { dispatch } = useContext(RootStore);
   const [sendSuccess, setSendSuccess] = React.useState({
@@ -52,7 +52,7 @@ export default function RegistrationForm(props) {
     }
   }, [])
 
-console.log(props.apiStatus === 200);
+console.log(props.positions.positions);
 
 
   // React.useEffect(() => {
@@ -362,8 +362,6 @@ console.log(props.apiStatus === 200);
               <div className={styles.secondFormRow}>
 
                 <div className={`select-component ${styles.selectComponent}`}>
-                  {
-                    positions.length !== 0 && (
                     <FieldArray
                       name="position"
                     >
@@ -390,8 +388,6 @@ console.log(props.apiStatus === 200);
                         </div>
                       )}
                     </FieldArray>
-                    )
-}
                 </div>
                 <div>
                   <div className={styles.fileFieldHolder}>
