@@ -4,8 +4,19 @@ import styles from './RegistrationBanner.module.scss';
 
 export default function RegistrationBanner() {
   const { t } = useTranslation();
+  const [support, setSupport] = React.useState(false);
+
+  React.useEffect(() => {
+    let elem = document.createElement('canvas');
+
+    if (!!(elem.getContext && elem.getContext('2d')))
+    {
+      // was able or not to get WebP representation
+      setSupport(elem.toDataURL('image/webp').indexOf('data:image/webp') === 0);
+    }
+  }, []);
   return (
-    <div className={styles.regBanner}>
+    <div className={${styles.regBanner} ${support ? styles.webp : styles.noWebp}}>
       <div className="container">
         <div className={styles.registrationTextBlock}>
           <h1 className="heading-2-desktop">

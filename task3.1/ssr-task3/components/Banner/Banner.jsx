@@ -2,21 +2,6 @@ import React from 'react';
 import styles from './banner.module.scss';
 import { withTranslation } from '../../i18n';
 
-const support_format_webp = () =>
-{
-  let res = false;
-  React.useEffect(() => {
-    let elem = document.createElement('canvas');
-
-    if (!!(elem.getContext && elem.getContext('2d')))
-    {
-      // was able or not to get WebP representation
-      res = elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-    }
-  }, [])
-  return res;
-}
-
 const Banner = ({ t }) => {
  const [support, setSupport] = React.useState(false);
 
@@ -29,7 +14,6 @@ const Banner = ({ t }) => {
       setSupport(elem.toDataURL('image/webp').indexOf('data:image/webp') === 0);
     }
   }, []);
-  console.log(support);
   return(
       <div className={`${styles.mainBanner} ${support ? styles.webp : styles.noWebp}`}>
         <div className="container">

@@ -13,8 +13,8 @@ import styles from './form.module.scss'
 import { CircularProgress } from '@material-ui/core';
 import ArrowIcon from './arrowIcon';
 import { RootStore } from '../../../root.context';
+import Dialog from '@material-ui/core/Dialog';
 
-const Dialog = React.lazy(() => import('@material-ui/core/Dialog'));
 
 export default function RegistrationForm() {
   const { t } = useTranslation();
@@ -96,7 +96,7 @@ export default function RegistrationForm() {
   const validationSchema = yup.object().shape({
     name: yup.string()
       .min(2, 'Name should be at least 2 characters!')
-      .max(60, 'Name should be less than 128 characters!')
+      .max(60, 'Name should be less than 60 characters!')
       .matches(/^[A-Za-z\s]+$/g, 'Name should contain only latin letters!'),
     email: yup.string()
       .max(254, 'Email should be less than 254 characters!')
@@ -129,8 +129,8 @@ export default function RegistrationForm() {
 
     <div id="form" className="form">
       <div className="container">
-        <h1 className="heading-2-desktop">{t('form.heading')}</h1>
-        <div><p className="paragraph-1">{t('form.attention')}</p></div>
+        <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
+        <div><p className={`paragraph-1 ${styles.formSubheading}`}>{t('form.attention')}</p></div>
         {positionsLoaded && (
         <Formik
           initialValues={initialValues}
@@ -203,7 +203,7 @@ export default function RegistrationForm() {
             touched,
             resetForm,
           }) => (
-            <Form className={styles.registrationFrom}>
+            <Form className={styles.registrationForm}>
               <Dialog open={open}>
                 {sendSuccess.serverSuccess && sendSuccess.validationSuccess && (
                   <div className="modal">
@@ -346,9 +346,9 @@ export default function RegistrationForm() {
                   </Field>
                 </div>
               </div>
-              <div className="secondFormRow">
+              <div className={styles.secondFormRow}>
 
-                <div className={styles.selectComponent}>
+                <div className={`select-component ${styles.selectComponent}`}>
                   {
                     positions.length !== 0 && (
                     <FieldArray
@@ -384,7 +384,6 @@ export default function RegistrationForm() {
                   <div className={styles.fileFieldHolder}>
                     <TextField
                       required
-                      className="border-1"
                       inputProps={{ readOnly: 'readonly', tabIndex: '-1' }}
                       helperText={t('form.upload.3')}
                       placeholder={t('form.upload.1')}
@@ -395,8 +394,8 @@ export default function RegistrationForm() {
                       error={!isValidFile && touched.file}
                       tabIndex="-1"
                     />
-                    <button type="button" onClick={handleUpload} className="secondary desktop-upload-btn">{t('form.upload.2')}</button>
-                    <button type="button" onClick={handleUpload} className="secondary mob-upload-btn">
+                    <button type="button" onClick={handleUpload} className={`secondary ${styles.desktopUploadBtn}`}>{t('form.upload.2')}</button>
+                    <button type="button" onClick={handleUpload} className={`secondary ${styles.mobUploadBtn}`}>
                       <svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
                         <title>upload</title>
                         <desc>Created with Sketch.</desc>
@@ -452,7 +451,7 @@ export default function RegistrationForm() {
                   </>
                 </div>
               </div>
-              <div className="submitHolder">
+              <div className={styles.submitHolder}>
                 {isSending
                   && (<CircularProgress />)}
                 {!isSending && (
@@ -464,7 +463,6 @@ export default function RegistrationForm() {
                       {t('form.submit')}
                   </button>
                 )}
-
               </div>
               {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
               {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
@@ -483,7 +481,7 @@ export default function RegistrationForm() {
             <div className={styles.fieldPlaceholder} />
           </div>
           <div className={styles.secondFormRow}>
-            <div className={styles.selectComponent} />
+            <div className={`select-component ${styles.selectComponent}`} />
             <div />
           </div>
           <div className={styles.submitHolder}>

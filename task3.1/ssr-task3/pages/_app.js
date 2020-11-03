@@ -4,6 +4,7 @@ import '../styles/variables.scss';
 import '../styles/index.scss';
 import '../styles/Footer.scss';
 import '../styles/Header.scss';
+import '../styles/form.scss';
 import { appWithTranslation } from '../i18n';
 import { RootProvider } from '../components/root.context';
 import Layout from '../components/layout';
