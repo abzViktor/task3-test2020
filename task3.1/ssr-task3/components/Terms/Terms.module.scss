@@ -1,7 +1,7 @@
 @import "../../styles/variables";
 
 .termsContainer {
-  .heading-3-desktop {
+  .heading3desktop {
     font-family: 'Overpass', sans-serif;
     font-weight: 400;
     font-size: 26px;
@@ -9,7 +9,7 @@
     letter-spacing: 0.19px;
   }
 
-  .heading-4-desktop {
+  .heading4desktop {
     font-family: 'Overpass', sans-serif;
     font-weight: 400;
     font-size: 22px;
@@ -17,7 +17,7 @@
   }
 
 
-  .paragraph-2 {
+  .paragraph2 {
     font-family: 'Source Sans Pro', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -49,7 +49,7 @@
         color: #000;
       }
     }
-    .paragraph-2{
+    .paragraph2{
       line-height: 32px;
     }
   }
@@ -84,10 +84,10 @@
     padding: 49px 0 46px;
     margin-bottom: 44px;
   }
-  .termsContainer .topic-article {
+  .termsContainer .topicArticle {
     margin-bottom: 41px;
   }
-  .termsContainer ul .line-height {
+  .termsContainer ul .lineHeight {
     line-height: 28px;
   }
   .termsContainer .mb3{
@@ -116,14 +116,14 @@
       margin-bottom: 27px;
     }
     ul {
-      .paragraph-2 {
+      .paragraph2 {
         line-height: 25px;
       }
       .lineHeight {
         line-height: 27px;
       }
     }
-    .heading-3-desktop {
+    .heading3desktop {
       font-size: 22px;
       line-height: 29px;
       letter-spacing: -0.17px;
@@ -131,7 +131,7 @@
     .termsContainer ul .lineHeight {
       line-height: 27px;
     }
-    .heading-4-desktop {
+    .heading4desktop {
       font-size: 18px;
       line-height: 17px;
       margin-top: 13px;

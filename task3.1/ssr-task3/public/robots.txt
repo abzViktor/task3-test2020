@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://task3-test2020viktor-p.abzdev2.com/sitemap.xml
