@@ -10,7 +10,7 @@ const renderImage = (image, fallbackImage) => {
   const onerror = `this.onerror=null;this.src=this.dataset.fallbackImage;`
   return (
       <div className={styles.photoHolder} dangerouslySetInnerHTML={{
-        __html: `<img loading="lazy" width="70" height="70" onError="${onerror}" data-fallback-image=${fallbackImage} src="${image}" />`
+        __html: `<img loading="lazy" width="70" height="70" onError="${onerror}" data-fallback-image=${fallbackImage} alt="User avatar" src="${image}" />`
       }}>
       </div>
   )
