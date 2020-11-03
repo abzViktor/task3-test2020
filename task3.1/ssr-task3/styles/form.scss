@@ -87,8 +87,8 @@
   padding-left: 15px;
 }
 
-.MuiOutlinedInput-input {
-  z-index: -1;
+.select-component .MuiOutlinedInput-input {
+  z-index: 0;
 }
 
 .MuiListItem-button:hover {
