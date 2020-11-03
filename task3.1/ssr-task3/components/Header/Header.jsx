@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Divider from '@material-ui/core/Divider';
 import { useTranslation } from 'react-i18next';
-
+import {useRouter} from "next/router";
 import { Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Logo from '../Logo/Logo';
@@ -18,6 +18,7 @@ const initialActive = {
 
 // eslint-disable-next-line react/prop-types
 export default function Header() {
+  const router = useRouter();
   const [tipName, setTipName] = React.useState('');
   const [tipEmail, setTipEmail] = React.useState('');
   const [activeMenu, setActiveMenu] = useState(initialActive);
@@ -115,15 +116,11 @@ export default function Header() {
         window.removeEventListener('scroll', checkActive);
       };
     }
-  }, []);
+  }, [router]);
 
   return (
     <>
       <div className={state.apiError.state ? 'api-error-spacer' : 'header-spacer'} />
-      {/* <HashLinkObserver smoothScroll={false} /> */}
-      {/* {user.map((user) => { */}
-      {/*  console.log(user); */}
-      {/* })} */}
       <div className="header-holder">
         {state.apiError.state && (
         <div className="api-error">

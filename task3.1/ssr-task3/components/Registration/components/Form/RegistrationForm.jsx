@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, {useContext, useEffect} from 'react';
 import TextField from '@material-ui/core/TextField';
+import Router from "next/router";
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
@@ -16,20 +17,20 @@ import { RootStore } from '../../../root.context';
 import Dialog from '@material-ui/core/Dialog';
 
 
-export default function RegistrationForm() {
+export default function RegistrationForm(props) {
   const { t } = useTranslation();
-
   const [open, setOpen] = React.useState(false);
   const [isValidFile, setValidFile] = React.useState(false);
   const [fetchError, setFetchError] = React.useState(false);
   const [isSending, setSending] = React.useState(false);
-  const [positionsLoaded, setPositionsLoaded] = React.useState(false);
+  const positions = React.useState(props.positions.positions);
+  const positionsLoaded = props.apiStatus === 200;
   const { dispatch } = useContext(RootStore);
   const [sendSuccess, setSendSuccess] = React.useState({
     validationSuccess: true,
     serverSuccess: true,
   });
-
+  console.log(props);
   const initialValues = {
     name: '',
     email: '',
@@ -38,50 +39,64 @@ export default function RegistrationForm() {
     file: '',
   };
 
-  const [positions, setPositions] = React.useState([]);
-
-  React.useEffect(() => {
-    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions')
-      .then((response) => {
-        // eslint-disable-next-line react/prop-types
-        response.json().then((data) => {
-          if (data.success) {
-            if (data.positions.length === 0) {
-              setFetchError(true);
-            } else {
-              setPositions(data.positions);
-              setFetchError(false);
-              setTimeout(() => {
-                setPositionsLoaded(true);
-              }, 2000);
-            }
-          } else {
-            setFetchError(true);
-            setPositionsLoaded(false);
-          }
-        }).catch(() => {
-          setFetchError(true);
-          console.log('apiError');
-          dispatch({
-            type: 'API_ERROR',
-            payload: {
-              state: true,
-              messageId: 2,
-            },
-          });
-        });
-      }).catch(() => {
-        setFetchError(true);
-        console.log('apiError');
-        dispatch({
-          type: 'API_ERROR',
-          payload: {
-            state: true,
-            messageId: 2,
-          },
-        });
+  useEffect(() => {
+    if(!positionsLoaded || positions.length === 0) {
+      Router.push('/');
+      dispatch({
+        type: 'API_ERROR',
+        payload: {
+          state: true,
+          messageId: 2,
+        },
       });
-  }, []);
+    }
+  }, [])
+
+console.log(props.apiStatus === 200);
+
+
+  // React.useEffect(() => {
+  //   window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions')
+  //     .then((response) => {
+  //       // eslint-disable-next-line react/prop-types
+  //       response.json().then((data) => {
+  //         if (data.success) {
+  //           if (data.positions.length === 0) {
+  //             setFetchError(true);
+  //           } else {
+  //             setPositions(data.positions);
+  //             setFetchError(false);
+  //             setTimeout(() => {
+  //               setPositionsLoaded(true);
+  //             }, 2000);
+  //           }
+  //         } else {
+  //           setFetchError(true);
+  //           setPositionsLoaded(false);
+  //         }
+  //       }).catch(() => {
+  //         setFetchError(true);
+  //         console.log('apiError');
+  //         dispatch({
+  //           type: 'API_ERROR',
+  //           payload: {
+  //             state: true,
+  //             messageId: 2,
+  //           },
+  //         });
+  //       });
+  //     }).catch(() => {
+  //       setFetchError(true);
+  //       console.log('apiError');
+  //       dispatch({
+  //         type: 'API_ERROR',
+  //         payload: {
+  //           state: true,
+  //           messageId: 2,
+  //         },
+  //       });
+  //     });
+  // }, []);
 
   const validateNumberMask = (value) => {
     let error;
@@ -126,12 +141,12 @@ export default function RegistrationForm() {
   const trimSideSpaces = (value) => value.replace(/^\s+|\s+$|^\n+|\n+$/g, '');
 
   return (
-
     <div id="form" className="form">
       <div className="container">
-        <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
-        <div><p className={`paragraph-1 ${styles.formSubheading}`}>{t('form.attention')}</p></div>
         {positionsLoaded && (
+            <>
+            <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
+        <div><p className={`paragraph-1 ${styles.formSubheading}`}>{t('form.attention')}</p></div>
         <Formik
           initialValues={initialValues}
           onSubmit={(data) => {
@@ -472,25 +487,7 @@ export default function RegistrationForm() {
             </Form>
           )}
         </Formik>
-        )}
-        {!positionsLoaded && (
-        <div className={styles.formPlaceholder}>
-          <div className={styles.firstFormRow}>
-            <div className={styles.fieldPlaceholder} />
-            <div className={styles.fieldPlaceholder} />
-            <div className={styles.fieldPlaceholder} />
-          </div>
-          <div className={styles.secondFormRow}>
-            <div className={`select-component ${styles.selectComponent}`} />
-            <div />
-          </div>
-          <div className={styles.submitHolder}>
-            <div className={styles.buttonPlaceholder} />
-          </div>
-        </div>
-        )}
-        {fetchError && (
-        <Redirect to="/#home" />
+            </>
         )}
       </div>
     </div>

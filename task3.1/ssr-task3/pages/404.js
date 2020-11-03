@@ -17,3 +17,7 @@ export default function NotFound() {
         </div>
     );
 }
+
+NotFound.getInitialProps = () => {
+    return {namespacesRequired: ['common']}
+}

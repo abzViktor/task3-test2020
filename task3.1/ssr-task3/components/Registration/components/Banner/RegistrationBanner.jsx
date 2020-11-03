@@ -4,7 +4,7 @@ import styles from './RegistrationBanner.module.scss';
 
 export default function RegistrationBanner() {
   const { t } = useTranslation();
-  const [support, setSupport] = React.useState(false);
+  const [support, setSupport] = React.useState(true);
 
   React.useEffect(() => {
     let elem = document.createElement('canvas');
