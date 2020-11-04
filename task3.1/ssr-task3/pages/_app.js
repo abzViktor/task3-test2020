@@ -10,6 +10,12 @@ import { RootProvider } from '../components/root.context';
 import Layout from '../components/layout';
 
 function MyApp({ Component, pageProps }) {
+    React.useEffect(() => {
+        const jssStyles = document.querySelector('#jss-server-side')
+        if (jssStyles && jssStyles.parentElement) {
+            jssStyles.parentElement.removeChild(jssStyles)
+        }
+    }, []);
   return (
       <RootProvider>
         <Layout>

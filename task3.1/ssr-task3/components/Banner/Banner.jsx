@@ -31,8 +31,8 @@ const Banner = ({ t }) => {
             </span>
               </p>
             </div>
-            <div id="bannerButtonGA" className={styles.buttonWrapper}>
-              <a href="registration#form"><button type="button" className="primary">{t('SignUp.1')}</button></a>
+            <div className={styles.buttonWrapper}>
+              <a href="registration#form"><button id="bannerButtonGA" type="button" className="primary">{t('SignUp.1')}</button></a>
             </div>
           </div>
         </div>
