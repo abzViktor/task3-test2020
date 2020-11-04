@@ -28,6 +28,7 @@ export default function Header() {
   const { state } = useContext(RootStore);
   const [html, setHtml] = useState(null);
   const [scrollBackPosition, setScrollBackPosition] = useState(0);
+  const { t } = useTranslation();
   useEffect(() => {
     setHtml(document.querySelector('body'));
   }, []);
@@ -70,7 +71,7 @@ export default function Header() {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
-  const { t } = useTranslation();
+
   useEffect(() => {
     window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
       .then((response) => response.json())
