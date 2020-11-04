@@ -68,7 +68,7 @@ export default function Terms() {
             <p className={`${styles.paragraph2} ${styles.mbP}`}>
               {t('terms.trivialExampleContent.1')}
             </p>
-            <p className={styles.paragraph2}>
+            <p className={`${styles.paragraph2} ${styles.lastMargin}`}>
               {t('terms.trivialExampleContent.2')}
             </p>
           </section>
