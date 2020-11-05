@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-// import Wrapper from './components/Wrapper/Wrapper';
 import * as serviceWorker from './serviceWorker';
 import './i18next';
 import { RootProvider } from './shared/root.context';
