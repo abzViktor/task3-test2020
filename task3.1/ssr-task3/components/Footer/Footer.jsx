@@ -16,7 +16,11 @@ import Logo from '../../assets/logo.svg';
 
 export default function Footer() {
   const { t, i18n } = useTranslation();
-  const [activeLang, setActiveLang] = useState({ en: 'inactive', de: 'inactive' });
+  const initialLang = {
+    en: 'inactive',
+    de: 'inactive'
+  }
+  const [activeLang, setActiveLang] = useState(initialLang);
   const footerLinks = [[["News", "#"], ["Blog", "#"], ["Partners", "#"], ["Shop", "#"]],
                  [["Overview", "#"], ["Design", "#"], ["Code", "#"], ["Collaborate", "#"]],
                  [["Tutorials", "#"], ["Resources", "#"], ["Guides", "#"], ["Examples", "#"]],
@@ -25,23 +29,20 @@ export default function Footer() {
   const socialNetworks = [<FacebookIcon />,<LinkedInIcon />,<InstagramIcon />,<TwitterIcon />,<PinterestIcon />];
 
   useEffect(() => {
-    if (document.cookie.match('next-i18next=de')) {
-      setActiveLang({
-        en: 'inactive',
-        de: 'active',
-      });
-    } else {
-      setActiveLang({
-        de: 'inactive',
-        en: 'active',
-      });
-    }
+    document.cookie.split(' ').forEach((cookie) => {
+      if(cookie.match('next-i18next')) {
+        setActiveLang({
+          ...initialLang,
+          [cookie.split('=')[1].replace(';', '')]: 'active'
+        });
+      }
+    });
   }, []);
+
   function handleClick(lang) {
     i18n.changeLanguage(lang);
     setActiveLang({
-      en: 'inactive',
-      de: 'inactive',
+      ...initialLang,
       [lang]: 'active',
     });
   }

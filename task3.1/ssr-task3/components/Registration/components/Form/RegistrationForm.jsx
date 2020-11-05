@@ -1,27 +1,26 @@
-import React, {useContext, useEffect} from 'react';
+import React, { useContext, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
-import Router from "next/router";
+import Router from 'next/router';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputMask from 'react-input-mask';
 import { useTranslation } from 'react-i18next';
-import { Redirect } from 'react-router-dom';
 import {
   Formik, Field, Form, FieldArray,
 } from 'formik';
 import * as yup from 'yup';
-import styles from './form.module.scss'
 import { CircularProgress } from '@material-ui/core';
-import ArrowIcon from './arrowIcon';
-import { RootStore } from '../../../root.context';
 import Dialog from '@material-ui/core/Dialog';
-
+import { trimDoubleSpaces, trimSideSpaces, trimSpaces } from '../../../../utils/formatText';
+import styles from './form.module.scss';
+import ArrowIcon from '../../../../assets/caret-down.svg';
+import UploadIcon from '../../../../assets/upload.svg';
+import { RootStore } from '../../../root.context';
 
 export default function RegistrationForm(props) {
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const [isValidFile, setValidFile] = React.useState(false);
-  const [fetchError, setFetchError] = React.useState(false);
   const [isSending, setSending] = React.useState(false);
   const [positions, setPositions] = React.useState(props.positions.positions);
   const positionsLoaded = props.apiStatus === 200;
@@ -30,17 +29,18 @@ export default function RegistrationForm(props) {
     validationSuccess: true,
     serverSuccess: true,
   });
-  console.log(props);
+  const [fileValue, setFileValue] = React.useState('');
+
   const initialValues = {
     name: '',
     email: '',
     phone: '',
-    position: '-1',
+    position_id: '-1',
     file: '',
   };
 
   useEffect(() => {
-    if(!positionsLoaded || positions.length === 0) {
+    if (!positionsLoaded || positions.length === 0) {
       Router.push('/');
       dispatch({
         type: 'API_ERROR',
@@ -50,62 +50,38 @@ export default function RegistrationForm(props) {
         },
       });
     }
-  }, [])
-
-console.log(props.positions.positions);
-
-
-  // React.useEffect(() => {
-  //   window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions')
-  //     .then((response) => {
-  //       // eslint-disable-next-line react/prop-types
-  //       response.json().then((data) => {
-  //         if (data.success) {
-  //           if (data.positions.length === 0) {
-  //             setFetchError(true);
-  //           } else {
-  //             setPositions(data.positions);
-  //             setFetchError(false);
-  //             setTimeout(() => {
-  //               setPositionsLoaded(true);
-  //             }, 2000);
-  //           }
-  //         } else {
-  //           setFetchError(true);
-  //           setPositionsLoaded(false);
-  //         }
-  //       }).catch(() => {
-  //         setFetchError(true);
-  //         console.log('apiError');
-  //         dispatch({
-  //           type: 'API_ERROR',
-  //           payload: {
-  //             state: true,
-  //             messageId: 2,
-  //           },
-  //         });
-  //       });
-  //     }).catch(() => {
-  //       setFetchError(true);
-  //       console.log('apiError');
-  //       dispatch({
-  //         type: 'API_ERROR',
-  //         payload: {
-  //           state: true,
-  //           messageId: 2,
-  //         },
-  //       });
-  //     });
-  // }, []);
+  }, []);
 
   const validateNumberMask = (value) => {
-    let error;
+    let error = '';
     if (value === '+38(0__)___-__-__' || !value) {
       error = '';
     } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/) && !value.match(/^\+\d{10}/)) {
       error = 'Phone number should be in +38(0XX)XXX-XX-XX format!';
     }
     return error;
+  };
+
+  const validateImage = (target) => {
+    if (target.files[0]) {
+      setFileValue(target.files[0].name);
+      const { URL } = window;
+      const img = new Image();
+      const file = target.files[0];
+      img.src = URL.createObjectURL(file);
+      img.onload = function () {
+        if (img.width < 70 || img.height < 70) {
+          setValidFile(false);
+        }
+      };
+      if (target.files[0].type !== 'image/jpeg' && target.files[0].type !== 'image/jpg') {
+        setValidFile(false);
+      } else if (target.files[0].size > 5e+6) {
+        setValidFile(false);
+      } else {
+        setValidFile(true);
+      }
+    }
   };
 
   const validationSchema = yup.object().shape({
@@ -118,91 +94,78 @@ console.log(props.positions.positions);
       .matches(/^[\w-.]{1,64}?@[\w-]+\.[\w-]{2,}/, 'Invalid Email!'),
   });
   const hiddenFileInput = React.useRef(null);
-  const handleUpload = (ev) => {
-    ev.preventDefault();
+
+  // left this functionality to trigger on button click, TextField triggers modal window with label
+  const handleUpload = (event) => {
+    event.preventDefault();
     hiddenFileInput.current.click();
   };
 
-  const [fileValue, setFileValue] = React.useState('');
+  const submitForm = (data) => {
+    setSending(true);
+    fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
+      .then((response) => response.json())
+      .then((res) => {
+        const formData = new FormData();
+        const fileField = document.querySelector('input[type="file"]');
+        console.log(data);
+        ['position_id', 'name', 'email'].map((key) => {
+          formData.append(key, data[key]);
+        });
+        formData.append('phone', data.phone.replace(/[()-]/g, ''));
+        formData.append('photo', fileField.files[0]);
 
-  //
-  // const handleSubmit = (ev) => {
-  //   ev.preventDefault();
-  //   console.log(ev.target.value);
-  // };
-
-  const trimDoubleSpaces = (value) => {
-    const newValue = value.replace(/\s{2,}/g, ' ');
-    return newValue;
+        fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            Token: res.token, // get token with GET api/v1/token method
+          },
+        })
+          .then((response) => response.json())
+          .then((postResponse) => {
+            if (postResponse.success) {
+              setTimeout(() => {
+                setSending(false);
+                setOpen(true);
+                setSendSuccess({
+                  serverSuccess: true,
+                  validationSuccess: true,
+                });
+              }, 2000);
+            } else {
+              setSending(false);
+              setOpen(true);
+              setSendSuccess({
+                serverSuccess: true,
+                validationSuccess: false,
+              });
+            }
+          })
+          .catch(() => {
+            setSending(false);
+            setOpen(true);
+            setSendSuccess({
+              validationSuccess: true,
+              serverSuccess: false,
+            });
+          });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
-
-  const trimSpaces = (value) => value.replace(/\s+/g, '');
-
-  const trimSideSpaces = (value) => value.replace(/^\s+|\s+$|^\n+|\n+$/g, '');
 
   return (
     <div id="form" className="form">
       <div className="container">
-            <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
+        <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
         <div><p className={`paragraph-1 ${styles.formSubheading}`}>{t('form.attention')}</p></div>
-              {positionsLoaded && (<Formik
+        {positionsLoaded && (
+        <Formik
           initialValues={initialValues}
           onSubmit={(data) => {
-            setSending(true);
-
-            window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
-              .then((response) => response.json())
-              .then((res) => {
-                // eslint-disable-next-line no-undef
-                const formData = new FormData();
-                const fileField = document.querySelector('input[type="file"]');
-                formData.append('position_id', data.position);
-                formData.append('name', data.name);
-                formData.append('email', data.email);
-                formData.append('phone', data.phone.replace(/[()-]/g, ''));
-                formData.append('photo', fileField.files[0]);
-
-                window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
-                  method: 'POST',
-                  body: formData,
-                  headers: {
-                    Token: res.token, // get token with GET api/v1/token method
-                  },
-                })
-                  .then((response) => response.json())
-                  .then((postResponse) => {
-                    console.log(postResponse);
-                    if (postResponse.success) {
-                      setTimeout(() => {
-                        setSending(false);
-                        setOpen(true);
-                        setSendSuccess({
-                          serverSuccess: true,
-                          validationSuccess: true,
-                        });
-                      }, 2000);
-                    } else {
-                      setSending(false);
-                      setOpen(true);
-                      setSendSuccess({
-                        serverSuccess: true,
-                        validationSuccess: false,
-                      });
-                      // proccess server errors
-                    }
-                  })
-                  .catch(() => {
-                    setSending(false);
-                    setOpen(true);
-                    setSendSuccess({
-                      validationSuccess: true,
-                      serverSuccess: false,
-                    });
-                  });
-              })
-              .catch((e) => {
-                console.log(e);
-              });
+            submitForm(data);
           }}
           validationSchema={validationSchema}
         >
@@ -210,7 +173,6 @@ console.log(props.positions.positions);
             values,
             setFieldValue,
             setFieldTouched,
-            // dirty,
             isValid,
             errors,
             touched,
@@ -219,70 +181,70 @@ console.log(props.positions.positions);
             <Form className={styles.registrationForm}>
               <Dialog open={open}>
                 {sendSuccess.serverSuccess && sendSuccess.validationSuccess && (
-                  <div className={styles.modal}>
-                    <h4 className="heading-4-desktop">Congratulations</h4>
-                    <p className="paragraph-2">
-                      {' '}
-                      You have successfully passed
-                      <br />
-                      {' '}
-                      the registration
-                    </p>
-                    <button
-                      type="button"
-                      className="text-link"
-                      onClick={() => {
-                        setOpen(false);
-                        resetForm();
-                        setFieldValue('file', '');
-                        setFileValue('');
-                      }}
-                    >
-                      OK
-                    </button>
-                  </div>
+                <div className={styles.modal}>
+                  <h4 className="heading-4-desktop">Congratulations</h4>
+                  <p className="paragraph-2">
+                    {' '}
+                    You have successfully passed
+                    <br />
+                    {' '}
+                    the registration
+                  </p>
+                  <button
+                    type="button"
+                    className="text-link"
+                    onClick={() => {
+                      setOpen(false);
+                      resetForm();
+                      setFieldValue('file', '');
+                      setFileValue('');
+                    }}
+                  >
+                    OK
+                  </button>
+                </div>
                 )}
                 {!sendSuccess.validationSuccess && (
-                  <div className={styles.modal}>
-                    <h4 className="heading-4-desktop">Something went wrong</h4>
-                    <p className="paragraph-2">
-                      {' '}
-                      Server validation failed,
-                      <br />
-                      {' '}
-                      try again
-                    </p>
-                    <button
-                      type="button"
-                      className="text-link"
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                    >
-                      OK
-                    </button>
-                  </div>
+                <div className={styles.modal}>
+                  <h4 className="heading-4-desktop">Something went wrong</h4>
+                  <p className="paragraph-2">
+                    {' '}
+                    Server validation failed,
+                    <br />
+                    {' '}
+                    try again
+                  </p>
+                  <button
+                    type="button"
+                    className="text-link"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    OK
+                  </button>
+                </div>
                 )}
                 {!sendSuccess.serverSuccess && (
-                  <div className={styles.modal}>
-                    <h4 className="heading-4-desktop">Something went wrong</h4>
-                    <p className="paragraph-2">
-                      {' '}
-                      Server response failed,
-                      <br />
-                      {' '}
-                      try again later
-                    </p>
-                    <button
-                      type="button"
-                      className="text-link"
-                      onClick={() => {
-                        setOpen(false);
-                      }}
-                    >
-                      OK
-                    </button>
-                  </div>
+                <div className={styles.modal}>
+                  <h4 className="heading-4-desktop">Something went wrong</h4>
+                  <p className="paragraph-2">
+                    {' '}
+                    Server response failed,
+                    <br />
+                    {' '}
+                    try again later
+                  </p>
+                  <button
+                    type="button"
+                    className="text-link"
+                    onClick={() => {
+                      setOpen(false);
+                    }}
+                  >
+                    OK
+                  </button>
+                </div>
                 )}
               </Dialog>
               <div className={styles.firstFormRow}>
@@ -341,7 +303,6 @@ console.log(props.positions.positions);
                         onPaste={(e) => {
                           e.preventDefault();
                           setFieldValue('phone', e.clipboardData.getData('Text'));
-                          // setFieldValue('phone', target.value);
                         }}
                       >
                         {() => (
@@ -360,117 +321,79 @@ console.log(props.positions.positions);
                 </div>
               </div>
               <div className={styles.secondFormRow}>
-
                 <div className={`select-component ${styles.selectComponent}`}>
-                    <FieldArray
-                      name="position"
-                    >
-                      {() => (
-                        <div>
-                          <Field
-                            className={`${styles.selectedItem} ${styles.formSelect}`}
-                            variant="outlined"
-                            fullWidth
-                            autoWidth
-                            IconComponent={ArrowIcon}
-                            name="position"
-                            type="select"
-                            as={Select}
-                          >
-                            <MenuItem value="-1" disabled>
-                              {t('form.select')}
-                            </MenuItem>
-                            {positions.map((pos) => (
-                              <MenuItem key={pos.id} value={pos.id}>{pos.name}</MenuItem>
-                            ))}
+                  <FieldArray
+                    name="position_id"
+                  >
+                    {() => (
+                      <div>
+                        <Field
+                          className={`${styles.selectedItem} ${styles.formSelect}`}
+                          variant="outlined"
+                          fullWidth
+                          autoWidth
+                          IconComponent={ArrowIcon}
+                          name="position_id"
+                          type="select"
+                          as={Select}
+                        >
+                          <MenuItem value="-1" disabled>
+                            {t('form.select')}
+                          </MenuItem>
+                          {positions.map((pos) => (
+                            <MenuItem key={pos.id} value={pos.id}>{pos.name}</MenuItem>
+                          ))}
 
-                          </Field>
-                        </div>
-                      )}
-                    </FieldArray>
+                        </Field>
+                      </div>
+                    )}
+                  </FieldArray>
                 </div>
                 <div>
-                  <div className={styles.fileFieldHolder}>
+                  <label htmlFor="file" className={styles.fileFieldHolder}>
                     <TextField
                       required
                       inputProps={{ readOnly: 'readonly', tabIndex: '-1' }}
                       helperText={t('form.upload.3')}
                       placeholder={t('form.upload.1')}
-                      onClick={handleUpload}
-                      ref={hiddenFileInput}
                       value={fileValue}
                       variant="outlined"
                       error={!isValidFile && touched.file}
                       tabIndex="-1"
                     />
                     <button type="button" onClick={handleUpload} className={`secondary ${styles.desktopUploadBtn}`}>{t('form.upload.2')}</button>
-                    <button type="button" onClick={handleUpload} className={`secondary ${styles.mobUploadBtn}`}>
-                      <svg width="20px" height="24px" viewBox="0 0 20 24" version="1.1" xmlns="http://www.w3.org/2000/svg">
-                        <title>upload</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs />
-                        <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
-                          <g id="upload" fill="#EF6C00" fillRule="nonzero">
-                            <path d="M18.12,14.2 C18.0551642,14.222096 17.9848358,14.222096 17.92,14.2 C17.86,14.2 17.81,14.2 17.78,14.31 C17.75,14.42 17.71,14.43 17.69,14.43 C17.67,14.43 17.69,14.49 17.69,14.61 L17.69,14.79 L17.69,19.56 C17.6847889,20.2177137 17.4164079,20.8459493 16.9447897,21.3044148 C16.4731715,21.7628804 15.837598,22.0133892 15.18,22 L4.41,22 C3.75845014,22.0102355 3.13190144,21.7494753 2.68,21.28 C2.23532929,20.8310068 1.99022381,20.2218476 2,19.59 L2,14.69 C2.00654693,14.5778048 1.97087459,14.4672205 1.9,14.38 C1.82129123,14.2955515 1.71478409,14.2422979 1.6,14.23 C1.48132462,14.2048911 1.3610262,14.188183 1.24,14.18 L0.49,14.18 C0.360349482,14.1786835 0.236431451,14.2333533 0.15,14.33 C0.0544088005,14.4171944 -4.1366484e-05,14.5406148 2.03938429e-16,14.67 L2.03938429e-16,19.57 C-0.0168652328,20.7430529 0.449651354,21.8713721 1.29,22.69 C2.1052145,23.5377036 3.23397252,24.0116372 4.41,24 L15.18,24 C16.3504191,24.0026631 17.4736678,23.5388946 18.3012812,22.7112812 C19.1288946,21.8836678 19.5926631,20.7604191 19.59,19.59 L19.59,14.69 C19.5965469,14.5778048 19.5608746,14.4672205 19.49,14.38 C19.4144273,14.2914523 19.3061818,14.2373295 19.19,14.23 C19.0713246,14.2048911 18.9510262,14.188183 18.83,14.18 L18.12,14.18 L18.12,14.2 Z" id="Shape" />
-                            <path d="M9.11,0.29 L0.78,8.62 C0.411745823,9.00629829 0.411745823,9.61370171 0.78,10 C0.956726196,10.1937775 1.20775326,10.3029197 1.47,10.3 L5.88,10.3 L5.88,17.15 C5.88,17.7022847 6.32771525,18.15 6.88,18.15 L12.75,18.15 C13.3022847,18.15 13.75,17.7022847 13.75,17.15 L13.75,10.29 L18.16,10.29 C18.4222467,10.2929197 18.6732738,10.1837775 18.85,9.99 C19.2119426,9.60504999 19.2119426,9.00495001 18.85,8.62 L10.48,0.29 C10.09505,-0.0719425778 9.49495001,-0.0719425778 9.11,0.29 Z" id="Shape" />
-                          </g>
-                        </g>
-                      </svg>
-                    </button>
-                  </div>
-                  <>
-                    <input
-                      accept="image/jpeg, image/jpg"
-                      onChange={({ target }) => {
-                        if (target.files[0]) {
-                          setFileValue(target.files[0].name);
-                          setFieldValue('file', target.value);
-                          setFieldTouched('file', true);
-
-                          const { URL } = window;
-                          // eslint-disable-next-line no-undef
-                          const img = new Image();
-                          const file = target.files[0];
-                          img.src = URL.createObjectURL(file);
-                          img.onload = function () {
-                            if (img.width < 70 || img.height < 70) {
-                              console.log('wrong wh', target.files[0], img.height, img.width);
-                              setValidFile(false);
-                            }
-                          };
-                          if (target.files[0].type !== 'image/jpeg' && target.files[0].type !== 'image/jpg') {
-                            console.log('wrong format', target.files[0]);
-                            setValidFile(false);
-                          } else if (target.files[0].size > 5e+6) {
-                            console.log('wrong size', target.files[0]);
-
-                            setValidFile(false);
-                          } else {
-                            setValidFile(true);
-                          }
-                        }
-                      }}
-                      type="file"
-                      name="file"
-                      required
-                      value={values.file}
-                      ref={hiddenFileInput}
-                      style={{ display: 'none' }}
-                    />
-                  </>
+                    <button type="button" onClick={handleUpload} className={`secondary ${styles.mobUploadBtn}`}><UploadIcon /></button>
+                  </label>
+                  <input
+                    accept="image/jpeg, image/jpg"
+                    onChange={({ target }) => {
+                      if (target.files[0]) {
+                        setFieldValue('file', target.value);
+                        setFieldTouched('file', true);
+                        validateImage(target);
+                      }
+                    }}
+                    type="file"
+                    name="file"
+                    id="file"
+                    required
+                    ref={hiddenFileInput}
+                    value={values.file}
+                    style={{ display: 'none' }}
+                  />
                 </div>
               </div>
               <div className={styles.submitHolder}>
                 {isSending
                   && (<CircularProgress />)}
                 {!isSending && (
-                  <button
-                    disabled={!(isValid && values.name !== '' && values.position !== '-1' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)}
-                    className={`primary ${styles.submitBtn}`}
-                    type="submit"
-                  >
-                      {t('form.submit')}
-                  </button>
+                <button
+                  disabled={!(isValid && values.name !== '' && values.position_id !== '-1' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)}
+                  className={`primary ${styles.submitBtn}`}
+                  type="submit"
+                >
+                  {t('form.submit')}
+                </button>
                 )}
               </div>
               {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
@@ -483,24 +406,23 @@ console.log(props.positions.positions);
         </Formik>
         )}
         {!positionsLoaded && (
-            <div className={styles.formPlaceholder}>
-              <div className={styles.firstFormRow}>
-                <div className={styles.fieldPlaceholder} />
-                <div className={styles.fieldPlaceholder} />
-                <div className={styles.fieldPlaceholder} />
-              </div>
-              <div className={styles.secondFormRow}>
+        <div className={styles.formPlaceholder}>
+          <div className={styles.firstFormRow}>
+            <div className={styles.fieldPlaceholder} />
+            <div className={styles.fieldPlaceholder} />
+            <div className={styles.fieldPlaceholder} />
+          </div>
+          <div className={styles.secondFormRow}>
 
-                <div className={styles.selectComponent} />
-                <div />
-              </div>
-              <div className={styles.submitHolder}>
-                <div className={styles.buttonPlaceholder} />
-              </div>
-            </div>
+            <div className={styles.selectComponent} />
+            <div />
+          </div>
+          <div className={styles.submitHolder}>
+            <div className={styles.buttonPlaceholder} />
+          </div>
+        </div>
         )}
       </div>
     </div>
-
   );
 }

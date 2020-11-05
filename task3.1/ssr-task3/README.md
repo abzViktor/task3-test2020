@@ -1,30 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Test assignment for frontend developer position
 
-## Getting Started
+## Installation  
 
-First, run the development server:
+####First of all you need clone this [repository](https://bitbucket.org/Trainee_abz/test2020_viktor_p.abz.dev_t1)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+`git clone https://abz_Viktor@bitbucket.org/Trainee_abz/test2020_viktor_p.abz.dev_t1.git`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+###Local environment
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+####Install all dependencies
+For that go to the root of project folder and run
 
-## Learn More
+`npm install`
 
-To learn more about Next.js, take a look at the following resources:
+####Run this project on your local machine 
+With command
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`npm run dev`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+###Deployment
 
-## Deploy on Vercel
+####There is no production or development server as this project is just test task
+#####If you want to deploy an imitation of production server, follow next steps
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Clone cookbooks repository
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+`git clone https://abz_Viktor@bitbucket.org/Trainee_abz/test2020_viktor_p.abz.dev_cookbooks.git`
+
+* Install [deployer](https://deployer.org/docs/installation.html)
+
+* From root folder run 
+
+`dep deploy dev`
+
+*It can take some time to be executed*
+
+**After that you can reach the site with [this link](https://task3-test2020viktor-p.abzdev2.com/)**
+
+#####If you want to change some server setting than change config than you need and run
+* Install [ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#) 
+#####and run `ansible-playbook --verbose --inventory-file=dev_hosts.ini playbook.yaml` 
+##### from root folder to apply settings you made. 

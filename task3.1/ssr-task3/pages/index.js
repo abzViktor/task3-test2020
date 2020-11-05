@@ -6,7 +6,6 @@ import Tools from '../components/Tools/Tools';
 import { useUserAgent } from 'next-useragent'
 
 export default function Home({users, initialCount, apiStatus }) {
-  console.log(users);
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
     const relation = document.getElementById('relation').offsetParent.offsetTop - 64;

@@ -1,6 +1,7 @@
 .select-component .MuiOutlinedInput-root svg{
   position: absolute;
-  right: 12px;
+  right: 12px !important;
+  top: 24px !important;
   z-index: -4;
 }
 

@@ -2,8 +2,14 @@ import Head from 'next/head';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import React from 'react';
+import { isWebpSupported } from '../utils/webpSupport';
+
 
 export default function Layout({ children }) {
+  const [support, setSupport] = React.useState(true)
+  React.useEffect(() => {
+    setSupport(isWebpSupported);
+  }, []);
   return (
     <>
     <Head>
@@ -18,9 +24,8 @@ export default function Layout({ children }) {
     <meta name="twitter:image:alt" content="Become a cool developer" />
     <meta name="twitter:site" content="@abz.agency" />
     </Head>
-    <div className="wrapper">
+    <div className={`wrapper ${support ? "webp" : "noWebp"}`}>
       <div className="content">
-
       <Header />
       {children}
     </div>

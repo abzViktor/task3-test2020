@@ -12,6 +12,7 @@
     "func-names": ["error", "never"],
     "quotes": [1, "single", "avoid-escape"],
     "no-shadow": 0,
-    "max-len": 0
+    "max-len": 0,
+    "anchor-is-valid": 0
   }
 }
