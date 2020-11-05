@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './letsGet.module.scss';
 
-import ManCool from './images/ManCool';
+import ManCool from '../../assets/man-mobile.svg';
 
 export default function LetsGetComponent() {
   const { t } = useTranslation();

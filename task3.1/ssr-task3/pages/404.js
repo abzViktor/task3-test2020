@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from '../components/404/404.module.scss';
-import NotFoundImage from '../components/404/404-image';
+import NotFoundImage from '../assets/404-image.svg';
 import {useTranslation} from "react-i18next";
 
 export default function NotFound() {

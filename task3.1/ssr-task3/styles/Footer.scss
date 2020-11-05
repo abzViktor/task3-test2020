@@ -102,7 +102,8 @@ footer {
     }
 
     .contact-link:hover,
-    .contact-link:hover svg g{
+    .contact-link:hover svg g,
+    .contact-link:hover svg path{
         color: $primary-color;
         fill: $primary-color;
     }
@@ -198,9 +199,11 @@ footer {
                 margin: 3px;
             }
 
-            .social-link:hover svg g {
+            .social-link:hover svg g,
+            .social-link:hover svg path {
                 fill: $primary-color;
             }
+
             .social-link:nth-last-child(1) svg{
                 margin-right: -7px;
             }
