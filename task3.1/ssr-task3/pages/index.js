@@ -1,11 +1,11 @@
 import React from 'react';
+import { useUserAgent } from 'next-useragent';
 import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
 import Users from '../components/Users/Users';
 import Tools from '../components/Tools/Tools';
-import { useUserAgent } from 'next-useragent'
 
-export default function Home({users, initialCount, apiStatus }) {
+export default function Home({ users, initialCount, apiStatus }) {
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
     const relation = document.getElementById('relation').offsetParent.offsetTop - 64;
@@ -52,30 +52,33 @@ export default function Home({users, initialCount, apiStatus }) {
 }
 
 Home.getInitialProps = async (ctx) => {
-    let ua, initialCount;
-    if(ctx.req) {
-        ua = useUserAgent(ctx.req.headers['user-agent']);
-    }
-    else {
-    }
-    let apiStatus = 200;
-    let users;
-    console.log(ua);
-    if(ctx.req) {
-        initialCount = ua.isMobile === true ? 3 : 6;
-    } else {
-        initialCount = 3;
-    }
+  let ua; let
+    initialCount;
+  if (ctx.req) {
+    ua = useUserAgent(ctx.req.headers['user-agent']);
+  } else {
+  }
+  let apiStatus = 200;
+  let users;
+  console.log(ua);
+  if (ctx.req) {
+    initialCount = ua.isMobile === true ? 3 : 6;
+  } else {
+    initialCount = 3;
+  }
   const res = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=0&length=${initialCount}&count=${initialCount}`);
   console.log(res.status);
-  if(res.status === 200) {
-      users = await res.json();
+  if (res.status === 200) {
+    users = await res.json();
   } else {
-      apiStatus = res.status;
-      users = {};
+    apiStatus = res.status;
+    users = {};
   }
   return (
-      {namespacesRequired: ['common'],
-      users: users,
-      initialCount: initialCount, apiStatus});
+    {
+      namespacesRequired: ['common'],
+      users,
+      initialCount,
+      apiStatus,
+    });
 };
