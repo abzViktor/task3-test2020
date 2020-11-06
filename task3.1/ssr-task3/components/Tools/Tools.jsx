@@ -4,6 +4,7 @@ import styles from './tools.module.scss';
 import JsIcon from '../../assets/tools/javascript.svg';
 import CssIcon from '../../assets/tools/css.svg';
 import HtmlIcon from '../../assets/tools/html.svg';
+
 export default function Tools() {
   const { t } = useTranslation();
 

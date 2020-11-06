@@ -18,22 +18,22 @@ export default function Footer() {
   const { t, i18n } = useTranslation();
   const initialLang = {
     en: 'inactive',
-    de: 'inactive'
-  }
+    de: 'inactive',
+  };
   const [activeLang, setActiveLang] = useState(initialLang);
-  const footerLinks = [[["News", "#"], ["Blog", "#"], ["Partners", "#"], ["Shop", "#"]],
-                 [["Overview", "#"], ["Design", "#"], ["Code", "#"], ["Collaborate", "#"]],
-                 [["Tutorials", "#"], ["Resources", "#"], ["Guides", "#"], ["Examples", "#"]],
-                 [["FAQ", "#"], ["Terms", "/terms"], ["Conditions", "/terms"], ["Help", "#"]]
-                ];
-  const socialNetworks = [<FacebookIcon />,<LinkedInIcon />,<InstagramIcon />,<TwitterIcon />,<PinterestIcon />];
+  const footerLinks = [[['News', '#'], ['Blog', '#'], ['Partners', '#'], ['Shop', '#']],
+    [['Overview', '#'], ['Design', '#'], ['Code', '#'], ['Collaborate', '#']],
+    [['Tutorials', '#'], ['Resources', '#'], ['Guides', '#'], ['Examples', '#']],
+    [['FAQ', '#'], ['Terms', '/terms'], ['Conditions', '/terms'], ['Help', '#']],
+  ];
+  const socialNetworks = [<FacebookIcon />, <LinkedInIcon />, <InstagramIcon />, <TwitterIcon />, <PinterestIcon />];
 
   useEffect(() => {
     document.cookie.split(' ').forEach((cookie) => {
-      if(cookie.match('next-i18next')) {
+      if (cookie.match('next-i18next')) {
         setActiveLang({
           ...initialLang,
-          [cookie.split('=')[1].replace(';', '')]: 'active'
+          [cookie.split('=')[1].replace(';', '')]: 'active',
         });
       }
     });
@@ -51,7 +51,7 @@ export default function Footer() {
       <div className="container">
         <div className="top-footer">
           <div className="logo-container">
-            <a href="#"><Logo /></a>
+            <a aria-label="Logo" href="#"><Logo /></a>
           </div>
           <nav>
             <ul>
@@ -75,24 +75,24 @@ export default function Footer() {
                 </a>
               </div>
               <div>
-                <a className="contact-link" href={`tel:${Contacts.CONTACTPHONE}`} >
+                <a className="contact-link" href={`tel:${Contacts.CONTACTPHONE}`}>
                   <Phone />
                   {Contacts.CONTACTPHONE}
                 </a>
               </div>
               <div>
-                <a className="contact-link" href={`tel:${Contacts.CONTACTCELLPHONE}`} >
+                <a className="contact-link" href={`tel:${Contacts.CONTACTCELLPHONE}`}>
                   <CellPhone />
                   {Contacts.CONTACTCELLPHONE}
                 </a>
               </div>
             </div>
             <div className="other-links">
-              {footerLinks.map((linkBlock, index)=> (
+              {footerLinks.map((linkBlock, index) => (
                 <ul key={index}>
-                {linkBlock.map((link) => (
+                  {linkBlock.map((link) => (
                     <li key={link[0]}><a className="secondary" href={link[1]}>{t(`links.${link[0]}`)}</a></li>
-                ))}
+                  ))}
                 </ul>
               ))}
             </div>
@@ -112,7 +112,7 @@ export default function Footer() {
           </div>
           <div className="social-networks">
             {socialNetworks.map((component, index) => (
-                <a key={index} className="social-link" href="#">{component}</a>
+              <a key={index} className="social-link" href="#">{component}</a>
             ))}
           </div>
         </div>

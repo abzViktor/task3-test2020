@@ -32,19 +32,18 @@ export default function DesktopMenu() {
       }, 300);
     }
     if (window.location.href.match('registration')) {
-      console.log('Location changed');
       setActiveMenu({
         ...initialActive,
         registration: 'primary active',
       });
     } else {
-      console.log('Location changed');
       checkActive();
       window.addEventListener('scroll', checkActive);
       return () => {
         window.removeEventListener('scroll', checkActive);
       };
     }
+    return null;
   }, [router]);
   return (
     <nav>

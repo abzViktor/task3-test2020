@@ -95,7 +95,7 @@ export default function Header() {
         <header className="container">
           <div className="desktop-header">
             <div className="logo-container">
-              <a onClick={scrollToTop} href="/"><Logo /></a>
+              <a aria-label="Logo" onClick={scrollToTop} href="/"><Logo /></a>
             </div>
             <div className="flex">
               <DesktopMenu />
@@ -113,7 +113,7 @@ export default function Header() {
                   <>
                     <div className="header-contacts" ref={refContainer}>
                       <div><span ref={refName}><PlaceholderName /></span></div>
-                      <div><a ref={refEmail}><PlaceholderEmail /></a></div>
+                      <div><a href="#" aria-label="placeholder" ref={refEmail}><PlaceholderEmail /></a></div>
                     </div>
                     <PlaceholderImage />
                   </>
@@ -129,7 +129,7 @@ export default function Header() {
           <div className="mobile-header flex">
             {open && (
             <>
-              <div onClick={toggleMenu(false)} className={`dark ${open ? 'opened' : 'closed'}`} />
+              <div aria-hidden="true" tabIndex={0} role="button" aria-label="Close menu" onClick={toggleMenu(false)} className={`dark ${open ? 'opened' : 'closed'}`} />
               <MobileMenu isUserLoaded={isUserLoaded} user={user} toggleMenu={toggleMenu} />
             </>
             )}

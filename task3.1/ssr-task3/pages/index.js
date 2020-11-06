@@ -1,11 +1,13 @@
 import React from 'react';
 import { useUserAgent } from 'next-useragent';
+import PropTypes from 'prop-types';
 import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
 import Users from '../components/Users/Users';
 import Tools from '../components/Tools/Tools';
 
 export default function Home({ users, initialCount, apiStatus }) {
+  /* global fetch */
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
     const relation = document.getElementById('relation').offsetParent.offsetTop - 64;
@@ -56,18 +58,15 @@ Home.getInitialProps = async (ctx) => {
     initialCount;
   if (ctx.req) {
     ua = useUserAgent(ctx.req.headers['user-agent']);
-  } else {
   }
   let apiStatus = 200;
   let users;
-  console.log(ua);
   if (ctx.req) {
     initialCount = ua.isMobile === true ? 3 : 6;
   } else {
     initialCount = 3;
   }
   const res = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=0&length=${initialCount}&count=${initialCount}`);
-  console.log(res.status);
   if (res.status === 200) {
     users = await res.json();
   } else {
@@ -81,4 +80,10 @@ Home.getInitialProps = async (ctx) => {
       initialCount,
       apiStatus,
     });
+};
+
+Home.propTypes = {
+  users: PropTypes.shape({}).isRequired,
+  initialCount: PropTypes.number.isRequired,
+  apiStatus: PropTypes.number.isRequired,
 };

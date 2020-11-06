@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Divider from '@material-ui/core/Divider';
+import PropTypes from 'prop-types';
 import PlaceholderImage from '../../../assets/placeholders/Ellipse_1.svg';
 import PlaceholderName from '../../../assets/placeholders/Rounded_Rectangle_2.svg';
 import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.svg';
@@ -8,7 +9,6 @@ import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.s
 export default function MobileMenu(props) {
   const { isUserLoaded, user, toggleMenu } = props;
   const { t } = useTranslation();
-
   return (
     <>
       <div className="sideMenu opened">
@@ -26,7 +26,7 @@ export default function MobileMenu(props) {
         <div className="side-menu-container-contacts">
           <div><PlaceholderImage /></div>
           <div><span className="name"><PlaceholderName /></span></div>
-          <div><a href="mailto:Superstar@gmail.com"><PlaceholderEmail /></a></div>
+          <div><a aria-label="placeholder" href="mailto:Superstar@gmail.com"><PlaceholderEmail /></a></div>
         </div>
         )}
         <Divider />
@@ -45,3 +45,9 @@ export default function MobileMenu(props) {
     </>
   );
 }
+
+MobileMenu.propTypes = {
+  isUserLoaded: PropTypes.bool.isRequired,
+  user: PropTypes.shape({ name: PropTypes.string, email: PropTypes.string, photo: PropTypes.string }).isRequired,
+  toggleMenu: PropTypes.func.isRequired,
+};

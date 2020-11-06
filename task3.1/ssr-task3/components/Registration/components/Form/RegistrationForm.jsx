@@ -11,6 +11,7 @@ import {
 import * as yup from 'yup';
 import { CircularProgress } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
+import PropTypes from 'prop-types';
 import { trimDoubleSpaces, trimSideSpaces, trimSpaces } from '../../../../utils/formatText';
 import styles from './form.module.scss';
 import ArrowIcon from '../../../../assets/caret-down.svg';
@@ -18,12 +19,15 @@ import UploadIcon from '../../../../assets/upload.svg';
 import { RootStore } from '../../../root.context';
 
 export default function RegistrationForm(props) {
+  /* global FormData, fetch, Image */
+  const { apiStatus, positions } = props;
+  const usersPositions = positions.positions;
+
   const { t } = useTranslation();
   const [open, setOpen] = React.useState(false);
   const [isValidFile, setValidFile] = React.useState(false);
   const [isSending, setSending] = React.useState(false);
-  const [positions, setPositions] = React.useState(props.positions.positions);
-  const positionsLoaded = props.apiStatus === 200;
+  const positionsLoaded = apiStatus === 200;
   const { dispatch } = useContext(RootStore);
   const [sendSuccess, setSendSuccess] = React.useState({
     validationSuccess: true,
@@ -108,9 +112,9 @@ export default function RegistrationForm(props) {
       .then((res) => {
         const formData = new FormData();
         const fileField = document.querySelector('input[type="file"]');
-        console.log(data);
         ['position_id', 'name', 'email'].map((key) => {
           formData.append(key, data[key]);
+          return null;
         });
         formData.append('phone', data.phone.replace(/[()-]/g, ''));
         formData.append('photo', fileField.files[0]);
@@ -150,9 +154,6 @@ export default function RegistrationForm(props) {
               serverSuccess: false,
             });
           });
-      })
-      .catch((e) => {
-        console.log(e);
       });
   };
 
@@ -340,7 +341,7 @@ export default function RegistrationForm(props) {
                           <MenuItem value="-1" disabled>
                             {t('form.select')}
                           </MenuItem>
-                          {positions.map((pos) => (
+                          {usersPositions.map((pos) => (
                             <MenuItem key={pos.id} value={pos.id}>{pos.name}</MenuItem>
                           ))}
 
@@ -362,7 +363,7 @@ export default function RegistrationForm(props) {
                       tabIndex="-1"
                     />
                     <button type="button" onClick={handleUpload} className={`secondary ${styles.desktopUploadBtn}`}>{t('form.upload.2')}</button>
-                    <button type="button" onClick={handleUpload} className={`secondary ${styles.mobUploadBtn}`}><UploadIcon /></button>
+                    <button aria-label="Upload" type="button" onClick={handleUpload} className={`secondary ${styles.mobUploadBtn}`}><UploadIcon /></button>
                   </label>
                   <input
                     accept="image/jpeg, image/jpg"
@@ -426,3 +427,13 @@ export default function RegistrationForm(props) {
     </div>
   );
 }
+
+RegistrationForm.propTypes = {
+  apiStatus: PropTypes.number.isRequired,
+  positions: PropTypes.shape({
+    positions: PropTypes.shape({
+      id: PropTypes.number, name: PropTypes.string, map: PropTypes.func,
+    }),
+    length: PropTypes.func,
+  }).isRequired,
+};
