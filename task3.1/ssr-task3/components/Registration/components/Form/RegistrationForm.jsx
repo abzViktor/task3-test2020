@@ -18,7 +18,7 @@ import ArrowIcon from '../../../../assets/caret-down.svg';
 import UploadIcon from '../../../../assets/upload.svg';
 import { RootStore } from '../../../root.context';
 
-export default function RegistrationForm(props) {
+const RegistrationForm = React.memo((props) => {
   /* global FormData, fetch, Image */
   const { apiStatus, positions } = props;
   const usersPositions = positions.positions;
@@ -426,14 +426,14 @@ export default function RegistrationForm(props) {
       </div>
     </div>
   );
-}
+});
 
 RegistrationForm.propTypes = {
   apiStatus: PropTypes.number.isRequired,
   positions: PropTypes.shape({
-    positions: PropTypes.shape({
-      id: PropTypes.number, name: PropTypes.string, map: PropTypes.func,
-    }),
+    positions: PropTypes.arrayOf(PropTypes.object),
     length: PropTypes.func,
   }).isRequired,
 };
+
+export default RegistrationForm;

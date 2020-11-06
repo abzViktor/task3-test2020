@@ -5,7 +5,7 @@ import JsIcon from '../../assets/tools/javascript.svg';
 import CssIcon from '../../assets/tools/css.svg';
 import HtmlIcon from '../../assets/tools/html.svg';
 
-export default function Tools() {
+export default React.memo(() => {
   const { t } = useTranslation();
 
   return (
@@ -55,4 +55,4 @@ export default function Tools() {
       </div>
     </div>
   );
-}
+});

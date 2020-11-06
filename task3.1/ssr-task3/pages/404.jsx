@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styles from '../components/404/404.module.scss';
 import NotFoundImage from '../assets/404-image.svg';
 
-export default function NotFound() {
+export default React.memo(() => {
   const { t } = useTranslation();
   return (
     <div className={styles.notFoundContainer}>
@@ -18,4 +18,4 @@ export default function NotFound() {
       </div>
     </div>
   );
-}
+});

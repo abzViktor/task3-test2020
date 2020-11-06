@@ -14,7 +14,7 @@ import CellPhone from '../../assets/footer-icons/cellphone.svg';
 
 import Logo from '../../assets/logo.svg';
 
-export default function Footer() {
+export default React.memo(() => {
   const { t, i18n } = useTranslation();
   const initialLang = {
     en: 'inactive',
@@ -119,4 +119,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-}
+});

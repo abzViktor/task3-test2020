@@ -6,7 +6,7 @@ import PlaceholderImage from '../../../assets/placeholders/Ellipse_1.svg';
 import PlaceholderName from '../../../assets/placeholders/Rounded_Rectangle_2.svg';
 import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.svg';
 
-export default function MobileMenu(props) {
+const MobileMenu = React.memo((props) => {
   const { isUserLoaded, user, toggleMenu } = props;
   const { t } = useTranslation();
   return (
@@ -44,10 +44,12 @@ export default function MobileMenu(props) {
       </div>
     </>
   );
-}
+});
 
 MobileMenu.propTypes = {
   isUserLoaded: PropTypes.bool.isRequired,
   user: PropTypes.shape({ name: PropTypes.string, email: PropTypes.string, photo: PropTypes.string }).isRequired,
   toggleMenu: PropTypes.func.isRequired,
 };
+
+export default MobileMenu;

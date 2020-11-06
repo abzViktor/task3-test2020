@@ -2,9 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './banner.module.scss';
 
-export default function Banner() {
+export default React.memo(() => {
   const { t } = useTranslation();
-
   return (
     <div className={styles.mainBanner}>
       <div className="container">
@@ -29,4 +28,4 @@ export default function Banner() {
       </div>
     </div>
   );
-}
+});

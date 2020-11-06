@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './RegistrationBanner.module.scss';
 
-export default function RegistrationBanner() {
+export default React.memo(() => {
   const { t } = useTranslation();
 
   return (
@@ -30,4 +30,4 @@ export default function RegistrationBanner() {
       </div>
     </div>
   );
-}
+});

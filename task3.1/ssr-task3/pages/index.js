@@ -1,42 +1,57 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useUserAgent } from 'next-useragent';
 import PropTypes from 'prop-types';
+import { throttle } from 'throttle-debounce';
 import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
 import Users from '../components/Users/Users';
 import Tools from '../components/Tools/Tools';
+import { HeaderStore } from '../components/header.context';
 
 export default function Home({ users, initialCount, apiStatus }) {
   /* global fetch */
+  const { headerState, headerDispatch } = useContext(HeaderStore);
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
     const relation = document.getElementById('relation').offsetParent.offsetTop - 64;
     const users = document.getElementById('users').offsetParent.offsetTop - 64;
 
     const scrollToElement = () => {
+      console.log('scroll');
       if (window.pageYOffset < about) {
-        localStorage.removeItem('active');
+        headerDispatch({
+          type: 'ACTIVE_MENU_ITEM',
+          payload: '',
+        });
       }
       if (window.pageYOffset >= about
           && window.pageYOffset < relation
-          && localStorage.getItem('active') !== 'about') {
-        localStorage.setItem('active', 'about');
+          && headerState.activeMenu !== 'about') {
+        headerDispatch({
+          type: 'ACTIVE_MENU_ITEM',
+          payload: 'about',
+        });
       }
       if (window.pageYOffset >= relation
           && window.pageYOffset < users
-          && localStorage.getItem('active') !== 'relation') {
-        localStorage.setItem('active', 'relation');
+          && headerState.activeMenu !== 'relation') {
+        headerDispatch({
+          type: 'ACTIVE_MENU_ITEM',
+          payload: 'relation',
+        });
       }
       if (window.pageYOffset >= users
-          && localStorage.getItem('active') !== 'users') {
-        localStorage.setItem('active', 'users');
+          && headerState.activeMenu !== 'users') {
+        headerDispatch({
+          type: 'ACTIVE_MENU_ITEM',
+          payload: 'users',
+        });
       }
     };
     scrollToElement();
-    window.addEventListener('scroll', scrollToElement);
+    window.addEventListener('scroll', throttle(200, scrollToElement));
     return function cleanup() {
-      localStorage.removeItem('active');
-      window.removeEventListener('scroll', scrollToElement);
+      window.removeEventListener('scroll', throttle(200, scrollToElement));
     };
   }, []);
 

@@ -15,7 +15,7 @@ import LogOut from '../../assets/header/sign-out.svg';
 
 import { RootStore } from '../root.context';
 
-export default function Header() {
+export default React.memo(() => {
   const [tipName, setTipName] = React.useState('');
   const [tipEmail, setTipEmail] = React.useState('');
   const [user, setUser] = useState([]);
@@ -146,4 +146,4 @@ export default function Header() {
       </div>
     </>
   );
-}
+});

@@ -3,14 +3,12 @@ import PropTypes from 'prop-types';
 import RegistrationBanner from '../components/Registration/components/Banner/RegistrationBanner';
 import RegistrationForm from '../components/Registration/components/Form/RegistrationForm';
 
-export default function Registration({ positions, apiStatus }) {
-  return (
-    <>
-      <RegistrationBanner />
-      <RegistrationForm positions={positions} apiStatus={apiStatus} />
-    </>
-  );
-}
+const Registration = React.memo(({ positions, apiStatus }) => (
+  <>
+    <RegistrationBanner />
+    <RegistrationForm positions={positions} apiStatus={apiStatus} />
+  </>
+));
 
 Registration.getInitialProps = async () => {
   /* global fetch */
@@ -31,3 +29,5 @@ Registration.propTypes = {
   positions: PropTypes.shape({}).isRequired,
   apiStatus: PropTypes.number.isRequired,
 };
+
+export default Registration;

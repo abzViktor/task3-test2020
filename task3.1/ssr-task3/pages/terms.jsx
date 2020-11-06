@@ -1,9 +1,8 @@
 import React from 'react';
-import styles from '../components/Terms/Terms.module.scss';
 import { useTranslation } from 'react-i18next';
-import Registration from "./registration";
+import styles from '../components/Terms/Terms.module.scss';
 
-export default function Terms() {
+export default React.memo(() => {
   const { t } = useTranslation();
   return (
     <div className={styles.termsContainer}>
@@ -76,8 +75,4 @@ export default function Terms() {
       </div>
     </div>
   );
-}
-
-Terms.getInitialProps = async (ctx) => {
-  return ({});
-};
+});
