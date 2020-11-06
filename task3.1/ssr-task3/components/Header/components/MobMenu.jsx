@@ -8,6 +8,7 @@ import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.s
 
 const MobileMenu = React.memo((props) => {
   const { isUserLoaded, user, toggleMenu } = props;
+  console.log(props);
   const { t } = useTranslation();
   return (
     <>

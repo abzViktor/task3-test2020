@@ -1,37 +1,35 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tooltip } from '@material-ui/core';
 
-import Box from '@material-ui/core/Box';
+import dynamic from 'next/dynamic';
+import { throttle } from 'throttle-debounce';
 import DesktopMenu from './components/Menu';
-import MobileMenu from './components/MobMenu';
-
 import Logo from '../../assets/logo.svg';
 import MenuButton from '../../assets/header/line-menu.svg';
-import PlaceholderImage from '../../assets/placeholders/Ellipse_1.svg';
-import PlaceholderName from '../../assets/placeholders/Rounded_Rectangle_2.svg';
-import PlaceholderEmail from '../../assets/placeholders/Rounded_Rectangle_3.svg';
-import LogOut from '../../assets/header/sign-out.svg';
 
+import DesktopUser from './components/DesktopUser';
+import LogOut from '../../assets/header/sign-out.svg';
 import { RootStore } from '../root.context';
 
+const MobileMenu = dynamic(() => import('../Header/components/MobMenu'));
+
 export default React.memo(() => {
-  const [tipName, setTipName] = React.useState('');
-  const [tipEmail, setTipEmail] = React.useState('');
-  const [user, setUser] = useState([]);
-  const [isUserLoaded, setUserLoaded] = useState(false);
   const { state } = useContext(RootStore);
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const refContainer = React.useRef(null);
-  const refName = React.useRef(null);
-  const refEmail = React.useRef(null);
   const [html, setHtml] = useState(null);
   const [scrollBackPosition, setScrollBackPosition] = useState(0);
+  const [user, setUser] = useState([]);
+  const [isUserLoaded, setUserLoaded] = useState(false);
+  const [mobileUser, setMobileUser] = useState({});
+
+  const [isDesktop, setIsDesktop] = useState(false);
+
   useEffect(() => {
     setHtml(document.querySelector('body'));
   }, []);
   const toggleMenu = (value) => () => {
+    setMobileUser(user);
     setOpen(value);
     if (value) {
       const scrollPosition = window.pageYOffset;
@@ -50,24 +48,13 @@ export default React.memo(() => {
   };
 
   useEffect(() => {
-    if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
-      setTipName(user.name);
-    } else {
-      setTipName('');
-    }
-  });
-
-  useEffect(() => {
-    if (refEmail.current.offsetWidth > refContainer.current.offsetWidth && user) {
-      setTipEmail(user.email);
-    } else {
-      setTipEmail('');
-    }
-  });
-
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
+    const resize = () => {
+      setIsDesktop(window.innerWidth > 830);
+    };
+    resize();
+    window.addEventListener('resize', throttle(200, resize));
+    return window.removeEventListener('resize', throttle(200, resize));
+  }, []);
 
   useEffect(() => {
     window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
@@ -77,10 +64,14 @@ export default React.memo(() => {
           setUser(data.user);
           setUserLoaded(true);
         } else {
-        // proccess server errors
+          // proccess server errors
         }
       });
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -100,24 +91,7 @@ export default React.memo(() => {
             <div className="flex">
               <DesktopMenu />
               <div className="header-personal-info">
-                {isUserLoaded && (
-                  <>
-                    <div className="header-contacts" ref={refContainer}>
-                      <div className="header-user"><Tooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></Tooltip></div>
-                      <div className="header-user"><Tooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></Tooltip></div>
-                    </div>
-                    <img width="70" height="70" className="header-avatar" src={user.photo} onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} alt="avatar icon" />
-                  </>
-                )}
-                {!isUserLoaded && (
-                  <>
-                    <div className="header-contacts" ref={refContainer}>
-                      <div><span ref={refName}><PlaceholderName /></span></div>
-                      <div><a href="#" aria-label="placeholder" ref={refEmail}><PlaceholderEmail /></a></div>
-                    </div>
-                    <PlaceholderImage />
-                  </>
-                )}
+                {isDesktop && <DesktopUser user={user} isUserLoaded={isUserLoaded} />}
                 <div>
                   <a href="#" className="exitButton">
                     <LogOut />
@@ -130,7 +104,7 @@ export default React.memo(() => {
             {open && (
             <>
               <div aria-hidden="true" tabIndex={0} role="button" aria-label="Close menu" onClick={toggleMenu(false)} className={`dark ${open ? 'opened' : 'closed'}`} />
-              <MobileMenu isUserLoaded={isUserLoaded} user={user} toggleMenu={toggleMenu} />
+              <MobileMenu isUserLoaded={isUserLoaded} user={mobileUser} toggleMenu={toggleMenu} />
             </>
             )}
             <div className="logo-container">
