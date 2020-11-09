@@ -28,7 +28,7 @@
   margin: 0 !important;
 }
 
-@media screen and (max-width: 1440px){
+@media screen and (max-width: #{$breakpoint-laptop-large}px){
   .mainText {
     max-width: 427px;
   }
@@ -48,7 +48,7 @@
   }
 }
 
-@media screen and (max-width: 992px) and (min-width: 701px) {
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) and (min-width: #{$breakpoint-tablet-medium + 1}px) {
   .bannerText {
     padding-top: 106px;
   }
@@ -72,7 +72,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: #{$breakpoint-tablet-small}px) {
   .mainText {
     margin: 0 auto;
   }
@@ -101,13 +101,13 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) {
   .textBlock {
     margin: 108px 0 118px;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
     .textBlock {
       margin: 66px 0 70px;
       .h1 {
@@ -154,6 +154,3 @@
     }
   }
 }
-
-
-

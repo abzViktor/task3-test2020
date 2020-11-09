@@ -27,7 +27,7 @@
 }
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) {
   .notFoundContainer {
     padding: 26px 0;
     h1 {

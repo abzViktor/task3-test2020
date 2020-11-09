@@ -1,3 +1,5 @@
+@import '../ssr-task3/styles/variables.scss';
+
 .toolsContainer {
   background-color: #f6f6f6;
   padding: 133px 0 118px 0;
@@ -43,7 +45,7 @@
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: #{$breakpoint-laptop-large}px) {
  .toolsContainer {
    padding-top: 136px;
    p {
@@ -65,7 +67,7 @@
  }
 }
 
-@media screen and (max-width: 974px) {
+@media screen and (max-width: #{$breakpoint-tablet-x-large - 18}px) {
   .toolsContainer {
     padding: 98px 0 81px 0;
  h2 {
@@ -135,7 +137,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: #{$breakpoint-mobile-medium + 100}px) {
   .toolsContainer {
     padding: 60px 0 51px;
     h2 {

@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import styles from './users.module.scss';
-import { RootStore } from '../root.context';
+import { RootStore } from '../../context/root.context';
 import GetUsers from './components/GetUsers';
 
 export default function Users({ users, initialCount, apiStatus }) {

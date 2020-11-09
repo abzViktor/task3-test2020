@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Router from 'next/router';
 import Select from '@material-ui/core/Select';
@@ -16,24 +16,26 @@ import { trimDoubleSpaces, trimSideSpaces, trimSpaces } from '../../../../utils/
 import styles from './form.module.scss';
 import ArrowIcon from '../../../../assets/caret-down.svg';
 import UploadIcon from '../../../../assets/upload.svg';
-import { RootStore } from '../../../root.context';
+import { RootStore } from '../../../../context/root.context';
+import { getToken, setUser } from '../../../../services/api';
+
+import { validateNumberMask, validateImage, validateLoadedImage } from '../../../../utils/validators';
 
 const RegistrationForm = React.memo((props) => {
-  /* global FormData, fetch, Image */
+  /* global FormData */
   const { apiStatus, positions } = props;
   const usersPositions = positions.positions;
-
   const { t } = useTranslation();
-  const [open, setOpen] = React.useState(false);
-  const [isValidFile, setValidFile] = React.useState(false);
-  const [isSending, setSending] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [isValidFile, setValidFile] = useState(false);
+  const [isSending, setSending] = useState(false);
   const positionsLoaded = apiStatus === 200;
   const { dispatch } = useContext(RootStore);
-  const [sendSuccess, setSendSuccess] = React.useState({
+  const [sendSuccess, setSendSuccess] = useState({
     validationSuccess: true,
     serverSuccess: true,
   });
-  const [fileValue, setFileValue] = React.useState('');
+  const [fileValue, setFileValue] = useState('');
 
   const initialValues = {
     name: '',
@@ -56,38 +58,6 @@ const RegistrationForm = React.memo((props) => {
     }
   }, []);
 
-  const validateNumberMask = (value) => {
-    let error = '';
-    if (value === '+38(0__)___-__-__' || !value) {
-      error = '';
-    } else if (!value.match(/^\+38\(0\d{2}\)\d{3}-\d{2}-\d{2}$/) && !value.match(/^\+\d{10}/)) {
-      error = 'Phone number should be in +38(0XX)XXX-XX-XX format!';
-    }
-    return error;
-  };
-
-  const validateImage = (target) => {
-    if (target.files[0]) {
-      setFileValue(target.files[0].name);
-      const { URL } = window;
-      const img = new Image();
-      const file = target.files[0];
-      img.src = URL.createObjectURL(file);
-      img.onload = function () {
-        if (img.width < 70 || img.height < 70) {
-          setValidFile(false);
-        }
-      };
-      if (target.files[0].type !== 'image/jpeg' && target.files[0].type !== 'image/jpg') {
-        setValidFile(false);
-      } else if (target.files[0].size > 5e+6) {
-        setValidFile(false);
-      } else {
-        setValidFile(true);
-      }
-    }
-  };
-
   const validationSchema = yup.object().shape({
     name: yup.string()
       .min(2, 'Name should be at least 2 characters!')
@@ -105,56 +75,41 @@ const RegistrationForm = React.memo((props) => {
     hiddenFileInput.current.click();
   };
 
-  const submitForm = (data) => {
-    setSending(true);
-    fetch('https://frontend-test-assignment-api.abz.agency/api/v1/token')
-      .then((response) => response.json())
-      .then((res) => {
-        const formData = new FormData();
-        const fileField = document.querySelector('input[type="file"]');
-        ['position_id', 'name', 'email'].map((key) => {
-          formData.append(key, data[key]);
-          return null;
-        });
-        formData.append('phone', data.phone.replace(/[()-]/g, ''));
-        formData.append('photo', fileField.files[0]);
+  const handleImageChange = (target) => {
+    setFileValue(target.files[0].name);
+    if (target.files[0]) {
+      validateLoadedImage(target).then((value) => setValidFile(value));
+      setValidFile(validateImage(target));
+    }
+  };
 
-        fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users', {
-          method: 'POST',
-          body: formData,
-          headers: {
-            Token: res.token, // get token with GET api/v1/token method
-          },
-        })
-          .then((response) => response.json())
-          .then((postResponse) => {
-            if (postResponse.success) {
-              setTimeout(() => {
-                setSending(false);
-                setOpen(true);
-                setSendSuccess({
-                  serverSuccess: true,
-                  validationSuccess: true,
-                });
-              }, 2000);
-            } else {
-              setSending(false);
-              setOpen(true);
-              setSendSuccess({
-                serverSuccess: true,
-                validationSuccess: false,
-              });
-            }
-          })
-          .catch(() => {
-            setSending(false);
-            setOpen(true);
-            setSendSuccess({
-              validationSuccess: true,
-              serverSuccess: false,
-            });
-          });
+  const submitForm = async (data) => {
+    setSending(true);
+    const token = await getToken();
+    const formData = new FormData();
+    const fileField = document.querySelector('input[type="file"]');
+    ['position_id', 'name', 'email'].map((key) => {
+      formData.append(key, data[key]);
+      return null;
+    });
+    formData.append('phone', data.phone.replace(/[()-]/g, ''));
+    formData.append('photo', fileField.files[0]);
+    const usersRes = await setUser(formData, token.token);
+    if (usersRes.success) {
+      setSending(false);
+      setOpen(true);
+      setSendSuccess({
+        serverSuccess: true,
+        validationSuccess: true,
       });
+    } else {
+      setSending(false);
+      setOpen(true);
+      setSendSuccess({
+        serverSuccess: true,
+        validationSuccess: false,
+      });
+    }
   };
 
   return (
@@ -267,7 +222,7 @@ const RegistrationForm = React.memo((props) => {
                         setFieldTouched(target.name, true);
                       }
                     }}
-                    helperText={touched.name ? errors.name : ''}
+                    helperText={touched.name && errors.name ? errors.name : '\u00a0'}
                     error={touched.name && (!!errors.name)}
                   />
                 </div>
@@ -279,7 +234,7 @@ const RegistrationForm = React.memo((props) => {
                     placeholder={t('form.email.2')}
                     variant="outlined"
                     as={TextField}
-                    helperText={touched.email ? errors.email : ''}
+                    helperText={touched.email && errors.email ? errors.email : '\u00a0'}
                     error={touched.email && (!!errors.email)}
                     onChange={({ target }) => {
                       setFieldValue(target.name, trimSpaces(target.value));
@@ -312,7 +267,7 @@ const RegistrationForm = React.memo((props) => {
                             type="tel"
                             required
                             label={t('form.phone.1')}
-                            helperText={touched.phone ? errors.phone : ''}
+                            helperText={touched.phone && errors.phone ? errors.phone : '\u00a0'}
                             error={touched.phone && (!!errors.phone)}
                           />
                         )}
@@ -371,7 +326,7 @@ const RegistrationForm = React.memo((props) => {
                       if (target.files[0]) {
                         setFieldValue('file', target.value);
                         setFieldTouched('file', true);
-                        validateImage(target);
+                        handleImageChange(target);
                       }
                     }}
                     type="file"
@@ -397,11 +352,6 @@ const RegistrationForm = React.memo((props) => {
                 </button>
                 )}
               </div>
-              {/* <pre>{JSON.stringify(values, null, 2)}</pre> */}
-              {/* <pre>{JSON.stringify(errors, null, 2)}</pre> */}
-              {/* <pre>{JSON.stringify(values.name.touched, null, 2)}</pre> */}
-              {/* /!* <pre>{JSON.stringify(dirty, null, 2)}</pre> *!/ */}
-              {/* <pre>{JSON.stringify(touched, null, 2)}</pre> */}
             </Form>
           )}
         </Formik>
@@ -409,9 +359,9 @@ const RegistrationForm = React.memo((props) => {
         {!positionsLoaded && (
         <div className={styles.formPlaceholder}>
           <div className={styles.firstFormRow}>
-            <div className={styles.fieldPlaceholder} />
-            <div className={styles.fieldPlaceholder} />
-            <div className={styles.fieldPlaceholder} />
+            {[...Array(3)].map(() => (
+              <div className={styles.fieldPlaceholder} />
+            ))}
           </div>
           <div className={styles.secondFormRow}>
 

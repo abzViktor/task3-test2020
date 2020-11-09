@@ -17,18 +17,18 @@ const DesktopUser = React.memo((props) => {
   useEffect(() => {
     if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
       setTipName(user.name);
-    } else {
+    }
+    if (refName.current.offsetWidth <= refContainer.current.offsetWidth && user) {
       setTipName('');
     }
-  });
-
-  useEffect(() => {
     if (refEmail.current.offsetWidth > refContainer.current.offsetWidth && user) {
       setTipEmail(user.email);
-    } else {
+    }
+    if (refEmail.current.offsetWidth <= refContainer.current.offsetWidth && user) {
       setTipEmail('');
     }
-  });
+  }, []);
+
   return (
     <>
       {isUserLoaded && (

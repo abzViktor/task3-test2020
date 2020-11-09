@@ -6,10 +6,10 @@ import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
 import Users from '../components/Users/Users';
 import Tools from '../components/Tools/Tools';
-import { HeaderStore } from '../components/header.context';
+import { HeaderStore } from '../context/header.context';
+import { getUsers } from '../services/api';
 
 export default function Home({ users, initialCount, apiStatus }) {
-  /* global fetch */
   const { headerState, headerDispatch } = useContext(HeaderStore);
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
@@ -50,9 +50,7 @@ export default function Home({ users, initialCount, apiStatus }) {
     };
     scrollToElement();
     window.addEventListener('scroll', throttle(200, scrollToElement));
-    return function cleanup() {
-      window.removeEventListener('scroll', throttle(200, scrollToElement));
-    };
+    return window.removeEventListener('scroll', throttle(200, scrollToElement));
   }, []);
 
   return (
@@ -81,7 +79,7 @@ Home.getInitialProps = async (ctx) => {
   } else {
     initialCount = 3;
   }
-  const res = await fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=0&length=${initialCount}&count=${initialCount}`);
+  const res = await getUsers(initialCount);
   if (res.status === 200) {
     users = await res.json();
   } else {

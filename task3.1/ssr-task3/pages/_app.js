@@ -7,7 +7,7 @@ import '../styles/Header.scss';
 import '../styles/form.scss';
 import Head from 'next/head';
 import { appWithTranslation } from '../i18n';
-import { RootProvider } from '../components/root.context';
+import { RootProvider } from '../context/root.context';
 import Layout from '../components/layout';
 
 function MyApp({ Component, pageProps }) {

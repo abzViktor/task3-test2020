@@ -13,6 +13,7 @@ import Phone from '../../assets/footer-icons/phone.svg';
 import CellPhone from '../../assets/footer-icons/cellphone.svg';
 
 import Logo from '../../assets/logo.svg';
+import MENUITEMS from '../../constants/menuItems';
 
 export default React.memo(() => {
   const { t, i18n } = useTranslation();
@@ -55,9 +56,7 @@ export default React.memo(() => {
           </div>
           <nav>
             <ul>
-              <li><a href="/#about" className="secondary">{t('About.1')}</a></li>
-              <li><a href="/#relation" className="secondary">{t('Relationships.1')}</a></li>
-              <li><a href="/#users" className="secondary">{t('Users.1')}</a></li>
+              {MENUITEMS.map((item) => (<li><a href={`/#${item[0]}`} className="secondary">{t(`${item[1]}.1`)}</a></li>))}
               <li><a href="/registration#form" className="secondary">{t('SignUp.1')}</a></li>
             </ul>
           </nav>

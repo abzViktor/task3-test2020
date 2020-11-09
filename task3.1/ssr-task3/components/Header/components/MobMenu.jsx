@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import PlaceholderImage from '../../../assets/placeholders/Ellipse_1.svg';
 import PlaceholderName from '../../../assets/placeholders/Rounded_Rectangle_2.svg';
 import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.svg';
+import MENUITEMS from '../../../constants/menuItems';
 
 const MobileMenu = React.memo((props) => {
   const { isUserLoaded, user, toggleMenu } = props;
@@ -34,9 +35,7 @@ const MobileMenu = React.memo((props) => {
         <div className="side-menu-container-nav">
           <nav>
             <ul>
-              <li><a href="/#about" onClick={toggleMenu(false)} className="primary">{t('About.1')}</a></li>
-              <li><a href="/#relation" onClick={toggleMenu(false)} className="primary">{t('Relationships.1')}</a></li>
-              <li><a href="/#users" onClick={toggleMenu(false)} className="primary">{t('Users.1')}</a></li>
+              {MENUITEMS.map((item) => (<li><a href={`/#${item[0]}`} onClick={toggleMenu(false)} className="primary">{t(`${item[1]}.1`)}</a></li>))}
               <li><a href="/registration#form" onClick={toggleMenu(false)} className="primary">{t('SignUp.1')}</a></li>
               <li><a href="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</a></li>
             </ul>

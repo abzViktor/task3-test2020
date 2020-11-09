@@ -213,7 +213,7 @@ footer {
 
 
 
-@media screen and (min-width: 2560px) {
+@media screen and (min-width: #{$breakpoint-desktop-large}px) {
     footer .other-links {
         flex-grow: 0.833;
     }
@@ -224,7 +224,7 @@ footer {
 }
 
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: #{$breakpoint-laptop-large}px) {
     footer hr {
         margin: 0 auto 24px auto;
     }
@@ -239,7 +239,7 @@ footer {
     }
 }
 
-@media screen and (max-width: 1440px) and (min-width: 992px) {
+@media screen and (max-width: #{$breakpoint-laptop-large}px) and (min-width: #{$breakpoint-tablet-x-large}px) {
     footer hr {
         margin: 0 auto 24px auto;
     }
@@ -250,7 +250,7 @@ footer {
 }
 
 
-@media screen and (max-width: 992px) and (min-width: 600px) {
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) and (min-width: #{$breakpoint-mobile-medium+100}px) {
     footer hr {
         margin: 0 auto 24px auto;
     }
@@ -261,7 +261,7 @@ footer {
     }
 }
 
-@media screen and (max-width: 830px){
+@media screen and (max-width: #{$breakpoint-tablet-large}px) {
     footer {
         .contact-link svg {
             display: none;
@@ -286,13 +286,13 @@ footer {
     }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) {
     footer hr {
         margin: 0 auto 24px auto;
     }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: #{$breakpoint-tablet-small + 20}px) {
     footer {
         .middle-footer {
             margin-bottom: 12px;

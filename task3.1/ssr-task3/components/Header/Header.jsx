@@ -3,31 +3,40 @@ import { useTranslation } from 'react-i18next';
 
 import dynamic from 'next/dynamic';
 import { throttle } from 'throttle-debounce';
+import PropTypes from 'prop-types';
 import DesktopMenu from './components/Menu';
 import Logo from '../../assets/logo.svg';
 import MenuButton from '../../assets/header/line-menu.svg';
 
 import DesktopUser from './components/DesktopUser';
 import LogOut from '../../assets/header/sign-out.svg';
-import { RootStore } from '../root.context';
+import { RootStore } from '../../context/root.context';
 
 const MobileMenu = dynamic(() => import('../Header/components/MobMenu'));
 
-export default React.memo(() => {
+const Header = React.memo((props) => {
+  const { user, isUserLoaded } = props;
   const { state } = useContext(RootStore);
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [html, setHtml] = useState(null);
   const [scrollBackPosition, setScrollBackPosition] = useState(0);
-  const [user, setUser] = useState([]);
-  const [isUserLoaded, setUserLoaded] = useState(false);
   const [mobileUser, setMobileUser] = useState({});
-
   const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const resize = () => {
+      setIsDesktop(window.innerWidth > 830);
+    };
+    resize();
+    window.addEventListener('resize', throttle(200, resize));
+    return window.removeEventListener('resize', throttle(200, resize));
+  }, []);
 
   useEffect(() => {
     setHtml(document.querySelector('body'));
   }, []);
+
   const toggleMenu = (value) => () => {
     setMobileUser(user);
     setOpen(value);
@@ -46,28 +55,6 @@ export default React.memo(() => {
       window.scrollTo(0, scrollBackPosition);
     }
   };
-
-  useEffect(() => {
-    const resize = () => {
-      setIsDesktop(window.innerWidth > 830);
-    };
-    resize();
-    window.addEventListener('resize', throttle(200, resize));
-    return window.removeEventListener('resize', throttle(200, resize));
-  }, []);
-
-  useEffect(() => {
-    window.fetch('https://frontend-test-assignment-api.abz.agency/api/v1/users/1')
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setUser(data.user);
-          setUserLoaded(true);
-        } else {
-          // proccess server errors
-        }
-      });
-  }, []);
 
   const scrollToTop = () => {
     window.scrollTo(0, 0);
@@ -121,3 +108,10 @@ export default React.memo(() => {
     </>
   );
 });
+
+Header.propTypes = {
+  isUserLoaded: PropTypes.bool.isRequired,
+  user: PropTypes.shape({ name: PropTypes.string, email: PropTypes.string, photo: PropTypes.string }).isRequired,
+};
+
+export default Header;

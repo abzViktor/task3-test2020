@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { debounce } from 'throttle-debounce';
 import styles from '../users.module.scss';
 import UserInfo from './User';
+import { getMoreUsers } from '../../../services/api';
 
 const renderImage = (image, fallbackImage) => {
   const onerror = 'this.onerror=null;this.src=this.dataset.fallbackImage;';
@@ -28,44 +30,41 @@ export default function GetUsers(props) {
   const [isMoreLoaded, setIsMoreLoaded] = React.useState(true);
 
   function handleResize() {
-    if (count === 6 && window.innerWidth <= 700) {
+    if (count === 6 && window.matchMedia('(max-width: 700px)').matches) {
       setCount(3);
     }
-    if (count === 3 && window.innerWidth > 700) {
+    if (count === 3 && window.matchMedia('(min-width: 701px)').matches) {
       setCount(6);
     }
   }
   const { t } = useTranslation();
 
   useEffect(() => {
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', debounce(200, handleResize));
+    return window.removeEventListener('resize', debounce(200, handleResize));
   }, []);
 
-  const ShowMore = () => {
+  const ShowMore = async () => {
     const startCount = window.innerWidth > 700 ? 6 : 3;
 
     setIsMoreLoaded(false);
     setShowButton(false);
-    window.fetch(`https://frontend-test-assignment-api.abz.agency/api/v1/users?&offset=${offset}&length=${startCount}&count=${startCount}`)
-      .then((response) => {
-        response.json().then((data) => {
-          if (data.success) {
-            setIsMoreLoaded(true);
-            setUsers([
-              ...thisUsers,
-              ...data.users,
-            ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
-            setOffset(offset + startCount);
-            if (data.total_users <= offset + startCount) {
-              setShowButton(false);
-            } else {
-              setShowButton(true);
-            }
-          } else {
-            // proccess server errors
-          }
-        });
-      });
+    const data = await getMoreUsers(offset, startCount);
+    if (data.success) {
+      setIsMoreLoaded(true);
+      setUsers([
+        ...thisUsers,
+        ...data.users,
+      ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
+      setOffset(offset + startCount);
+      if (data.total_users <= offset + startCount) {
+        setShowButton(false);
+      } else {
+        setShowButton(true);
+      }
+    } else {
+      // proccess server errors
+    }
   };
   if (noUsers) {
     return <div className={styles.noUsers}>{t('no-users.1')}</div>;

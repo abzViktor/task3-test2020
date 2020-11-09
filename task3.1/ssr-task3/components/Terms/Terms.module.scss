@@ -76,7 +76,7 @@
   background: transparent;
 }
 
-@media screen and (max-width: 992px){
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px){
   .termsContainer .headingSection h1 {
     margin: 0 0 24px;
   }
@@ -99,7 +99,7 @@
 
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: #{$breakpoint-mobile-medium}px){
   .termsContainer .headingSection {
     padding: 21px 0 30px;
     margin-bottom: 23px;

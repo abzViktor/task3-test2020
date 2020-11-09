@@ -1,6 +1,6 @@
 export const trimDoubleSpaces = (value) => {
-    const newValue = value.replace(/\s{2,}/g, ' ');
-    return newValue;
+  const newValue = value.replace(/\s{2,}/g, ' ');
+  return newValue;
 };
 
 export const trimSpaces = (value) => value.replace(/\s+/g, '');

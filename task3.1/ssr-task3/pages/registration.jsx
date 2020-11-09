@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import RegistrationBanner from '../components/Registration/components/Banner/RegistrationBanner';
 import RegistrationForm from '../components/Registration/components/Form/RegistrationForm';
+import { getPositions } from '../services/api';
 
 const Registration = React.memo(({ positions, apiStatus }) => (
   <>
@@ -11,10 +12,9 @@ const Registration = React.memo(({ positions, apiStatus }) => (
 ));
 
 Registration.getInitialProps = async () => {
-  /* global fetch */
-  let positions; let
-    apiStatus;
-  const res = await fetch('https://frontend-test-assignment-api.abz.agency/api/v1/positions');
+  let positions;
+  let apiStatus;
+  const res = await getPositions();
   if (res.status === 200) {
     apiStatus = res.status;
     positions = await res.json();

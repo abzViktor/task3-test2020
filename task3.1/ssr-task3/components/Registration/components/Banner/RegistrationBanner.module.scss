@@ -51,7 +51,7 @@
   }
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: #{$breakpoint-laptop-large}px) {
   .regBanner {
     padding: 100px 0 135px;
   }
@@ -68,7 +68,7 @@
   }
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) {
   .registrationBannerText {
     h1 {
       margin: 9px 0 27px;
@@ -86,7 +86,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) {
   .regBanner {
     padding: 78px 0 99px;
   }
@@ -95,13 +95,13 @@
   }
 }
 
-@media screen and (max-width: 768px) and (min-width: 700px) {
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) and (min-width: #{$breakpoint-tablet-small}px) {
   .regBanner h1 {
     padding: 0 127px;
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: #{$breakpoint-tablet-small}px) {
   .registrationBannerContent {
     flex-direction: column-reverse;
     align-items: center;
@@ -121,7 +121,7 @@
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
   .registrationTextBlock h1 {
     padding: 0;
   }

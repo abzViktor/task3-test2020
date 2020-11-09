@@ -1,14 +1,27 @@
 import Head from 'next/head';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import Header from './Header/Header';
 import Footer from './Footer/Footer';
 import { isWebpSupported } from '../utils/webpSupport';
-import { HeaderProvider } from './header.context';
+import { HeaderProvider } from '../context/header.context';
+import { getUser } from '../services/api';
 
 export default function Layout({ children }) {
   const [support, setSupport] = React.useState(true);
+  const [user, setUser] = useState({});
   React.useEffect(() => {
     setSupport(isWebpSupported);
+  }, []);
+  const [isUserLoaded, setUserLoaded] = useState(false);
+
+  useEffect(() => {
+    getUser().then((data) => {
+      if (data.success) {
+        setUser(data.user);
+        setUserLoaded(true);
+      }
+    });
   }, []);
   return (
     <>
@@ -29,7 +42,7 @@ export default function Layout({ children }) {
       <div className={`wrapper ${support ? 'webp' : 'noWebp'}`}>
         <HeaderProvider>
           <div className="content">
-            <Header />
+            <Header user={user} isUserLoaded={isUserLoaded} />
             {children}
           </div>
         </HeaderProvider>
@@ -40,3 +53,7 @@ export default function Layout({ children }) {
     </>
   );
 }
+
+Layout.propTypes = {
+  children: PropTypes.node.isRequired,
+};

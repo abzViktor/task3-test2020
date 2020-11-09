@@ -70,7 +70,7 @@ body {
 }
 
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) {
   .heading-1-desktop {
     font-family: 'Overpass', sans-serif;
     font-weight: 600;
@@ -80,7 +80,7 @@ body {
 }
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: #{$breakpoint-mobile-medium + 100}px) {
   .heading-1-desktop {
     font-family: 'Overpass', sans-serif;
     font-weight: 600;
@@ -105,6 +105,25 @@ body {
     font-weight: 400;
     font-size: 22px;
     line-height: 27px;
+  }
+
+  button.secondary:after,
+  button.primary:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 4px;
+    bottom: -4px;
+    left: 0;
+  }
+  button.secondary:before,
+  button.primary:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 4px;
+    top: -4px;
+    left: 0;
   }
 }
 
@@ -180,28 +199,6 @@ button.text-link:hover {
   cursor: pointer;
 }
 
-
-@media screen and (max-width: 600px) {
-  button.secondary:after,
-  button.primary:after {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 4px;
-    bottom: -4px;
-    left: 0;
-  }
-  button.secondary:before,
-  button.primary:before {
-    position: absolute;
-    content: "";
-    width: 100%;
-    height: 4px;
-    top: -4px;
-    left: 0;
-  }
-}
-
 .MuiInputLabel-outlined {
   z-index: 0 !important;
 }
@@ -263,7 +260,7 @@ code {
   margin: 0 auto;
 }
 
-@media screen and (min-width: 2560px) {
+@media screen and (min-width: #{$breakpoint-desktop-large}px) {
   .container {
     max-width: 1140px;
     padding: 0 24px;
@@ -271,7 +268,7 @@ code {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
   .container {
     padding: 0 15px;
   }

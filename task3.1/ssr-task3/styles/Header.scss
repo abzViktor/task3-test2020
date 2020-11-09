@@ -220,13 +220,13 @@ header .mobile-header {
 
 
 
-@media screen and (max-width: 830px){
+@media screen and (max-width: #{$breakpoint-tablet-large}px){
     header .desktop-header {
         display: none;
     }
 }
 
-@media screen and (min-width: 831px){
+@media screen and (min-width: #{$breakpoint-tablet-large + 1}px){
     header .mobile-header {
         display: none;
     }
