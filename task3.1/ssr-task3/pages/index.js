@@ -1,23 +1,30 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useUserAgent } from 'next-useragent';
 import PropTypes from 'prop-types';
 import { throttle } from 'throttle-debounce';
+import dynamic from 'next/dynamic';
 import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
-import Users from '../components/Users/Users';
+
 import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import { getUsers } from '../services/api';
 
+const Users = dynamic(() => import('../components/Users/Users'));
+
 export default function Home({ users, initialCount, apiStatus }) {
   const { headerState, headerDispatch } = useContext(HeaderStore);
+  const [loadUsers, setLoadUsers] = useState(false);
+
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
     const relation = document.getElementById('relation').offsetParent.offsetTop - 64;
     const users = document.getElementById('users').offsetParent.offsetTop - 64;
 
     const scrollToElement = () => {
-      console.log('scroll');
+      if (window.pageYOffset > 300) {
+        setLoadUsers(true);
+      }
       if (window.pageYOffset < about) {
         headerDispatch({
           type: 'ACTIVE_MENU_ITEM',
@@ -61,7 +68,7 @@ export default function Home({ users, initialCount, apiStatus }) {
       <div className="anchor-holder"><span id="relation" /></div>
       <Tools />
       <div className="anchor-holder"><span id="users" /></div>
-      <Users users={users} initialCount={initialCount} apiStatus={apiStatus} />
+      {loadUsers && <Users users={users} initialCount={initialCount} apiStatus={apiStatus} />}
     </>
   );
 }

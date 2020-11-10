@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import DesktopMenu from './components/Menu';
 import Logo from '../../assets/logo.svg';
 import MenuButton from '../../assets/header/line-menu.svg';
+import { scrollToTop } from '../../utils/helpers';
 
 import DesktopUser from './components/DesktopUser';
 import LogOut from '../../assets/header/sign-out.svg';
@@ -23,7 +24,6 @@ const Header = React.memo((props) => {
   const [scrollBackPosition, setScrollBackPosition] = useState(0);
   const [mobileUser, setMobileUser] = useState({});
   const [isDesktop, setIsDesktop] = useState(false);
-
   useEffect(() => {
     const resize = () => {
       setIsDesktop(window.innerWidth > 830);
@@ -54,10 +54,6 @@ const Header = React.memo((props) => {
       html.style.removeProperty('width');
       window.scrollTo(0, scrollBackPosition);
     }
-  };
-
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
   };
 
   return (
