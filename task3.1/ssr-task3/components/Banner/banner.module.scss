@@ -120,37 +120,37 @@
     }
 }
 
-//@mixin background($width) {
-//  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}.jpg");
-//}
-//
-//@mixin background-webp($width) {
-//  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}.webp");
-//}
-//
-//@mixin background-retina($width) {
-//  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}-x2.jpg");
-//}
-//
-//@mixin background-webp-retina($width) {
-//  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}-x2.webp");
-//}
-//
-//@each $breakpoint in $breakpoints {
-//  @media screen and (max-width: #{$breakpoint}px) {
-//    .webp.mainBanner {
-//      @include background-webp($breakpoint);
-//    }
-//    .noWebp.mainBanner {
-//      @include background($breakpoint);
-//    }
-//  }
-//  @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
-//    .webp.mainBanner {
-//      @include background-webp-retina($breakpoint);
-//    }
-//    .noWebp.mainBanner {
-//      @include background-retina($breakpoint);
-//    }
-//  }
-//}
+@mixin background($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}.jpg");
+}
+
+@mixin background-webp($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}.webp");
+}
+
+@mixin background-retina($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}-x2.jpg");
+}
+
+@mixin background-webp-retina($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}-x2.webp");
+}
+
+@each $breakpoint in $breakpoints {
+  @media screen and (max-width: #{$breakpoint}px) {
+    .webp.mainBanner {
+      @include background-webp($breakpoint);
+    }
+    .noWebp.mainBanner {
+      @include background($breakpoint);
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
+    .webp.mainBanner {
+      @include background-webp-retina($breakpoint);
+    }
+    .noWebp.mainBanner {
+      @include background-retina($breakpoint);
+    }
+  }
+}
