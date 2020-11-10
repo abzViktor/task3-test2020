@@ -15,20 +15,17 @@ const DesktopUser = React.memo((props) => {
   const refEmail = useRef(null);
 
   useEffect(() => {
-    if (refName.current.offsetWidth > refContainer.current.offsetWidth && user) {
+    if (refName.current.offsetWidth > refContainer.current.offsetWidth) {
       setTipName(user.name);
     }
-    if (refName.current.offsetWidth <= refContainer.current.offsetWidth && user) {
-      setTipName('');
-    }
-    if (refEmail.current.offsetWidth > refContainer.current.offsetWidth && user) {
+    if (refEmail.current.offsetWidth > refContainer.current.offsetWidth) {
       setTipEmail(user.email);
     }
-    if (refEmail.current.offsetWidth <= refContainer.current.offsetWidth && user) {
-      setTipEmail('');
-    }
-  }, []);
+  }, [isUserLoaded]);
 
+  const handleImageError = (e) => {
+    e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg';
+  };
   return (
     <>
       {isUserLoaded && (
@@ -37,7 +34,7 @@ const DesktopUser = React.memo((props) => {
           <div className="header-user"><Tooltip title={tipName}><Box component="span" className="paragraph-3" ref={refName}>{user.name}</Box></Tooltip></div>
           <div className="header-user"><Tooltip title={tipEmail}><Box component="a" ref={refEmail} href={`mailto:${user.email}`}>{user.email}</Box></Tooltip></div>
         </div>
-        <img width="70" height="70" className="header-avatar" src={user.photo} onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} alt="avatar icon" />
+        <img width="70" height="70" className="header-avatar" src={user.photo} onError={handleImageError} alt="avatar icon" />
       </>
       )}
       {!isUserLoaded && (

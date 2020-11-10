@@ -16,7 +16,7 @@ export default function Layout({ children }) {
   const [isUserLoaded, setUserLoaded] = useState(false);
 
   useEffect(() => {
-    getUser().then((data) => {
+    getUser(11).then((data) => {
       if (data.success) {
         setUser(data.user);
         setUserLoaded(true);

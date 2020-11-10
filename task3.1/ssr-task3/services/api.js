@@ -1,6 +1,6 @@
 /* global fetch */
 
-export const getUser = () => fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/users/1`)
+export const getUser = (id) => fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/users/${id}`)
   .then((response) => response.json());
 
 export const getToken = () => fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/token`)

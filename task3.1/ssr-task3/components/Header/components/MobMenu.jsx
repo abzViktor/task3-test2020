@@ -14,7 +14,6 @@ const MobileMenu = React.memo((props) => {
   return (
     <>
       <div className="sideMenu opened">
-
         {isUserLoaded && (
         <>
           <div className="side-menu-container-contacts">
