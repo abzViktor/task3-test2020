@@ -1,21 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useUserAgent } from 'next-useragent';
 import PropTypes from 'prop-types';
 import { throttle } from 'throttle-debounce';
-import dynamic from 'next/dynamic';
 import Banner from '../components/Banner/Banner';
 import LetsGet from '../components/LetsGet/LetsGet';
-
-// import Tools from '../components/Tools/Tools';
+import Users from '../components/Users/Users';
+import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import { getUsers } from '../services/api';
 
-const Users = dynamic(() => import('../components/Users/Users'));
-const Tools = dynamic(() => import('../components/Tools/Tools'));
-
 export default function Home({ users, initialCount, apiStatus }) {
   const { headerState, headerDispatch } = useContext(HeaderStore);
-  const [loadUsers, setLoadUsers] = useState(false);
 
   React.useEffect(() => {
     const about = document.getElementById('about').offsetParent.offsetTop - 64;
@@ -23,9 +18,6 @@ export default function Home({ users, initialCount, apiStatus }) {
     const users = document.getElementById('users').offsetParent.offsetTop - 64;
 
     const scrollToElement = () => {
-      if (window.pageYOffset > 300) {
-        setLoadUsers(true);
-      }
       if (window.pageYOffset < about) {
         headerDispatch({
           type: 'ACTIVE_MENU_ITEM',
@@ -67,21 +59,23 @@ export default function Home({ users, initialCount, apiStatus }) {
       <div className="anchor-holder"><span id="about" /></div>
       <LetsGet />
       <div className="anchor-holder"><span id="relation" /></div>
-      {loadUsers && <Tools />}
+      <Tools />
       <div className="anchor-holder"><span id="users" /></div>
-      {loadUsers && <Users users={users} initialCount={initialCount} apiStatus={apiStatus} />}
+      <Users users={users} initialCount={initialCount} apiStatus={apiStatus} />
     </>
   );
 }
 
 Home.getInitialProps = async (ctx) => {
-  let ua; let
-    initialCount;
+  let ua;
+  let initialCount;
+  let apiStatus = 200;
+  let users;
+
   if (ctx.req) {
     ua = useUserAgent(ctx.req.headers['user-agent']);
   }
-  let apiStatus = 200;
-  let users;
+
   if (ctx.req) {
     initialCount = ua.isMobile === true ? 3 : 6;
   } else {
