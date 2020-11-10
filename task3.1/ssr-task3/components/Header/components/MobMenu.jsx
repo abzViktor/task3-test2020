@@ -18,7 +18,7 @@ const MobileMenu = React.memo((props) => {
         <>
           <div className="side-menu-container-contacts">
             <div><img width="70" onError={(e) => { e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg'; }} height="70" className="header-avatar-mob" src={user.photo} alt="avatar icon" /></div>
-            <div><span className="mob-name">{user.name}</span></div>
+            <div><span className="name mob-name">{user.name}</span></div>
             <div><a href={`mailto:${user.email}`}>{user.email}</a></div>
           </div>
         </>
