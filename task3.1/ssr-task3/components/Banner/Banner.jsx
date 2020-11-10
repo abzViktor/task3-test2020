@@ -1,11 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import PropTypes from 'prop-types';
 import styles from './banner.module.scss';
 
-export default React.memo(() => {
+const Banner = React.memo((props) => {
+  const { webpSupport } = props;
   const { t } = useTranslation();
   return (
-    <div className={styles.mainBanner}>
+    <div className={`${webpSupport ? styles.webp : styles.noWebp} ${styles.mainBanner}`}>
       <div className="container">
         <div className={styles.textBlock}>
           <div>
@@ -29,3 +31,9 @@ export default React.memo(() => {
     </div>
   );
 });
+
+Banner.propTypes = {
+  webpSupport: PropTypes.bool.isRequired,
+};
+
+export default Banner;

@@ -9,7 +9,9 @@ import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import { getUsers } from '../services/api';
 
-export default function Home({ users, initialCount, apiStatus }) {
+export default function Home({
+  users, initialCount, apiStatus, webpSupport,
+}) {
   const { headerState, headerDispatch } = useContext(HeaderStore);
 
   React.useEffect(() => {
@@ -55,7 +57,7 @@ export default function Home({ users, initialCount, apiStatus }) {
 
   return (
     <>
-      <Banner />
+      <Banner webpSupport={webpSupport} />
       <div className="anchor-holder"><span id="about" /></div>
       <LetsGet />
       <div className="anchor-holder"><span id="relation" /></div>
@@ -71,9 +73,17 @@ Home.getInitialProps = async (ctx) => {
   let initialCount;
   let apiStatus = 200;
   let users;
+  let webpSupport;
 
   if (ctx.req) {
     ua = useUserAgent(ctx.req.headers['user-agent']);
+    console.log(ua);
+  }
+
+  if (ua.isSafari || ua.isIE) {
+    webpSupport = false;
+  } else {
+    webpSupport = true;
   }
 
   if (ctx.req) {
@@ -94,6 +104,7 @@ Home.getInitialProps = async (ctx) => {
       users,
       initialCount,
       apiStatus,
+      webpSupport,
     });
 };
 

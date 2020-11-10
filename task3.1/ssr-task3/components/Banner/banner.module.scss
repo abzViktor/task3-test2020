@@ -138,18 +138,18 @@
 
 @each $breakpoint in $breakpoints {
   @media screen and (max-width: #{$breakpoint}px) {
-    :global(.webp) .mainBanner {
+    .webp.mainBanner {
       @include background-webp($breakpoint);
     }
-    :global(.noWebp) .mainBanner {
+    .noWebp.mainBanner {
       @include background($breakpoint);
     }
   }
   @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
-    :global(.webp) .mainBanner {
+    .webp.mainBanner {
       @include background-webp-retina($breakpoint);
     }
-    :global(.noWebp) .mainBanner {
+    .noWebp.mainBanner {
       @include background-retina($breakpoint);
     }
   }
