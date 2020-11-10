@@ -19,7 +19,7 @@ const renderImage = (image, fallbackImage) => {
   );
 };
 
-export default function GetUsers(props) {
+const GetUsers = React.memo((props) => {
   const { initialCount, users } = props;
   const [count, setCount] = React.useState(0);
 
@@ -93,9 +93,11 @@ export default function GetUsers(props) {
       </div>
     </div>
   );
-}
+});
 
 GetUsers.propTypes = {
   users: PropTypes.shape({ users: PropTypes.arrayOf(PropTypes.object), length: PropTypes.func }).isRequired,
   initialCount: PropTypes.number.isRequired,
 };
+
+export default GetUsers;
