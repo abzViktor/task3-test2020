@@ -222,9 +222,10 @@ const RegistrationForm = React.memo((props) => {
                         setFieldTouched(target.name, true);
                       }
                     }}
-                    helperText={touched.name && errors.name ? errors.name : '\u00a0'}
+                    helperText={touched.name ? errors.name : ''}
                     error={touched.name && (!!errors.name)}
                   />
+                  {!errors.name && <div className={styles.errorSpacer} />}
                 </div>
                 <div>
                   <Field
@@ -234,12 +235,13 @@ const RegistrationForm = React.memo((props) => {
                     placeholder={t('form.email.2')}
                     variant="outlined"
                     as={TextField}
-                    helperText={touched.email && errors.email ? errors.email : '\u00a0'}
+                    helperText={touched.email ? errors.email : ''}
                     error={touched.email && (!!errors.email)}
                     onChange={({ target }) => {
                       setFieldValue(target.name, trimSpaces(target.value));
                     }}
                   />
+                  {!errors.email && <div className={styles.errorSpacer} />}
                 </div>
                 <div>
                   <Field
@@ -267,13 +269,14 @@ const RegistrationForm = React.memo((props) => {
                             type="tel"
                             required
                             label={t('form.phone.1')}
-                            helperText={touched.phone && errors.phone ? errors.phone : '\u00a0'}
+                            helperText={touched.phone ? errors.phone : ''}
                             error={touched.phone && (!!errors.phone)}
                           />
                         )}
                       </InputMask>
                     )}
                   </Field>
+                  {!errors.phone && <div className={styles.errorSpacer} />}
                 </div>
               </div>
               <div className={styles.secondFormRow}>
