@@ -20,10 +20,10 @@ const Header = React.memo((props) => {
   const { state } = useContext(RootStore);
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const [html, setHtml] = useState(null);
   const [scrollBackPosition, setScrollBackPosition] = useState(0);
   const [mobileUser, setMobileUser] = useState({});
   const [isDesktop, setIsDesktop] = useState(false);
+  const html = { body: null };
   useEffect(() => {
     const resize = () => {
       setIsDesktop(window.innerWidth > 830);
@@ -33,9 +33,9 @@ const Header = React.memo((props) => {
     return window.removeEventListener('resize', throttle(200, resize));
   }, []);
 
-  useEffect(() => {
-    setHtml(document.querySelector('body'));
-  }, []);
+  if (typeof (window) !== 'undefined') {
+    html.body = document.querySelector('body');
+  }
 
   const toggleMenu = (value) => () => {
     setMobileUser(user);
@@ -43,15 +43,15 @@ const Header = React.memo((props) => {
     if (value) {
       const scrollPosition = window.pageYOffset;
       setScrollBackPosition(scrollPosition);
-      html.style.overflow = 'hidden';
-      html.style.position = 'fixed';
-      html.style.top = `-${scrollPosition}px`;
-      html.style.width = '100%';
+      html.body.style.overflow = 'hidden';
+      html.body.style.position = 'fixed';
+      html.body.style.top = `-${scrollPosition}px`;
+      html.body.style.width = '100%';
     } else {
-      html.style.removeProperty('overflow');
-      html.style.removeProperty('position');
-      html.style.removeProperty('top');
-      html.style.removeProperty('width');
+      html.body.style.removeProperty('overflow');
+      html.body.style.removeProperty('position');
+      html.body.style.removeProperty('top');
+      html.body.style.removeProperty('width');
       window.scrollTo(0, scrollBackPosition);
     }
   };

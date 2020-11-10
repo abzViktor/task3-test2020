@@ -13,7 +13,7 @@ import Phone from '../../assets/footer-icons/phone.svg';
 import CellPhone from '../../assets/footer-icons/cellphone.svg';
 
 import Logo from '../../assets/logo.svg';
-import MENUITEMS from '../../constants/menuItems';
+import MENU_ITEMS from '../../constants/menuItems';
 
 export default React.memo(() => {
   const { t, i18n } = useTranslation();
@@ -22,10 +22,10 @@ export default React.memo(() => {
     de: 'inactive',
   };
   const [activeLang, setActiveLang] = useState(initialLang);
-  const footerLinks = [[['News', '#'], ['Blog', '#'], ['Partners', '#'], ['Shop', '#']],
-    [['Overview', '#'], ['Design', '#'], ['Code', '#'], ['Collaborate', '#']],
-    [['Tutorials', '#'], ['Resources', '#'], ['Guides', '#'], ['Examples', '#']],
-    [['FAQ', '#'], ['Terms', '/terms'], ['Conditions', '/terms'], ['Help', '#']],
+  const footerLinks = [[{ title: 'News', link: '#' }, { title: 'Blog', link: '#' }, { title: 'Partners', link: '#' }, { title: 'Shop', link: '#' }],
+    [{ title: 'Overview', link: '#' }, { title: 'Design', link: '#' }, { title: 'Code', link: '#' }, { title: 'Collaborate', link: '#' }],
+    [{ title: 'Tutorials', link: '#' }, { title: 'Resources', link: '#' }, { title: 'Guides', link: '#' }, { title: 'Examples', link: '#' }],
+    [{ title: 'FAQ', link: '#' }, { title: 'Terms', link: '/terms' }, { title: 'Conditions', link: '/terms' }, { title: 'Help', link: '#' }],
   ];
   const socialNetworks = [<FacebookIcon />, <LinkedInIcon />, <InstagramIcon />, <TwitterIcon />, <PinterestIcon />];
 
@@ -56,7 +56,7 @@ export default React.memo(() => {
           </div>
           <nav>
             <ul>
-              {MENUITEMS.map((item) => (<li><a href={`/#${item[0]}`} className="secondary">{t(`${item[1]}.1`)}</a></li>))}
+              {MENU_ITEMS.map((item) => (<li><a href={`/#${item[0]}`} className="secondary">{t(`${item[1]}.1`)}</a></li>))}
               <li><a href="/registration#form" className="secondary">{t('SignUp.1')}</a></li>
             </ul>
           </nav>
@@ -68,21 +68,21 @@ export default React.memo(() => {
           <div className="flex footer-contacts-container">
             <div className="footer-contacts">
               <div>
-                <a className="contact-link" href={`mailto:${Contacts.CONTACTEMAIL}`}>
+                <a className="contact-link" href={`mailto:${Contacts.CONTACT_EMAIL}`}>
                   <Mail />
-                  {Contacts.CONTACTEMAIL}
+                  {Contacts.CONTACT_EMAIL}
                 </a>
               </div>
               <div>
-                <a className="contact-link" href={`tel:${Contacts.CONTACTPHONE}`}>
+                <a className="contact-link" href={`tel:${Contacts.CONTACT_PHONE}`}>
                   <Phone />
-                  {Contacts.CONTACTPHONE}
+                  {Contacts.CONTACT_PHONE}
                 </a>
               </div>
               <div>
-                <a className="contact-link" href={`tel:${Contacts.CONTACTCELLPHONE}`}>
+                <a className="contact-link" href={`tel:${Contacts.CONTACT_CELL_PHONE}`}>
                   <CellPhone />
-                  {Contacts.CONTACTCELLPHONE}
+                  {Contacts.CONTACT_CELL_PHONE}
                 </a>
               </div>
             </div>
@@ -90,7 +90,7 @@ export default React.memo(() => {
               {footerLinks.map((linkBlock, index) => (
                 <ul key={index}>
                   {linkBlock.map((link) => (
-                    <li key={link[0]}><a className="secondary" href={link[1]}>{t(`links.${link[0]}`)}</a></li>
+                    <li key={link.title}><a className="secondary" href={link.link}>{t(`links.${link.title}`)}</a></li>
                   ))}
                 </ul>
               ))}

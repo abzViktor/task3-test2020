@@ -24,7 +24,8 @@ const DesktopUser = React.memo((props) => {
   }, [isUserLoaded]);
 
   const handleImageError = (e) => {
-    e.target.onerror = null; e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg';
+    e.target.onerror = null;
+    e.target.src = 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg';
   };
   return (
     <>

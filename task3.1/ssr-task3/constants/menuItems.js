@@ -1,3 +1,3 @@
-const MENUITEMS = [['about', 'About'], ['relation', 'Relationships'], ['users', 'Users']];
+const MENU_ITEMS = [['about', 'About'], ['relation', 'Relationships'], ['users', 'Users']];
 
-export default MENUITEMS;
+export default MENU_ITEMS;

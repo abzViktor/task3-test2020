@@ -10,12 +10,10 @@ import { getUser } from '../services/api';
 export default function Layout({ children }) {
   const [support, setSupport] = React.useState(true);
   const [user, setUser] = useState({});
-  React.useEffect(() => {
-    setSupport(isWebpSupported);
-  }, []);
   const [isUserLoaded, setUserLoaded] = useState(false);
 
   useEffect(() => {
+    setSupport(isWebpSupported);
     getUser(11).then((data) => {
       if (data.success) {
         setUser(data.user);
