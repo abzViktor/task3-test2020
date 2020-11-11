@@ -10,7 +10,6 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="preconnect" href="https://fonts.gstatic.com/" crossOrigin />
-          <link href="fonts/fonts.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
