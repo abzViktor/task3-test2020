@@ -83,7 +83,7 @@ Home.getInitialProps = async (ctx) => {
     console.log(state.ua);
   }
 
-  if (state.ua.isSafari || state.ua.isIE) {
+  if (state.ua.isSafari) {
     state.webpSupport = false;
   } else {
     state.webpSupport = true;

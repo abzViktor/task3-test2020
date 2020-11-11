@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 
 import dynamic from 'next/dynamic';
 import { throttle } from 'throttle-debounce';
-import PropTypes from 'prop-types';
 import DesktopMenu from './components/Menu';
 import Logo from '../../assets/logo.svg';
 import MenuButton from '../../assets/header/line-menu.svg';
@@ -12,33 +11,48 @@ import { scrollToTop } from '../../utils/helpers';
 import DesktopUser from './components/DesktopUser';
 import LogOut from '../../assets/header/sign-out.svg';
 import { RootStore } from '../../context/root.context';
+import { getUser } from '../../services/api';
 
 const MobileMenu = dynamic(() => import('../Header/components/MobMenu'));
 
-const Header = React.memo((props) => {
-  const { user, isUserLoaded } = props;
+const Header = React.memo(() => {
+  const [isUserLoaded, setUserLoaded] = useState(false);
+  const [user, setUser] = useState({});
   const { state } = useContext(RootStore);
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [scrollBackPosition, setScrollBackPosition] = useState(0);
-  const [mobileUser, setMobileUser] = useState({});
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [loadUser, setLoadUser] = useState(false);
   const html = { body: null };
+
+  if (typeof (window) !== 'undefined') {
+    html.body = document.querySelector('body');
+  }
+
   useEffect(() => {
     const resize = () => {
-      setIsDesktop(window.innerWidth > 830);
+      if (window.innerWidth > 830) {
+        setLoadUser(true);
+      }
     };
     resize();
     window.addEventListener('resize', throttle(200, resize));
     return window.removeEventListener('resize', throttle(200, resize));
   }, []);
 
-  if (typeof (window) !== 'undefined') {
-    html.body = document.querySelector('body');
-  }
+  useEffect(() => {
+    if (loadUser) {
+      getUser(1).then((data) => {
+        if (data.success) {
+          setUserLoaded(true);
+          setUser(data.user);
+        }
+      });
+    }
+  }, [loadUser]);
 
   const toggleMenu = (value) => () => {
-    setMobileUser(user);
+    setLoadUser(true);
     setOpen(value);
     if (value) {
       const scrollPosition = window.pageYOffset;
@@ -74,7 +88,7 @@ const Header = React.memo((props) => {
             <div className="flex">
               <DesktopMenu />
               <div className="header-personal-info">
-                {isDesktop && <DesktopUser user={user} isUserLoaded={isUserLoaded} />}
+                {loadUser && <DesktopUser user={user} isUserLoaded={isUserLoaded} />}
                 <div>
                   <a href="#" className="exitButton">
                     <LogOut />
@@ -84,10 +98,10 @@ const Header = React.memo((props) => {
             </div>
           </div>
           <div className="mobile-header flex">
-            {open && (
+            {loadUser && (
             <>
               <div aria-hidden="true" tabIndex={0} role="button" aria-label="Close menu" onClick={toggleMenu(false)} className={`dark ${open ? 'opened' : 'closed'}`} />
-              <MobileMenu isUserLoaded={isUserLoaded} user={mobileUser} toggleMenu={toggleMenu} />
+              <MobileMenu isUserLoaded={isUserLoaded} user={user} open={open} toggleMenu={toggleMenu} />
             </>
             )}
             <div className="logo-container">
@@ -104,10 +118,5 @@ const Header = React.memo((props) => {
     </>
   );
 });
-
-Header.propTypes = {
-  isUserLoaded: PropTypes.bool.isRequired,
-  user: PropTypes.shape({ name: PropTypes.string, email: PropTypes.string, photo: PropTypes.string }).isRequired,
-};
 
 export default Header;

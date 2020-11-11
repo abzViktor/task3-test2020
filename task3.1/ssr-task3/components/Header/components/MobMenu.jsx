@@ -5,15 +5,17 @@ import PropTypes from 'prop-types';
 import PlaceholderImage from '../../../assets/placeholders/Ellipse_1.svg';
 import PlaceholderName from '../../../assets/placeholders/Rounded_Rectangle_2.svg';
 import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.svg';
-import MENUITEMS from '../../../constants/menuItems';
+import MENU_ITEMS from '../../../constants/menuItems';
 
 const MobileMenu = React.memo((props) => {
-  const { isUserLoaded, user, toggleMenu } = props;
-  console.log(props);
+  const {
+    isUserLoaded, user, toggleMenu, open,
+  } = props;
+
   const { t } = useTranslation();
   return (
     <>
-      <div className="sideMenu opened">
+      <div className={`sideMenu ${open ? 'opened' : 'closed'}`}>
         {isUserLoaded && (
         <>
           <div className="side-menu-container-contacts">
@@ -34,7 +36,7 @@ const MobileMenu = React.memo((props) => {
         <div className="side-menu-container-nav">
           <nav>
             <ul>
-              {MENUITEMS.map((item) => (<li><a href={`/#${item[0]}`} onClick={toggleMenu(false)} className="primary">{t(`${item[1]}.1`)}</a></li>))}
+              {MENU_ITEMS.map((item) => (<li><a href={`/#${item[0]}`} onClick={toggleMenu(false)} className="primary">{t(`${item[1]}.1`)}</a></li>))}
               <li><a href="/registration#form" onClick={toggleMenu(false)} className="primary">{t('SignUp.1')}</a></li>
               <li><a href="/terms" onClick={toggleMenu(false)} className="primary">{t('links.T&C')}</a></li>
             </ul>
@@ -49,6 +51,7 @@ MobileMenu.propTypes = {
   isUserLoaded: PropTypes.bool.isRequired,
   user: PropTypes.shape({ name: PropTypes.string, email: PropTypes.string, photo: PropTypes.string }).isRequired,
   toggleMenu: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 export default MobileMenu;

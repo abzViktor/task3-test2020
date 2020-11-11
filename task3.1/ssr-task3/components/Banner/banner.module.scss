@@ -154,3 +154,22 @@
     }
   }
 }
+
+@each $breakpoint in $breakpoints {
+  @media screen and (max-width: #{$breakpoint}px) {
+    :global(.webp) .mainBanner {
+      @include background-webp($breakpoint);
+    }
+    :global(.webp) .mainBanner {
+      @include background($breakpoint);
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
+    :global(.webp) .mainBanner {
+      @include background-webp-retina($breakpoint);
+    }
+    :global(.webp) .mainBanner {
+      @include background-retina($breakpoint);
+    }
+  }
+}

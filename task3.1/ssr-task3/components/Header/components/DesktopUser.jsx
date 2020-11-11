@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { Tooltip } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import PropTypes from 'prop-types';
@@ -7,21 +7,12 @@ import PlaceholderEmail from '../../../assets/placeholders/Rounded_Rectangle_3.s
 import PlaceholderImage from '../../../assets/placeholders/Ellipse_1.svg';
 
 const DesktopUser = React.memo((props) => {
-  const { user, isUserLoaded } = props;
+  const { isUserLoaded, user } = props;
   const [tipName, setTipName] = useState('');
   const [tipEmail, setTipEmail] = useState('');
   const refContainer = useRef(null);
   const refName = useRef(null);
   const refEmail = useRef(null);
-
-  useEffect(() => {
-    if (refName.current.offsetWidth > refContainer.current.offsetWidth) {
-      setTipName(user.name);
-    }
-    if (refEmail.current.offsetWidth > refContainer.current.offsetWidth) {
-      setTipEmail(user.email);
-    }
-  }, [isUserLoaded]);
 
   const handleImageError = (e) => {
     e.target.onerror = null;
