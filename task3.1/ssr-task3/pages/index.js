@@ -2,17 +2,16 @@ import React, { useContext, useEffect } from 'react';
 import { useUserAgent } from 'next-useragent';
 import PropTypes from 'prop-types';
 import { throttle } from 'throttle-debounce';
-import dynamic from 'next/dynamic';
 import Banner from '../components/Banner/Banner';
-// import LetsGet from '../components/LetsGet/LetsGet';
-// import Users from '../components/Users/Users';
-// import Tools from '../components/Tools/Tools';
+import LetsGet from '../components/LetsGet/LetsGet';
+import Users from '../components/Users/Users';
+import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import HEADER_HEIGHT from '../constants/header';
 
-const LetsGet = dynamic(() => import('../components/LetsGet/LetsGet'));
-const Users = dynamic(() => import('../components/Users/Users'));
-const Tools = dynamic(() => import('../components/Tools/Tools'));
+// const LetsGet = dynamic(() => import('../components/LetsGet/LetsGet'));
+// const Users = dynamic(() => import('../components/Users/Users'));
+// const Tools = dynamic(() => import('../components/Tools/Tools'));
 
 export default function Home({ initialCount, webpSupport }) {
   const { headerState, headerDispatch } = useContext(HeaderStore);
@@ -62,11 +61,11 @@ export default function Home({ initialCount, webpSupport }) {
     <>
       <Banner webpSupport={webpSupport} />
       <div className="anchor-holder"><span id="about" /></div>
-      <LetsGet />
+      {/* <LetsGet /> */}
       <div className="anchor-holder"><span id="relation" /></div>
-      <Tools />
+      {/* <Tools /> */}
       <div className="anchor-holder"><span id="users" /></div>
-      <Users initialCount={initialCount} />
+      {/* <Users initialCount={initialCount} /> */}
     </>
   );
 }
