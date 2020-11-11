@@ -5,22 +5,22 @@ import styles from './users.module.scss';
 import { RootStore } from '../../context/root.context';
 import GetUsers from './components/GetUsers';
 
-export default function Users({ users, initialCount, apiStatus }) {
+export default function Users({ initialCount }) {
   const { t } = useTranslation();
-  const apiOk = apiStatus;
+  const apiOk = 200;
   const { dispatch } = useContext(RootStore);
 
-  useEffect(() => {
-    if (apiStatus !== 200) {
-      dispatch({
-        type: 'API_ERROR',
-        payload: {
-          state: true,
-          messageId: 1,
-        },
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (apiStatus !== 200) {
+  //     dispatch({
+  //       type: 'API_ERROR',
+  //       payload: {
+  //         state: true,
+  //         messageId: 1,
+  //       },
+  //     });
+  //   }
+  // }, []);
 
   return (
     <>
@@ -33,7 +33,7 @@ export default function Users({ users, initialCount, apiStatus }) {
           <div className={styles.pWrapper}>
             <p className="paragraph-1">{t('Cheerful.2')}</p>
           </div>
-          <GetUsers users={users} initialCount={initialCount} />
+          <GetUsers initialCount={initialCount} />
         </div>
       </div>
       )}
@@ -42,7 +42,5 @@ export default function Users({ users, initialCount, apiStatus }) {
 }
 
 Users.propTypes = {
-  users: PropTypes.shape({}).isRequired,
   initialCount: PropTypes.number.isRequired,
-  apiStatus: PropTypes.number.isRequired,
 };

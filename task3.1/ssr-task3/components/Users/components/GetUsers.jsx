@@ -2,10 +2,15 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { CircularProgress } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import { debounce } from 'throttle-debounce';
+import { debounce, throttle } from 'throttle-debounce';
 import styles from '../users.module.scss';
 import UserInfo from './User';
-import { getMoreUsers } from '../../../services/api';
+import { getMoreUsers, getUsers } from '../../../services/api';
+import { ReactComponent as Placeholder0 } from '../../../../../task3/src/components/Users/Placeholders/image-ph.svg';
+import { ReactComponent as Placeholder1 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4.svg';
+import { ReactComponent as Placeholder2 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4 (1).svg';
+import { ReactComponent as Placeholder3 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4 (2).svg';
+import { ReactComponent as Placeholder4 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4 (3).svg';
 
 const renderImage = (image, fallbackImage) => {
   const onerror = 'this.onerror=null;this.src=this.dataset.fallbackImage;';
@@ -20,14 +25,15 @@ const renderImage = (image, fallbackImage) => {
 };
 
 const GetUsers = React.memo((props) => {
-  const { initialCount, users } = props;
+  const { initialCount } = props;
   const [count, setCount] = React.useState(0);
-
-  const [thisUsers, setUsers] = React.useState(users.users);
+  const [users, setUsers] = React.useState([]);
   const [showButton, setShowButton] = React.useState(true);
   const [offset, setOffset] = React.useState(initialCount);
-  const noUsers = users.length === 0;
+  const [noUsers, setNoUsers] = React.useState(false);
   const [isMoreLoaded, setIsMoreLoaded] = React.useState(true);
+  const [loadUsers, setLoadUsers] = React.useState(false);
+  const [usersLoaded, setUsersLoaded] = React.useState(false);
 
   function handleResize() {
     if (count === 6 && window.matchMedia('(max-width: 700px)').matches) {
@@ -37,12 +43,46 @@ const GetUsers = React.memo((props) => {
       setCount(6);
     }
   }
+
+  function handleScroll() {
+    const usersBlock = document.getElementById('usersBlock').offsetTop;
+    if (window.pageYOffset + window.innerWidth + 300 > usersBlock) {
+      setLoadUsers(true);
+    }
+  }
   const { t } = useTranslation();
 
   useEffect(() => {
     window.addEventListener('resize', debounce(200, handleResize));
+    if (loadUsers === true) {
+      window.removeEventListener('resize', debounce(200, handleResize));
+    }
     return window.removeEventListener('resize', debounce(200, handleResize));
   }, []);
+
+  useEffect(() => {
+    handleScroll();
+    window.addEventListener('scroll', throttle(200, handleScroll));
+    return window.removeEventListener('resize', throttle(200, handleScroll));
+  }, []);
+
+  useEffect(() => {
+    if (loadUsers) {
+      getUsers(initialCount).then((data) => {
+        if (data.success) {
+          setUsers(data.users);
+          setUsersLoaded(true);
+          if (data.users.length === 0) {
+            setNoUsers(true);
+            setShowButton(false);
+          }
+          if (data.total_users <= offset) {
+            setShowButton(false);
+          }
+        }
+      });
+    }
+  }, [loadUsers]);
 
   const ShowMore = async () => {
     const startCount = window.innerWidth > 700 ? 6 : 3;
@@ -53,7 +93,7 @@ const GetUsers = React.memo((props) => {
     if (data.success) {
       setIsMoreLoaded(true);
       setUsers([
-        ...thisUsers,
+        ...users,
         ...data.users,
       ].sort((a, b) => b.registration_timestamp - a.registration_timestamp));
       setOffset(offset + startCount);
@@ -70,9 +110,11 @@ const GetUsers = React.memo((props) => {
     return <div className={styles.noUsers}>{t('no-users.1')}</div>;
   }
   return (
-    <div>
+    <div id="usersBlock">
+      {usersLoaded
+      && (
       <div className={styles.usersBlock}>
-        {thisUsers.map((user) => (
+        {users.map((user) => (
           <div key={user.id} className={styles.userBlock}>
             {renderImage(user.photo, 'https://source-task3-test2020viktor-p.abzdev2.com/cover-icon-user.svg')}
             <UserInfo
@@ -84,6 +126,24 @@ const GetUsers = React.memo((props) => {
           </div>
         ))}
       </div>
+      )}
+      {!usersLoaded
+        && (
+        <div className={styles.usersBlock}>
+          { [...Array(initialCount)].map(() => (
+            <div key={Math.random()} className={styles.userBlock}>
+              <Placeholder0 />
+              <div className={styles.userInfo}>
+                <p className={styles.userName}><Placeholder1 /></p>
+                <p className="paragraph-3"><Placeholder2 /></p>
+                <div className={styles.placeholderSpacer} />
+                <p><Placeholder3 /></p>
+                <p><Placeholder4 /></p>
+              </div>
+            </div>
+          ))}
+        </div>
+        )}
 
       <div className={styles.buttonWrapper}>
         {isMoreLoaded === false && <CircularProgress />}
@@ -96,7 +156,6 @@ const GetUsers = React.memo((props) => {
 });
 
 GetUsers.propTypes = {
-  users: PropTypes.shape({ users: PropTypes.arrayOf(PropTypes.object), length: PropTypes.func }).isRequired,
   initialCount: PropTypes.number.isRequired,
 };
 

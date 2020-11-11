@@ -19,4 +19,4 @@ export const getMoreUsers = (offset, startCount) => fetch(`${process.env.NEXT_PU
 
 export const getPositions = () => fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/positions`);
 
-export const getUsers = (initialCount) => fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/users?&offset=0&length=${initialCount}&count=${initialCount}`);
+export const getUsers = (initialCount) => fetch(`${process.env.NEXT_PUBLIC_API_ROUTE}/users?&offset=0&length=${initialCount}&count=${initialCount}`).then((response) => response.json());
