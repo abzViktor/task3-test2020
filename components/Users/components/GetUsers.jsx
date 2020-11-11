@@ -6,11 +6,11 @@ import { debounce, throttle } from 'throttle-debounce';
 import styles from '../users.module.scss';
 import UserInfo from './User';
 import { getMoreUsers, getUsers } from '../../../services/api';
-import { ReactComponent as Placeholder0 } from '../../../../../task3/src/components/Users/Placeholders/image-ph.svg';
-import { ReactComponent as Placeholder1 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4.svg';
-import { ReactComponent as Placeholder2 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4 (1).svg';
-import { ReactComponent as Placeholder3 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4 (2).svg';
-import { ReactComponent as Placeholder4 } from '../../../../../task3/src/components/Users/Placeholders/Rounded_Rectangle_4 (3).svg';
+import { ReactComponent as Placeholder0 } from '../../../assets/placeholders/image-ph.svg';
+import { ReactComponent as Placeholder1 } from '../../../assets/placeholders/Rounded_Rectangle_4.svg';
+import { ReactComponent as Placeholder2 } from '../../../assets/placeholders/Rounded_Rectangle_4 (1).svg';
+import { ReactComponent as Placeholder3 } from '../../../assets/placeholders/Rounded_Rectangle_4 (2).svg';
+import { ReactComponent as Placeholder4 } from '../../../assets/placeholders/Rounded_Rectangle_4 (3).svg';
 
 const renderImage = (image, fallbackImage) => {
   const onerror = 'this.onerror=null;this.src=this.dataset.fallbackImage;';
