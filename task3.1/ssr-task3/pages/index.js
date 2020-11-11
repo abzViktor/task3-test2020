@@ -61,11 +61,11 @@ export default function Home({ initialCount, webpSupport }) {
     <>
       <Banner webpSupport={webpSupport} />
       <div className="anchor-holder"><span id="about" /></div>
-      {/* <LetsGet /> */}
+      <LetsGet />
       <div className="anchor-holder"><span id="relation" /></div>
-      {/* <Tools /> */}
+      <Tools />
       <div className="anchor-holder"><span id="users" /></div>
-      {/* <Users initialCount={initialCount} /> */}
+      <Users initialCount={initialCount} />
     </>
   );
 }
