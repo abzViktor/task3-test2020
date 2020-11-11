@@ -2,12 +2,17 @@ import React, { useContext, useEffect } from 'react';
 import { useUserAgent } from 'next-useragent';
 import PropTypes from 'prop-types';
 import { throttle } from 'throttle-debounce';
+import dynamic from 'next/dynamic';
 import Banner from '../components/Banner/Banner';
-import LetsGet from '../components/LetsGet/LetsGet';
-import Users from '../components/Users/Users';
-import Tools from '../components/Tools/Tools';
+// import LetsGet from '../components/LetsGet/LetsGet';
+// import Users from '../components/Users/Users';
+// import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import HEADER_HEIGHT from '../constants/header';
+
+const LetsGet = dynamic(() => import('../components/LetsGet/LetsGet'));
+const Users = dynamic(() => import('../components/Users/Users'));
+const Tools = dynamic(() => import('../components/Tools/Tools'));
 
 export default function Home({ initialCount, webpSupport }) {
   const { headerState, headerDispatch } = useContext(HeaderStore);

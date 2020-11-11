@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './users.module.scss';
 import GetUsers from './components/GetUsers';
 
-export default function Users({ initialCount }) {
+const Users = React.memo(({ initialCount }) => {
   const { t } = useTranslation();
   const apiOk = 200;
 
@@ -25,7 +25,9 @@ export default function Users({ initialCount }) {
       )}
     </>
   );
-}
+});
+
+export default Users;
 
 Users.propTypes = {
   initialCount: PropTypes.number.isRequired,
