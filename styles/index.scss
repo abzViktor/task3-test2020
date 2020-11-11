@@ -1,0 +1,332 @@
+@import "./variables.scss";
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
+}
+
+.MuiDialog-paper {
+  border-radius: 4px !important;
+  margin: 0;
+}
+
+.MuiTooltip-tooltip {
+  font-size: 14px !important;
+  max-width: 260px !important;
+}
+
+
+.heading-1-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  line-height: 60px;
+}
+
+.heading-2-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 42px;
+  line-height: 51px;
+}
+
+.heading-3-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 31px;
+}
+
+.heading-4-desktop {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 26px;
+}
+
+.paragraph-1 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.paragraph-2 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: -0.026px;
+}
+
+.paragraph-3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) {
+  .heading-1-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 600;
+    font-size: 42px;
+    line-height: 51px;
+  }
+}
+
+
+@media screen and (max-width: #{$breakpoint-mobile-medium + 100}px) {
+  .heading-1-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 32px;
+  }
+  .paragraph-1 {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+  }
+  .heading-2-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 50px;
+  }
+
+  .heading-3-desktop {
+    font-family: 'Overpass', sans-serif;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  button.secondary:after,
+  button.primary:after {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 4px;
+    bottom: -4px;
+    left: 0;
+  }
+  button.secondary:before,
+  button.primary:before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 4px;
+    top: -4px;
+    left: 0;
+  }
+}
+
+
+
+button.primary {
+  color: #fff;
+  background-color: #ef6c00;
+  border-radius: 4px;
+  border: 2px solid #ef6c00;
+}
+
+button.primary,
+button.secondary {
+  position: relative;
+  padding: 6px 60px;
+  font-family: "Source Sans Pro";
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 290px;
+}
+
+button.primary:hover,
+button.secondary:hover{
+  cursor: pointer;
+}
+
+button.secondary:active,
+button.secondary:focus,
+button.secondary:hover{
+  background-color: #FEE6D2;
+  border: 2px solid #ef6c00;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button.secondary {
+  color: #ef6c00;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 2px solid #ef6c00;
+}
+
+button.primary:active,
+button.primary:hover{
+  background-color: $primary-button-hover;
+  border: 2px solid $primary-button-hover;
+}
+
+button[disabled] {
+  background-color: #D7D7D7;
+  border: 2px solid #D7D7D7;
+  color: #929191;
+  pointer-events: none;
+}
+
+button.text-link {
+  border: 0;
+  outline: 0;
+  min-width: 48px;
+  min-height: 48px;
+  font-family: "Source Sans Pro";
+  font-size: 22px;
+  font-weight: 700;
+  color: #ef6c00;
+  background: transparent;
+}
+
+button.text-link:hover {
+  color:#fc831f;
+  cursor: pointer;
+}
+
+.MuiInputLabel-outlined {
+  z-index: 0 !important;
+}
+
+#__next {
+  height: 100%;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: unset !important;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+.footer {
+  flex: 0 0 auto;
+}
+.header-spacer {
+  height: 64px;
+}
+.lock {
+  height: 100%;
+  overflow: hidden;
+}
+
+.api-error-spacer {
+  height: 88px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.cls-1{isolation:isolate;}
+.cls-2{fill:#161616;}
+
+.container {
+  max-width: 929px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: #{$breakpoint-desktop-large}px) {
+  .container {
+    max-width: 1140px;
+    padding: 0 24px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+a {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+a.primary {
+  color: #000;
+}
+
+a.primary:hover,
+a.secondary:hover{
+  text-decoration: none;
+  color: #ef6c00;
+  cursor: pointer;
+}
+
+a.primary:active,
+a.secondary:active{
+  color:#fc831f;
+  cursor: pointer;
+}
+
+a.secondary {
+  color: #fff;
+}
+
+a.text-link {
+  font-family: "Source Sans Pro";
+  font-size: 22px;
+  font-weight: 700;
+  color: #ef6c00;
+}
+
+a.text-link:hover {
+  color:#fc831f;
+  cursor: pointer;
+}
+
+.flex {
+  display: flex;
+}
+
+.anchor-holder {
+  position: relative;
+  span {
+    top: -64px;
+    position: absolute;
+  }
+}
+
+.tempHeading {
+  text-align: center;
+}
+

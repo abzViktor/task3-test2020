@@ -1,0 +1,49 @@
+@import "../../styles/variables";
+
+.notFoundContainer {
+  background-color: #f6f6f6;
+  padding: 60px 0 56px 0;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    padding: 0;
+    margin: 0 0 22px;
+    line-height: 32px;
+  }
+  .notFoundContent {
+    text-align: center;
+  }
+  p {
+    padding: 0;
+    margin: 0 0 26px;
+  }
+
+}
+.image404 {
+  svg {
+    width: 396px;
+    margin-right: 46px;
+  }
+}
+
+
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) {
+  .notFoundContainer {
+    padding: 26px 0;
+    h1 {
+      margin: 0 0 12px;
+    }
+    p {
+      padding: 0;
+    }
+  }
+  .image404 {
+    svg {
+      width: 290px;
+      height: auto;
+      margin: 0;
+    }
+  }
+}

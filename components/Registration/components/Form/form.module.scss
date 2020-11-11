@@ -1,0 +1,272 @@
+@import './../ssr-task3/styles/variables.scss';
+
+.registrationForm {
+  margin: 0 -14px;
+}
+
+.errorSpacer {
+  height: 22px;
+}
+
+.submitBtn {
+  margin: 1px 0;
+}
+
+.formPlaceholder {
+  display: block !important;
+  margin: 0 -15px;
+  height: 257px;
+  margin-bottom: 140px;
+
+  .buttonPlaceholder {
+    width: 290px;
+    height: 46px;
+    margin: 0 auto;
+  }
+
+  >div>div {
+    background-color: #ccc;
+    width: 100%;
+    height: 56px;
+    margin: 0 15px;
+  }
+}
+
+
+.modal {
+  padding: 24px 13px 24px 24px;
+  border-radius: 4px;
+  width: 251px;
+  height: 129px;
+  h4, p {
+    margin: 0;
+  }
+  h4 {
+    margin-bottom: 9px;
+    margin-top: -4px;
+  }
+  p {
+    margin-bottom: 24px;
+  }
+  button {
+    float: right;
+  }
+}
+
+.formHeading {
+  margin-bottom: 15px;
+  margin-top: 126px;
+  text-align: center;
+}
+
+.formSubheading {
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 61px;
+  text-align: center;
+}
+
+.form {
+  padding-top: 101px;
+
+  >div>div {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .fileFieldHolder {
+    .MuiOutlinedInput-root.Mui-error fieldset.MuiOutlinedInput-notchedOutline {
+      border: 1px solid #f44336 !important;
+    }
+  }
+}
+
+.mobUploadBtn {
+  display: none;
+}
+
+.fileFieldHolder {
+  position: relative;
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0;
+    height: 56px;
+    width: 130px;
+    min-width: 130px;
+    border-radius: 0 4px 4px 0;
+  }
+  >div {
+    width: 100%;
+  }
+  div:hover,
+  input:hover {
+    cursor: pointer;
+  }
+}
+
+.submitHolder {
+  text-align: center;
+  margin-bottom: 140px;
+}
+
+.firstFormRow,
+.secondFormRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  width: 100%;
+  >div {
+    padding: 0 15px;
+    width: 100%;
+    margin-bottom: 18px;
+    >div {
+      width: 100%;
+    }
+  }
+}
+
+.firstFormRow {
+  margin-bottom: 0;
+ >div {
+   margin-bottom: 18px;
+ }
+}
+
+@media screen and (max-width: #{$breakpoint-laptop-large}px) {
+  .formPlaceholder {
+    margin-bottom: 127px;
+
+  }
+  .formSubheading {
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 57px;
+  }
+  .form {
+     padding-top: 107px;
+   }
+  .formHeading{
+    margin-bottom: 15px;
+    margin-top: 131px;
+    text-align: center;
+  }
+  .submitHolder {
+    margin-bottom: 138px;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) {
+  .formPlaceholder {
+    margin-bottom: 100px;
+
+  }
+  .submitHolder {
+    margin-bottom: 100px;
+  }
+  .form {
+    padding-top: 59px;
+    h1 {
+      margin-bottom: 27px;
+    }
+  }
+  .formHeading{
+    margin-top: 94px;
+  }
+  .formSubheading {
+    max-width: 364px;
+    line-height: 22px;
+    padding-bottom: 56px;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-small}px) {
+  .submitHolder {
+    padding: 0 15px;
+    margin-bottom: 58px;
+    margin-top: -10px;
+    button {
+      width: 100%;
+    }
+  }
+  .form {
+    padding-top: 37px;
+  }
+  .form h1{
+    margin: 9px 0 5px;
+    padding: 0;
+  }
+  .form {
+
+  }
+  .formSubheading {
+    padding-bottom: 32px;
+  }
+  .formPlaceholder {
+    display: block !important;
+    margin: 0 -15px;
+    height: 542px;
+    margin-bottom: 45px;
+
+    .buttonPlaceholder {
+      width: 290px;
+      height: 46px;
+      margin: 36px auto 0;
+    }
+    >div>div {
+
+      margin: 0 15px 35px;
+
+    }
+  }
+
+  .firstFormRow,
+  .secondFormRow {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    width: 100%;
+    >div {
+      padding: 0 15px;
+      width: 100%;
+      margin-bottom: 35px;
+      >div {
+        width: 100%;
+      }
+    }
+  }
+
+  .firstFormRow {
+    >div {
+      margin-bottom: calc(35px - 18px);
+    }
+  }
+}
+
+
+
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
+  button.mobUploadBtn {
+    width: 56px;
+    min-width: unset;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .desktopUploadBtn {
+    display: none;
+  }
+  .formHeading {
+    margin-top: 45px;
+    margin-bottom: 4px;
+  }
+}
+
+
+
+
+

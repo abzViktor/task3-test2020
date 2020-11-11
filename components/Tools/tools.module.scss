@@ -1,0 +1,195 @@
+@import '../ssr-task3/styles/variables.scss';
+
+.toolsContainer {
+  background-color: #f6f6f6;
+  padding: 133px 0 118px 0;
+  .toolsContent {
+    display: flex;
+    margin: 0 -15px;
+    justify-content: space-between;
+    >div {
+      width: 33.3%;
+      padding: 0 15px;
+    }
+  }
+  .headingHolder {
+    display: flex;
+    justify-content: center;
+  }
+  .svgHolder {
+    width: 98px;
+    padding: 0;
+    svg {
+      width: 98px;
+    }
+  }
+  h2 {
+    text-align: center;
+    max-width: 600px;
+    margin-bottom: 51px;
+    margin-top: 0;
+  }
+  h3 {
+    margin-top: 14px;
+    margin-bottom: 0;
+  }
+  p {
+    color: #4c4b4b;
+    margin-top: 10px;
+  }
+
+  .cssBlock {
+    p {
+      padding-right: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-laptop-large}px) {
+ .toolsContainer {
+   padding-top: 136px;
+   p {
+     margin-top: 12px;
+
+   }
+   .toolsContent {
+     .cssBlock {
+       p {
+           max-width: 220px;
+       }
+     }
+     .jsBlock {
+       p {
+         max-width: 264px;
+       }
+     }
+   }
+ }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-x-large - 18}px) {
+  .toolsContainer {
+    padding: 98px 0 81px 0;
+ h2 {
+   margin-bottom: 47px;
+ }
+    .toolsContent {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      .svgHolder {
+        padding: 0;
+        width: 88px;
+        margin-bottom: 5px;
+        svg {
+          width: 88px;
+        }
+      }
+      .htmlSvgHolder {
+        margin-top: -4px;
+        margin-bottom: 10px;
+      }
+      >div {
+        display: flex;
+        max-width: 100%;
+        width: 82.3%;
+        padding-bottom: 22px;
+        >div {
+          padding-left: 36px;
+        }
+      }
+      .jsBlock {
+        padding-bottom: 0;
+        .svgHolder {
+          padding: 0;
+          margin-top:-7px;
+        }
+      }
+      .cssBlock {
+        padding-bottom: 30px;
+        h3 {
+          margin-top: 0;
+        }
+        p {
+          max-width: unset;
+        }
+      }
+      .jsBlock {
+        h3 {
+          padding-left: 4px;
+        }
+        p {
+          max-width: unset;
+          padding-left: 4px;
+          padding-right: 17px;
+        }
+      }
+    }
+    h3 {
+      margin-bottom: 7px;
+      margin-top: -6px;
+    }
+    p {
+      margin-top: 0;
+      letter-spacing: 0.07px;
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-mobile-medium + 100}px) {
+  .toolsContainer {
+    padding: 60px 0 51px;
+    h2 {
+      margin-bottom: 38px;
+    }
+    .toolsContent {
+      .svgHolder {
+        padding: 0;
+        width: 88px;
+        margin-bottom: -2px;
+        svg {
+          width: 88px;
+        }
+      }
+      >div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 21px;
+        width: 290px;
+        >div {
+          text-align: center;
+          padding: 0;
+        }
+      }
+      .cssBlock {
+        padding-bottom: 20px;
+        p {
+          max-width: unset;
+          padding: 0;
+        }
+      }
+      .jsBlock {
+        margin-top: 0px;
+        margin-bottom: 5px;
+        p {
+          max-width: unset;
+          padding: 0 4px;
+        }
+      }
+    }
+    h2 {
+      line-height: 27px;
+      //letter-spacing: 0.1px;
+    }
+    h3 {
+      margin-bottom: 3px;
+    }
+    p {
+      margin-bottom: 4px;
+    }
+  }
+}
+

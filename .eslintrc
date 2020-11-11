@@ -1,0 +1,18 @@
+{
+  "extends": ["airbnb"],
+  "globals": {
+    "document": true,
+    "window": true,
+    "localStorage": true,
+    "navigator": true
+  },
+  "plugins": ["babel"],
+  "parser": "babel-eslint",
+  "rules": {
+    "func-names": ["error", "never"],
+    "quotes": [1, "single", "avoid-escape"],
+    "no-shadow": 0,
+    "max-len": 0,
+    "jsx-a11y/anchor-is-valid": 0
+  }
+}

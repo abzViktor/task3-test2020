@@ -1,0 +1,175 @@
+@import "../../styles/variables";
+
+.mainBanner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.textBlock {
+  margin: 130px 0 138px;
+  max-width: 533px;
+  color: #fff;
+  .p {
+    font-size: 20px;
+    margin-bottom: 36px;
+  }
+  .h1 {
+    margin-top: 0;
+    margin-bottom: 22px;
+  }
+  .a {
+    display: block;
+  }
+}
+
+.allVisible {
+  max-width: 466px;
+  margin: 0 !important;
+}
+
+@media screen and (max-width: #{$breakpoint-laptop-large}px){
+  .mainText {
+    max-width: 427px;
+  }
+  .h1 {
+    margin-bottom: 25px;
+  }
+  .textBlock {
+    margin: 129px 0 156px;
+    .p {
+      margin-bottom: 41px;
+    }
+  }
+  .allVisible {
+    max-width: 466px;
+    margin: 0 !important;
+    display: inline;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) and (min-width: #{$breakpoint-tablet-medium + 1}px) {
+  .bannerText {
+    padding-top: 106px;
+  }
+  .textBlock {
+    width: 56%;
+    height: 397px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    .h1 {
+      margin-bottom: 4px;
+    }
+    .a {
+      margin: 0px 0 2px -2px;
+    }
+    .p {
+      font-size: 18px;
+      line-height: 24px;
+      margin-bottom: 35px;
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-small}px) {
+  .mainText {
+    margin: 0 auto;
+  }
+  .desktopVisible {
+    display: none;
+  }
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+  }
+  .bannerText {
+    padding-top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: -2px;
+  }
+  .textBlock {
+    width: 100%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    .h1, .p, a {
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) {
+  .textBlock {
+    margin: 108px 0 118px;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
+    .textBlock {
+      margin: 66px 0 70px;
+      .h1 {
+        margin-bottom: 0;
+      }
+      .p {
+        margin-bottom: 39px;
+        font-size: 16px;
+      }
+    }
+}
+
+@mixin background($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}.jpg");
+}
+
+@mixin background-webp($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}.webp");
+}
+
+@mixin background-retina($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}-x2.jpg");
+}
+
+@mixin background-webp-retina($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/banner/bg-#{$width}-x2.webp");
+}
+
+@each $breakpoint in $breakpoints {
+  @media screen and (max-width: #{$breakpoint}px) {
+    .webp.mainBanner {
+      @include background-webp($breakpoint);
+    }
+    .noWebp.mainBanner {
+      @include background($breakpoint);
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
+    .webp.mainBanner {
+      @include background-webp-retina($breakpoint);
+    }
+    .noWebp.mainBanner {
+      @include background-retina($breakpoint);
+    }
+  }
+}
+
+@each $breakpoint in $breakpoints {
+  @media screen and (max-width: #{$breakpoint}px) {
+    :global(.webp) .mainBanner {
+      @include background-webp($breakpoint);
+    }
+    :global(.webp) .mainBanner {
+      @include background($breakpoint);
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
+    :global(.webp) .mainBanner {
+      @include background-webp-retina($breakpoint);
+    }
+    :global(.webp) .mainBanner {
+      @include background-retina($breakpoint);
+    }
+  }
+}

@@ -1,0 +1,187 @@
+@import "../../../../styles/variables";
+
+.regBanner {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding: 100px 0;
+  p {
+    hyphens: none;
+  }
+}
+
+.registrationTextBlock {
+  color: #fff;
+  width: 100%;
+  text-align: center;
+}
+
+.registrationBannerText {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  h1 {
+    margin: 23px 0 29px;
+  }
+}
+
+.registrationBannerContent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  .paragraphsBanner {
+    max-width: 50%;
+    width: 50%;
+    text-align: left;
+    p {
+      margin-bottom: 21px;
+    }
+  }
+  .imageContainer {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 19px;
+    padding-left: 33px;
+  }
+  .imageContainer img {
+    width: 429px;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-laptop-large}px) {
+  .regBanner {
+    padding: 100px 0 135px;
+  }
+  .registrationBannerText h1{
+    margin: -10px 0 27px;
+  }
+  .registrationBannerContent {
+    .imageContainer {
+      padding-left: 31px;
+      img {
+        padding: 11px 0 0 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-x-large}px) {
+  .registrationBannerText {
+    h1 {
+      margin: 9px 0 27px;
+      padding: 0 125px;
+    }
+  }
+  .registrationBannerContent {
+    .imageContainer {
+      padding-left: 26px;
+      img {
+        width: 343px;
+        padding: 0 0 0 20px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) {
+  .regBanner {
+    padding: 78px 0 99px;
+  }
+  .regBanner .heading-2-desktop {
+    margin: 9px 0 25px;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-medium}px) and (min-width: #{$breakpoint-tablet-small}px) {
+  .regBanner h1 {
+    padding: 0 127px;
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-tablet-small}px) {
+  .registrationBannerContent {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    .imageContainer {
+      padding: 0;
+    }
+    .imageContainer img{
+      padding: 0;
+    }
+    .paragraphsBanner {
+      width: 100%;
+    }
+    p {
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: #{$breakpoint-mobile-medium}px) {
+  .registrationTextBlock h1 {
+    padding: 0;
+  }
+  .regBanner {
+    padding: 47px 0 46px;
+  }
+  .registrationTextBlock {
+    h1 {
+      line-height: 32px;
+    }
+  }
+  .registrationBannerContent {
+    flex-direction: column-reverse;
+    .imageContainer {
+      padding: 0;
+      margin-bottom: 10px;
+    }
+    .imageContainer img {
+      width: 257px;
+      padding: 0;
+    }
+    .paragraphsBanner {
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}
+
+@mixin registration-background($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-#{$width}.jpg");
+}
+
+@mixin registration-background-webp($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-#{$width}.webp");
+}
+
+@mixin registration-background-retina($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-#{$width}-x2.jpg");
+}
+
+@mixin registration-background-webp-retina($width) {
+  background-image: url("https://source-task3-test2020viktor-p.abzdev2.com/reg-banner/bg-#{$width}-x2.webp");
+}
+
+@each $breakpoint in $breakpoints {
+  @media screen and (max-width: #{$breakpoint}px) {
+    :global(.webp) .regBanner {
+      @include registration-background-webp($breakpoint);
+    }
+    :global(.noWebp) .regBanner {
+      @include registration-background($breakpoint);
+    }
+  }
+  @media screen and (-webkit-min-device-pixel-ratio: 2) and (max-width: #{$breakpoint}px) {
+    :global(.webp) .regBanner {
+      @include registration-background-webp-retina($breakpoint);
+    }
+    :global(.noWebp) .regBanner {
+      @include registration-background-retina($breakpoint);
+    }
+  }
+}

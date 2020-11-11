@@ -1,0 +1,235 @@
+@import './variables.scss';
+
+.logo-container svg {
+    width: 134px;
+}
+
+.header-holder {
+    z-index: 1;
+    position: fixed;
+    top:0;
+    left: 0;
+    right: 0;
+    background-color: $background-color;
+}
+
+header .desktop-header,
+header .mobile-header {
+    background-color: $background-color;
+    height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side-menu-container-contacts {
+    width: 250px;
+    padding-left: 15px;
+    padding-top: 30px;
+    margin-bottom: 24px;
+}
+
+.side-menu-container-contacts a{
+    color: #8d8c8c;
+}
+
+.side-menu-container-nav {
+    width: 250px;
+    padding-left: 15px;
+}
+
+.mobile-header nav ul {
+    padding: 0;
+}
+
+.side-menu-container-nav nav ul {
+    padding: 0;
+    list-style: none;
+    margin-top: 31px;
+}
+
+.side-menu-container-nav nav a,
+.side-menu-container-nav nav li {
+    margin: 23px 0;
+}
+
+
+.desktop-header nav ul {
+    display: flex;
+    list-style: none;
+    padding-right: 43px;
+    li {
+        margin-bottom: 7px;
+    }
+}
+
+.desktop-header nav ul li a {
+    text-decoration: none;
+    color: #000000;
+    margin: 0 15px;
+}
+
+.desktop-header nav ul li a.active,
+.side-menu-container-nav nav a.active{
+    color: $secondary-color;
+    pointer-events: none;
+}
+
+.header-personal-info {
+    display: flex;
+    align-items: center;
+}
+
+.header-contacts {
+    margin-bottom: 7px;
+
+    > div:nth-child(1) {
+        margin-bottom: -1px;
+       text-align: right;
+    }
+
+    > div:nth-child(2) {
+        font-size: 12px;
+    }
+}
+
+.sideMenu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 250px;
+    background-color: white;
+    height: 100vh;
+    z-index: 2;
+}
+
+.dark.closed {
+    display: none;
+}
+
+.dark.opened {
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.sideMenu.opened {
+    left: 0;
+}
+
+.header-contacts a {
+    font-size: 12px;
+    font-family: "Source Sans Pro", sans-serif;
+    text-decoration: none;
+    color: #8d8c8c;
+    line-height: 10px;
+}
+
+.header-avatar,
+.header-contacts + svg{
+    border-radius: 50%;
+    margin: 0 14px 0 12px;
+    width: 40px;
+    height: 40px;
+    background-color: #ccc;
+    img {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.header-avatar-mob {
+    width: 67px;
+    height: 67px;
+    border-radius: 50%;
+    margin-bottom: 5px;
+    background-color: #ccc;
+}
+
+.side-menu-container .name{
+ font-family: "Source Sans Pro", sans-serif;
+    font-size: 20px;
+}
+
+.side-menu-container a {
+    font-size: 13px;
+    font-family: "Source Sans Pro", sans-serif;
+    text-decoration: none;
+    color: #8d8c8c;
+}
+
+.exitButton {
+    background-color: transparent;
+    outline: 0;
+    border: 0;
+}
+
+.exitButton:hover svg g{
+    fill: #2638bb;
+}
+.menuOpen {
+    outline: 0;
+    border: 0;
+    width: 48px;
+    height: 48px;
+    background-color: transparent;
+    padding: 0;
+    margin-right: -12px;
+}
+
+.MuiDrawer-modal.opened {
+    overflow: hidden;
+}
+
+.header-user {
+    width: 112px;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #8d8c8c;
+    white-space: nowrap;
+    >span{
+        color: #000;
+    }
+}
+.mob-name {
+    font-size: 20px;
+    font-family: "Source Sans Pro";
+}
+
+.side-menu-container-contacts {
+    width: 230px;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+
+.menuOpen:hover svg g {
+    fill: #2638bb;
+}
+
+.api-error {
+    background-color: $primary-color;
+    height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+
+
+@media screen and (max-width: #{$breakpoint-tablet-large}px){
+    header .desktop-header {
+        display: none;
+    }
+}
+
+@media screen and (min-width: #{$breakpoint-tablet-large + 1}px){
+    header .mobile-header {
+        display: none;
+    }
+}
+
+
