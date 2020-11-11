@@ -24,7 +24,24 @@ function MyApp({ Component, pageProps }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: '{ "@context": "http://schema.org","@type": "Organization","email": "work.of.future@gmail.com", "name": "abz.agency", "telephone": "+38 (095) 556 08 45", "address": { "@type": "PostalAddress", "addressLocality": "Kyiv, Ukraine","postalCode": "360023","streetAddress": "Lva Tolstoho street, 43"},}',
+            __html: '{\n'
+                + '  "@context": "https://schema.org",\n'
+                + '  "@type": "Organization",\n'
+                + '  "address": {\n'
+                + '    "@type": "PostalAddress",\n'
+                + '    "addressLocality": "Kyiv, Ukraine",\n'
+                + '    "postalCode": "430012",\n'
+                + '    "streetAddress": "Lva Tolstogo street, 43"\n'
+                + '  },\n'
+                + '  "email": "work.of.future@gmail.com",\n'
+                + '  "member": [\n'
+                + '    {\n'
+                + '      "@type": "Organization"\n'
+                + '    }\n'
+                + '  ],\n'
+                + '  "name": "Abz.agency",\n'
+                + '  "telephone": "+38 (095) 556 08 45"\n'
+                + '}',
           }}
         />
 
