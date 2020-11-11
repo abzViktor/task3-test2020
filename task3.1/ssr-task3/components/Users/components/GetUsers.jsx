@@ -102,8 +102,6 @@ const GetUsers = React.memo((props) => {
       } else {
         setShowButton(true);
       }
-    } else {
-      // proccess server errors
     }
   };
   if (noUsers) {

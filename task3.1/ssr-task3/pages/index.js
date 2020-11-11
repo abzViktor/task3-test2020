@@ -9,7 +9,7 @@ import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import HEADER_HEIGHT from '../constants/header';
 
-export default function Home({ initialCount, apiStatus, webpSupport }) {
+export default function Home({ initialCount, webpSupport }) {
   const { headerState, headerDispatch } = useContext(HeaderStore);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export default function Home({ initialCount, apiStatus, webpSupport }) {
       <div className="anchor-holder"><span id="relation" /></div>
       <Tools />
       <div className="anchor-holder"><span id="users" /></div>
-      <Users initialCount={initialCount} apiStatus={apiStatus} />
+      <Users initialCount={initialCount} />
     </>
   );
 }
@@ -70,7 +70,6 @@ Home.getInitialProps = async (ctx) => {
   const state = {
     ua: {},
     initialCount: null,
-    apiStatus: 200,
     webpSupport: true,
   };
 
@@ -90,13 +89,11 @@ Home.getInitialProps = async (ctx) => {
     {
       namespacesRequired: ['common'],
       initialCount: state.initialCount,
-      apiStatus: state.apiStatus,
       webpSupport: state.webpSupport,
     });
 };
 
 Home.propTypes = {
   initialCount: PropTypes.number.isRequired,
-  apiStatus: PropTypes.number.isRequired,
   webpSupport: PropTypes.bool.isRequired,
 };
