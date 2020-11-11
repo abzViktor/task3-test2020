@@ -21,6 +21,39 @@ function MyApp({ Component, pageProps }) {
   return (
     <RootProvider>
       <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: '{\n'
+                + '                  {\n'
+                + "                    '@context': 'https://schema.org',\n"
+                + "                    '@type': 'Organization',\n"
+                + '                    address: {\n'
+                + "                      '@type': 'PostalAddress',\n"
+                + "                      addressLocality: 'Ukraine, Kyiv',\n"
+                + "                      postalCode: '360020',\n"
+                + "                      streetAddress: 'L`va Tolstoy, 43',\n"
+                + '                    },\n'
+                + "                    email: 'work.of.future@gmail.com',\n"
+                + '                    member: [\n'
+                + '                      {\n'
+                + "                        '@type': 'Organization',\n"
+                + '                      },\n'
+                + '                      {\n'
+                + "                        '@type': 'Organization',\n"
+                + '                      },\n'
+                + '                      {\n'
+                + "                        '@type': 'Person',\n"
+                + "                        name: 'Viktor Peredera',\n"
+                + '                      },\n'
+                + '                    ],\n'
+                + "                    name: 'abz.agency',\n"
+                + "                    telephone: '+38 (095) 556 08 45',\n"
+                + '                  }\n'
+                + '            }',
+          }}
+        />
+
         {/* <script dangerouslySetInnerHTML={{__html: "(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-NDVNDGK');"}}/> */}
       </Head>
       <Layout>
