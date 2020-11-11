@@ -4,7 +4,7 @@ import App from 'next/app';
 import '../styles/index.scss';
 import '../styles/Footer.scss';
 import '../styles/Header.scss';
-// import '../styles/form.scss';
+import '../styles/fonts.css';
 import Head from 'next/head';
 import { appWithTranslation } from '../i18n';
 import { RootProvider } from '../context/root.context';
