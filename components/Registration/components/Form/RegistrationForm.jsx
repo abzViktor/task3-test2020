@@ -115,8 +115,8 @@ const RegistrationForm = React.memo((props) => {
   return (
     <div id="form" className="form">
       <div className="container">
-        <h1 className={`heading-2-desktop ${styles.formHeading}`}>{t('form.heading')}</h1>
-        <div><p className={`paragraph-1 ${styles.formSubheading}`}>{t('form.attention')}</p></div>
+        <h1 className={classNames("heading-2-desktop", styles.formHeading)}>{t('form.heading')}</h1>
+        <div><p className={classNames("paragraph-1", styles.formSubheading)}>{t('form.attention')}</p></div>
         {positionsLoaded && (
         <Formik
           initialValues={initialValues}
@@ -287,7 +287,7 @@ const RegistrationForm = React.memo((props) => {
                     {() => (
                       <div>
                         <Field
-                          className={`${styles.selectedItem} ${styles.formSelect}`}
+                          className={classNames(styles.selectedItem, styles.formSelect)}
                           variant="outlined"
                           fullWidth
                           autoWidth
@@ -320,8 +320,8 @@ const RegistrationForm = React.memo((props) => {
                       error={!isValidFile && touched.file}
                       tabIndex="-1"
                     />
-                    <button type="button" onClick={handleUpload} className={`secondary ${styles.desktopUploadBtn}`}>{t('form.upload.2')}</button>
-                    <button aria-label="Upload" type="button" onClick={handleUpload} className={`secondary ${styles.mobUploadBtn}`}><UploadIcon /></button>
+                    <button type="button" onClick={handleUpload} className={classNames("secondary", styles.desktopUploadBtn)}>{t('form.upload.2')}</button>
+                    <button aria-label="Upload" type="button" onClick={handleUpload} className={classNames("secondary", styles.mobUploadBtn)}><UploadIcon /></button>
                   </label>
                   <input
                     accept="image/jpeg, image/jpg"
@@ -348,7 +348,7 @@ const RegistrationForm = React.memo((props) => {
                 {!isSending && (
                 <button
                   disabled={!(isValid && values.name !== '' && values.position_id !== '-1' && values.email !== '' && values.phone !== '' && values.phone !== '+38(0__)___-__-__' && isValidFile && touched.file)}
-                  className={`primary ${styles.submitBtn}`}
+                  className={classNames("primary", styles.submitBtn)}
                   type="submit"
                 >
                   {t('form.submit')}

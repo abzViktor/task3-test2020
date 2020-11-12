@@ -9,10 +9,6 @@ import Tools from '../components/Tools/Tools';
 import { HeaderStore } from '../context/header.context';
 import HEADER_HEIGHT from '../constants/header';
 
-// const LetsGet = dynamic(() => import('../components/LetsGet/LetsGet'));
-// const Users = dynamic(() => import('../components/Users/Users'));
-// const Tools = dynamic(() => import('../components/Tools/Tools'));
-
 export default function Home({ initialCount, webpSupport }) {
   const { headerState, headerDispatch } = useContext(HeaderStore);
 
@@ -74,7 +70,7 @@ Home.getInitialProps = async (ctx) => {
   const state = {
     ua: {},
     initialCount: null,
-    webpSupport: true,
+    webpSupport: false,
   };
 
   if (ctx.req) {

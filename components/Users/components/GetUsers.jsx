@@ -145,7 +145,7 @@ const GetUsers = React.memo((props) => {
 
       <div className={styles.buttonWrapper}>
         {isMoreLoaded === false && <CircularProgress />}
-        <button hidden={!showButton} type="button" onClick={ShowMore} className={`secondary ${styles.showMoreBtn}`}>
+        <button hidden={!showButton} type="button" onClick={ShowMore} className={classNames("secondary", styles.showMoreBtn)}>
           {t('ShowMore.1')}
         </button>
       </div>

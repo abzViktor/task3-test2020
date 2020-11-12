@@ -72,7 +72,7 @@ const Header = React.memo(() => {
 
   return (
     <>
-      <div className={state.apiError.state ? 'api-error-spacer' : 'header-spacer'} />
+      <div className={classNames({'api-error-spacer': state.apiError.state}, {'header-spacer': !state.apiError.state})} />
       <div className="header-holder">
         {state.apiError.state && (
         <div className="api-error">

@@ -9,6 +9,7 @@ import Head from 'next/head';
 import { appWithTranslation } from '../i18n';
 import { RootProvider } from '../context/root.context';
 import Layout from '../components/layout';
+import {useUserAgent} from "next-useragent";
 
 function MyApp({ Component, pageProps }) {
   React.useEffect(() => {

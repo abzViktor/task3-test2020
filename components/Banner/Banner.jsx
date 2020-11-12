@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import styles from './banner.module.scss';
@@ -7,17 +7,17 @@ const Banner = React.memo((props) => {
   const { webpSupport } = props;
   const { t } = useTranslation();
   return (
-    <div className={`${webpSupport ? styles.webp : styles.noWebp} ${styles.mainBanner}`}>
+      <div className={`${webpSupport ? styles.webp : styles.noWebp} ${styles.mainBanner}`}>
       <div className="container">
         <div className={styles.textBlock}>
           <div>
-            <h1 className={`${styles.h1} heading-1-desktop`}>
+            <h1 className={classNames([styles.h1], "heading-1-desktop")}>
               {t('TestAssignment.1')}
             </h1>
           </div>
           <div className={styles.mainText}>
-            <p className={`${styles.p} paragraph-1`}>
-              <span className={`${styles.p} ${styles.allVisible}`}>{t('KindlyRemind.1')}</span>
+            <p className={classNames([styles.p], "paragraph-1")}>
+              <span className={classNames([styles.p], [styles.allVisible])}>{t('KindlyRemind.1')}</span>
               <span className={styles.desktopVisible}>
                 {t('KindlyRemind.2')}
               </span>

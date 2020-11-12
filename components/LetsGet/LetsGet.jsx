@@ -17,10 +17,10 @@ export default React.memo(() => {
           </div>
           <div className={styles.letsTextBlock}>
             <h3 className="heading-3-desktop">{t('Cool.1')}</h3>
-            <p className={`paragraph-2 ${styles.middleText}`}>
+            <p className={classNames("paragraph-2", styles.middleText)}>
               {t('Looking.1')}
             </p>
-            <p className={`paragraph-2 ${styles.bottomText}`}>
+            <p className={classNames("paragraph-2", styles.bottomText)}>
               {t('Looking.2')}
             </p>
             <a href="/registration#form" className="text-link" rel="stylesheet">{t('SignUp.1')}</a>

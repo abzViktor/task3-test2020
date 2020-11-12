@@ -18,7 +18,7 @@ export default React.memo(() => {
         </div>
         <div className={styles.toolsContent}>
           <div>
-            <div className={`${styles.svgHolder} ${styles.htmlSvgHolder}`}>
+            <div className={classNames(styles.svgHolder, styles.htmlSvgHolder)}>
               <HtmlIcon />
             </div>
             <div>
